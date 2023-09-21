@@ -25,7 +25,7 @@ public class WarzoneArena {
         while (IS_GAMEPLAY_ON) {
             System.out.println("Warp to Warzone!");
         // auto build check
-            System.out.print("auto build completed!");
+            System.out.print("auto build completed! --- Git Guardian");
             // Intentionally exit the game
             endGamePlay();
         }
