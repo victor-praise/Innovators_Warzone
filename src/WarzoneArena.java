@@ -23,7 +23,7 @@ public class WarzoneArena {
 
         // Gameplay begins here
         while (IS_GAMEPLAY_ON) {
-            System.out.print("Warp to Warzone!");
+            System.out.println("Warp to Warzone!");
         // auto build check
             System.out.print("auto build completed!");
             // Intentionally exit the game
