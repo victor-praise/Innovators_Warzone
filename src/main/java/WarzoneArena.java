@@ -1,3 +1,5 @@
+package main.java;
+
 /*
  * Main entry point for the game nick-named `WARZONE`
  * This project is part of SOEN-6441 class, batch Fall-2023, headed by Dr. Amin Ranj Bar
