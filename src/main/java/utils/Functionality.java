@@ -1,14 +1,27 @@
 package main.java.utils;
 
 /**
+ * Represents an individual Functionality in the user command string, e.g. -add Asia 4, for an editcontinent command
  * @author kevin on 2023-09-21
  */
 public class Functionality {
-    BaseFunctionality functionality;
-    String[] functionalityParams;
+    /**
+     * functionality of the base command, e.g. 'Add' in -add Asia 4
+     */
+    public BaseFunctionality functionality;
 
-    public Functionality(BaseFunctionality functionality, String[] functionalityParams) {
-        this.functionality = functionality;
-        this.functionalityParams = functionalityParams;
+    /**
+     * set of parameters for the given functionality, e.g. 'Asia' & '4' are params to 'add Asia 4'
+     */
+    public String[] functionalityParams;
+
+    /**
+     * Creates a Functionality form associated data
+     * @param p_functionality functionality of the base command
+     * @param p_functionalityParams parameters to a given functionality
+     */
+    public Functionality(BaseFunctionality p_functionality, String[] p_functionalityParams) {
+        this.functionality = p_functionality;
+        this.functionalityParams = p_functionalityParams;
     }
 }

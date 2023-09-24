@@ -1,5 +1,7 @@
 package tests.java.utils;
 
+import main.java.utils.BaseCommand;
+import main.java.utils.BaseFunctionality;
 import main.java.utils.Command;
 import main.java.utils.CommandParser;
 import org.junit.jupiter.api.AfterEach;
@@ -21,18 +23,30 @@ class CommandParserTest {
     void tearDown() {
     }
 
+    /**
+     * Given a valid command string,
+     */
     @Test
-    void test_givenEditMapCommand_whenValidAddContinentRequested_thenCommandCreated() {
-        String command = "editcontinent -add Africa 3";
-        CommandParser parser = new CommandParser();
-        Command validCommand = parser.parseCommandStatement(command);
-        assert validCommand != null;
+    void testGivenValidCommandStringWhenParsedThenProperCommandCreated() {
+        String l_command = "editcontinent -add Africa 3";
+        CommandParser l_parser = new CommandParser();
+        Command l_validCommand = l_parser.parseCommandStatement(l_command);
+
+        assert l_validCommand != null;
+        assert l_validCommand.command == BaseCommand.EditContinent;
+        assert l_validCommand.functionalities[0].functionality == BaseFunctionality.Add;
+        assert l_validCommand.functionalities[0].functionalityParams.length == 2;
     }
+
+    /**
+     * Given an invalid command string, validate that it does not generate any command object
+     */
     @Test
-    void test_givenInvalidCommand_whenValidAddContinentRequested_thenNoneCreated() {
-        String command = "customcommand -add Africa 3";
-        CommandParser parser = new CommandParser();
-        Command validCommand = parser.parseCommandStatement(command);
-        assert validCommand == null;
+    void testGivenInvalidCommandStringWhenParsedThenNoneCreated() {
+        String l_command = "customcommand -add Africa 3";
+        CommandParser l_parser = new CommandParser();
+        Command l_invalidCommand = l_parser.parseCommandStatement(l_command);
+        assert l_invalidCommand == null;
+        assertNull(l_invalidCommand);
     }
 }

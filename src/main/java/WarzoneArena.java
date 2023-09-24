@@ -13,18 +13,18 @@ package main.java;
  */
 
 /**
+ * A tactical game-play where the player objective is to capture as much territory as possible.
+ * Player wins by controlling every territory possible.
  * @author Kevin Wadera
+ * @version 1.0
  */
-
-// A tactical game-play where the player objective is to capture as much territory as possible.
-// Player wins by controlling every territory possible.
 public class WarzoneArena {
-    public  static Boolean IS_GAMEPLAY_ON = true;
+    public  static Boolean Is_Gameplay_On = true;
     public static void main(String[] args) {
         // Gameplay setup goes here
 
         // Gameplay begins here
-        while (IS_GAMEPLAY_ON) {
+        while (Is_Gameplay_On) {
             System.out.println("Warp to Warzone!");
         // auto build check
             System.out.print("auto build completed! --- Git Guardian");
@@ -33,8 +33,11 @@ public class WarzoneArena {
         }
     }
 
+    /**
+     * Call to this should be made when the game needs to be terminated
+     */
     // To be called when a single player controls entire board
     public static void endGamePlay() {
-        IS_GAMEPLAY_ON = false;
+        Is_Gameplay_On = false;
     }
 }
