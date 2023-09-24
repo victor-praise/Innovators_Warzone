@@ -11,7 +11,7 @@ public class Functionality {
     public BaseFunctionality functionality;
 
     /**
-     * set of parameters for the given functionality, e.g. 'Asia' & '4' are params to 'add Asia 4'
+     * set of parameters for the given functionality, e.g. <i>Asia</i> and <i>4</i> are params to <i>add Asia 4</i>
      */
     public String[] functionalityParams;
 

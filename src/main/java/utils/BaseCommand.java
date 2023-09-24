@@ -9,14 +9,49 @@ import java.util.Map;
  * @version 1.0
  */
 public enum BaseCommand {
+    /**
+     * Command to add/remove a continent
+     */
     EditContinent("editcontinent"),
+
+    /**
+     * Command to add/remove a country in a continent.
+     */
     EditCountry("editcountry"),
+
+    /**
+     * Command to add/remove a country from the neighbour's list of another country
+     */
     EditNeighbour("editneighbour"),
+
+    /**
+     * Command to save the current state of map to a .map file
+     */
     SaveMap("savemap"),
+
+    /**
+     * Command to display a map in full details. i.e. it's continents, countries, their neighbours etc.
+     */
     ShowMap("showmap"),
+
+    /**
+     * Loads a map from a given file, or from command line when no filename provided.
+     */
     EditMap("editmap"),
+
+    /**
+     * Command to validate a map up till the point when this command is executed
+     */
     ValidateMap("validatemap"),
+
+    /**
+     * Distribute all the countries at random to all the players
+     */
     AssignCountries("assigncountries"),
+
+    /**
+     * An invalid command string by user will correspond to this.
+     */
     None("");
 
     /**

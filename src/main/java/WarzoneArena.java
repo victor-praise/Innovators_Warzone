@@ -19,7 +19,13 @@ package main.java;
  * @version 1.0
  */
 public class WarzoneArena {
-    public  static Boolean Is_Gameplay_On = true;
+
+    private  static Boolean Is_Gameplay_On = true;
+
+    /**
+     * Main entry point of the game.
+     * @param args Any command line arguments separated by a space
+     */
     public static void main(String[] args) {
         // Gameplay setup goes here
 

@@ -9,10 +9,22 @@ import java.util.Map;
  * @version 1.0
  */
 public enum BaseFunctionality {
+    /**
+     * Functionality which adds some objects depending on the base of the command
+     */
     Add("add"),
+    /**
+     * Functionality which removes some objects depending on the base of the command
+     */
     Remove("remove"),
+    /**
+     * An invalid/unknown functionality corresponds to this
+     */
     None("");
 
+    /**
+     * describes the lower cased string of the expected functionality
+     */
     public final String d_label;
     private static final Map<String, BaseFunctionality> From_String = new HashMap<String, BaseFunctionality>();
 
