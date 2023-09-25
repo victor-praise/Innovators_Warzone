@@ -14,7 +14,9 @@ public class Country {
     int d_noOfArmies;
 
     int d_countryID;
+
     int d_continentID;
+
     String d_countryName;
 
     List<Integer> d_neighbors;
@@ -28,11 +30,11 @@ public class Country {
      */
 
     public Country(int p_countryID, String p_countryName, int p_continentID){
-        d_countryID = p_countryID;
-        d_countryName = p_countryName;
-        d_continentID = p_continentID;
-        d_neighbors = new ArrayList<>();
-        d_noOfArmies = 0;
+        this.d_countryID = p_countryID;
+        this.d_countryName = p_countryName;
+        this.d_continentID = p_continentID;
+        this.d_neighbors = new ArrayList<>();
+        this.d_noOfArmies = 0;
     }
 
     /**
