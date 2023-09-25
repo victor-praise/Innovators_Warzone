@@ -1,4 +1,4 @@
-package main.java;
+package main.java.arena;
 
 /*
  * Main entry point for the game nick-named `WARZONE`
@@ -21,6 +21,7 @@ package main.java;
 public class WarzoneArena {
 
     private  static Boolean Is_Gameplay_On = true;
+    private static Game d_Game;
 
     /**
      * Main entry point of the game.
@@ -28,6 +29,7 @@ public class WarzoneArena {
      */
     public static void main(String[] args) {
         // Gameplay setup goes here
+        setupGame();
 
         // Gameplay begins here
         while (Is_Gameplay_On) {
@@ -45,5 +47,10 @@ public class WarzoneArena {
     // To be called when a single player controls entire board
     public static void endGamePlay() {
         Is_Gameplay_On = false;
+    }
+
+    private static void setupGame() {
+        d_Game = Game.sharedInstance();
+        d_Game.setup();
     }
 }

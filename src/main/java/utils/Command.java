@@ -34,4 +34,8 @@ public class Command {
         this.baseParams = baseParams;
         this.functionalities = functionalities;
     }
+
+    public void execute() {
+        System.out.println("Will execute command: " + this.command);
+    }
 }

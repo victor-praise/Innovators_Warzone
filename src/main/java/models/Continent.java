@@ -10,6 +10,8 @@ import java.util.List;
  *
  */
 public class Continent {
+    private static int Next_Continent_Id = 0;
+
     int d_continentID;
 
     String d_continentName;
@@ -30,6 +32,16 @@ public class Continent {
         this.d_continentName=p_continentName;
         this.d_continentValue=p_continentValue;
         this.d_countries=new ArrayList<Country>();
+    }
+
+    /**
+     * Helper constructor which provides the continent id from a static variable
+     * @param p_continentName continent name
+     * @param p_continentValue continent value
+     */
+    public Continent(String p_continentName, int p_continentValue) {
+        int l_nextId = ++Next_Continent_Id;
+        new Continent(l_nextId, p_continentName, p_continentValue);
     }
 
     /**
