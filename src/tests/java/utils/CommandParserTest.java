@@ -1,8 +1,8 @@
 package tests.java.utils;
 
-import main.java.utils.BaseCommand;
-import main.java.utils.BaseFunctionality;
-import main.java.utils.Command;
+import main.java.commands.BaseCommand;
+import main.java.commands.BaseFunctionality;
+import main.java.commands.Command;
 import main.java.utils.CommandParser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

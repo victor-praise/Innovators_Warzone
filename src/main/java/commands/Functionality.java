@@ -1,4 +1,4 @@
-package main.java.utils;
+package main.java.commands;
 
 /**
  * Represents an individual Functionality in the user command string, e.g. -add Asia 4, for an editcontinent command
