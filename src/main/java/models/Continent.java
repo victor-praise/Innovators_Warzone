@@ -2,6 +2,7 @@ package main.java.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *  This class is responsible for the continents on the map
@@ -137,4 +138,23 @@ public class Continent {
             d_countries.remove(p_country);
         }
     }
+
+    /**
+     * Removes particular country ID from the neighbor list of all countries in continent.
+     *
+     * @param p_countryId ID of country to be removed
+
+     */
+    public void removeCountryAsNeighbourFromAll(Integer p_countryId) {
+        if (d_countries != null && !d_countries.isEmpty()) {
+            for (Country c: d_countries){
+                if (c.getD_neighbors() != null) {
+                    if (c.getD_neighbors().contains(p_countryId)){
+                        c.removeNeighbour(p_countryId);
+                    }
+                }
+            }
+        }
+    }
+
 }
