@@ -1,6 +1,6 @@
 package tests.java.utils;
 
-import main.java.utils.BaseFunctionality;
+import main.java.commands.BaseFunctionality;
 import org.junit.jupiter.api.Test;
 
 /**

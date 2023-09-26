@@ -42,13 +42,16 @@ public class WarzoneArena {
     }
 
     /**
-     * Call to this should be made when the game needs to be terminated
+     * Call to this method should be made when the game needs to be terminated
      */
     // To be called when a single player controls entire board
     public static void endGamePlay() {
         Is_Gameplay_On = false;
     }
 
+    /**
+     * All the game setup parameters will go here
+     */
     private static void setupGame() {
         d_Game = Game.sharedInstance();
         d_Game.setup();

@@ -11,15 +11,15 @@ import java.util.List;
  */
 public class Country {
 
-    int d_noOfArmies;
+    private int d_noOfArmies;
 
-    int d_countryID;
+    private int d_countryID;
 
-    int d_continentID;
+    private int d_continentID;
 
-    String d_countryName;
+    private String d_countryName;
 
-    List<Integer> d_neighbors;
+    private List<Integer> d_neighbors;
 
     /**
      * constructor of this class.
@@ -151,7 +151,4 @@ public class Country {
             System.out.println("There is no neighbour with the provided ID");
         }
     }
-
-
-
 }

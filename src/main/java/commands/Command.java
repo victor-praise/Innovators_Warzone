@@ -1,14 +1,14 @@
-package main.java.utils;
+package main.java.commands;
 
 /**
  * Model class representable for a command given by the user
  * @author kevin on 2023-09-21
  * @version 1.0
  */
-public class Command {
+public class Command implements ExecutableCommand {
 
     /**
-     * base of the user input command
+     * primary instruction of the user input command
      */
     public BaseCommand command;
 
@@ -19,7 +19,7 @@ public class Command {
 
     /**
      * a list of functionalities extracted from user input
-     * @see main.java.utils.Functionality
+     * @see Functionality
      */
     public Functionality[] functionalities;
 
@@ -36,6 +36,6 @@ public class Command {
     }
 
     public void execute() {
-        System.out.println("Will execute command: " + this.command);
+        System.out.println("[Pending] execute command: " + this.command);
     }
 }

@@ -1,10 +1,8 @@
 package main.java.arena;
 
 import main.java.models.Continent;
-import main.java.models.Country;
-import main.java.utils.Command;
+import main.java.commands.Command;
 import main.java.utils.CommandParser;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -54,6 +52,7 @@ public class Game {
             return;
         }
         d_continents.add(p_continent);
+        System.out.println("[Game] Inserted new continent: " + p_continent);
     }
 
     /**

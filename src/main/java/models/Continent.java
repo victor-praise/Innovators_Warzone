@@ -5,21 +5,19 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *  This class is responsible for the continents on the map
+ * This class is responsible for the continents on the map
  * @author Victor
- *
- *
  */
 public class Continent {
     private static int Next_Continent_Id = 0;
 
-    int d_continentID;
+    private int d_continentID;
 
-    String d_continentName;
+    private String d_continentName;
 
-    int d_continentValue;
+    private int d_continentValue;
 
-    List<Country> d_countries;
+    private List<Country> d_countries;
 
     /**
      * constructor.
@@ -41,8 +39,7 @@ public class Continent {
      * @param p_continentValue continent value
      */
     public Continent(String p_continentName, int p_continentValue) {
-        int l_nextId = ++Next_Continent_Id;
-        new Continent(l_nextId, p_continentName, p_continentValue);
+        this(++Next_Continent_Id, p_continentName, p_continentValue);
     }
 
     /**
@@ -157,4 +154,13 @@ public class Continent {
         }
     }
 
+
+    @Override
+    public String toString() {
+        String l_description = "Name: ";
+        return "\nName: "
+                .concat(this.getD_continentName())
+                .concat("\n")
+                .concat("Bonus Points: " + this.getD_continentValue());
+    }
 }
