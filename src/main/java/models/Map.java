@@ -212,7 +212,7 @@ public class Map {
                 if(l_continent != null && l_continent.getD_countries()!=null){
                     for(Country c: l_continent.getD_countries() ){
                         removeCountryAsNeighbourFromAll(c.getD_countryID());
-                        updateNeighbours(c.d_countryID);
+                        updateNeighbours(c.getD_countryID());
                         d_countries.remove(c);
                     }
                 }
