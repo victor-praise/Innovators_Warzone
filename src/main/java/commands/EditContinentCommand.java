@@ -53,6 +53,13 @@ public class EditContinentCommand extends Command {
                     System.out.println("[EditContinent]: Removing a continent failed");
                     return;
                 }
+                String l_continentName = l_function.functionalityParams[0];
+                if (Game.sharedInstance().removeContinentWithName(l_continentName)) {
+                    System.out.println("[EditContinent]: Removed continent with name: " + l_continentName);
+                } else {
+                    System.out.println("[EditContinent]: Removing a continent failed");
+                }
+
                 break;
 
             default:
