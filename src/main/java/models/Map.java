@@ -1,6 +1,7 @@
 package main.java.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -123,7 +124,7 @@ public class Map {
     }
 
     /**
-     * Ensure continent is not already in the map.
+     * Ensure continent is not already on the map.
      *
      * @param p_continent List of Continents in the map
      * @param p_continentName name of new continent
@@ -138,6 +139,20 @@ public class Map {
     }
 
     /**
+     * Ensure country is not already on the map.
+     *
+     * @param p_countryName name of new continent
+     */
+    public boolean countryExists(String p_countryName){
+        for(Country obj: d_countries){
+            if(obj.getD_countryName().equals(p_countryName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * returns continent given continent name.
      *
      * @param p_continentName name of new continent
@@ -145,6 +160,19 @@ public class Map {
     public Continent getContinent(String p_continentName){
         for (Continent obj : d_continents) {
             if (obj.getD_continentName().equals(p_continentName)) {
+                return obj;
+            }
+        }
+        return null;
+    }
+    /**
+     * returns continent given continent name.
+     *
+     * @param p_countryName name of new continent
+     */
+    public Country getCountry(String p_countryName){
+        for(Country obj:d_countries){
+            if(obj.getD_countryName().equals(p_countryName)){
                 return obj;
             }
         }
@@ -200,7 +228,7 @@ public class Map {
     /**
      * Removes continent from Map.
      *     Deletes Specified Continent
-     *     Deletes Countries in Continents and their associated data in the Map
+     *     Deletes all Countries in the Continent along with their data on the Map
      *
      * @param p_continentName Continent Name to be removed
 
@@ -221,6 +249,87 @@ public class Map {
             else{
                 System.out.println("Continent is not on the map");
             }
+        }
+    }
+
+    /**
+     * adds a country to the Map.
+     *
+     * @param p_countryName Name of Country to be added
+     * @param p_continentName Name of Continent to be added
+     *
+     */
+    public void addCountry(String p_countryName, String p_continentName){
+        if(d_countries==null){
+            d_countries = new ArrayList<>();
+        }
+        if(!countryExists(p_countryName)){
+           int l_countryId=d_countries.size()>0? Collections.max(getCountryIDs())+1:1;
+            Continent l_continent = getContinent(p_continentName);
+            if(d_continents!=null && l_continent!=null && getContinentIDs().contains(l_continent.getD_continentID())){
+                Country l_country = new Country(l_countryId,p_countryName,l_continent.getD_continentID());
+                d_countries.add(l_country);
+            }
+            else{
+                System.out.println("Continent does not exist");
+            }
+
+        }
+        else{
+            System.out.println("Country already exists");
+        }
+
+    }
+
+    /**
+     * removes a country from the Map.
+     *
+     * @param p_countryName Name of country to be Added
+     */
+    public void removeCountry(String p_countryName){
+        if(d_countries!=null && countryExists(p_countryName)){
+            Country l_country = getCountry(p_countryName);
+            for(Continent c: d_continents){
+                if(c.getD_continentID()==l_country.getD_continentID()){
+                    c.removeCountry(l_country);
+                }
+                c.removeCountryAsNeighbourFromAll(l_country.getD_countryID());
+            }
+            removeCountryAsNeighbourFromAll(l_country.getD_countryID());
+            d_countries.remove(l_country);
+        }
+    }
+    /**
+     * Adds a country as a Neighbour to another.
+     *
+     * @param p_countryName Country whose neighbours are to be updated
+     * @param p_neighbourName Country to be added as neighbour
+     */
+    public void addNeighbour(String p_countryName, String p_neighbourName){
+        if(d_countries != null && getCountry(p_countryName) != null && getCountry(p_neighbourName) != null){
+            Country l_country = getCountry(p_countryName);
+            Country l_neighbour = getCountry(p_neighbourName);
+            d_countries.get(d_countries.indexOf(l_country)).addNeighbour(l_neighbour.getD_countryID());
+        }
+        else{
+            System.out.println("Countries does not exist");
+        }
+    }
+
+    /**
+     * Removes a country as a Neighbor to another.
+     *
+     * @param p_countryName Country whose neighbors are to be updated
+     * @param p_neighbourName Country to be removed as neighbor
+     */
+    public void removeNeighbour(String p_countryName, String p_neighbourName){
+        if(d_countries != null && getCountry(p_countryName) != null && getCountry(p_neighbourName) != null){
+            Country l_country = getCountry(p_countryName);
+            Country l_neighbour = getCountry(p_neighbourName);
+            d_countries.get(d_countries.indexOf(l_country)).removeNeighbour(l_neighbour.getD_countryID());
+        }
+        else{
+            System.out.println("Countries does not exist");
         }
     }
 }
