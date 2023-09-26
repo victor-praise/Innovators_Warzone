@@ -28,11 +28,11 @@ public class MapService {
      */
     public Map loadMap(String p_fileName)  {
         Map l_map = new Map();
-        List<String> l_fileLines = loadFile(p_fileName);
+        List<String> l_file = loadFile(p_fileName);
 
-        if (null != l_fileLines && !l_fileLines.isEmpty()) {
+        if (l_file != null && !l_file.isEmpty()) {
 
-           // new MapReader().parseMapFile( l_map, l_fileLines);
+            new MapReader().readMapFile( l_map, l_file);
 
         }
         return l_map;
