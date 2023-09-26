@@ -1,4 +1,4 @@
-package tests.java.utils;
+package main.java.utils;
 
 import main.java.commands.BaseCommand;
 import main.java.commands.BaseFunctionality;

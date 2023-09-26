@@ -44,6 +44,21 @@ public class Game {
     }
 
     /**
+     * Setter for the continents
+     */
+    public void setD_continents(List<Continent> d_continents) {
+        this.d_continents = d_continents;
+    }
+
+    /**
+     * Getter for the continents
+     * @return List of continents
+     */
+    public List<Continent> getD_continents() {
+        return d_continents;
+    }
+
+    /**
      * Inserts an instance of Continent to the continents list
      * @param p_continent the continent to be inserted, must be non-null
      */

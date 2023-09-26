@@ -1,6 +1,5 @@
-package tests.java.utils;
+package main.java.commands;
 
-import main.java.commands.BaseFunctionality;
 import org.junit.jupiter.api.Test;
 
 /**
