@@ -62,6 +62,22 @@ public class MapService {
     }
 
     /**
+     * Method is responsible for creating a new map if map to be edited does not
+     * exists, and if it exists it parses the map file to game state object.
+     * @param p_filePath consists of base filepath
+     * @throws IOException triggered in case the file does not exist or the file name is invalid
+     */
+    public void editMap(String p_filePath) throws IOException{
+        String l_filePath = getFilePath(p_filePath);
+        File l_fileToBeEdited = new File(l_filePath);
+        if (l_fileToBeEdited.createNewFile()) {
+            //create new map file
+        }
+        else{
+            loadMap(p_filePath);
+        }
+    }
+    /**
      * Generates absolute file path from the given map file.
      *
      * @param p_fileName amp filename

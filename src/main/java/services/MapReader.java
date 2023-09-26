@@ -25,8 +25,9 @@ public class MapReader {
     public void readMapFile(Map p_map, List<String> p_file){
         List<Continent> l_continentObjects = parseContinentMapData(p_file);
         List<Country> l_countryObjects = parseCountryMapData(p_file);
-
-       l_continentObjects = linkCountryToContinent(l_countryObjects,l_continentObjects);
+        l_continentObjects = linkCountryToContinent(l_countryObjects,l_continentObjects);
+        p_map.setD_continents(l_continentObjects);
+        p_map.setD_countries(l_countryObjects);
     }
 
     /**
