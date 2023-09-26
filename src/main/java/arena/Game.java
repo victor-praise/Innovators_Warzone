@@ -6,6 +6,7 @@ import main.java.utils.CommandParser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * A singleton class describing all the high level game functionalities and resources
@@ -43,6 +44,21 @@ public class Game {
     }
 
     /**
+     * Setter for the continents
+     */
+    public void setD_continents(List<Continent> d_continents) {
+        this.d_continents = d_continents;
+    }
+
+    /**
+     * Getter for the continents
+     * @return List of continents
+     */
+    public List<Continent> getD_continents() {
+        return d_continents;
+    }
+
+    /**
      * Inserts an instance of Continent to the continents list
      * @param p_continent the continent to be inserted, must be non-null
      */
@@ -51,8 +67,17 @@ public class Game {
             System.out.println("[Undefined] can not insert a null value to list of continents");
             return;
         }
-        d_continents.add(p_continent);
-        System.out.println("[Game] Inserted new continent: " + p_continent);
+        String l_nameToValidate = p_continent.getD_continentName();
+        List<Continent> l_sameNameContinents = d_continents
+                .stream()
+                .filter(continent -> continent.getD_continentName().equalsIgnoreCase(l_nameToValidate))
+                .toList();
+        if (l_sameNameContinents.isEmpty()) {
+            d_continents.add(p_continent);
+            System.out.println("[Game] Inserted new continent: " + p_continent);
+        } else {
+            System.out.println("[Game] Inserted failed. Continent with same name exists: " + l_sameNameContinents.get(0));
+        }
     }
 
     /**
@@ -65,6 +90,7 @@ public class Game {
             System.out.println("[Undefined] can not remove a null value to list of continents");
             return false;
         }
+        System.out.println("[Game] Will remove continent: " + p_continent);
         return d_continents.remove(p_continent);
     }
 
@@ -76,7 +102,23 @@ public class Game {
     public boolean removeContinentWithId(int p_continentId) {
         Continent l_continentToRemove = null;
         for (Continent l_continent:d_continents) {
-            if (l_continentToRemove.getD_continentID() == p_continentId) {
+            if (l_continent.getD_continentID() == p_continentId) {
+                l_continentToRemove = l_continent;
+                break;
+            }
+        }
+        return removeContinent(l_continentToRemove);
+    }
+
+    /**
+     * Removes a continent with a given name
+     * @param p_continentName name of continent to remove
+     * @return true if instance was successfully removed, false otherwise
+     */
+    public boolean removeContinentWithName(String p_continentName) {
+        Continent l_continentToRemove = null;
+        for (Continent l_continent:d_continents) {
+            if (l_continent.getD_continentName().equalsIgnoreCase(p_continentName)) {
                 l_continentToRemove = l_continent;
                 break;
             }
