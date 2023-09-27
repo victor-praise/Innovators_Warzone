@@ -43,6 +43,9 @@ public class Map {
      * @return d_continents
      */
     public List<Continent> getD_continents() {
+        if (d_continents == null) {
+            d_continents = new ArrayList<Continent>();
+        }
         return d_continents;
     }
 
@@ -131,7 +134,7 @@ public class Map {
      */
     public boolean continentExists(List<Continent> p_continent, String p_continentName){
         for (Continent obj : p_continent) {
-            if (obj.getD_continentName().equals(p_continentName)) {
+            if (obj.getD_continentName().equalsIgnoreCase(p_continentName)) {
                 return true;
             }
         }
@@ -211,30 +214,25 @@ public class Map {
      * @param p_controlValue Control value of the continent to be added
      */
     public void addContinent(String p_continentName, Integer p_controlValue){
-        if(d_continents!=null){
-            if(!continentExists(d_continents,p_continentName)){
-                d_continents.add(new Continent( p_continentName, p_controlValue));
-            }
-            else{
-                System.out.println("Continent already exists on the map");
-            }
+        if (!continentExists(getD_continents(), p_continentName)) {
+            Continent l_newContinent = new Continent( p_continentName, p_controlValue);
+            d_continents.add(l_newContinent);
+            System.out.println("Inserted a new continent: " + l_newContinent);
         }
-
-        else{
-            d_continents= new ArrayList<Continent>();
-            d_continents.add(new Continent(p_continentName, p_controlValue));
+        else {
+            System.out.println("Continent already exists on the map");
         }
     }
+
     /**
      * Removes continent from Map.
      *     Deletes Specified Continent
      *     Deletes all Countries in the Continent along with their data on the Map
      *
      * @param p_continentName Continent Name to be removed
-
      */
-    public void removeContinent(String p_continentName){
-        if(d_continents!=null){
+    public boolean removeContinent(String p_continentName){
+        if(d_continents != null){
             if(continentExists(d_continents,p_continentName)){
                 Continent l_continent = getContinent(p_continentName);
                 if(l_continent != null && l_continent.getD_countries()!=null){
@@ -244,12 +242,11 @@ public class Map {
                         d_countries.remove(c);
                     }
                 }
-                d_continents.remove(l_continent);
-            }
-            else{
-                System.out.println("Continent is not on the map");
+                return d_continents.remove(l_continent);
             }
         }
+        System.out.println("Continent with name " + p_continentName + "is not on the map");
+        return false;
     }
 
     /**

@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="Country class and functions added">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arena/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arena/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/EditContinentCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/EditContinentCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +33,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
   <component name="ProjectId" id="2Vsb6uUdq0XSA9PLweEobqLLjUC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -39,6 +44,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "warzone-mapcreation",
+    "last_opened_file_path": "/Users/kevin/Concordia/Sem-1/SOEN-6441/Innovators_Warzone",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -49,7 +68,7 @@
       <recent name="tests.java.commands" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in Innovators_Warzone">
+  <component name="RunManager">
     <configuration name="All in Innovators_Warzone" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <option name="PACKAGE_NAME" value="" />
@@ -106,6 +125,7 @@
       <option name="presentableId" value="Default" />
       <updated>1695627567777</updated>
       <workItem from="1695670837048" duration="5398000" />
+      <workItem from="1695757626410" duration="4834000" />
     </task>
     <task id="LOCAL-00001" summary="Country class and functions added">
       <created>1695647446148</created>

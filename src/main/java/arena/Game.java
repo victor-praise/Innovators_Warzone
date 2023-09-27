@@ -2,6 +2,7 @@ package main.java.arena;
 
 import main.java.models.Continent;
 import main.java.commands.Command;
+import main.java.models.Map;
 import main.java.utils.CommandParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +21,34 @@ public class Game {
     private static Game d_sharedInstance = null;
 
     /**
-     * holds all the references of the continents in the game
+     * The current Map object in the game.
      */
-    private List<Continent> d_continents;
+    private Map d_map = null;
+
+    /**
+     * Returns current map being edited or a new map when there are no current map
+     * @return current map object
+     */
+    public Map getD_map() {
+        if (d_map != null) {
+            return d_map;
+        }
+        d_map = new Map();
+        return d_map;
+    }
+
+    public void setD_map(Map p_map) {
+        if (d_map == null) {
+            this.d_map = p_map;
+            return;
+        }
+        System.out.println("[Game]: Attempting to overwrite existing map object, declined. Please save the current map before editing another.");
+    }
 
     /**
      * constructor being made private to prevent random instance creation, always use sharedInstance()
      */
-    private Game() {
-        d_continents = new ArrayList<>();
-    }
+    private Game() {}
 
     /**
      * We keep a singleton instance of Game which is accessible throughout the game engine
@@ -41,89 +60,6 @@ public class Game {
         }
 
         return d_sharedInstance;
-    }
-
-    /**
-     * Setter for the continents
-     */
-    public void setD_continents(List<Continent> d_continents) {
-        this.d_continents = d_continents;
-    }
-
-    /**
-     * Getter for the continents
-     * @return List of continents
-     */
-    public List<Continent> getD_continents() {
-        return d_continents;
-    }
-
-    /**
-     * Inserts an instance of Continent to the continents list
-     * @param p_continent the continent to be inserted, must be non-null
-     */
-    public void insertContinent(Continent p_continent) {
-        if (p_continent == null) {
-            System.out.println("[Undefined] can not insert a null value to list of continents");
-            return;
-        }
-        String l_nameToValidate = p_continent.getD_continentName();
-        List<Continent> l_sameNameContinents = d_continents
-                .stream()
-                .filter(continent -> continent.getD_continentName().equalsIgnoreCase(l_nameToValidate))
-                .toList();
-        if (l_sameNameContinents.isEmpty()) {
-            d_continents.add(p_continent);
-            System.out.println("[Game] Inserted new continent: " + p_continent);
-        } else {
-            System.out.println("[Game] Inserted failed. Continent with same name exists: " + l_sameNameContinents.get(0));
-        }
-    }
-
-    /**
-     * Removes an instance of Continent from the existing list
-     * @param p_continent continent to be removed, must be non-null
-     * @return true if instance was successfully removed, false otherwise
-     */
-    public boolean removeContinent(Continent p_continent) {
-        if (p_continent == null) {
-            System.out.println("[Undefined] can not remove a null value to list of continents");
-            return false;
-        }
-        System.out.println("[Game] Will remove continent: " + p_continent);
-        return d_continents.remove(p_continent);
-    }
-
-    /**
-     * Removes a continent with a given continent id from the list
-     * @param p_continentId an integer id for the continent to remove
-     * @return true if instance was successfully removed, false otherwise
-     */
-    public boolean removeContinentWithId(int p_continentId) {
-        Continent l_continentToRemove = null;
-        for (Continent l_continent:d_continents) {
-            if (l_continent.getD_continentID() == p_continentId) {
-                l_continentToRemove = l_continent;
-                break;
-            }
-        }
-        return removeContinent(l_continentToRemove);
-    }
-
-    /**
-     * Removes a continent with a given name
-     * @param p_continentName name of continent to remove
-     * @return true if instance was successfully removed, false otherwise
-     */
-    public boolean removeContinentWithName(String p_continentName) {
-        Continent l_continentToRemove = null;
-        for (Continent l_continent:d_continents) {
-            if (l_continent.getD_continentName().equalsIgnoreCase(p_continentName)) {
-                l_continentToRemove = l_continent;
-                break;
-            }
-        }
-        return removeContinent(l_continentToRemove);
     }
 
     /**

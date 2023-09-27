@@ -41,8 +41,7 @@ public class EditContinentCommand extends Command {
                 try {
                     String l_continentName = l_function.functionalityParams[0];
                     int l_bonusValue = Integer.parseInt(l_function.functionalityParams[1]);
-                    Continent l_continent = new Continent(l_continentName, l_bonusValue);
-                    Game.sharedInstance().insertContinent(l_continent);
+                    Game.sharedInstance().getD_map().addContinent(l_continentName, l_bonusValue);
                 } catch (NumberFormatException nfe) {
                     System.out.println("[EditContinent]: Invalid format: bonus points must be an integer, found: [ " + l_function.functionalityParams[1] +" ]");
                 }
@@ -54,12 +53,11 @@ public class EditContinentCommand extends Command {
                     return;
                 }
                 String l_continentName = l_function.functionalityParams[0];
-                if (Game.sharedInstance().removeContinentWithName(l_continentName)) {
+                if (Game.sharedInstance().getD_map().removeContinent(l_continentName)) {
                     System.out.println("[EditContinent]: Removed continent with name: " + l_continentName);
                 } else {
                     System.out.println("[EditContinent]: Removing a continent failed");
                 }
-
                 break;
 
             default:
