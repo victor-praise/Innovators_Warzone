@@ -1,3 +1,5 @@
+package main.java.arena;
+
 /*
  * Main entry point for the game nick-named `WARZONE`
  * This project is part of SOEN-6441 class, batch Fall-2023, headed by Dr. Amin Ranj Bar
@@ -11,18 +13,29 @@
  */
 
 /**
+ * A tactical game-play where the player objective is to capture as much territory as possible.
+ * Player wins by controlling every territory possible.
  * @author Kevin Wadera
+ * @version 1.0
  */
-
-// A tactical game-play where the player objective is to capture as much territory as possible.
-// Player wins by controlling every territory possible.
 public class WarzoneArena {
-    public  static Boolean IS_GAMEPLAY_ON = true;
+
+    private  static Boolean Is_Gameplay_On = true;
+    private static Game d_Game;
+
+    /**
+     * Main entry point of the game.
+     * @param args Any command line arguments separated by a space
+     */
     public static void main(String[] args) {
         // Gameplay setup goes here
+        setupGame();
+
+        // TEMPORARY Map Display
+        Game.sharedInstance().getD_map().show();
 
         // Gameplay begins here
-        while (IS_GAMEPLAY_ON) {
+        while (Is_Gameplay_On) {
             System.out.println("Warp to Warzone!");
         // auto build check
             System.out.print("auto build completed! --- Git Guardian");
@@ -31,8 +44,19 @@ public class WarzoneArena {
         }
     }
 
+    /**
+     * Call to this method should be made when the game needs to be terminated
+     */
     // To be called when a single player controls entire board
     public static void endGamePlay() {
-        IS_GAMEPLAY_ON = false;
+        Is_Gameplay_On = false;
+    }
+
+    /**
+     * All the game setup parameters will go here
+     */
+    private static void setupGame() {
+        d_Game = Game.sharedInstance();
+        d_Game.setup();
     }
 }
