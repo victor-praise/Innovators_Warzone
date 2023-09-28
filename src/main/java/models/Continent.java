@@ -7,6 +7,7 @@ import java.util.Objects;
 /**
  * This class is responsible for the continents on the map
  * @author Victor
+ * @version 1.0
  */
 public class Continent {
     private static int Next_Continent_Id = 0;
@@ -120,7 +121,7 @@ public class Continent {
      * @param p_country the country to be added
      */
     public void addCountry(Country p_country) {
-            d_countries.add(p_country);
+        d_countries.add(p_country);
     }
 
     /**

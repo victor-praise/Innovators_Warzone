@@ -1,5 +1,6 @@
 package main.java.services;
 
+import main.java.arena.Game;
 import main.java.models.Map;
 
 import java.io.BufferedReader;
@@ -28,6 +29,7 @@ public class MapService {
      */
     public Map loadMap(String p_fileName)  {
         Map l_map = new Map();
+        Game.sharedInstance().setD_map(l_map);
         List<String> l_file = loadFile(p_fileName);
 
         if (l_file != null && !l_file.isEmpty()) {

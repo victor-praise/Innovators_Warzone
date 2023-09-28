@@ -33,7 +33,7 @@ class EditContinentCommandTest {
      */
     @AfterEach
     void tearDown() {
-        Game.sharedInstance().setD_continents(new ArrayList<>());
+        Game.sharedInstance().getD_map().setD_continents(new ArrayList<>());
     }
 
     /**
@@ -46,7 +46,7 @@ class EditContinentCommandTest {
 
         d_systemUnderTest.execute();
 
-        int continentCount = Game.sharedInstance().getD_continents().size();
+        int continentCount = Game.sharedInstance().getD_map().getD_continents().size();
         assertEquals(continentCount, 1, "Expected 1 found " + continentCount);
     }
 
@@ -62,7 +62,7 @@ class EditContinentCommandTest {
         // Repeat 1 more time, this one should be rejected
         d_systemUnderTest.execute();
 
-        int continentCount = Game.sharedInstance().getD_continents().size();
+        int continentCount = Game.sharedInstance().getD_map().getD_continents().size();
         assertEquals(continentCount, 1, "Expected 1 found " + continentCount);
     }
 
@@ -73,9 +73,9 @@ class EditContinentCommandTest {
     void test_givenRemoveFunctionality_whenExecuted_thenContinentRemoved() {
         Continent l_asia = new Continent("Asia", 2);
         List<Continent> l_continents = new ArrayList<Continent>(List.of(l_asia));
-        Game.sharedInstance().setD_continents(l_continents);
+        Game.sharedInstance().getD_map().setD_continents(l_continents);
 
-        int continentCount = Game.sharedInstance().getD_continents().size();
+        int continentCount = Game.sharedInstance().getD_map().getD_continents().size();
         assertEquals(1, continentCount);
 
         Functionality function = new Functionality(BaseFunctionality.Remove, new String[]{"Asia"});
@@ -83,7 +83,7 @@ class EditContinentCommandTest {
 
         d_systemUnderTest.execute();
 
-        continentCount = Game.sharedInstance().getD_continents().size();
+        continentCount = Game.sharedInstance().getD_map().getD_continents().size();
         assertEquals(continentCount, 0, "Expected 0 found " + continentCount);
     }
 }
