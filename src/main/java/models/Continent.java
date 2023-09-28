@@ -119,7 +119,7 @@ public class Continent {
      *
      * @param p_country the country to be added
      */
-    public void addCountry(Country p_country){
+    public void addCountry(Country p_country) {
             d_countries.add(p_country);
     }
 
@@ -128,10 +128,10 @@ public class Continent {
      *
      * @param p_country country to be removed
      */
-    public void removeCountry(Country p_country){
-        if(d_countries==null){
+    public void removeCountry(Country p_country) {
+        if(d_countries==null) {
             System.out.println("Country does not Exist");
-        }else {
+        } else {
             d_countries.remove(p_country);
         }
     }
@@ -154,7 +154,10 @@ public class Continent {
         }
     }
 
-
+    /**
+     * Describes the Continent - name and bonus points
+     * @return String description
+     */
     @Override
     public String toString() {
         String l_description = "Name: ";

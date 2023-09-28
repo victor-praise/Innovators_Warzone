@@ -127,28 +127,38 @@ public class Country {
     }
 
     /**
-     * adds a neighbour to the list
-     *
+     * Adds a neighbour to the list
      * @param p_countryID country ID
      */
-    public void addNeighbour(int p_countryID){
-        if(!d_neighbors.contains(p_countryID)){
+    public void addNeighbour(int p_countryID) {
+        if(!d_neighbors.contains(p_countryID)) {
             d_neighbors.add(p_countryID);
         }
-
     }
 
     /**
-     * removes countryID from neighbour list.
-     *
+     * Removes countryID from neighbour list.
      * @param p_countryID country ID
      */
-    public void removeNeighbour(int p_countryID){
-        if(d_neighbors.contains(p_countryID)){
+    public void removeNeighbour(int p_countryID) {
+        if(d_neighbors.contains(p_countryID)) {
             d_neighbors.remove((Integer) p_countryID);
         }
         else{
             System.out.println("There is no neighbour with the provided ID");
         }
+    }
+
+    /**
+     * Describes the Country - name and id of neighbours
+     * @return String description of country
+     */
+    @Override
+    public String toString() {
+        String l_description = d_countryID + " " + d_countryName;
+        for (int neighbour: d_neighbors) {
+            l_description = l_description.concat(" " + neighbour);
+        }
+        return l_description;
     }
 }

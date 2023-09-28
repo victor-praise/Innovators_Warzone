@@ -50,6 +50,10 @@ public class CommandParser {
                     l_command = new EditCountryCommand(l_baseParams, l_functionalities);
                     break;
 
+                case EditNeighbour:
+                    l_command = new EditNeighbourCommand(l_baseParams, l_functionalities);
+                    break;
+
                 default:
                     break;
             }
