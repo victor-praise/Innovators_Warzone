@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="Country class and functions added">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arena/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arena/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/EditContinentCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/EditContinentCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -125,7 +124,7 @@
       <option name="presentableId" value="Default" />
       <updated>1695627567777</updated>
       <workItem from="1695670837048" duration="5398000" />
-      <workItem from="1695757626410" duration="4834000" />
+      <workItem from="1695757626410" duration="10399000" />
     </task>
     <task id="LOCAL-00001" summary="Country class and functions added">
       <created>1695647446148</created>
@@ -161,5 +160,26 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Country class and functions added" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/models/Map.java</url>
+          <line>280</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/models/Map.java</url>
+          <line>270</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/models/Map.java</url>
+          <line>242</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

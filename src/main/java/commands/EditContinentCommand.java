@@ -34,7 +34,7 @@ public class EditContinentCommand extends Command {
         switch (l_function.functionality) {
             case Add:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 2) {
-                    System.out.println("[EditContinent]: Adding a continent requires 2 parameters\n[1] Country Name\n[2] Bonus Points");
+                    System.out.println("[EditContinent]: Adding a continent requires 2 parameters\n[1] Continent Name\n[2] Bonus Points");
                     System.out.println("[EditContinent]: Adding a continent failed");
                     return;
                 }
@@ -48,7 +48,7 @@ public class EditContinentCommand extends Command {
                 break;
             case Remove:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 1) {
-                    System.out.println("[EditContinent]: Removing a continent requires 1 parameters\n[1] Country Name");
+                    System.out.println("[EditContinent]: Removing a continent requires 1 parameters\n[1] Continent Name");
                     System.out.println("[EditContinent]: Removing a continent failed");
                     return;
                 }

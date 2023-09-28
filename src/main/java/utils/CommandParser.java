@@ -44,6 +44,11 @@ public class CommandParser {
             switch (l_baseCommand) {
                 case EditContinent:
                     l_command = new EditContinentCommand(l_baseParams, l_functionalities);
+                    break;
+
+                case EditCountry:
+                    l_command = new EditCountryCommand(l_baseParams, l_functionalities);
+                    break;
 
                 default:
                     break;
