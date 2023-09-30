@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="Country class and functions added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Continent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Continent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/main/java/commands/EditContinentCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/main/java/commands/EditContinentCommandTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,15 +26,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
   <component name="ProjectId" id="2Vsb6uUdq0XSA9PLweEobqLLjUC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -43,24 +48,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "warzone-mapcreation",
-    "last_opened_file_path": "/Users/kevin/Concordia/Sem-1/SOEN-6441/Innovators_Warzone",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -128,7 +115,7 @@
       <option name="presentableId" value="Default" />
       <updated>1695627567777</updated>
       <workItem from="1695670837048" duration="5398000" />
-      <workItem from="1695757626410" duration="19972000" />
+      <workItem from="1695757626410" duration="14350000" />
     </task>
     <task id="LOCAL-00001" summary="Country class and functions added">
       <created>1695647446148</created>

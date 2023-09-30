@@ -91,6 +91,7 @@ public class Map {
      * @param p_continent continent to add
      */
     public void addContinentToMap(Continent p_continent){
+
         d_continents.add(p_continent);
     }
 
@@ -122,6 +123,7 @@ public class Map {
      * @return Bool Value if map is valid
      */
     public Boolean validate() {
+
         //TODO: should be updated
         return true;
     }
