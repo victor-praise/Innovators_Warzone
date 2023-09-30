@@ -39,7 +39,11 @@ public class EditNeighbourCommand extends Command {
                 }
                 l_countryName = l_function.functionalityParams[0];
                 l_neighbourName = l_function.functionalityParams[1];
-                Game.sharedInstance().getD_map().addNeighbour(l_countryName, l_neighbourName);
+                if (Game.sharedInstance().getD_map().addNeighbour(l_countryName, l_neighbourName)) {
+                    System.out.println("[EditNeighbour]: Added " + l_countryName + " as a neighbour to: " + l_neighbourName);
+                } else {
+                    System.out.println("[EditNeighbour]: Adding a neighbour failed");
+                }
                 break;
             case Remove:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 2) {
@@ -49,7 +53,11 @@ public class EditNeighbourCommand extends Command {
                 }
                 l_countryName = l_function.functionalityParams[0];
                 l_neighbourName = l_function.functionalityParams[1];
-                Game.sharedInstance().getD_map().removeNeighbour(l_countryName, l_neighbourName);
+                if (Game.sharedInstance().getD_map().removeNeighbour(l_countryName, l_neighbourName)) {
+                    System.out.println("[EditNeighbour]: Removed " + l_countryName + " and : " + l_neighbourName + "as neighbours");
+                } else {
+                    System.out.println("[EditNeighbour]: Removing a neighbour failed");
+                }
                 break;
 
             default:

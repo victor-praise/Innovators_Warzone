@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="Country class and functions added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Continent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Continent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/main/java/commands/EditContinentCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/main/java/commands/EditContinentCommandTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/EditNeighbourCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/EditNeighbourCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -32,9 +31,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2Vsb6uUdq0XSA9PLweEobqLLjUC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -47,8 +46,10 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "warzone-mapcreation",
+    "git-widget-placeholder": "kevin/command-test-cases",
     "last_opened_file_path": "/Users/kevin/Concordia/Sem-1/SOEN-6441/Innovators_Warzone",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -80,7 +81,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditContinentCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EditCountryCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <extension name="coverage">
         <pattern>
@@ -89,13 +90,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.commands" />
-      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditContinentCommandTest" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditCountryCommandTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditContinentCommandTest.test_givenRemoveFunctionality_whenExecuted_thenContinentRemoved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EditCountryCommandTest.test_givenAContinent_whenAddCommandExecuted_thenCountryAdded" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <extension name="coverage">
         <pattern>
@@ -104,8 +105,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.commands" />
-      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditContinentCommandTest" />
-      <option name="METHOD_NAME" value="test_givenRemoveFunctionality_whenExecuted_thenContinentRemoved" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditCountryCommandTest" />
+      <option name="METHOD_NAME" value="test_givenAContinent_whenAddCommandExecuted_thenCountryAdded" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EditCountryCommandTest.test_givenAContinent_whenRemoveCommandExecuted_thenCountryRemoved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Innovators_Warzone" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.commands.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main.java.commands" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditCountryCommandTest" />
+      <option name="METHOD_NAME" value="test_givenAContinent_whenRemoveCommandExecuted_thenCountryRemoved" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EditNeighbourCommandTest.given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Innovators_Warzone" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.commands.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main.java.commands" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditNeighbourCommandTest" />
+      <option name="METHOD_NAME" value="given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -114,8 +147,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in Innovators_Warzone" />
-        <item itemvalue="JUnit.EditContinentCommandTest" />
-        <item itemvalue="JUnit.EditContinentCommandTest.test_givenRemoveFunctionality_whenExecuted_thenContinentRemoved" />
+        <item itemvalue="JUnit.EditNeighbourCommandTest.given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" />
+        <item itemvalue="JUnit.EditCountryCommandTest" />
+        <item itemvalue="JUnit.EditCountryCommandTest.test_givenAContinent_whenRemoveCommandExecuted_thenCountryRemoved" />
+        <item itemvalue="JUnit.EditCountryCommandTest.test_givenAContinent_whenAddCommandExecuted_thenCountryAdded" />
       </list>
     </recent_temporary>
   </component>
@@ -129,6 +164,7 @@
       <updated>1695627567777</updated>
       <workItem from="1695670837048" duration="5398000" />
       <workItem from="1695757626410" duration="19972000" />
+      <workItem from="1696105109057" duration="4916000" />
     </task>
     <task id="LOCAL-00001" summary="Country class and functions added">
       <created>1695647446148</created>
@@ -164,5 +200,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Country class and functions added" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/models/Map.java</url>
+          <line>295</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
