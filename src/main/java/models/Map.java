@@ -351,7 +351,7 @@ public class Map {
     }
 
     public void show() {
-        for (Continent continent: d_continents) {
+        for (Continent continent: getD_continents()) {
             System.out.println(continent.getD_continentName());
             for (Country country: continent.getD_countries()) {
                 System.out.println("\t" + country);

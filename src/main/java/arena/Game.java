@@ -37,9 +37,17 @@ public class Game {
         return d_map;
     }
 
+    /**
+     * Attempts to set a new map object. Fails if current map object is not null.
+     * Can be used to reset the map object too by passing null.
+     * @param p_map new map object to set
+     */
     public void setD_map(Map p_map) {
-        if (d_map == null) {
+        if (d_map == null || p_map == null) {
             this.d_map = p_map;
+            if (p_map == null) {
+                Continent.resetNextContinentId();
+            }
             return;
         }
         System.out.println("[Game]: Attempting to overwrite existing map object, declined. Please save the current map before editing another.");

@@ -5,9 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="Country class and functions added">
+      <change afterPath="$PROJECT_DIR$/res/canada.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/map1.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/commands/EditMapCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/commands/EditMapCommandTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/models/ContinentTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/models/CountryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/models/MapTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/services/MapReaderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/services/MapServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/EditNeighbourCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/EditNeighbourCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Innovators_Warzone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Innovators_Warzone.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arena/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arena/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Continent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Continent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,11 +82,13 @@
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="main.java.commands" />
+      <recent name="main.java.models" />
+      <recent name="main.java.services" />
       <recent name="tests.main.java.commands" />
       <recent name="tests.java.commands" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in Innovators_Warzone">
+  <component name="RunManager">
     <configuration name="All in Innovators_Warzone" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <option name="PACKAGE_NAME" value="" />
@@ -96,7 +112,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditCountryCommandTest.test_givenAContinent_whenAddCommandExecuted_thenCountryAdded" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EditMapCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <extension name="coverage">
         <pattern>
@@ -105,14 +121,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.commands" />
-      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditCountryCommandTest" />
-      <option name="METHOD_NAME" value="test_givenAContinent_whenAddCommandExecuted_thenCountryAdded" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditMapCommandTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditCountryCommandTest.test_givenAContinent_whenRemoveCommandExecuted_thenCountryRemoved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EditMapCommandTest.test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <extension name="coverage">
         <pattern>
@@ -121,8 +136,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.commands" />
-      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditCountryCommandTest" />
-      <option name="METHOD_NAME" value="test_givenAContinent_whenRemoveCommandExecuted_thenCountryRemoved" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditMapCommandTest" />
+      <option name="METHOD_NAME" value="test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -147,10 +162,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in Innovators_Warzone" />
+        <item itemvalue="JUnit.EditMapCommandTest" />
+        <item itemvalue="JUnit.EditMapCommandTest.test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded" />
         <item itemvalue="JUnit.EditNeighbourCommandTest.given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" />
         <item itemvalue="JUnit.EditCountryCommandTest" />
-        <item itemvalue="JUnit.EditCountryCommandTest.test_givenAContinent_whenRemoveCommandExecuted_thenCountryRemoved" />
-        <item itemvalue="JUnit.EditCountryCommandTest.test_givenAContinent_whenAddCommandExecuted_thenCountryAdded" />
       </list>
     </recent_temporary>
   </component>
@@ -164,7 +179,7 @@
       <updated>1695627567777</updated>
       <workItem from="1695670837048" duration="5398000" />
       <workItem from="1695757626410" duration="19972000" />
-      <workItem from="1696105109057" duration="4916000" />
+      <workItem from="1696105109057" duration="13082000" />
     </task>
     <task id="LOCAL-00001" summary="Country class and functions added">
       <created>1695647446148</created>
@@ -205,9 +220,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/models/Map.java</url>
-          <line>295</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/src/main/java/services/MapService.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
