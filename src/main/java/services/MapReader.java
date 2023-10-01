@@ -1,5 +1,6 @@
 package main.java.services;
 
+import main.java.arena.Game;
 import main.java.models.Continent;
 import main.java.models.Country;
 import main.java.models.Map;
@@ -28,6 +29,7 @@ public class MapReader {
         l_continentObjects = linkCountryToContinent(l_countryObjects, l_continentObjects);
         p_map.setD_continents(l_continentObjects);
         p_map.setD_countries(l_countryObjects);
+        Game.sharedInstance().setD_map(p_map);
     }
 
     /**
@@ -48,7 +50,7 @@ public class MapReader {
         return l_continents;
     }
     /**
-     * Reads the corresponding map file lines and extracts continent data.
+     * Reads the corresponding map file lines and extracts country data.
      *
      * @param p_file All Lines in the map document
      * @return List of countries

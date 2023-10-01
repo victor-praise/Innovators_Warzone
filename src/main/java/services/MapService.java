@@ -3,10 +3,9 @@ package main.java.services;
 import main.java.arena.Game;
 import main.java.models.Map;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,7 +72,32 @@ public class MapService {
         }
         String l_filePath = getFilePath(p_filePath);
         File l_fileToBeEdited = new File(l_filePath);
+
         loadMap(l_fileToBeEdited.exists() ? p_filePath : null);
+    }
+
+    /**
+     * Method is responsible for saving a map
+     * @param p_fileName file name for map to be saved as
+     * @throws IOException
+     */
+    public void saveMap(String p_fileName) throws IOException {
+        try {
+            if(Game.sharedInstance().getD_map() != null) {
+                Map l_map = Game.sharedInstance().getD_map();
+                //TODO
+                //First validate map before saving
+
+                Files.deleteIfExists(Paths.get(getFilePath(p_fileName)));
+                FileWriter l_fileWriter = new FileWriter(getFilePath(p_fileName));
+                new MapSaver().saveMapToFile(l_fileWriter);
+                l_fileWriter.close();
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
     /**
      * Generates absolute file path from the given map file.
