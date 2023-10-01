@@ -44,6 +44,13 @@ public class Continent {
     }
 
     /**
+     * When ever a map is set to null, Next_Continent_Id should default back to 0
+     */
+    public static void resetNextContinentId() {
+        Next_Continent_Id = 0;
+    }
+
+    /**
      * getter method that returns continent ID.
      *
      * @return continent ID

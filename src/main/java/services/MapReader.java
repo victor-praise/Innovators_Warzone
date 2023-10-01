@@ -25,7 +25,7 @@ public class MapReader {
     public void readMapFile(Map p_map, List<String> p_file){
         List<Continent> l_continentObjects = parseContinentMapData(p_file);
         List<Country> l_countryObjects = parseCountryMapData(p_file);
-        l_continentObjects = linkCountryToContinent(l_countryObjects,l_continentObjects);
+        l_continentObjects = linkCountryToContinent(l_countryObjects, l_continentObjects);
         p_map.setD_continents(l_continentObjects);
         p_map.setD_countries(l_countryObjects);
     }
@@ -61,8 +61,10 @@ public class MapReader {
 
          for (String country : l_countryLines) {
              String[] l_countriesData = country.split(" ");
-             l_countriesList.add(new Country(Integer.parseInt(l_countriesData[0]), l_countriesData[1],
-                     Integer.parseInt(l_countriesData[2])));
+             int l_countryId = Integer.parseInt(l_countriesData[0]);
+             int l_continentId = Integer.parseInt(l_countriesData[2]);
+             Country l_country = new Country(l_countryId, l_countriesData[1], l_continentId);
+             l_countriesList.add(l_country);
          }
          return parseNeighboursData(p_file,l_countriesList);
      }

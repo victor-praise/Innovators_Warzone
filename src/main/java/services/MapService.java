@@ -27,17 +27,15 @@ public class MapService {
      * @return Map object after processing map file.
 
      */
-    public Map loadMap(String p_fileName)  {
+    public void loadMap(String p_fileName)  {
         Map l_map = new Map();
-        Game.sharedInstance().setD_map(l_map);
-        List<String> l_file = loadFile(p_fileName);
-
-        if (l_file != null && !l_file.isEmpty()) {
-
-            new MapReader().readMapFile( l_map, l_file);
-
+        if (p_fileName != null) {
+            List<String> l_file = loadFile(p_fileName);
+            if (l_file != null && !l_file.isEmpty()) {
+                new MapReader().readMapFile( l_map, l_file);
+            }
         }
-        return l_map;
+        Game.sharedInstance().setD_map(l_map);
     }
 
     /**
@@ -65,19 +63,17 @@ public class MapService {
 
     /**
      * Method is responsible for creating a new map if map to be edited does not
-     * exists, and if it exists it parses the map file to game state object.
+     * exist, and if it exists it parses the map file to game state object.
      * @param p_filePath consists of base filepath
      * @throws IOException triggered in case the file does not exist or the file name is invalid
      */
-    public void editMap(String p_filePath) throws IOException{
+    public void editMap(String p_filePath) throws IOException {
+        if (!p_filePath.contains(".map")) {
+            p_filePath = p_filePath.concat(".map");
+        }
         String l_filePath = getFilePath(p_filePath);
         File l_fileToBeEdited = new File(l_filePath);
-        if (l_fileToBeEdited.createNewFile()) {
-            //create new map file
-        }
-        else{
-            loadMap(p_filePath);
-        }
+        loadMap(l_fileToBeEdited.exists() ? p_filePath : null);
     }
     /**
      * Generates absolute file path from the given map file.
@@ -87,6 +83,6 @@ public class MapService {
      */
     public String getFilePath(String p_fileName){
         String l_filePath = new File("").getAbsolutePath();
-        return l_filePath + File.separator + "src/main/resources" + File.separator + p_fileName;
+        return l_filePath + File.separator + "res" + File.separator + p_fileName;
     }
 }
