@@ -5,9 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="Country class and functions added">
+      <change afterPath="$PROJECT_DIR$/res/canada.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/map1.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/commands/EditMapCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/commands/EditMapCommandTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/models/ContinentTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/models/CountryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/models/MapTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/services/MapReaderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/main/java/services/MapServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapSaver.java" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/Innovators_Warzone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Innovators_Warzone.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arena/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arena/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Continent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Continent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +33,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -39,6 +55,11 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+
   <component name="ProjectId" id="2Vsb6uUdq0XSA9PLweEobqLLjUC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -47,17 +68,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "kevin/command-test-cases",
+    "last_opened_file_path": "/Users/kevin/Concordia/Sem-1/SOEN-6441/Innovators_Warzone",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="main.java.commands" />
+      <recent name="main.java.models" />
+      <recent name="main.java.services" />
       <recent name="tests.main.java.commands" />
       <recent name="tests.java.commands" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in Innovators_Warzone">
+  <component name="RunManager">
     <configuration name="All in Innovators_Warzone" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <option name="PACKAGE_NAME" value="" />
@@ -66,7 +111,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditContinentCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EditCountryCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <extension name="coverage">
         <pattern>
@@ -75,13 +120,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.commands" />
-      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditContinentCommandTest" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditCountryCommandTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditContinentCommandTest.test_givenRemoveFunctionality_whenExecuted_thenContinentRemoved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EditMapCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <extension name="coverage">
         <pattern>
@@ -90,8 +135,39 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.commands" />
-      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditContinentCommandTest" />
-      <option name="METHOD_NAME" value="test_givenRemoveFunctionality_whenExecuted_thenContinentRemoved" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditMapCommandTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EditMapCommandTest.test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Innovators_Warzone" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.commands.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main.java.commands" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditMapCommandTest" />
+      <option name="METHOD_NAME" value="test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EditNeighbourCommandTest.given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Innovators_Warzone" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.commands.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main.java.commands" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditNeighbourCommandTest" />
+      <option name="METHOD_NAME" value="given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -100,8 +176,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in Innovators_Warzone" />
-        <item itemvalue="JUnit.EditContinentCommandTest" />
-        <item itemvalue="JUnit.EditContinentCommandTest.test_givenRemoveFunctionality_whenExecuted_thenContinentRemoved" />
+        <item itemvalue="JUnit.EditMapCommandTest" />
+        <item itemvalue="JUnit.EditMapCommandTest.test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded" />
+        <item itemvalue="JUnit.EditNeighbourCommandTest.given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" />
+        <item itemvalue="JUnit.EditCountryCommandTest" />
       </list>
     </recent_temporary>
   </component>
@@ -114,7 +192,10 @@
       <option name="presentableId" value="Default" />
       <updated>1695627567777</updated>
       <workItem from="1695670837048" duration="5398000" />
-      <workItem from="1695757626410" duration="14350000" />
+
+      <workItem from="1695757626410" duration="19972000" />
+      <workItem from="1696105109057" duration="13082000" />
+
     </task>
     <task id="LOCAL-00001" summary="Country class and functions added">
       <created>1695647446148</created>
@@ -150,5 +231,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Country class and functions added" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/services/MapService.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

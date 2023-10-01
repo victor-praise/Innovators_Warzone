@@ -17,7 +17,7 @@ public class Map {
      */
     String d_mapFile;
     List<Continent> d_continents;
-    List<Country> d_countries;
+    private List<Country> d_countries;
 
     /**
      * getter method that returns the map file.
@@ -64,6 +64,9 @@ public class Map {
      * @return list of countries
      */
     public List<Country> getD_countries() {
+        if (d_countries == null) {
+            d_countries = new ArrayList<Country>();
+        }
         return d_countries;
     }
 
@@ -82,7 +85,7 @@ public class Map {
      * @param p_country country to add
      */
     public void addCountryToMap(Country p_country){
-        d_countries.add(p_country);
+        getD_countries().add(p_country);
     }
 
     /**
@@ -311,7 +314,7 @@ public class Map {
      * @param p_countryName Country whose neighbours are to be updated
      * @param p_neighbourName Country to be added as neighbour
      */
-    public void addNeighbour(String p_countryName, String p_neighbourName) {
+    public boolean addNeighbour(String p_countryName, String p_neighbourName) {
         Country l_country = getCountry(p_countryName);
         Country l_neighbour = getCountry(p_neighbourName);
 
@@ -319,9 +322,11 @@ public class Map {
             // Add both as neighbour to each other
             l_country.addNeighbour(l_neighbour.getD_countryID());
             l_neighbour.addNeighbour(l_country.getD_countryID());
+            return true;
         }
         else{
             System.out.println("[Map]: At least one of these countries do not exist");
+            return false;
         }
     }
 
@@ -331,7 +336,7 @@ public class Map {
      * @param p_countryName Country whose neighbors are to be updated
      * @param p_neighbourName Country to be removed as neighbor
      */
-    public void removeNeighbour(String p_countryName, String p_neighbourName) {
+    public boolean removeNeighbour(String p_countryName, String p_neighbourName) {
         if(getCountry(p_countryName) != null && getCountry(p_neighbourName) != null){
             Country l_country = getCountry(p_countryName);
             Country l_neighbour = getCountry(p_neighbourName);
@@ -339,14 +344,16 @@ public class Map {
             // Remove both as neighbour to each other
             l_country.removeNeighbour(l_neighbour.getD_countryID());
             l_neighbour.removeNeighbour(l_country.getD_countryID());
+            return true;
         }
         else{
             System.out.println("[Map]: At least one of these countries do not exist");
+            return false;
         }
     }
 
     public void show() {
-        for (Continent continent: d_continents) {
+        for (Continent continent: getD_continents()) {
             System.out.println(continent.getD_continentName());
             for (Country country: continent.getD_countries()) {
                 System.out.println("\t" + country);
