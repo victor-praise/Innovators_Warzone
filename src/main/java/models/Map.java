@@ -4,6 +4,7 @@ import main.java.exceptions.InValidException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +21,21 @@ public class Map {
      * stores the map file name.
      */
     String d_mapFile;
+
+    /**
+     * list of continents.
+     */
     List<Continent> d_continents;
+
+    /**
+     * list of countries.
+     */
     private List<Country> d_countries;
+
+    /**
+     * HashMap of the countries one can reach from the existing position.
+     */
+    HashMap<Integer, Boolean> d_countryReach = new HashMap<Integer, Boolean>();
 
     /**
      * getter method that returns the map file.
@@ -146,21 +160,44 @@ public class Map {
      * @return Bool Value if map is valid
      */
     public Boolean validate() throws InValidException {
-        return (isObjectNotNull());
+        return (isObjectNotNull() && hasAdjacentContinent());
     }
 
     /**
      * performs NULL check on MAP object
-     *
      */
     public Boolean isObjectNotNull() throws InValidException {
-        if(d_continents == null || d_continents.isEmpty())
+        if(d_continents == null || d_continents.isEmpty()) {
             throw new InValidException("Map continent cannot be empty.");
-
+        }
         if(d_countries==null || d_countries.isEmpty()){
             throw new InValidException("Each continent mush have one country.");
         }
+        for(Country l_country: d_countries) {
+            if(l_country.getD_neighbors().isEmpty() || l_country.getD_neighbors().size() < 1) {
+                throw new InValidException(l_country.getD_countryName() + " has no adjacent neighbour.");
+            }
+        }
         return true;
+    }
+
+    /**
+     * performs neighbour check on Continent
+     */
+    public Boolean hasAdjacentContinent() throws InValidException{
+        for(Continent l_continent: d_continents) {
+            if(l_continent.getD_countries().isEmpty() || l_continent.getD_countries().size()<1) {
+                throw new InValidException(l_continent.getD_continentName() + " has no countries. It must have at least one country");
+            }
+            if(!hasAdjacentContinentConnection(l_continent)){
+//                l_flagConnectivity=false;
+            }
+        }
+        return true;
+    }
+
+    public Boolean hasAdjacentContinentConnection(Continent p_continent) {
+
     }
 
     /**
