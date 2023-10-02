@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import main.java.arena.Game;
+
 /**
  *  This class is responsible for the map
  * @author Victor
@@ -150,7 +152,7 @@ public class Map {
      * @param p_countryName name of new continent
      */
     public boolean countryExists(String p_countryName) {
-        for(Country obj: d_countries) {
+        for(Country obj: getD_countries()) {
             if(obj.getD_countryName().equalsIgnoreCase(p_countryName)) {
                 return true;
             }
@@ -350,13 +352,57 @@ public class Map {
         }
     }
 
+    /**
+     * Displays map according to .map file format
+     * @author Sadiqali
+     * 
+     */
+
     public void show() {
-        for (Continent continent: getD_continents()) {
-            System.out.println(continent.getD_continentName());
-            for (Country country: continent.getD_countries()) {
-                System.out.println("\t" + country);
-            }
+
+    System.out.println("\n[Continents]");
+
+    /**
+     * Displayes list of Continents in the format continentName continentValue
+     */
+
+        if(getD_continents().isEmpty()) {
+            return;
         }
-        System.out.println("\n");
+        for(Continent continent: getD_continents()){
+            System.out.print(continent.getD_continentName());
+            System.out.print(" " + continent.getD_continentValue() + "\n");
+        }
+
+        System.out.println("");
+    
+    /**
+     * Displays list of countries in the format countryID countryName
+     */
+
+        if(!getD_countries().isEmpty()){
+            System.out.println("[Countries]");
+            for(Country country: getD_countries()){
+                System.out.print("" + country.getD_countryID());
+                System.out.print(" " + country.getD_countryName());
+                System.out.print(" " + country.getD_continentID() + "\n");
+            }
+        } else {
+            return;
+        }
+
+        System.out.print("\n");
+
+        if(getD_countries().isEmpty()) {
+            return;
+        }
+        System.out.println("\n[Borders]");
+        for(Country country: getD_countries()) {
+            String neighbours = String.valueOf(country.getD_countryID());
+            for(int neighbor: country.getD_neighbors()) {
+                neighbours += (" " + neighbor);
+            }
+            System.out.println(neighbours);
+        }
     }
 }
