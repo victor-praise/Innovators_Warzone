@@ -182,7 +182,9 @@ public class Map {
     }
 
     /**
-     * performs neighbour check on Continent
+     * check all neighbour connectivity on Continent
+     * @return Boolean Value if all are connected
+     * @throws InValidException if any continent is not Connected
      */
     public Boolean hasAdjacentContinent() throws InValidException{
         for(Continent l_continent: d_continents) {
@@ -190,14 +192,47 @@ public class Map {
                 throw new InValidException(l_continent.getD_continentName() + " has no countries. It must have at least one country");
             }
             if(!hasAdjacentContinentConnection(l_continent)){
-//                l_flagConnectivity=false;
+                return false;
             }
         }
         return true;
     }
 
-    public Boolean hasAdjacentContinentConnection(Continent p_continent) {
+    public Boolean hasAdjacentContinentConnection(Continent p_continent) throws InValidException{
+        HashMap<Integer, Boolean> l_continentCountry = new HashMap<Integer, Boolean>();
+        for (Country country : p_continent.getD_countries()) {
+            l_continentCountry.put(country.getD_countryID(), false);
+        }
+        dfsSubgraph(p_continent.getD_countries().get(0), l_continentCountry, p_continent);
 
+        // Iterate each entry to locate unreachable countries in continent
+        for (java.util.Map.Entry<Integer, Boolean> entry : l_continentCountry.entrySet()) {
+            if (!entry.getValue()) {
+                Country l_country = getCountry(String.valueOf(entry.getKey()));
+                String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
+                throw new InValidException(l_messageException);
+            }
+        }
+        return !l_continentCountry.containsValue(false);
+    }
+
+
+    /**
+     * DFS Applied to the Countries under continent.
+     *
+     * @param p_c country visited
+     * @param p_continentCountry Hashmap of Visited Boolean Values
+     * @param p_continent continent being checked for connectivity
+     */
+    public void dfsSubgraph(Country p_c, HashMap<Integer, Boolean> p_continentCountry, Continent p_continent) {
+        p_continentCountry.put(p_c.getD_countryID(), true);
+        for (Country country : p_continent.getD_countries()) {
+            if (p_c.getD_neighbors().contains(country.getD_countryID())) {
+                if (!p_continentCountry.get(country.getD_countryID())) {
+                    dfsSubgraph(country, p_continentCountry, p_continent);
+                }
+            }
+        }
     }
 
     /**
