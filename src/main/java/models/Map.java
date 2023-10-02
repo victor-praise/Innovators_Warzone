@@ -1,5 +1,7 @@
 package main.java.models;
 
+import main.java.exceptions.InValidException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -143,9 +145,21 @@ public class Map {
      *
      * @return Bool Value if map is valid
      */
-    public Boolean validate() {
+    public Boolean validate() throws InValidException {
+        return (isObjectNotNull());
+    }
 
-        //TODO: should be updated
+    /**
+     * performs NULL check on MAP object
+     *
+     */
+    public Boolean isObjectNotNull() throws InValidException {
+        if(d_continents == null || d_continents.isEmpty())
+            throw new InValidException("Map continent cannot be empty.");
+
+        if(d_countries==null || d_countries.isEmpty()){
+            throw new InValidException("Each continent mush have one country.");
+        }
         return true;
     }
 
