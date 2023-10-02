@@ -160,7 +160,7 @@ public class Map {
      * @return Bool Value if map is valid
      */
     public Boolean validate() throws InValidException {
-        return (isObjectNotNull() && hasAdjacentContinent());
+        return (isObjectNotNull() && hasAdjacentContinent() && hasCountryConnectivity());
     }
 
     /**
@@ -168,15 +168,10 @@ public class Map {
      */
     public Boolean isObjectNotNull() throws InValidException {
         if(d_continents == null || d_continents.isEmpty()) {
-            throw new InValidException("Map continent cannot be empty.");
+            throw new InValidException("[ValidateMap] Map continent cannot be empty.");
         }
         if(d_countries==null || d_countries.isEmpty()){
-            throw new InValidException("Each continent mush have one country.");
-        }
-        for(Country l_country: d_countries) {
-            if(l_country.getD_neighbors().isEmpty() || l_country.getD_neighbors().size() < 1) {
-                throw new InValidException(l_country.getD_countryName() + " has no adjacent neighbour.");
-            }
+            throw new InValidException("[ValidateMap] Each continent must have one country.");
         }
         return true;
     }
@@ -189,7 +184,7 @@ public class Map {
     public Boolean hasAdjacentContinent() throws InValidException{
         for(Continent l_continent: d_continents) {
             if(l_continent.getD_countries().isEmpty() || l_continent.getD_countries().size()<1) {
-                throw new InValidException(l_continent.getD_continentName() + " has no countries. It must have at least one country");
+                throw new InValidException("[ValidateMap] " + l_continent.getD_continentName() + " has no countries. It must have at least one country");
             }
             if(!hasAdjacentContinentConnection(l_continent)){
                 return false;
@@ -210,7 +205,7 @@ public class Map {
             if (!entry.getValue()) {
                 Country l_country = getCountry(String.valueOf(entry.getKey()));
                 String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
-                throw new InValidException(l_messageException);
+                throw new InValidException("[ValidateMap] " + l_messageException);
             }
         }
         return !l_continentCountry.containsValue(false);
@@ -233,6 +228,73 @@ public class Map {
                 }
             }
         }
+    }
+
+
+    /**
+     * Checks country connectivity in the map.
+     * @return boolean value (true) for all connected countries
+     * @throws InValidException which Country is not connected
+     */
+    public boolean hasCountryConnectivity() throws InValidException {
+        for (Country country : d_countries) {
+            d_countryReach.put(country.getD_countryID(), false);
+        }
+
+        dfsCountry(d_countries.get(0));
+
+        // Iterates over entries to locate the unreachable country
+        for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReach.entrySet()) {
+            if (!entry.getValue()) {
+                String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
+                throw new InValidException("[ValidateMap] " + l_exceptionMessage);
+            }
+        }
+        return !d_countryReach.containsValue(false);
+    }
+
+
+    /**
+     * DFS applies iteratively to all entered node
+     * @param p_c Country visited first
+     * @throws InValidException Exception
+     */
+    public void dfsCountry(Country p_c) throws InValidException {
+        d_countryReach.put(p_c.getD_countryID(), true);
+        for (Country l_nextCountry : getAdjacentCountry(p_c)) {
+            if (!d_countryReach.get(l_nextCountry.getD_countryID())) {
+                dfsCountry(l_nextCountry);
+            }
+        }
+    }
+
+    /**
+     * Gets the Adjacent Country Objects.
+     * @param p_country the adjacent country
+     * @return list of Adjacent Country Objects
+     * @throws InValidException pointing out which Country is not connected
+     * @throws InValidException Exception
+     */
+    public List<Country> getAdjacentCountry(Country p_country) throws InValidException {
+        List<Country> l_adjCountries = new ArrayList<Country>();
+        if (!p_country.getD_neighbors().isEmpty()) {
+            for (int i : p_country.getD_neighbors()) {
+                l_adjCountries.add(getCountry(i));
+            }
+        } else {
+            throw new InValidException("[ValidateMap] " + p_country.getD_countryName() + " doesn't have any neighbour countries");
+        }
+        return l_adjCountries;
+    }
+
+    /**
+     * Finds the Country object from a given country ID.
+     *
+     * @param p_countryId ID of the country object to be found
+     * @return matching country object
+     */
+    public Country getCountry(Integer p_countryId) {
+        return d_countries.stream().filter(l_country -> l_country.getD_countryID() == p_countryId).findFirst().orElse(null);
     }
 
     /**
