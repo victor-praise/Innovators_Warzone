@@ -58,6 +58,10 @@ public class CommandParser {
                     l_command = new EditMapCommand(l_baseParams, l_functionalities);
                     break;
 
+                case ShowMap:
+                    l_command = new ShowMapCommand(l_baseParams, l_functionalities);
+                    break;
+
                 default:
                     break;
             }
