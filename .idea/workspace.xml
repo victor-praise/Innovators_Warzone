@@ -5,25 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="Country class and functions added">
-      <change afterPath="$PROJECT_DIR$/res/canada.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/map1.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/EditMapCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/main/java/commands/EditMapCommandTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/main/java/models/ContinentTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/main/java/models/CountryTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/main/java/models/MapTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/main/java/services/MapReaderTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/main/java/services/MapServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-
-      <change beforePath="$PROJECT_DIR$/Innovators_Warzone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Innovators_Warzone.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/arena/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arena/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/Continent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Continent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arena/WarzoneArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arena/WarzoneArena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/EditMapCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/EditMapCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/EditNeighbourCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/EditNeighbourCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShowMapCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ShowMapCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/MapReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapSaver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -55,11 +48,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
-
   <component name="ProjectId" id="2Vsb6uUdq0XSA9PLweEobqLLjUC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -68,7 +59,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -76,7 +66,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "kevin/command-test-cases",
+    "git-widget-placeholder": "kevin/feature/savemap",
     "last_opened_file_path": "/Users/kevin/Concordia/Sem-1/SOEN-6441/Innovators_Warzone",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -89,7 +79,6 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -192,10 +181,9 @@
       <option name="presentableId" value="Default" />
       <updated>1695627567777</updated>
       <workItem from="1695670837048" duration="5398000" />
-
       <workItem from="1695757626410" duration="19972000" />
       <workItem from="1696105109057" duration="13082000" />
-
+      <workItem from="1696216153931" duration="6469000" />
     </task>
     <task id="LOCAL-00001" summary="Country class and functions added">
       <created>1695647446148</created>
@@ -231,16 +219,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Country class and functions added" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/services/MapService.java</url>
-          <line>73</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

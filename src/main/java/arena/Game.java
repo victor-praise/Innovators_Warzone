@@ -86,7 +86,12 @@ public class Game {
             Command l_command = l_parser.parseCommandStatement(l_nextCommand);
             if (l_command != null) {
                 l_command.execute();
-            } else if (!(l_nextCommand.equals("commit") || l_nextCommand.equals("quit"))) {
+            } else if (l_nextCommand.equals("commit")) {
+                System.out.println("[Game] --- Ready for next phase ---");
+            } else if (l_nextCommand.equals("quit")) {
+                System.out.println("[Game] --- Quitting game ---");
+                WarzoneArena.endGamePlay();
+            } else {
                 System.out.println("[Undefined] Following command could not be understood: " + l_nextCommand);
             }
         }

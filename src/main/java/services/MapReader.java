@@ -29,7 +29,6 @@ public class MapReader {
         l_continentObjects = linkCountryToContinent(l_countryObjects, l_continentObjects);
         p_map.setD_continents(l_continentObjects);
         p_map.setD_countries(l_countryObjects);
-        Game.sharedInstance().setD_map(p_map);
     }
 
     /**

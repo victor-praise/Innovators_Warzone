@@ -3,6 +3,7 @@ package main.java.commands;
 import main.java.arena.Game;
 
 /**
+ * Prints the map contents on console
  * @author Sadiqali
  * ShowMapCommand base method for Command Superclass to execute showMap() method
  */

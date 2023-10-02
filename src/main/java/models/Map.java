@@ -82,6 +82,22 @@ public class Map {
     }
 
     /**
+     * Checks for null and empty continents list
+     * @return true if map has at-least one continent, false otherwise
+     */
+    public boolean hasContinents() {
+        return d_continents != null && !d_continents.isEmpty();
+    }
+
+    /**
+     * Checks for null and empty continents list
+     * @return true if map has at-least one continent, false otherwise
+     */
+    public boolean hasCountries() {
+        return d_countries != null && !d_countries.isEmpty();
+    }
+
+    /**
      * adds the country to the map.
      *
      * @param p_country country to add
@@ -138,6 +154,7 @@ public class Map {
      *
      * @param p_continent List of Continents in the map
      * @param p_continentName name of new continent
+     * @return true if the continent exists, false otherwise
      */
     public boolean continentExists(List<Continent> p_continent, String p_continentName) {
         for (Continent obj : p_continent) {
@@ -152,6 +169,7 @@ public class Map {
      * Ensure country is not already on the map.
      *
      * @param p_countryName name of new continent
+     * @return true if the country exists, false otherwise
      */
     public boolean countryExists(String p_countryName) {
         for(Country obj: getD_countries()) {
@@ -166,6 +184,7 @@ public class Map {
      * returns continent given continent name.
      *
      * @param p_continentName name of new continent
+     * @return Continent with the passed in name, null when no continent could not be found
      */
     public Continent getContinent(String p_continentName) {
         Continent l_continent = null;
@@ -173,7 +192,7 @@ public class Map {
             return l_continent;
         }
         for (Continent obj : d_continents) {
-            if (obj.getD_continentName().equals(p_continentName)) {
+            if (obj.getD_continentName().equalsIgnoreCase(p_continentName)) {
                 l_continent = obj;
                 break;
             }
@@ -184,6 +203,7 @@ public class Map {
      * returns continent given continent name.
      *
      * @param p_countryName name of new continent
+     * @return Country with the passed in name, null when no country could not be found
      */
     public Country getCountry(String p_countryName) {
         if (d_countries == null) {
@@ -243,6 +263,7 @@ public class Map {
      *     Deletes all Countries in the Continent along with their data on the Map
      *
      * @param p_continentName Continent Name to be removed
+     * @return true when the continent was removed successfully, false otherwise
      */
     public boolean removeContinent(String p_continentName) {
         if(d_continents != null) {
@@ -295,6 +316,7 @@ public class Map {
      * removes a country from the Map.
      *
      * @param p_countryName Name of country to be Added
+     * @return true when the country was removed successfully, false otherwise
      */
     public boolean removeCountry(String p_countryName) {
         Country l_country = getCountry(p_countryName);
@@ -315,6 +337,7 @@ public class Map {
      *
      * @param p_countryName Country whose neighbours are to be updated
      * @param p_neighbourName Country to be added as neighbour
+     * @return true when the neighbour was added successfully, false otherwise
      */
     public boolean addNeighbour(String p_countryName, String p_neighbourName) {
         Country l_country = getCountry(p_countryName);
@@ -337,6 +360,7 @@ public class Map {
      *
      * @param p_countryName Country whose neighbors are to be updated
      * @param p_neighbourName Country to be removed as neighbor
+     * @return true when the neighbour was removed successfully, false otherwise
      */
     public boolean removeNeighbour(String p_countryName, String p_neighbourName) {
         if(getCountry(p_countryName) != null && getCountry(p_neighbourName) != null){
