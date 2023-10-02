@@ -1,6 +1,7 @@
 package main.java.services;
 
 import main.java.arena.Game;
+import main.java.exceptions.InValidException;
 import main.java.models.Map;
 
 import java.io.*;
@@ -19,12 +20,8 @@ import java.util.stream.Collectors;
 public class MapService {
 
     /**
-     * The loadmap method process map file.
-     *
-
+     * The loadMap method process map file.
      * @param p_fileName map file name.
-     * @return Map object after processing map file.
-
      */
     public void loadMap(String p_fileName)  {
         Map l_map = new Map();
@@ -33,6 +30,8 @@ public class MapService {
             if (l_file != null && !l_file.isEmpty()) {
                 new MapReader().readMapFile( l_map, l_file);
             }
+        } else {
+            System.out.println("[Map Service]: Unknown file name, Creating new map from scratch");
         }
         Game.sharedInstance().setD_map(l_map);
     }
@@ -79,23 +78,24 @@ public class MapService {
     /**
      * Method is responsible for saving a map
      * @param p_fileName file name for map to be saved as
-     * @throws IOException
+     * @throws IOException when file could not be written
      */
-    public void saveMap(String p_fileName) throws IOException {
-        try {
-            if(Game.sharedInstance().getD_map() != null) {
-                Map l_map = Game.sharedInstance().getD_map();
-                //TODO
-                //First validate map before saving
+    public void saveMap(String p_fileName) throws IOException, InValidException {
+        if(Game.sharedInstance().getD_map() != null ){
+            Map l_currentMap = Game.sharedInstance().getD_map();
 
+            if(l_currentMap.validate()){
                 Files.deleteIfExists(Paths.get(getFilePath(p_fileName)));
                 FileWriter l_fileWriter = new FileWriter(getFilePath(p_fileName));
+                l_fileWriter.write("; map: " + p_fileName + System.lineSeparator());
                 new MapSaver().saveMapToFile(l_fileWriter);
                 l_fileWriter.close();
             }
+
+
         }
-        catch (IOException e){
-            e.printStackTrace();
+        else{
+            System.out.println("Map cannot be saved");
         }
 
     }

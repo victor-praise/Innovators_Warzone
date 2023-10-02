@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
+ * Command to edit map contents of a given file
+ * if the file doesn't exist, a new map is created from scratch
  * @author kevin on 2023-09-30
  */
 public class EditMapCommand extends Command {
@@ -45,6 +47,10 @@ public class EditMapCommand extends Command {
         }
 
         try {
+            if (l_filename == null || l_filename.isBlank()) {
+                System.out.println("[EditMapCommand]: file name is mandatory ");
+                return;
+            }
             mapService.editMap(l_filename);
         } catch (IOException e) {
             System.out.println("[EditMapCommand]: Error executing edit map command: " + e.getMessage());

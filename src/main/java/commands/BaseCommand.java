@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * This enum contains all the commands that can be given by the user/player.
+ *
  * @author kevin on 2023-09-21
  * @version 1.0
  */
@@ -50,31 +51,39 @@ public enum BaseCommand {
     AssignCountries("assigncountries"),
 
     /**
+     * Loads a map from a given file
+     */
+    LoadMap("loadmap"),
+
+    /**
      * An invalid command string by user will correspond to this.
      */
     None("");
 
-    /**
-     * describes the lower cased string of the expected command
-     */
-    public final String d_label;
     private static final Map<String, BaseCommand> From_String = new HashMap<String, BaseCommand>();
-    private BaseCommand(String commandString) {
-        this.d_label = commandString;
-    }
 
     static {
-        for(BaseCommand command: values()) {
-           From_String.put(command.d_label, command);
-           if (command.d_label.equals("editneighbour")) {
-               // Additional safety for american english
-               From_String.put("editneighbor", command);
+        for (BaseCommand command : values()) {
+            From_String.put(command.d_label, command);
+            if (command.d_label.equals("editneighbour")) {
+                // Additional safety for american english
+                From_String.put("editneighbor", command);
             }
         }
     }
 
     /**
+     * describes the lower cased string of the expected command
+     */
+    public final String d_label;
+
+    private BaseCommand(String commandString) {
+        this.d_label = commandString;
+    }
+
+    /**
      * Converts a given command string to the matching enum value, if correct
+     *
      * @param p_label: command string input by the user
      * @return A valid corresponding enum for a command, null if command could not be identified
      */

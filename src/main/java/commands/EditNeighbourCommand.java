@@ -3,6 +3,7 @@ package main.java.commands;
 import main.java.arena.Game;
 
 /**
+ * Command to either add or remove a country from all of its neighbours list
  * @author kevin on 2023-09-27
  */
 public class EditNeighbourCommand extends Command {
