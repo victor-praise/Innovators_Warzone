@@ -167,10 +167,10 @@ public class Map {
      */
     public Boolean isObjectNotNull() throws InValidException {
         if (d_continents == null || d_continents.isEmpty()) {
-            throw new InValidException("[ValidateMap] Map continent cannot be empty.");
+            throw new InValidException("Map continent cannot be empty.");
         }
         if (d_countries == null || d_countries.isEmpty()) {
-            throw new InValidException("[ValidateMap] Each continent must have one country.");
+            throw new InValidException("Each continent must have one country.");
         }
         return true;
     }
@@ -184,7 +184,7 @@ public class Map {
     public Boolean hasAdjacentContinent() throws InValidException {
         for (Continent l_continent : d_continents) {
             if (l_continent.getD_countries().isEmpty()) {
-                throw new InValidException("[ValidateMap] " + l_continent.getD_continentName() + " has no countries. It must have at least one country");
+                throw new InValidException(l_continent.getD_continentName() + " has no countries. It must have at least one country");
             }
             if (!hasAdjacentContinentConnection(l_continent)) {
                 return false;
@@ -203,9 +203,9 @@ public class Map {
         // Iterate each entry to locate unreachable countries in continent
         for (java.util.Map.Entry<Integer, Boolean> entry : l_continentCountry.entrySet()) {
             if (!entry.getValue()) {
-                Country l_country = getCountry(String.valueOf(entry.getKey()));
+                Country l_country = getCountry(entry.getKey());
                 String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
-                throw new InValidException("[ValidateMap] " + l_messageException);
+                throw new InValidException(l_messageException);
             }
         }
         return !l_continentCountry.containsValue(false);
@@ -248,7 +248,7 @@ public class Map {
         for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReach.entrySet()) {
             if (!entry.getValue()) {
                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
-                throw new InValidException("[ValidateMap] " + l_exceptionMessage);
+                throw new InValidException(l_exceptionMessage);
             }
         }
         return !d_countryReach.containsValue(false);
@@ -285,7 +285,7 @@ public class Map {
                 l_adjCountries.add(getCountry(i));
             }
         } else {
-            throw new InValidException("[ValidateMap] " + p_country.getD_countryName() + " doesn't have any neighbour countries");
+            throw new InValidException(p_country.getD_countryName() + " doesn't have any neighbour countries");
         }
         return l_adjCountries;
     }
@@ -363,6 +363,24 @@ public class Map {
         }
         for (Country obj : d_countries) {
             if (obj.getD_countryName().equalsIgnoreCase(p_countryName)) {
+                return obj;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * returns the country for a given country id.
+     *
+     * @param p_countryId id of a country
+     * @return Country with the passed in id, null when no country could not be found
+     */
+    public Country getCountry(int p_countryId) {
+        if (d_countries == null) {
+            return null;
+        }
+        for (Country obj : d_countries) {
+            if (p_countryId == obj.getD_countryID()) {
                 return obj;
             }
         }

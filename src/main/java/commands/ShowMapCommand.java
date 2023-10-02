@@ -4,12 +4,12 @@ import main.java.arena.Game;
 
 /**
  * Prints the map contents on console
+ *
  * @author Sadiqali
  * ShowMapCommand base method for Command Superclass to execute showMap() method
  */
-
 public class ShowMapCommand extends Command {
-        /**
+    /**
      * Creates a new EditContinent command with given params and/or any functionalities
      *
      * @param baseParams      represents any parameter to the basecommand
