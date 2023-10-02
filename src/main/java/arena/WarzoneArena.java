@@ -31,9 +31,6 @@ public class WarzoneArena {
         // Gameplay setup goes here
         setupGame();
 
-        // TEMPORARY Map Display
-        Game.sharedInstance().getD_map().show();
-
         // Gameplay begins here
         while (Is_Gameplay_On) {
             System.out.println("Warp to Warzone!");
