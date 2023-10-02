@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="Country class and functions added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arena/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arena/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arena/WarzoneArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arena/WarzoneArena.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +70,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "Rebasing feature/validate-map",
+    "git-widget-placeholder": "feature/validate-map",
     "last_opened_file_path": "/Users/kevin/Concordia/Sem-1/SOEN-6441/Innovators_Warzone",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -74,7 +80,8 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
