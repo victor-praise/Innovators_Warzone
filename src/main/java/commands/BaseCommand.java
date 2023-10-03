@@ -51,6 +51,11 @@ public enum BaseCommand {
     AssignCountries("assigncountries"),
 
     /**
+     * To add or remove a player
+     */
+    GamePlayer("gameplayer"),
+    
+    /**
      * An invalid command string by user will correspond to this.
      */
     None("");

@@ -1,7 +1,6 @@
 package main.java.models;
 
 import main.java.exceptions.InValidException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -554,15 +553,11 @@ public class Map {
 
     public void show() {
 
-        System.out.println("\n[Continents]");
-
-        /**
-         * Displayes list of Continents in the format continentName continentValue
-         */
-
+        // display list of Continents in the format continentName continentValue
         if (getD_continents().isEmpty()) {
             return;
         }
+        System.out.println("\n[Continents]");
         for (Continent continent : getD_continents()) {
             System.out.print(continent.getD_continentName());
             System.out.print(" " + continent.getD_continentValue() + "\n");
@@ -570,19 +565,15 @@ public class Map {
 
         System.out.println();
 
-        /**
-         * Displays list of countries in the format countryID countryName
-         */
-
-        if (!getD_countries().isEmpty()) {
-            System.out.println("[Countries]");
-            for (Country country : getD_countries()) {
-                System.out.print("" + country.getD_countryID());
-                System.out.print(" " + country.getD_countryName());
-                System.out.print(" " + country.getD_continentID() + "\n");
-            }
-        } else {
+        // displays list of countries in the format countryID countryName
+        if (getD_countries().isEmpty()) {
             return;
+        }
+        System.out.println("[Countries]");
+        for (Country country : getD_countries()) {
+            System.out.print("" + country.getD_countryID());
+            System.out.print(" " + country.getD_countryName());
+            System.out.print(" " + country.getD_continentID() + "\n");
         }
 
         System.out.print("\n");
@@ -592,9 +583,9 @@ public class Map {
         }
         System.out.println("\n[Borders]");
         for (Country country : getD_countries()) {
-            String neighbours = String.valueOf(country.getD_countryID());
+            StringBuilder neighbours = new StringBuilder(String.valueOf(country.getD_countryID()));
             for (int neighbor : country.getD_neighbors()) {
-                neighbours += (" " + neighbor);
+                neighbours.append(" ").append(neighbor);
             }
             System.out.println(neighbours);
         }
