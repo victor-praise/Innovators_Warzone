@@ -70,6 +70,10 @@ public class CommandParser {
                     l_command = new ValidateMapCommand(l_baseParams, l_functionalities);
                     break;
 
+                case GamePlayer:
+                    l_command = new GamePlayerCommand(l_baseParams, l_functionalities);
+                    break;
+
                 default:
                     break;
             }

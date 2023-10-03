@@ -3,8 +3,11 @@ package main.java.arena;
 import main.java.commands.Command;
 import main.java.models.Continent;
 import main.java.models.Map;
+import main.java.models.Player;
 import main.java.utils.CommandParser;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -18,6 +21,11 @@ public class Game {
      * private instance of single Game class
      */
     private static Game d_sharedInstance = null;
+
+    /**
+     * private list of all the players
+     */
+    private List<Player> d_players; //need to know where will this list go
 
     /**
      * The current Map object in the game.
@@ -71,6 +79,88 @@ public class Game {
             return;
         }
         System.out.println("[Game]: Attempting to overwrite existing map object, declined. Please save the current map before editing another.");
+    }
+
+    /**
+     * Getter for list of all the players
+     *
+     * @return list of existing players
+     */
+    public List<Player> getD_players() {
+        if (d_players != null) {
+            return d_players;
+        }
+        d_players = new ArrayList<Player>();
+        return d_players;
+    }
+
+    public void setD_players(List<Player> p_players) {
+        d_players = p_players;
+    }
+
+    /**
+     * Finds player with a given name
+     *
+     * @param name name of player to fetch
+     * @return Player object with given name if present, null otherwise
+     */
+    public Player getPlayer(String name) {
+        if (d_players == null) {
+            return null;
+        }
+        Player l_player = null;
+        for (Player p : d_players) {
+            if (p.getD_name().equals(name)) {
+                l_player = p;
+                break;
+            }
+        }
+        return l_player;
+    }
+
+    public void addPlayer(Player player) {
+        d_players.add(player);
+    }
+
+    public boolean addPlayer(String p_name) {
+        Player l_player = getPlayer(p_name);
+        if (l_player == null) {
+            getD_players().add(new Player(p_name));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Remove a player object from the players list
+     *
+     * @param p_player player to remove
+     * @return true if removal was successful, false otherwise
+     */
+    public boolean removePlayer(Player p_player) {
+        if (d_players == null || p_player == null) {
+            return false;
+        }
+
+        return d_players.remove(p_player);
+    }
+
+    /**
+     * Remove a player with given name from the players list
+     *
+     * @param p_playerName name of player to remove
+     * @return true if removal was successful, false otherwise
+     */
+    public boolean removePlayer(String p_playerName) {
+        Player l_playerToRemove = null;
+        for (Player player : d_players) {
+            if (p_playerName.equalsIgnoreCase(player.getD_name())) {
+                l_playerToRemove = player;
+                break;
+            }
+        }
+        return removePlayer(l_playerToRemove);
     }
 
     /**
