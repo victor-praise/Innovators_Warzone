@@ -54,6 +54,11 @@ public enum BaseCommand {
      * To add or remove a player
      */
     GamePlayer("gameplayer"),
+
+    /**
+     * Loads a map from a given file
+     */
+    LoadMap("loadmap"),
     
     /**
      * An invalid command string by user will correspond to this.
