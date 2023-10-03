@@ -1,10 +1,12 @@
 package main.java.models;
 
-import main.java.exceptions.InValidException;
+import main.java.exceptions.MapInvalidException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 /**
@@ -26,7 +28,7 @@ public class Map {
     /**
      * HashMap of the countries one can reach from the existing position.
      */
-    HashMap<Integer, Boolean> d_countryReach = new HashMap<Integer, Boolean>();
+    HashMap<Integer, Boolean> d_countryReachability = new HashMap<Integer, Boolean>();
 
     /**
      * list of countries.
@@ -157,19 +159,19 @@ public class Map {
      *
      * @return Bool Value if map is valid
      */
-    public Boolean validate() throws InValidException {
-        return (isObjectNotNull() && hasAdjacentContinent() && hasCountryConnectivity());
+    public Boolean validate() throws MapInvalidException {
+        return (checkMapEmptiness() && hasAdjacentContinent() && hasCountryConnectivity());
     }
 
     /**
      * performs NULL check on MAP object
      */
-    public Boolean isObjectNotNull() throws InValidException {
-        if (d_continents == null || d_continents.isEmpty()) {
-            throw new InValidException("Map continent cannot be empty.");
+    public Boolean checkMapEmptiness() throws MapInvalidException {
+        if (getD_continents().isEmpty()) {
+            throw new MapInvalidException("There should be at least one continent");
         }
-        if (d_countries == null || d_countries.isEmpty()) {
-            throw new InValidException("Each continent must have one country.");
+        if (getD_countries().isEmpty()) {
+            throw new MapInvalidException("Continents should have at least one country.");
         }
         return true;
     }
@@ -178,12 +180,12 @@ public class Map {
      * check all neighbour connectivity on Continent
      *
      * @return Boolean Value if all are connected
-     * @throws InValidException if any continent is not Connected
+     * @throws MapInvalidException if any continent is not Connected
      */
-    public Boolean hasAdjacentContinent() throws InValidException {
+    public Boolean hasAdjacentContinent() throws MapInvalidException {
         for (Continent l_continent : d_continents) {
             if (l_continent.getD_countries().isEmpty()) {
-                throw new InValidException(l_continent.getD_continentName() + " has no countries. It must have at least one country");
+                throw new MapInvalidException("Each continent must have at least one country. No country found under: " + l_continent.getD_continentName());
             }
             if (!hasAdjacentContinentConnection(l_continent)) {
                 return false;
@@ -192,101 +194,96 @@ public class Map {
         return true;
     }
 
-    public Boolean hasAdjacentContinentConnection(Continent p_continent) throws InValidException {
-        HashMap<Integer, Boolean> l_continentCountry = new HashMap<Integer, Boolean>();
+    public Boolean hasAdjacentContinentConnection(Continent p_continent) throws MapInvalidException {
+        HashMap<Integer, Boolean> l_countryReachabilityStatus = new HashMap<Integer, Boolean>();
         for (Country country : p_continent.getD_countries()) {
-            l_continentCountry.put(country.getD_countryID(), false);
+            l_countryReachabilityStatus.put(country.getD_countryID(), false);
         }
-        dfsSubgraph(p_continent.getD_countries().get(0), l_continentCountry, p_continent);
+
+        buildContinentReachabilityStatus(p_continent.getD_countries().get(0), l_countryReachabilityStatus, p_continent);
 
         // Iterate each entry to locate unreachable countries in continent
-        for (java.util.Map.Entry<Integer, Boolean> entry : l_continentCountry.entrySet()) {
+        for (Entry<Integer, Boolean> entry : l_countryReachabilityStatus.entrySet()) {
             if (!entry.getValue()) {
                 Country l_country = getCountry(entry.getKey());
                 String l_messageException = l_country.getD_countryName() + " in Continent " + p_continent.getD_continentName() + " is not reachable";
-                throw new InValidException(l_messageException);
+                throw new MapInvalidException(l_messageException);
             }
         }
-        return !l_continentCountry.containsValue(false);
+        return !l_countryReachabilityStatus.containsValue(false);
     }
 
 
     /**
-     * DFS Applied to the Countries under continent.
+     * Compiles reachability status starting from 1 given country under continent.
      *
-     * @param p_c                country visited
+     * @param p_country          country visited
      * @param p_continentCountry Hashmap of Visited Boolean Values
      * @param p_continent        continent being checked for connectivity
      */
-    public void dfsSubgraph(Country p_c, HashMap<Integer, Boolean> p_continentCountry, Continent p_continent) {
-        p_continentCountry.put(p_c.getD_countryID(), true);
+    public void buildContinentReachabilityStatus(Country p_country, HashMap<Integer, Boolean> p_continentCountry, Continent p_continent) {
+        p_continentCountry.put(p_country.getD_countryID(), true);
         for (Country country : p_continent.getD_countries()) {
-            if (p_c.getD_neighbors().contains(country.getD_countryID())) {
+            if (p_country.getD_neighbors().contains(country.getD_countryID())) {
                 if (!p_continentCountry.get(country.getD_countryID())) {
-                    dfsSubgraph(country, p_continentCountry, p_continent);
+                    buildContinentReachabilityStatus(country, p_continentCountry, p_continent);
                 }
             }
         }
     }
 
-
     /**
      * Checks country connectivity in the map.
      *
      * @return boolean value (true) for all connected countries
-     * @throws InValidException which Country is not connected
+     * @throws MapInvalidException which Country is not connected
      */
-    public boolean hasCountryConnectivity() throws InValidException {
-        for (Country country : d_countries) {
-            d_countryReach.put(country.getD_countryID(), false);
+    public boolean hasCountryConnectivity() throws MapInvalidException {
+        if (d_countries == null) {
+            return false;
         }
-
-        dfsCountry(d_countries.get(0));
+        d_countries.forEach(country -> d_countryReachability.put(country.getD_countryID(), false));
+        buildCountryReachabilityStatus(d_countries.get(0));
 
         // Iterates over entries to locate the unreachable country
-        for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReach.entrySet()) {
+        for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReachability.entrySet()) {
             if (!entry.getValue()) {
                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
-                throw new InValidException(l_exceptionMessage);
+                throw new MapInvalidException(l_exceptionMessage);
             }
         }
-        return !d_countryReach.containsValue(false);
+        return !d_countryReachability.containsValue(false);
     }
 
 
     /**
      * DFS applies iteratively to all entered node
      *
-     * @param p_c Country visited first
-     * @throws InValidException Exception
+     * @param p_country Country visited first
+     * @throws MapInvalidException Exception
      */
-    public void dfsCountry(Country p_c) throws InValidException {
-        d_countryReach.put(p_c.getD_countryID(), true);
-        for (Country l_nextCountry : getAdjacentCountry(p_c)) {
-            if (!d_countryReach.get(l_nextCountry.getD_countryID())) {
-                dfsCountry(l_nextCountry);
+    public void buildCountryReachabilityStatus(Country p_country) throws MapInvalidException {
+        d_countryReachability.put(p_country.getD_countryID(), true);
+        for (Country l_nextCountry : getConnectedCountriesFor(p_country)) {
+            if (!d_countryReachability.get(l_nextCountry.getD_countryID())) {
+                buildCountryReachabilityStatus(l_nextCountry);
             }
         }
     }
 
     /**
-     * Gets the Adjacent Country Objects.
+     * Fetches connected countries for a given country.
      *
-     * @param p_country the adjacent country
-     * @return list of Adjacent Country Objects
-     * @throws InValidException pointing out which Country is not connected
-     * @throws InValidException Exception
+     * @param p_country the country for which connected countries are required
+     * @return list of connected countries
+     * @throws MapInvalidException Exception explaining the invalidity
      */
-    public List<Country> getAdjacentCountry(Country p_country) throws InValidException {
-        List<Country> l_adjCountries = new ArrayList<Country>();
-        if (!p_country.getD_neighbors().isEmpty()) {
-            for (int i : p_country.getD_neighbors()) {
-                l_adjCountries.add(getCountry(i));
-            }
-        } else {
-            throw new InValidException(p_country.getD_countryName() + " doesn't have any neighbour countries");
+    public List<Country> getConnectedCountriesFor(Country p_country) throws MapInvalidException {
+        List<Integer> l_neighborIds = p_country.getD_neighbors();
+        if (l_neighborIds.isEmpty()) {
+            throw new MapInvalidException(p_country.getD_countryName() + " doesn't have any neighbouring countries");
         }
-        return l_adjCountries;
+        return l_neighborIds.stream().map(this::getCountry).toList();
     }
 
     /**

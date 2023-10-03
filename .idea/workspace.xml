@@ -9,7 +9,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/BaseCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/BaseCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/LoadMapCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/LoadMapCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveMapCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveMapCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ValidateMapCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ValidateMapCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/InValidException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/MapInvalidException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/MapService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/CommandParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +59,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "victor/feature/load-map",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -191,5 +204,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Country class and functions added" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/models/Map.java</url>
+          <line>241</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

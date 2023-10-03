@@ -74,6 +74,10 @@ public class CommandParser {
                     l_command = new GamePlayerCommand(l_baseParams, l_functionalities);
                     break;
 
+                case LoadMap:
+                    l_command = new LoadMapCommand(l_baseParams, l_functionalities);
+                    break;
+
                 default:
                     break;
             }

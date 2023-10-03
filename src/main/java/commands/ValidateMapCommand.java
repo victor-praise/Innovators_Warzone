@@ -1,7 +1,7 @@
 package main.java.commands;
 
 import main.java.arena.Game;
-import main.java.exceptions.InValidException;
+import main.java.exceptions.MapInvalidException;
 
 /**
  * @author kevin on 2023-10-02
@@ -29,7 +29,7 @@ public class ValidateMapCommand extends Command {
             } else {
                 System.out.println("[ValidateMap]: Map found to be invalid");
             }
-        } catch (InValidException error) {
+        } catch (MapInvalidException error) {
             System.out.println("[ValidateMap]: Map found to be invalid: " + error.getMessage());
         }
     }

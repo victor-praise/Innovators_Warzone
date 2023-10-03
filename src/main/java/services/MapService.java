@@ -1,7 +1,7 @@
 package main.java.services;
 
 import main.java.arena.Game;
-import main.java.exceptions.InValidException;
+import main.java.exceptions.MapInvalidException;
 import main.java.models.Map;
 
 import java.io.*;
@@ -80,7 +80,7 @@ public class MapService {
      * @param p_fileName file name for map to be saved as
      * @throws IOException when file could not be written
      */
-    public void saveMap(String p_fileName) throws IOException, InValidException {
+    public void saveMap(String p_fileName) throws IOException, MapInvalidException {
         if(Game.sharedInstance().getD_map() != null ){
             Map l_currentMap = Game.sharedInstance().getD_map();
 
