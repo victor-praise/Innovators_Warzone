@@ -7,7 +7,7 @@ The project members of team W14(Innovators) include:
  *  - Karansinh Matroja
  *  - Kevin Wadera
  *  - Mohammad Al-Shariar
- *  - Sadiq Ali Shaik
+ *  - Sadiqali Shaik
  *  - Victor Nwatu
 
 
