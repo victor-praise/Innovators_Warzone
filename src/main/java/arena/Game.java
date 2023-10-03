@@ -2,6 +2,7 @@ package main.java.arena;
 
 import main.java.commands.Command;
 import main.java.models.Continent;
+import main.java.models.Country;
 import main.java.models.Map;
 import main.java.models.Player;
 import main.java.utils.CommandParser;
@@ -191,6 +192,28 @@ public class Game {
                 });
         }
     }
+
+    /**
+     * Return the owner name for a given country name
+     * @param p_countryName name of country for which we need the owner name
+     * @return Owner name if present, null otherwise
+     */
+    public String getOwnerNameForCountryName(String p_countryName) {
+        String l_ownerName = null;
+        for (Player l_player: getD_players()) {
+            for (Country l_country: l_player.getD_ownedCountries()) {
+                if (l_country.getD_countryName().equalsIgnoreCase(p_countryName)) {
+                    l_ownerName = l_player.getD_name();
+                    break;
+                }
+            }
+            if (l_ownerName != null) {
+                break;
+            }
+        }
+        return l_ownerName;
+    }
+
     /**
      * We set up the game play over here with proper description being given to user
      */
