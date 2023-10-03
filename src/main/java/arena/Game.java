@@ -8,6 +8,7 @@ import main.java.utils.CommandParser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -163,6 +164,33 @@ public class Game {
         return removePlayer(l_playerToRemove);
     }
 
+    /**
+     * randomly assign each country in countries list to a single player
+     */
+    public void assignCountriesToPlayers() {
+        int playersCount = getD_players().size();
+        switch (playersCount) {
+            case 0:
+                System.out.println("[AssignCountries]: No players defined. Cannot assign countries.");
+                break;
+
+            case 1:
+                getD_map().getD_countries().forEach(country -> d_players.get(0).receiveOwnershipForCountry(country));
+                System.out.println("[AssignCountries]: Single player defined. Assigning all the countries to: " + d_players.get(0).getD_name());
+                System.out.println("[AssignCountries]: Winner: " + d_players.get(0).getD_name());
+                WarzoneArena.endGamePlay();
+                break;
+
+            default:
+                Random randomNum = new Random();
+                getD_map().getD_countries().forEach(country -> {
+                    int randomPlayerIndex = randomNum.nextInt(playersCount);
+                    Player randomPlayer = d_players.get(randomPlayerIndex);
+                    System.out.println("[Game]: Assigning country: " + country.getD_countryName() + " to: -- " + randomPlayer.getD_name());
+                    randomPlayer.receiveOwnershipForCountry(country);
+                });
+        }
+    }
     /**
      * We set up the game play over here with proper description being given to user
      */

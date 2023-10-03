@@ -78,6 +78,10 @@ public class CommandParser {
                     l_command = new LoadMapCommand(l_baseParams, l_functionalities);
                     break;
 
+                case AssignCountries:
+                    l_command = new AssignCountriesCommand(l_baseParams, l_functionalities);
+                    break;
+
                 default:
                     break;
             }
