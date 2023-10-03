@@ -1,5 +1,6 @@
 package main.java.arena;
 
+import main.java.commands.BaseCommand;
 import main.java.commands.Command;
 import main.java.models.Continent;
 import main.java.models.Country;
@@ -187,8 +188,9 @@ public class Game {
                 getD_map().getD_countries().forEach(country -> {
                     int randomPlayerIndex = randomNum.nextInt(playersCount);
                     Player randomPlayer = d_players.get(randomPlayerIndex);
-                    System.out.println("[Game]: Assigning country: " + country.getD_countryName() + " to: -- " + randomPlayer.getD_name());
-                    randomPlayer.receiveOwnershipForCountry(country);
+                    if (randomPlayer.receiveOwnershipForCountry(country)) {
+                        System.out.println("[Game]: Assigning country: " + country.getD_countryName() + " to: -- " + randomPlayer.getD_name());
+                    }
                 });
         }
     }
@@ -230,6 +232,10 @@ public class Game {
             Command l_command = l_parser.parseCommandStatement(l_nextCommand);
             if (l_command != null) {
                 l_command.execute();
+                if (l_command.command == BaseCommand.AssignCountries) {
+                    System.out.println("[Game] --- Ready for Issue Orders phase ---");
+                    break;
+                }
             } else if (l_nextCommand.equals("commit")) {
                 System.out.println("[Game] --- Ready for next phase ---");
             } else if (l_nextCommand.equals("quit")) {

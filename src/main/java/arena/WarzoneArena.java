@@ -1,20 +1,7 @@
 package main.java.arena;
 
-import java.util.List;
-
 import main.java.models.Player;
-
-/*
- * Main entry point for the game nick-named `WARZONE`
- * This project is part of SOEN-6441 class, batch Fall-2023, headed by Dr. Amin Ranj Bar
- * The project members of team W14(Innovators) include:
- *  - Angad Virdi
- *  - Karansinh Matroja
- *  - Kevin Wadera
- *  - Mohammad Al-Shariar
- *  - Sadiq Ali Shaik
- *  - Victor Nwatu
- */
+import main.java.orders.Order;
 
 /**
  * A tactical game-play where the player objective is to capture as much territory as possible.
@@ -25,9 +12,21 @@ import main.java.models.Player;
  */
 public class WarzoneArena {
 
+    /**
+     * Global level boolean to terminate game
+     */
     private static Boolean Is_Gameplay_On = true;
+
+
+    /**
+     * Global level game object
+     */
     private static Game d_Game;
-    
+
+    /**
+     * Global value for defining default reinforcement for each turn in the game
+     */
+    private static final int DEFAULT_REINFORCEMENT = 3;
 
     /**
      * Main entry point of the game.
@@ -41,13 +40,58 @@ public class WarzoneArena {
         // Gameplay begins here
         while (Is_Gameplay_On) {
             System.out.println("Warp to Warzone!");
-            // auto build check
-            System.out.print("auto build completed! --- Git Guardian");
+
+            // assign reinforcement
+            assignReinforcement();
+
+            // Issue Orders phase
+            issueOrdersPhase();
+
+            // Execute Orders phase
+            executeOrdersPhase();
+
             // Intentionally exit the game
             endGamePlay();
         }
     }
 
+    private static void issueOrdersPhase() {
+        System.out.println("--- Issuing Orders phase ---");
+        boolean hasMoreOrders = true;
+        while (hasMoreOrders) {
+            hasMoreOrders = false;
+            for (Player l_player: Game.sharedInstance().getD_players()) {
+                if (l_player.canIssueOrder()) {
+                    hasMoreOrders = true;
+                    System.out.println("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedCountryUnits() + " army units left to deploy");
+                    l_player.issue_order();
+                }
+            }
+        }
+    }
+
+    private static void executeOrdersPhase() {
+        System.out.println("--- Executing Orders Phase ---");
+        boolean hasMoreOrders = true;
+        while (hasMoreOrders) {
+            hasMoreOrders = false;
+            for (Player l_player: Game.sharedInstance().getD_players()) {
+                Order l_order = l_player.nextorder();
+                if (l_order != null) {
+                    l_order.execute();
+                    hasMoreOrders = true;
+                }
+            }
+        }
+    }
+
+    private static void assignReinforcement() {
+        System.out.println("--- Assigning Reinforcements phase ---");
+        for (Player player: Game.sharedInstance().getD_players()) {
+            // TODO: Check for ownership of continents, which should be added to DEFAULT_REINFORCEMENT
+            player.setD_assignedCountryUnits(DEFAULT_REINFORCEMENT);
+        }
+    }
     /**
      * Call to this method should be made when the game needs to be terminated
      */

@@ -1,7 +1,12 @@
 package main.java.models;
 
+import main.java.commands.Command;
+import main.java.orders.Order;
+import main.java.utils.OrderParser;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * This class is responsible for the addition and removal of players.
@@ -16,6 +21,10 @@ public class Player {
     private List<Country> d_ownedCountries;
 
     private String d_name;
+
+    private int d_assignedCountryUnits = 0;
+
+    private List<Order> d_ordersList = new ArrayList<>();
 
     public Player() {
         d_ownedCountries = new ArrayList<>();
@@ -62,6 +71,38 @@ public class Player {
         this.d_ownedCountries = p_ownedCountries;
     }
 
+    /**
+     * Retrieve the number of available country units
+     * @return available units at this point
+     */
+    public int getD_assignedCountryUnits() {
+        return d_assignedCountryUnits;
+    }
+
+    /**
+     * Assign a unit of army to this player
+     * @param d_assignedCountryUnits units of army to assign
+     */
+    public void setD_assignedCountryUnits(int d_assignedCountryUnits) {
+        System.out.println(getD_name() + " has been assigned " + d_assignedCountryUnits + " reinforcements");
+        this.d_assignedCountryUnits = d_assignedCountryUnits;
+    }
+
+    /**
+     * Reduces given number of army units from player's available units
+     *
+     * @param p_units units to reduce
+     */
+    public void reduceArmyUnits(int p_units) {
+        this.d_assignedCountryUnits -= p_units;
+    }
+
+    /**
+     * Assign ownership of country to this player
+     *
+     * @param p_country country to assign
+     * @return success or failure
+     */
     public boolean receiveOwnershipForCountry(Country p_country) {
         return this.d_ownedCountries.add(p_country);
     }
@@ -74,5 +115,79 @@ public class Player {
      */
     public boolean removeOwnershipForCountry(Country p_country) {
         return this.d_ownedCountries.remove(p_country);
+    }
+
+    /**
+     * Determines if this player owns a country  with the given name
+     *
+     * @param p_countryName name of country to check
+     * @return true if player has ownership of country with passed in name, false otherwise
+     */
+    public boolean hasOwnershipForCountryWithName(String p_countryName) {
+        for (Country l_ownedCountry: getD_ownedCountries()) {
+            if (l_ownedCountry.getD_countryName().equalsIgnoreCase(p_countryName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns a country from owned country list having a given name
+     *
+     * @param p_countryName name of country to fetch
+     * @return Country with passed in name, null otherwise
+     */
+    public Country getOwnedCountryWithName(String p_countryName) {
+        Country l_ownedCountry = null;
+        for (Country l_country: getD_ownedCountries()) {
+            if (l_country.getD_countryName().equalsIgnoreCase(p_countryName)) {
+                l_ownedCountry = l_country;
+                break;
+            }
+        }
+        return  l_ownedCountry;
+    }
+
+    /**
+     * Adds an order to the orders list
+     *
+     * @param p_order order to append
+     */
+    public void appendOrderToList(Order p_order) {
+        this.d_ordersList.add(p_order);
+    }
+
+    /**
+     * Fetches the next order from the orders list and removes it from list
+     *
+     * @return the next available order, null if there are none
+     */
+    public Order nextorder() {
+        try {
+            return this.d_ordersList.remove(0);
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println("[Player]: No more orders available for: " + getD_name());
+            return null;
+        }
+    }
+    /**
+     * Ask the player to issue orders, will add an order object to its 'order' list
+     */
+    public void issue_order() {
+        System.out.println("Player [" + getD_name() + "] needs to issue order: ");
+        Scanner inputReader = new Scanner(System.in);
+        String l_nextOrder = inputReader.nextLine();
+        Command l_command = OrderParser.parseOrderStatement(this, l_nextOrder);
+        l_command.execute();
+    }
+
+    /**
+     * Determines if the user can assign any more orders
+     *
+     * @return true if player can issue orders
+     */
+    public boolean canIssueOrder() {
+        return getD_assignedCountryUnits() > 0;
     }
 }
