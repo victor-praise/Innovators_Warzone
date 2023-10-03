@@ -1,5 +1,6 @@
 package main.java.commands;
 
+import main.java.exceptions.MapInvalidException;
 import main.java.services.MapService;
 
 import java.io.IOException;
@@ -58,6 +59,8 @@ public class SaveMapCommand extends Command{
         } catch (IOException error) {
             System.out.println("[SaveMapCommand]: Error while saving map to: " + l_filename + " " + error.getLocalizedMessage());
             throw new RuntimeException(error);
+        } catch (MapInvalidException e) {
+            e.printStackTrace();
         }
     }
 

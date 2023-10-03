@@ -1,6 +1,7 @@
 package main.java.services;
 
 import main.java.arena.Game;
+import main.java.exceptions.MapInvalidException;
 import main.java.models.Map;
 
 import java.io.*;
@@ -79,12 +80,23 @@ public class MapService {
      * @param p_fileName file name for map to be saved as
      * @throws IOException when file could not be written
      */
-    public void saveMap(String p_fileName) throws IOException {
-        Files.deleteIfExists(Paths.get(getFilePath(p_fileName)));
-        FileWriter l_fileWriter = new FileWriter(getFilePath(p_fileName));
-        l_fileWriter.write("; map: " + p_fileName + System.lineSeparator());
-        new MapSaver().saveMapToFile(l_fileWriter);
-        l_fileWriter.close();
+    public void saveMap(String p_fileName) throws IOException, MapInvalidException {
+        if(Game.sharedInstance().getD_map() != null ){
+            Map l_currentMap = Game.sharedInstance().getD_map();
+
+            if(l_currentMap.validate()){
+                Files.deleteIfExists(Paths.get(getFilePath(p_fileName)));
+                FileWriter l_fileWriter = new FileWriter(getFilePath(p_fileName));
+                l_fileWriter.write("; map: " + p_fileName + System.lineSeparator());
+                new MapSaver().saveMapToFile(l_fileWriter);
+                l_fileWriter.close();
+            }
+
+
+        }
+        else{
+            System.out.println("Map cannot be saved");
+        }
     }
     /**
      * Generates absolute file path from the given map file.
