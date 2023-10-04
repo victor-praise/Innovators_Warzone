@@ -42,7 +42,7 @@ public class DeployOrderCommand extends PlayerOrderCommand {
             }
 
             // validate number of army units
-            int l_availableUnitsToPlayer = this.d_issuingPlayer.getD_assignedCountryUnits();
+            int l_availableUnitsToPlayer = this.d_issuingPlayer.getD_assignedArmyUnits();
             if (l_armyUnits > l_availableUnitsToPlayer) {
                 System.out.println("[DeployOrder]: " + d_issuingPlayer.getD_name() + " has only " + l_availableUnitsToPlayer + " units left. Cannot assign more army than " + l_availableUnitsToPlayer);
                 return;
@@ -53,7 +53,7 @@ public class DeployOrderCommand extends PlayerOrderCommand {
             // Reduce army units for this player
             this.d_issuingPlayer.reduceArmyUnits(l_armyUnits);
             // Inform about remaining army units
-            System.out.println("[DeployOrder]: Remaining Units of army to deploy: " + this.d_issuingPlayer.getD_assignedCountryUnits());
+            System.out.println("[DeployOrder]: Remaining Units of army to deploy: " + this.d_issuingPlayer.getD_assignedArmyUnits());
 
         } catch (NumberFormatException error) {
             System.out.println("[DeployOrder]: Deploy order requires the second parameters to be integer, i.e. Units of army to deploy");

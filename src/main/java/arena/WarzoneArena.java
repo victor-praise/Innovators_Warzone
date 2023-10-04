@@ -63,7 +63,7 @@ public class WarzoneArena {
             for (Player l_player: Game.sharedInstance().getD_players()) {
                 if (l_player.canIssueOrder()) {
                     hasMoreOrders = true;
-                    System.out.println("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedCountryUnits() + " army units left to deploy");
+                    System.out.println("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedArmyUnits() + " army units left to deploy");
                     l_player.issue_order();
                 }
             }
@@ -89,7 +89,7 @@ public class WarzoneArena {
         System.out.println("--- Assigning Reinforcements phase ---");
         for (Player player: Game.sharedInstance().getD_players()) {
             // TODO: Check for ownership of continents, which should be added to DEFAULT_REINFORCEMENT
-            player.setD_assignedCountryUnits(DEFAULT_REINFORCEMENT);
+            player.setD_assignedArmyUnits(DEFAULT_REINFORCEMENT);
         }
     }
     /**

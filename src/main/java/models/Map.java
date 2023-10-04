@@ -129,7 +129,6 @@ public class Map {
      * @param p_continent continent to add
      */
     public void addContinentToMap(Continent p_continent) {
-
         d_continents.add(p_continent);
     }
 

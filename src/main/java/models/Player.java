@@ -22,7 +22,7 @@ public class Player {
 
     private String d_name;
 
-    private int d_assignedCountryUnits = 0;
+    private int d_assignedArmyUnits = 0;
 
     private List<Order> d_ordersList = new ArrayList<>();
 
@@ -75,17 +75,17 @@ public class Player {
      * Retrieve the number of available country units
      * @return available units at this point
      */
-    public int getD_assignedCountryUnits() {
-        return d_assignedCountryUnits;
+    public int getD_assignedArmyUnits() {
+        return d_assignedArmyUnits;
     }
 
     /**
      * Assign a unit of army to this player
-     * @param d_assignedCountryUnits units of army to assign
+     * @param d_assignedArmyUnits units of army to assign
      */
-    public void setD_assignedCountryUnits(int d_assignedCountryUnits) {
-        System.out.println(getD_name() + " has been assigned " + d_assignedCountryUnits + " reinforcements");
-        this.d_assignedCountryUnits = d_assignedCountryUnits;
+    public void setD_assignedArmyUnits(int d_assignedArmyUnits) {
+        System.out.println(getD_name() + " has been assigned " + d_assignedArmyUnits + " reinforcements");
+        this.d_assignedArmyUnits = d_assignedArmyUnits;
     }
 
     /**
@@ -94,7 +94,7 @@ public class Player {
      * @param p_units units to reduce
      */
     public void reduceArmyUnits(int p_units) {
-        this.d_assignedCountryUnits -= p_units;
+        this.d_assignedArmyUnits -= p_units;
     }
 
     /**
@@ -188,6 +188,6 @@ public class Player {
      * @return true if player can issue orders
      */
     public boolean canIssueOrder() {
-        return getD_assignedCountryUnits() > 0;
+        return getD_assignedArmyUnits() > 0;
     }
 }
