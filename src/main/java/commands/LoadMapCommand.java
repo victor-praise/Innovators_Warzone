@@ -28,17 +28,17 @@ public class LoadMapCommand extends Command {
      */
     @Override
     public void execute() {
-        if (functionalities != null && functionalities.length != 0) {
+        if (d_functionalities != null && d_functionalities.length != 0) {
             System.out.println("[LoadMapCommand]: No functionality is supported for EditMap command");
             return;
         }
         MapService mapService = new MapService();
         String l_filename;
 
-        if (baseParams == null) {
+        if (d_baseParams == null) {
             l_filename = null;
         } else {
-            Optional<String> optionalFileName = Arrays.stream(baseParams).findFirst();
+            Optional<String> optionalFileName = Arrays.stream(d_baseParams).findFirst();
             l_filename = optionalFileName.orElse(null);
         }
 

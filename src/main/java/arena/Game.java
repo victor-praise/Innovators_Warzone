@@ -7,7 +7,6 @@ import main.java.models.Country;
 import main.java.models.Map;
 import main.java.models.Player;
 import main.java.utils.CommandParser;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -232,7 +231,7 @@ public class Game {
             Command l_command = l_parser.parseCommandStatement(l_nextCommand);
             if (l_command != null) {
                 l_command.execute();
-                if (l_command.command == BaseCommand.AssignCountries) {
+                if (l_command.d_command == BaseCommand.AssignCountries) {
                     System.out.println("[Game] --- Ready for Issue Orders phase ---");
                     break;
                 }

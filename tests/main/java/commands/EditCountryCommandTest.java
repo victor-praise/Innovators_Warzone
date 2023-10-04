@@ -48,7 +48,7 @@ class EditCountryCommandTest {
     @Test
     void test_givenAContinent_whenAddCommandExecuted_thenCountryAdded() {
         Functionality function = new Functionality(BaseFunctionality.Add, new String[]{"India", "Asia"});
-        d_systemUnderTest.functionalities = new Functionality[]{function};
+        d_systemUnderTest.d_functionalities = new Functionality[]{function};
 
         d_systemUnderTest.execute();
 
@@ -66,7 +66,7 @@ class EditCountryCommandTest {
         l_continent.addCountry(l_country);
         Game.sharedInstance().getD_map().addCountryToMap(l_country);
         Functionality function = new Functionality(BaseFunctionality.Remove, new String[]{"India"});
-        d_systemUnderTest.functionalities = new Functionality[]{function};
+        d_systemUnderTest.d_functionalities = new Functionality[]{function};
         List<Country> l_countries = Game.sharedInstance().getD_map().getD_countries();
         assertEquals(1, l_countries.size(), "Expected 1 country, found: " + l_countries.size());
 

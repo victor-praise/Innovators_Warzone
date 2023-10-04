@@ -1,7 +1,5 @@
 package main.java.commands;
 
-import main.java.arena.Game;
-import main.java.models.Map;
 import main.java.services.MapService;
 
 import java.io.IOException;
@@ -31,7 +29,7 @@ public class EditMapCommand extends Command {
      */
     @Override
     public void execute() {
-        if (functionalities != null && functionalities.length != 0) {
+        if (d_functionalities != null && d_functionalities.length != 0) {
             System.out.println("[EditMapCommand]: No functionality is supported for EditMap command");
             return;
         }
@@ -39,10 +37,10 @@ public class EditMapCommand extends Command {
         MapService mapService = new MapService();
         String l_filename;
 
-        if (baseParams == null) {
+        if (d_baseParams == null) {
            l_filename = null;
         } else {
-            Optional<String> optionalFileName = Arrays.stream(baseParams).findFirst();
+            Optional<String> optionalFileName = Arrays.stream(d_baseParams).findFirst();
             l_filename = optionalFileName.orElse(null);
         }
 

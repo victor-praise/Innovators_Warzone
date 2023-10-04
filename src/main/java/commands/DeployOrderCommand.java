@@ -25,14 +25,14 @@ public class DeployOrderCommand extends PlayerOrderCommand {
      */
     @Override
     public void execute() {
-        if (baseParams == null || baseParams.length < 2) {
+        if (d_baseParams == null || d_baseParams.length < 2) {
             System.out.println("[DeployOrder]: Deploy order required two parameters. [1] Name of Country to deploy. [2] Units of army to deploy");
             return;
         }
 
         try {
-            String l_countryName = baseParams[0];
-            int l_armyUnits = Integer.parseInt(baseParams[1]);
+            String l_countryName = d_baseParams[0];
+            int l_armyUnits = Integer.parseInt(d_baseParams[1]);
             Country l_country = this.d_issuingPlayer.getOwnedCountryWithName((l_countryName));
 
             // check for ownership of country

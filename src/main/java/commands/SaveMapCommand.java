@@ -29,7 +29,7 @@ public class SaveMapCommand extends Command{
      */
     @Override
     public void execute() {
-        if (functionalities != null && functionalities.length != 0) {
+        if (d_functionalities != null && d_functionalities.length != 0) {
             System.out.println("[SaveMapCommand]: No functionality is supported for SaveMap command");
             return;
         }
@@ -37,11 +37,11 @@ public class SaveMapCommand extends Command{
         MapService mapService = new MapService();
         String l_filename;
 
-        if (baseParams == null) {
+        if (d_baseParams == null) {
             System.out.println("[SaveMapCommand]: file name is mandatory ");
             return;
         } else {
-            Optional<String> optionalFileName = Arrays.stream(baseParams).findFirst();
+            Optional<String> optionalFileName = Arrays.stream(d_baseParams).findFirst();
             l_filename = optionalFileName.orElse(null);
         }
 

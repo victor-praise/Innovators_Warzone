@@ -19,17 +19,17 @@ public class Map {
     /**
      * stores the map file name.
      */
-    String d_mapFile;
+    private String d_mapFile;
 
     /**
      * list of continents.
      */
-    List<Continent> d_continents;
+    private List<Continent> d_continents;
 
     /**
      * HashMap of the countries one can reach from the existing position.
      */
-    HashMap<Integer, Boolean> d_countryReachability = new HashMap<Integer, Boolean>();
+    private HashMap<Integer, Boolean> d_countryReachability = new HashMap<Integer, Boolean>();
 
     /**
      * list of countries.

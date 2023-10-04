@@ -1,7 +1,6 @@
 package main.java.commands;
 
 import main.java.arena.Game;
-import main.java.models.Player;
 
 public class GamePlayerCommand extends Command{
     /**
@@ -20,11 +19,11 @@ public class GamePlayerCommand extends Command{
      */
     @Override
     public void execute() {
-        if (functionalities == null || functionalities.length == 0) {
+        if (d_functionalities == null || d_functionalities.length == 0) {
             System.out.println("[GamePlayer]: No functionality provided. Expectation: '-add' or '-remove'");
             return;
         }
-        Functionality l_function = functionalities[0];
+        Functionality l_function = d_functionalities[0];
         String l_playerName = null;
         switch (l_function.functionality) {
             case Add:

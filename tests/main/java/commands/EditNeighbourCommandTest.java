@@ -53,7 +53,7 @@ class EditNeighbourCommandTest {
     @Test
     void given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour() {
         Functionality function = new Functionality(BaseFunctionality.Add, new String[]{"India", "China"});
-        d_systemUnderTest.functionalities = new Functionality[]{function};
+        d_systemUnderTest.d_functionalities = new Functionality[]{function};
 
         d_systemUnderTest.execute();
 
