@@ -59,7 +59,11 @@ public enum BaseCommand {
      * Loads a map from a given file
      */
     LoadMap("loadmap"),
-    
+
+    /**
+     * Issues a deploy order
+     */
+    DeployOrder("deploy"),
     /**
      * An invalid command string by user will correspond to this.
      */

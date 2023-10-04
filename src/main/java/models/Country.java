@@ -150,6 +150,15 @@ public class Country {
     }
 
     /**
+     * Adds a given number of army units to this country
+     *
+     * @param p_units units of army to add
+     */
+    public void addArmyUnits(int p_units) {
+        this.d_noOfArmies += p_units;
+    }
+
+    /**
      * Describes the Country - name and id of neighbours
      * @return String description of country
      */
