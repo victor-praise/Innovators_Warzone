@@ -38,7 +38,7 @@ public class EditMapCommand extends Command {
         String l_filename;
 
         if (baseParams == null) {
-           l_filename = null;
+            l_filename = null;
         } else {
             Optional<String> optionalFileName = Arrays.stream(baseParams).findFirst();
             l_filename = optionalFileName.orElse(null);

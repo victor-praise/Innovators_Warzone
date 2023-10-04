@@ -5,6 +5,7 @@ import main.java.models.Continent;
 
 /**
  * Commands pertaining to modifying continents
+ *
  * @author kevin on 2023-09-24
  */
 public class EditContinentCommand extends Command {
@@ -43,7 +44,7 @@ public class EditContinentCommand extends Command {
                     int l_bonusValue = Integer.parseInt(l_function.functionalityParams[1]);
                     Game.sharedInstance().getD_map().addContinent(l_continentName, l_bonusValue);
                 } catch (NumberFormatException nfe) {
-                    System.out.println("[EditContinent]: Invalid format: bonus points must be an integer, found: [ " + l_function.functionalityParams[1] +" ]");
+                    System.out.println("[EditContinent]: Invalid format: bonus points must be an integer, found: [ " + l_function.functionalityParams[1] + " ]");
                 }
                 break;
             case Remove:

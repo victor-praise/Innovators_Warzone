@@ -2,6 +2,7 @@ package main.java.commands;
 
 /**
  * Represents an individual Functionality in the user command string, e.g. -add Asia 4, for an editcontinent command
+ *
  * @author kevin on 2023-09-21
  */
 public class Functionality {
@@ -17,7 +18,8 @@ public class Functionality {
 
     /**
      * Creates a Functionality form associated data
-     * @param p_functionality functionality of the base command
+     *
+     * @param p_functionality       functionality of the base command
      * @param p_functionalityParams parameters to a given functionality
      */
     public Functionality(BaseFunctionality p_functionality, String[] p_functionalityParams) {

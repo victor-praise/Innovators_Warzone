@@ -4,6 +4,7 @@ import main.java.arena.Game;
 
 /**
  * Commands pertaining to modifying countries list
+ *
  * @author kevin on 2023-09-27
  */
 public class EditCountryCommand extends Command {

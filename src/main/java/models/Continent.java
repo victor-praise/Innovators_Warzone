@@ -6,6 +6,7 @@ import java.util.Objects;
 
 /**
  * This class is responsible for the continents on the map
+ *
  * @author Victor
  * @version 1.0
  */
@@ -23,20 +24,21 @@ public class Continent {
     /**
      * constructor.
      *
-     * @param p_continentID continent ID
-     * @param p_continentName continent name
+     * @param p_continentID    continent ID
+     * @param p_continentName  continent name
      * @param p_continentValue continent value
      */
     public Continent(int p_continentID, String p_continentName, int p_continentValue) {
-        this.d_continentID=p_continentID;
-        this.d_continentName=p_continentName;
-        this.d_continentValue=p_continentValue;
-        this.d_countries=new ArrayList<Country>();
+        this.d_continentID = p_continentID;
+        this.d_continentName = p_continentName;
+        this.d_continentValue = p_continentValue;
+        this.d_countries = new ArrayList<Country>();
     }
 
     /**
      * Helper constructor which provides the continent id from a static variable
-     * @param p_continentName continent name
+     *
+     * @param p_continentName  continent name
      * @param p_continentValue continent value
      */
     public Continent(String p_continentName, int p_continentValue) {
@@ -137,7 +139,7 @@ public class Continent {
      * @param p_country country to be removed
      */
     public void removeCountry(Country p_country) {
-        if(d_countries==null) {
+        if (d_countries == null) {
             System.out.println("Country does not Exist");
         } else {
             d_countries.remove(p_country);
@@ -148,13 +150,12 @@ public class Continent {
      * Removes particular country ID from the neighbor list of all countries in continent.
      *
      * @param p_countryId ID of country to be removed
-
      */
     public void removeCountryAsNeighbourFromAll(Integer p_countryId) {
         if (d_countries != null && !d_countries.isEmpty()) {
-            for (Country c: d_countries){
+            for (Country c : d_countries) {
                 if (c.getD_neighbors() != null) {
-                    if (c.getD_neighbors().contains(p_countryId)){
+                    if (c.getD_neighbors().contains(p_countryId)) {
                         c.removeNeighbour(p_countryId);
                     }
                 }
@@ -164,6 +165,7 @@ public class Continent {
 
     /**
      * Describes the Continent - name and bonus points
+     *
      * @return String description
      */
     @Override

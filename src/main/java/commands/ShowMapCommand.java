@@ -8,7 +8,7 @@ import main.java.arena.Game;
  */
 
 public class ShowMapCommand extends Command {
-        /**
+    /**
      * Creates a new EditContinent command with given params and/or any functionalities
      *
      * @param baseParams      represents any parameter to the basecommand

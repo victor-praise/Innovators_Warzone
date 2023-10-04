@@ -4,6 +4,7 @@ import main.java.models.Continent;
 import main.java.commands.Command;
 import main.java.models.Map;
 import main.java.utils.CommandParser;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 
 /**
  * A singleton class describing all the high level game functionalities and resources
+ *
  * @author kevin on 2023-09-25
  * @version 1.0
  */
@@ -27,6 +29,7 @@ public class Game {
 
     /**
      * Returns current map being edited or a new map when there are no current map
+     *
      * @return current map object
      */
     public Map getD_map() {
@@ -40,6 +43,7 @@ public class Game {
     /**
      * Attempts to set a new map object. Fails if current map object is not null.
      * Can be used to reset the map object too by passing null.
+     *
      * @param p_map new map object to set
      */
     public void setD_map(Map p_map) {
@@ -56,10 +60,12 @@ public class Game {
     /**
      * constructor being made private to prevent random instance creation, always use sharedInstance()
      */
-    private Game() {}
+    private Game() {
+    }
 
     /**
      * We keep a singleton instance of Game which is accessible throughout the game engine
+     *
      * @return an existing instance if it exists, otherwise returns a newly created instance
      */
     public static synchronized Game sharedInstance() {

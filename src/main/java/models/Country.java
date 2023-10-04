@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  This class is responsible for the countries on the map
+ * This class is responsible for the countries on the map
+ *
  * @author Victor
- *
- *
  */
 public class Country {
 
@@ -24,12 +23,12 @@ public class Country {
     /**
      * constructor of this class.
      *
-     * @param p_countryID country ID
+     * @param p_countryID   country ID
      * @param p_countryName country name
      * @param p_continentID continent ID
      */
 
-    public Country(int p_countryID, String p_countryName, int p_continentID){
+    public Country(int p_countryID, String p_countryName, int p_continentID) {
         this.d_countryID = p_countryID;
         this.d_countryName = p_countryName;
         this.d_continentID = p_continentID;
@@ -39,6 +38,7 @@ public class Country {
 
     /**
      * getter method to get the armies.
+     *
      * @return armies
      */
     public int getD_noOfArmies() {
@@ -128,35 +128,37 @@ public class Country {
 
     /**
      * Adds a neighbour to the list
+     *
      * @param p_countryID country ID
      */
     public void addNeighbour(int p_countryID) {
-        if(!d_neighbors.contains(p_countryID)) {
+        if (!d_neighbors.contains(p_countryID)) {
             d_neighbors.add(p_countryID);
         }
     }
 
     /**
      * Removes countryID from neighbour list.
+     *
      * @param p_countryID country ID
      */
     public void removeNeighbour(int p_countryID) {
-        if(d_neighbors.contains(p_countryID)) {
+        if (d_neighbors.contains(p_countryID)) {
             d_neighbors.remove((Integer) p_countryID);
-        }
-        else{
+        } else {
             System.out.println("There is no neighbour with the provided ID");
         }
     }
 
     /**
      * Describes the Country - name and id of neighbours
+     *
      * @return String description of country
      */
     @Override
     public String toString() {
         String l_description = d_countryID + " " + d_countryName;
-        for (int neighbour: d_neighbors) {
+        for (int neighbour : d_neighbors) {
             l_description = l_description.concat(" " + neighbour);
         }
         return l_description;

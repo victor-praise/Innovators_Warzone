@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * This enum corresponds to all the possible functionality for any given command
+ *
  * @author kevin on 2023-09-21
  * @version 1.0
  */
@@ -33,13 +34,14 @@ public enum BaseFunctionality {
     }
 
     static {
-        for (BaseFunctionality functionality: values()) {
+        for (BaseFunctionality functionality : values()) {
             From_String.put(functionality.d_label, functionality);
         }
     }
 
     /**
      * This static function creates a corresponding enum from a valid functionality string
+     *
      * @param p_label the functionality string inupt by the user
      * @return A corresponding enum for a valid string, null for unknown functionality string
      */

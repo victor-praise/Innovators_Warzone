@@ -2,6 +2,7 @@ package main.java.commands;
 
 /**
  * All executable commands can be called to execute() themselves
+ *
  * @author kevin on 2023-09-24
  */
 public interface ExecutableCommand {

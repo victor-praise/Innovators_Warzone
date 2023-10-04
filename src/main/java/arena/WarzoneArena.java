@@ -15,16 +15,18 @@ package main.java.arena;
 /**
  * A tactical game-play where the player objective is to capture as much territory as possible.
  * Player wins by controlling every territory possible.
+ *
  * @author Kevin Wadera
  * @version 1.0
  */
 public class WarzoneArena {
 
-    private  static Boolean Is_Gameplay_On = true;
+    private static Boolean Is_Gameplay_On = true;
     private static Game d_Game;
 
     /**
      * Main entry point of the game.
+     *
      * @param args Any command line arguments separated by a space
      */
     public static void main(String[] args) {
@@ -37,7 +39,7 @@ public class WarzoneArena {
         // Gameplay begins here
         while (Is_Gameplay_On) {
             System.out.println("Warp to Warzone!");
-        // auto build check
+            // auto build check
             System.out.print("auto build completed! --- Git Guardian");
             // Intentionally exit the game
             endGamePlay();
