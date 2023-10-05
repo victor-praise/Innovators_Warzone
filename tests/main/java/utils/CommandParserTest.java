@@ -34,7 +34,7 @@ class CommandParserTest {
         assert l_validCommand != null;
         assert l_validCommand.command == BaseCommand.EditContinent;
         assert l_validCommand.functionalities[0].functionality == BaseFunctionality.Add;
-        assert l_validCommand.functionalities[0].functionalityParams.length == 5;
+        assert l_validCommand.functionalities[0].functionalityParams.length == 2;
     }
 
     /**
