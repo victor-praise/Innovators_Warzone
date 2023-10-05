@@ -22,7 +22,7 @@ class BaseCommandTest {
     @Test
     void givenValidStringWhenEnumRequestedThenEnumCreated() {
         String commandString = "showmap";
-        BaseCommand command = BaseCommand.from(commandString);
+        main.java.commands.BaseCommand command = BaseCommand.from(commandString);
         assert command == BaseCommand.ShowMap;
     }
 
