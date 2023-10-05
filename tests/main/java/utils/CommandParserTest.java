@@ -3,12 +3,11 @@ package main.java.utils;
 import main.java.commands.BaseCommand;
 import main.java.commands.BaseFunctionality;
 import main.java.commands.Command;
-import main.java.utils.CommandParser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @author kevin on 2023-09-21
@@ -35,7 +34,7 @@ class CommandParserTest {
         assert l_validCommand != null;
         assert l_validCommand.command == BaseCommand.EditContinent;
         assert l_validCommand.functionalities[0].functionality == BaseFunctionality.Add;
-        assert l_validCommand.functionalities[0].functionalityParams.length == 2;
+        assert l_validCommand.functionalities[0].functionalityParams.length == 5;
     }
 
     /**
