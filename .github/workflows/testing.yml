@@ -24,7 +24,8 @@ jobs:
 #        run: mvn --batch-mode --update-snapshots verify
 
       - name: Test
-        run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
+        run: mvn --batch-mode -Dmaven test
+#        run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
 
 #      - name: Report
 #        uses: dorny/test-reporter@v1
