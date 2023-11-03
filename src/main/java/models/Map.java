@@ -3,6 +3,7 @@ package main.java.models;
 import main.java.arena.Game;
 import main.java.exceptions.MapInvalidException;
 import main.java.models.MapEx;
+import main.java.models.MapEx;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
 /**
  * This class is responsible for the map
  *
@@ -183,17 +183,33 @@ public class Map {
      * @return Boolean Value if all are connected
      * @throws MapInvalidException if any continent is not Connected
      */
+    // public Boolean hasAdjacentContinent() throws MapInvalidException {
+    //     for (Continent l_continent : d_continents) {
+    //         if (l_continent.getD_countries().isEmpty()) {
+    //             throw new MapInvalidException("Each continent must have at least one country. No country found under: " + l_continent.getD_continentName());
+    //         }
+    //         if (!hasAdjacentContinentConnection(l_continent)) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
     public Boolean hasAdjacentContinent() throws MapInvalidException {
         for (Continent l_continent : d_continents) {
-            if (l_continent.getD_countries().isEmpty()) {
-                throw new MapInvalidException("Each continent must have at least one country. No country found under: " + l_continent.getD_continentName());
-            }
+            checkIfContinentHasCountry(l_continent);
             if (!hasAdjacentContinentConnection(l_continent)) {
                 return false;
             }
         }
         return true;
     }
+    
+    private void checkIfContinentHasCountry(Continent continent) throws MapInvalidException {
+        if (continent.getD_countries().isEmpty()) {
+            throw new MapInvalidException("Each continent must have at least one country. No country found under: " + continent.getD_continentName());
+        }
+    }
+    
 
     public Boolean hasAdjacentContinentConnection(Continent p_continent) throws MapInvalidException {
         HashMap<Integer, Boolean> l_countryReachabilityStatus = new HashMap<Integer, Boolean>();
@@ -335,17 +351,19 @@ public class Map {
      * @return Continent with the passed in name, null when no continent could not be found
      */
     public Continent getContinent(String p_continentName) {
-        Continent l_continent = null;
-        if (d_continents == null || d_continents.isEmpty()) {
-            return l_continent;
-        }
-        for (Continent obj : d_continents) {
-            if (obj.getD_continentName().equalsIgnoreCase(p_continentName)) {
-                l_continent = obj;
-                break;
-            }
-        }
-        return l_continent;
+        // Continent l_continent = null;
+        // if (d_continents == null || d_continents.isEmpty()) {
+        //     return l_continent;
+        // }
+        // for (Continent obj : d_continents) {
+        //     if (obj.getD_continentName().equalsIgnoreCase(p_continentName)) {
+        //         l_continent = obj;
+        //         break;
+        //     }
+        // }
+        MapEx me=new MapEx();
+        return me.getContinentEx(p_continentName);
+        // return l_continent;
     }
 
     /**
