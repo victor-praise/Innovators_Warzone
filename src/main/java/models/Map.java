@@ -255,20 +255,43 @@ public class Map {
      * @throws MapInvalidException which Country is not connected
      */
     public boolean hasCountryConnectivity() throws MapInvalidException {
+
         if (d_countries == null) {
             return false;
         }
+    
+        // Initialize the country reachability status map
         d_countries.forEach(country -> d_countryReachability.put(country.getD_countryID(), false));
+    
+        // Build country reachability status starting from the first country
         buildCountryReachabilityStatus(d_countries.get(0));
-
-        // Iterates over entries to locate the unreachable country
+    
+        // Check for unreachable countries and throw an exception if found
         for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReachability.entrySet()) {
             if (!entry.getValue()) {
                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
                 throw new MapInvalidException(l_exceptionMessage);
             }
         }
+    
+        // Check if all countries are reachable
         return !d_countryReachability.containsValue(false);
+        
+        
+        // if (d_countries == null) {
+        //     return false;
+        // }
+        // d_countries.forEach(country -> d_countryReachability.put(country.getD_countryID(), false));
+        // buildCountryReachabilityStatus(d_countries.get(0));
+
+        // // Iterates over entries to locate the unreachable country
+        // for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReachability.entrySet()) {
+        //     if (!entry.getValue()) {
+        //         String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
+        //         throw new MapInvalidException(l_exceptionMessage);
+        //     }
+        // }
+        // return !d_countryReachability.containsValue(false);
     }
 
 
@@ -350,19 +373,17 @@ public class Map {
      * @return Continent with the passed in name, null when no continent could not be found
      */
     public Continent getContinent(String p_continentName) {
-        // Continent l_continent = null;
-        // if (d_continents == null || d_continents.isEmpty()) {
-        //     return l_continent;
-        // }
-        // for (Continent obj : d_continents) {
-        //     if (obj.getD_continentName().equalsIgnoreCase(p_continentName)) {
-        //         l_continent = obj;
-        //         break;
-        //     }
-        // }
-        MapEx me=new MapEx();
-        return me.getContinentEx(p_continentName);
-        // return l_continent;
+        Continent l_continent = null;
+        if (d_continents == null || d_continents.isEmpty()) {
+            return l_continent;
+        }
+        for (Continent obj : d_continents) {
+            if (obj.getD_continentName().equalsIgnoreCase(p_continentName)) {
+                l_continent = obj;
+                break;
+            }
+        }
+        return l_continent;
     }
 
     /**
