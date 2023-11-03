@@ -212,6 +212,8 @@ public class Map {
 
     public Boolean hasAdjacentContinentConnection(Continent p_continent) throws MapInvalidException {
         HashMap<Integer, Boolean> l_countryReachabilityStatus = new HashMap<Integer, Boolean>();
+
+        // Initialize country reachability status for the continent's countries
         for (Country country : p_continent.getD_countries()) {
             l_countryReachabilityStatus.put(country.getD_countryID(), false);
         }
