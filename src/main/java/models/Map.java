@@ -2,6 +2,7 @@ package main.java.models;
 
 import main.java.arena.Game;
 import main.java.exceptions.MapInvalidException;
+import main.java.models.MapEx;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -571,9 +572,9 @@ public class Map {
         System.out.println("[Countries]");
         for (Country country : countries) {
             System.out.print(country.getD_countryID() + " " + country.getD_countryName());
-            String ownerName = Game.sharedInstance().getOwnerNameForCountryName(country.getD_countryName());
-            if (ownerName != null) {
-                System.out.print(" " + ownerName);
+            String l_ownerName = Game.sharedInstance().getOwnerNameForCountryName(country.getD_countryName());
+            if (l_ownerName != null) {
+                System.out.print(" " + l_ownerName);
             }
             System.out.println();
         }
