@@ -444,13 +444,25 @@ public class Map {
      * @param p_controlValue  Control value of the continent to be added
      */
     public void addContinent(String p_continentName, Integer p_controlValue) {
-        if (!continentExists(getD_continents(), p_continentName)) {
+
+
+        if (continentExists(getD_continents(), p_continentName)) {
+            System.out.println("Continent already exists on the map");
+        } else {
             Continent l_newContinent = new Continent(p_continentName, p_controlValue);
             d_continents.add(l_newContinent);
             System.out.println("[Map]: Inserted a new continent: " + l_newContinent);
-        } else {
-            System.out.println("Continent already exists on the map");
         }
+        
+
+
+        // if (!continentExists(getD_continents(), p_continentName)) {
+        //     Continent l_newContinent = new Continent(p_continentName, p_controlValue);
+        //     d_continents.add(l_newContinent);
+        //     System.out.println("[Map]: Inserted a new continent: " + l_newContinent);
+        // } else {
+        //     System.out.println("Continent already exists on the map");
+        // }
     }
 
     /**
