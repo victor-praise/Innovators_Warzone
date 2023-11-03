@@ -392,13 +392,23 @@ public class Map {
      * @param p_countryName name of new continent
      * @return Country with the passed in name, null when no country could not be found
      */
+    // public Country getCountry(String p_countryName) {
+    //     if (d_countries == null) {
+    //         return null;
+    //     }
+    //     for (Country obj : d_countries) {
+    //         if (obj.getD_countryName().equalsIgnoreCase(p_countryName)) {
+    //             return obj;
+    //         }
+    //     }
+    //     return null;
+    // }
     public Country getCountry(String p_countryName) {
-        if (d_countries == null) {
-            return null;
-        }
-        for (Country obj : d_countries) {
-            if (obj.getD_countryName().equalsIgnoreCase(p_countryName)) {
-                return obj;
+        if (d_countries != null) {
+            for (Country country : d_countries) {
+                if (country.getD_countryName().equalsIgnoreCase(p_countryName)) {
+                    return country;
+                }
             }
         }
         return null;
