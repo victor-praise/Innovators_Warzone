@@ -3,9 +3,11 @@ package main.java.phases;
 import main.java.arena.Game;
 import main.java.models.Player;
 import main.java.utils.Constants;
+import main.java.utils.logger.LogEntryBuffer;
 
 /**
  * @author kevin on 2023-11-02
+ * @author victor
  */
 public class Reinforcement extends MainPlay {
 
@@ -34,5 +36,6 @@ public class Reinforcement extends MainPlay {
     public void next() {
         Game.sharedInstance().setD_gamePhase(new Attack());
         System.out.println("--- Moving to Attack phase --- ");
+        LogEntryBuffer.getInstance().log("---- Moving to Attack phase -----" + "\n");
     }
 }

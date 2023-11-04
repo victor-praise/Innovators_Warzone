@@ -2,6 +2,7 @@ package main.java.phases;
 
 import main.java.arena.Game;
 import main.java.models.Player;
+import main.java.utils.logger.LogEntryBuffer;
 
 /**
  * @author kevin on 2023-11-02
@@ -18,6 +19,7 @@ public class Attack extends MainPlay {
     @Override
     public void attack() {
         System.out.println("--- Attack / Issuing Orders phase ---");
+        LogEntryBuffer.getInstance().log("==== Attack / Issuing Orders phase ====" + "\n\n\n");
         boolean hasMoreOrders = true;
         while (hasMoreOrders) {
             hasMoreOrders = false;
@@ -41,6 +43,7 @@ public class Attack extends MainPlay {
     public void next() {
         Game.sharedInstance().setD_gamePhase(new Fortification());
         System.out.println("--- Moving to Fortification phase --- ");
+        LogEntryBuffer.getInstance().log("--- Moving to Fortification phase ---" + "\n");
     }
 
     /**
