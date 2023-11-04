@@ -2,7 +2,6 @@ package main.java.models;
 
 import main.java.arena.Game;
 import main.java.exceptions.MapInvalidException;
-import main.java.models.MapEx;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -261,13 +260,13 @@ public class Map {
         if (d_countries == null) {
             return false;
         }
-    
+
         // Initialize the country reachability status map
         d_countries.forEach(country -> d_countryReachability.put(country.getD_countryID(), false));
-    
+
         // Build country reachability status starting from the first country
         buildCountryReachabilityStatus(d_countries.get(0));
-    
+
         // Check for unreachable countries and throw an exception if found
         for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReachability.entrySet()) {
             if (!entry.getValue()) {
@@ -275,25 +274,25 @@ public class Map {
                 throw new MapInvalidException(l_exceptionMessage);
             }
         }
-    
+
         // Check if all countries are reachable
         return !d_countryReachability.containsValue(false);
         
         
-        // if (d_countries == null) {
-        //     return false;
-        // }
-        // d_countries.forEach(country -> d_countryReachability.put(country.getD_countryID(), false));
-        // buildCountryReachabilityStatus(d_countries.get(0));
-
-        // // Iterates over entries to locate the unreachable country
-        // for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReachability.entrySet()) {
-        //     if (!entry.getValue()) {
-        //         String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
-        //         throw new MapInvalidException(l_exceptionMessage);
-        //     }
-        // }
-        // return !d_countryReachability.containsValue(false);
+//         if (d_countries == null) {
+//             return false;
+//         }
+//         d_countries.forEach(country -> d_countryReachability.put(country.getD_countryID(), false));
+//         buildCountryReachabilityStatus(d_countries.get(0));
+//
+//         // Iterates over entries to locate the unreachable country
+//         for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReachability.entrySet()) {
+//             if (!entry.getValue()) {
+//                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
+//                 throw new MapInvalidException(l_exceptionMessage);
+//             }
+//         }
+//         return !d_countryReachability.containsValue(false);
     }
 
 
@@ -394,27 +393,27 @@ public class Map {
      * @param p_countryName name of new continent
      * @return Country with the passed in name, null when no country could not be found
      */
-    // public Country getCountry(String p_countryName) {
-    //     if (d_countries == null) {
-    //         return null;
-    //     }
-    //     for (Country obj : d_countries) {
-    //         if (obj.getD_countryName().equalsIgnoreCase(p_countryName)) {
-    //             return obj;
-    //         }
-    //     }
-    //     return null;
-    // }
-    public Country getCountry(String p_countryName) {
-        if (d_countries != null) {
-            for (Country country : d_countries) {
-                if (country.getD_countryName().equalsIgnoreCase(p_countryName)) {
-                    return country;
-                }
-            }
-        }
-        return null;
-    }
+//    public Country getCountry(String p_countryName) {
+//        if (d_countries == null) {
+//            return null;
+//        }
+//        for (Country obj : d_countries) {
+//            if (obj.getD_countryName().equalsIgnoreCase(p_countryName)) {
+//                return obj;
+//            }
+//        }
+//        return null;
+//    }
+     public Country getCountry(String p_countryName) {
+         if (d_countries != null) {
+             for (Country country : d_countries) {
+                 if (country.getD_countryName().equalsIgnoreCase(p_countryName)) {
+                     return country;
+                 }
+             }
+         }
+         return null;
+     }
 
     /**
      * returns the country for a given country id.
