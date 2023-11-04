@@ -661,6 +661,7 @@ public class Map {
 
         /** // display list of Continents in the format continentName continentValue
         if (getD_continents().isEmpty()) {
+            System.out.println("\n[Map]: This map is empty.");
             return;
         }
         System.out.println("\n[Continents]");

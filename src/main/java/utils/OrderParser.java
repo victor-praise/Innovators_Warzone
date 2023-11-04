@@ -1,9 +1,6 @@
 package main.java.utils;
 
-import main.java.commands.BaseCommand;
-import main.java.commands.Command;
-import main.java.commands.DeployOrderCommand;
-import main.java.commands.Functionality;
+import main.java.commands.*;
 import main.java.models.Player;
 
 /**
@@ -36,6 +33,10 @@ public class OrderParser {
                     l_command = new DeployOrderCommand(p_player, l_orderParams);
                     break;
 
+                case Quit:
+                    l_command = new QuitCommand();
+                    break;
+
                 default:
                     break;
             }
@@ -57,7 +58,7 @@ public class OrderParser {
 
     private static boolean isOrderCommand(BaseCommand p_command) {
         //TODO: Create an array of possible orders and verify that the command passed is in this array.
-        BaseCommand[] possibleOrders = {BaseCommand.DeployOrder};
+        BaseCommand[] possibleOrders = {BaseCommand.DeployOrder, BaseCommand.Quit};
         for (BaseCommand order: possibleOrders) {
             if (p_command == order) {
                 return true;
