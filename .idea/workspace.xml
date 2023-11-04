@@ -2,23 +2,19 @@
 <project version="4">
   <component name="AnalysisUIOptions">
     <option name="ANALYZE_INJECTED_CODE" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_25_2023_8_39_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_25_2023_8_39_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_28_2023_3_41_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_28_2023_3_41_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_29_2023_9_43_AM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9_29_2023_9_43_AM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="Country class and functions added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/arena/WarzoneArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arena/WarzoneArena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/EditContinentCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/EditContinentCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/LoadMapCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/LoadMapCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/DeployOrderCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/DeployOrderCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/main/java/models/MapTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/main/java/models/MapTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +27,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
+        <option value="Enum" />
         <option value="Class" />
-        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -62,12 +58,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "kevin/feature/issueorder",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -80,20 +78,7 @@
       <recent name="tests.java.commands" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.WarzoneArena">
-    <configuration name="WarzoneArena" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.arena.WarzoneArena" />
-      <module name="Innovators_Warzone" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.java.arena.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="All in Innovators_Warzone" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <option name="PACKAGE_NAME" value="" />
@@ -102,7 +87,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditMapCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeployOrderCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <extension name="coverage">
         <pattern>
@@ -111,13 +96,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.commands" />
-      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditMapCommandTest" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.DeployOrderCommandTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditMapCommandTest.test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeployOrderCommandTest.test_givenFixedArmyForPlayer_whenLessThanAssignedDeployed_thenDeploymentSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <extension name="coverage">
         <pattern>
@@ -126,14 +111,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.commands" />
-      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditMapCommandTest" />
-      <option name="METHOD_NAME" value="test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.DeployOrderCommandTest" />
+      <option name="METHOD_NAME" value="test_givenFixedArmyForPlayer_whenLessThanAssignedDeployed_thenDeploymentSuccess" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditNeighbourCommandTest.given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeployOrderCommandTest.test_givenFixedArmyForPlayer_whenMoreThanAssignedDeployed_thenDeploymentFails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Innovators_Warzone" />
       <extension name="coverage">
         <pattern>
@@ -142,8 +127,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="main.java.commands" />
-      <option name="MAIN_CLASS_NAME" value="main.java.commands.EditNeighbourCommandTest" />
-      <option name="METHOD_NAME" value="given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" />
+      <option name="MAIN_CLASS_NAME" value="main.java.commands.DeployOrderCommandTest" />
+      <option name="METHOD_NAME" value="test_givenFixedArmyForPlayer_whenMoreThanAssignedDeployed_thenDeploymentFails" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MapTest.test_givenAnUnconnectedContinent_whenValidated_thenValidationFails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Innovators_Warzone" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.models.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main.java.models" />
+      <option name="MAIN_CLASS_NAME" value="main.java.models.MapTest" />
+      <option name="METHOD_NAME" value="test_givenAnUnconnectedContinent_whenValidated_thenValidationFails" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -151,11 +152,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.WarzoneArena" />
         <item itemvalue="JUnit.All in Innovators_Warzone" />
-        <item itemvalue="JUnit.EditMapCommandTest" />
-        <item itemvalue="JUnit.EditMapCommandTest.test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded" />
-        <item itemvalue="JUnit.EditNeighbourCommandTest.given2Countries_whenCountry2AddedAsNeighbourToCountry1_thenCountry2AlsoHasNeighbour" />
+        <item itemvalue="JUnit.DeployOrderCommandTest" />
+        <item itemvalue="JUnit.DeployOrderCommandTest.test_givenFixedArmyForPlayer_whenLessThanAssignedDeployed_thenDeploymentSuccess" />
+        <item itemvalue="JUnit.DeployOrderCommandTest.test_givenFixedArmyForPlayer_whenMoreThanAssignedDeployed_thenDeploymentFails" />
+        <item itemvalue="JUnit.MapTest.test_givenAnUnconnectedContinent_whenValidated_thenValidationFails" />
       </list>
     </recent_temporary>
   </component>
@@ -207,5 +208,36 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Country class and functions added" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/models/Map.java</url>
+          <line>241</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/services/MapService.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/commands/DeployOrderCommand.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/main/java/commands/DeployOrderCommandTest.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Innovators_Warzone$MapTest_test_givenAnUnconnectedContinent_whenValidated_thenValidationFails.ic" NAME="MapTest.test_givenAnUnconnectedContinent_whenValidated_thenValidationFails Coverage Results" MODIFIED="1696458892810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>main.java.models.*</FILTER>
+    </SUITE>
   </component>
 </project>

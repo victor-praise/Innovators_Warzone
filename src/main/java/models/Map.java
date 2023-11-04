@@ -19,17 +19,17 @@ public class Map {
     /**
      * stores the map file name.
      */
-    String d_mapFile;
+    private String d_mapFile;
 
     /**
      * list of continents.
      */
-    List<Continent> d_continents;
+    private List<Continent> d_continents;
 
     /**
      * HashMap of the countries one can reach from the existing position.
      */
-    HashMap<Integer, Boolean> d_countryReachability = new HashMap<Integer, Boolean>();
+    private HashMap<Integer, Boolean> d_countryReachability = new HashMap<Integer, Boolean>();
 
     /**
      * list of countries.
@@ -129,7 +129,6 @@ public class Map {
      * @param p_continent continent to add
      */
     public void addContinentToMap(Continent p_continent) {
-
         d_continents.add(p_continent);
     }
 
@@ -553,6 +552,7 @@ public class Map {
 
         // display list of Continents in the format continentName continentValue
         if (getD_continents().isEmpty()) {
+            System.out.println("\n[Map]: This map is empty.");
             return;
         }
         System.out.println("\n[Continents]");

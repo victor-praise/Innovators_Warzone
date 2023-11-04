@@ -37,57 +37,7 @@ public class CommandParser {
             }
         }
 
-        Command l_command = null;
-        if (l_baseCommand == BaseCommand.None) {
-            return null;
-        } else {
-            switch (l_baseCommand) {
-                case EditContinent:
-                    l_command = new EditContinentCommand(l_baseParams, l_functionalities);
-                    break;
-
-                case EditCountry:
-                    l_command = new EditCountryCommand(l_baseParams, l_functionalities);
-                    break;
-
-                case EditNeighbour:
-                    l_command = new EditNeighbourCommand(l_baseParams, l_functionalities);
-                    break;
-
-                case EditMap:
-                    l_command = new EditMapCommand(l_baseParams, l_functionalities);
-                    break;
-
-                case ShowMap:
-                    l_command = new ShowMapCommand(l_baseParams, l_functionalities);
-                    break;
-
-                case SaveMap:
-                    l_command = new SaveMapCommand(l_baseParams, l_functionalities);
-                    break;
-
-                case ValidateMap:
-                    l_command = new ValidateMapCommand(l_baseParams, l_functionalities);
-                    break;
-
-                case GamePlayer:
-                    l_command = new GamePlayerCommand(l_baseParams, l_functionalities);
-                    break;
-
-                case LoadMap:
-                    l_command = new LoadMapCommand(l_baseParams, l_functionalities);
-                    break;
-
-                case AssignCountries:
-                    l_command = new AssignCountriesCommand(l_baseParams, l_functionalities);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        return l_command;
+        return new Command(l_baseCommand, l_baseParams, l_functionalities);
     }
 
     /**

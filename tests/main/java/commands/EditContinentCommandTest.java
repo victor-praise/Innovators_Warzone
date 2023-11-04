@@ -42,7 +42,7 @@ class EditContinentCommandTest {
     @Test
     void testGivenAddFunctionality_whenCommandExecuted_thenContinentCreated() {
         Functionality function = new Functionality(BaseFunctionality.Add, new String[]{"Asia", "3"});
-        d_systemUnderTest.functionalities = new Functionality[]{function};
+        d_systemUnderTest.d_functionalities = new Functionality[]{function};
 
         d_systemUnderTest.execute();
 
@@ -56,7 +56,7 @@ class EditContinentCommandTest {
     @Test
     void testGivenAddFunctionality_whenContinentExists_thenAdditionRejected() {
         Functionality function = new Functionality(BaseFunctionality.Add, new String[]{"Asia", "3"});
-        d_systemUnderTest.functionalities = new Functionality[]{function};
+        d_systemUnderTest.d_functionalities = new Functionality[]{function};
         d_systemUnderTest.execute();
 
         // Repeat 1 more time, this one should be rejected
@@ -79,7 +79,7 @@ class EditContinentCommandTest {
         assertEquals(1, continentCount);
 
         Functionality function = new Functionality(BaseFunctionality.Remove, new String[]{"Asia"});
-        d_systemUnderTest.functionalities = new Functionality[]{function};
+        d_systemUnderTest.d_functionalities = new Functionality[]{function};
 
         d_systemUnderTest.execute();
 

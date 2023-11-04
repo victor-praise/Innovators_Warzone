@@ -21,7 +21,7 @@ public class Command implements ExecutableCommand {
      * a list of functionalities extracted from user input
      * @see Functionality
      */
-    public Functionality[] functionalities;
+    public Functionality[] d_functionalities;
 
     /**
      * Creates a new Command object with given baseCommand and/or any params and/or any functionalities
@@ -30,12 +30,12 @@ public class Command implements ExecutableCommand {
      * @param functionalities represents all the functionalities in the user input
      */
     public Command(BaseCommand baseCommand, String[] baseParams, Functionality[] functionalities) {
-        this.command = baseCommand;
-        this.baseParams = baseParams;
-        this.functionalities = functionalities;
+        this.d_command = baseCommand;
+        this.d_baseParams = baseParams;
+        this.d_functionalities = functionalities;
     }
 
     public void execute() {
-        System.out.println("[Pending] execute command: " + this.command);
+        System.out.println("[Pending] execute command: " + this.d_command);
     }
 }

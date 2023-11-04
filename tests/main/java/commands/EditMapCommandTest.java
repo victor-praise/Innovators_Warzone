@@ -2,14 +2,12 @@ package main.java.commands;
 
 import main.java.arena.Game;
 import main.java.models.Continent;
-import main.java.models.Country;
 import main.java.models.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,7 +42,7 @@ class EditMapCommandTest {
     @Test
     void test_givenMapOfCanada_whenCommandExecuted_thenContinentAndCountriesLoaded() {
         String l_filename = "Canada";
-        d_systemUnderTest.baseParams = new String[]{l_filename};
+        d_systemUnderTest.d_baseParams = new String[]{l_filename};
 
         d_systemUnderTest.execute();
 

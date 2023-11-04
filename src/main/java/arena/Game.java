@@ -6,6 +6,8 @@ import main.java.models.Continent;
 import main.java.models.Country;
 import main.java.models.Map;
 import main.java.models.Player;
+import main.java.phases.Phase;
+import main.java.phases.Preload;
 import main.java.utils.CommandParser;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class Game {
      */
     private static Game d_sharedInstance = null;
 
+    private Phase d_gamePhase;
     /**
      * private list of all the players
      */
@@ -34,6 +37,11 @@ public class Game {
      * The current Map object in the game.
      */
     private Map d_map = null;
+
+    /**
+     * Global level boolean to terminate game
+     */
+    public static Boolean Is_Gameplay_On = true;
 
     /**
      * constructor being made private to prevent random instance creation, always use sharedInstance()
@@ -52,6 +60,13 @@ public class Game {
         }
 
         return d_sharedInstance;
+    }
+
+    /**
+     * @param d_gamePhase phase to shift the game to
+     */
+    public void setD_gamePhase(Phase d_gamePhase) {
+        this.d_gamePhase = d_gamePhase;
     }
 
     /**
@@ -180,7 +195,7 @@ public class Game {
                 getD_map().getD_countries().forEach(country -> d_players.get(0).receiveOwnershipForCountry(country));
                 System.out.println("[AssignCountries]: Single player defined. Assigning all the countries to: " + d_players.get(0).getD_name());
                 System.out.println("[AssignCountries]: Winner: " + d_players.get(0).getD_name());
-                WarzoneArena.endGamePlay();
+                Game.endGamePlay();
                 break;
 
             default:
@@ -219,31 +234,27 @@ public class Game {
     /**
      * We set up the game play over here with proper description being given to user
      */
-    public void setup() {
-        System.out.println("--- Game setup ---");
-        System.out.println("--- Enter commands to set up the map followed by 'commit' to begin game ---");
+    public void start() {
+        System.out.println("--- Game Starts ---");
         System.out.println("--- At any point, you can give a command  'quit' to exit the game ---");
         String l_nextCommand = "";
         CommandParser l_parser = new CommandParser();
+        setD_gamePhase(new Preload());
 
-        while (!(l_nextCommand.equals("commit") || l_nextCommand.equals("quit"))) {
-            Scanner commandReader = new Scanner(System.in);
-            l_nextCommand = commandReader.nextLine();
-            Command l_command = l_parser.parseCommandStatement(l_nextCommand);
-            if (l_command != null) {
-                l_command.execute();
-                if (l_command.command == BaseCommand.AssignCountries) {
-                    System.out.println("[Game] --- Ready for Issue Orders phase ---");
-                    break;
-                }
-            } else if (l_nextCommand.equals("commit")) {
-                System.out.println("[Game] --- Ready for next phase ---");
-            } else if (l_nextCommand.equals("quit")) {
-                System.out.println("[Game] --- Quitting game ---");
-                WarzoneArena.endGamePlay();
-            } else {
-                System.out.println("[Undefined] Following command could not be understood: " + l_nextCommand);
-            }
+        Scanner commandReader = new Scanner(System.in);
+        l_nextCommand = commandReader.nextLine();
+        Command l_command = l_parser.parseCommandStatement(l_nextCommand);
+        while (l_command.d_command != BaseCommand.Quit && Is_Gameplay_On) {
+            d_gamePhase.executeCommand(l_command);
+            l_command = l_parser.parseCommandStatement(commandReader.nextLine());
         }
+    }
+
+    /**
+     * Call to this method should be made when the game needs to be terminated
+     */
+    // To be called when a single player controls entire board
+    public static void endGamePlay() {
+        Is_Gameplay_On = false;
     }
 }
