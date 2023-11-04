@@ -14,7 +14,9 @@ public class LogWriter implements Observer{
      * constructor that ensures logs are cleared
      */
     public LogWriter() {
+
         clearLogs();
+
     }
 
     /**
@@ -59,9 +61,10 @@ public class LogWriter implements Observer{
             if (!directory.exists() || !directory.isDirectory()) {
                 directory.mkdirs();
             }
-            File l_File = new File("Logs/" + l_Filename + ".log");
-            if (l_File.exists()) {
-                l_File.delete();
+            File l_file = new File("Logs", l_Filename);
+            if (l_file.exists()) {
+
+                l_file.delete();
             }
         } catch (Exception ex) {
 
