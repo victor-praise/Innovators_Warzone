@@ -5,6 +5,7 @@ import main.java.models.Player;
 import main.java.orders.DeployOrder;
 
 /**
+ * Deploys a unit of army to a given country, reduces the available army units
  * @author kevin on 2023-10-03
  */
 public class DeployOrderCommand extends PlayerOrderCommand {

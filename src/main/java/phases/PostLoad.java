@@ -15,8 +15,10 @@ import java.util.Optional;
 public class PostLoad extends Edit {
 
     /**
-     * @param p_baseParams
-     * @param p_functionalities
+     * Loads a valid map if present in correct phase, otherwise displays invalid command message
+     *
+     * @param p_baseParams parameters for this command
+     * @param p_functionalities functionalities of this command
      */
     @Override
     public void loadMap(String[] p_baseParams, Functionality[] p_functionalities) {
@@ -24,8 +26,10 @@ public class PostLoad extends Edit {
     }
 
     /**
-     * @param p_baseParams
-     * @param p_functionalities
+     * Allows user to 'Add' or 'Remove' countries
+     *
+     * @param p_baseParams parameters for this command
+     * @param p_functionalities functionalities of this command
      */
     public void editCountry(String[] p_baseParams, Functionality[] p_functionalities) {
         if (p_functionalities == null || p_functionalities.length == 0) {
@@ -65,8 +69,10 @@ public class PostLoad extends Edit {
     }
 
     /**
-     * @param p_baseParams
-     * @param p_functionalities
+     * Allows user to 'Add' or 'Remove' continents
+     *
+     * @param p_baseParams parameters for this command
+     * @param p_functionalities functionalities of this command
      */
     @Override
     public void editContinent(String[] p_baseParams, Functionality[] p_functionalities) {
@@ -111,8 +117,10 @@ public class PostLoad extends Edit {
     }
 
     /**
-     * @param p_baseParams
-     * @param p_functionalities
+     * Allows user to 'Add' or 'Remove' neighbours
+     *
+     * @param p_baseParams parameters for this command
+     * @param p_functionalities functionalities of this command
      */
     @Override
     public void editNeighbour(String[] p_baseParams, Functionality[] p_functionalities) {
@@ -159,8 +167,10 @@ public class PostLoad extends Edit {
     }
 
     /**
-     * @param p_baseParams
-     * @param p_functionalities
+     * Save a map to a text file exactly as edited (using the “domination” game map format)
+     *
+     * @param p_baseParams parameters for this command
+     * @param p_functionalities functionalities of this command
      */
     public void saveMap(String[] p_baseParams, Functionality[] p_functionalities) {
         if (p_functionalities != null && p_functionalities.length != 0) {
@@ -202,14 +212,14 @@ public class PostLoad extends Edit {
     }
 
     /**
-     *
+     * Moves to next state based on state diagram
      */
     public void next() {
         System.out.println("must load map");
     }
 
     /**
-     *
+     * Displays invalid command message and prints the allowed commands
      */
     @Override
     public void printInvalidCommandMessage() {

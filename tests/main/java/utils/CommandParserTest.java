@@ -7,7 +7,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+
+import static main.java.arena.Game.sharedInstance;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * @author kevin on 2023-09-21
@@ -20,6 +24,8 @@ class CommandParserTest {
 
     @AfterEach
     void tearDown() {
+        sharedInstance().getD_map().setD_continents(new ArrayList<>());
+        sharedInstance().getD_map().setD_countries(new ArrayList<>());
     }
 
     /**
@@ -45,7 +51,6 @@ class CommandParserTest {
         String l_command = "customcommand -add Africa 3";
         CommandParser l_parser = new CommandParser();
         Command l_invalidCommand = l_parser.parseCommandStatement(l_command);
-        assert l_invalidCommand == null;
-        assertNull(l_invalidCommand);
+        assertEquals(BaseCommand.None, l_invalidCommand.d_command, "Expected None command but found: " + l_invalidCommand.d_command);
     }
 }

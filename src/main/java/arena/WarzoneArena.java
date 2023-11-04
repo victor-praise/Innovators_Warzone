@@ -10,11 +10,6 @@ package main.java.arena;
 public class WarzoneArena {
 
     /**
-     * Global level game object
-     */
-    private static Game d_Game;
-
-    /**
      * Main entry point of the game.
      *
      * @param args Any command line arguments separated by a space
@@ -28,7 +23,7 @@ public class WarzoneArena {
      * All the game setup parameters will go here
      */
     private static void startGame() {
-        d_Game = Game.sharedInstance();
+        Game d_Game = Game.sharedInstance();
         d_Game.start();
     }
 }

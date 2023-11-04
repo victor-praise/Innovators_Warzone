@@ -9,8 +9,10 @@ import main.java.commands.Functionality;
 public class Preload extends Edit {
 
     /**
-     * @param p_baseParams
-     * @param p_functionalities
+     * Loads a valid map if present in correct phase, otherwise displays invalid command message
+     *
+     * @param p_baseParams parameters for this command
+     * @param p_functionalities functionalities of this command
      */
     @Override
     public void loadMap(String[] p_baseParams, Functionality[] p_functionalities) {
@@ -20,8 +22,10 @@ public class Preload extends Edit {
     }
 
     /**
-     * @param p_baseParams
-     * @param p_functionalities
+     * Save a map to a text file exactly as edited (using the “domination” game map format)
+     *
+     * @param p_baseParams parameters for this command
+     * @param p_functionalities functionalities of this command
      */
     @Override
     public void saveMap(String[] p_baseParams, Functionality[] p_functionalities) {
@@ -29,14 +33,14 @@ public class Preload extends Edit {
     }
 
     /**
-     *
+     * Moves to next state based on state diagram
      */
     public void next() {
         System.out.println("[PreLoad]: must load map, currently in pre load phase");
     }
 
     /**
-     *
+     * Displays invalid command message and prints the allowed commands
      */
     @Override
     public void printInvalidCommandMessage() {
