@@ -10,12 +10,12 @@ public class Command implements ExecutableCommand {
     /**
      * primary instruction of the user input command
      */
-    public BaseCommand command;
+    public BaseCommand d_command;
 
     /**
      * parameters which immediately follow the command, e.g. filename for loadmap command
      */
-    public String[] baseParams;
+    public String[] d_baseParams;
 
     /**
      * a list of functionalities extracted from user input
