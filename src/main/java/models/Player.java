@@ -179,7 +179,20 @@ public class Player {
         Scanner inputReader = new Scanner(System.in);
         String l_nextOrder = inputReader.nextLine();
         Command l_command = OrderParser.parseOrderStatement(this, l_nextOrder);
-        l_command.execute();
+        if (l_command != null) {
+            l_command.execute();
+        } else {
+            System.out.println("Valid commands in state [Attack] are: ");
+            System.out.println("1. deploy countryID numarmies");
+            System.out.println("2. advance countrynamefrom countynameto numarmies");
+            System.out.println("3. bomb countryID");
+            System.out.println("4. blockade countryID");
+            System.out.println("5. airlift sourcecountryID targetcountryID numarmies");
+            System.out.println("6. negotiate playerID");
+            System.out.println("7. quit");
+            System.out.println(" --- ");
+
+        }
     }
 
     /**

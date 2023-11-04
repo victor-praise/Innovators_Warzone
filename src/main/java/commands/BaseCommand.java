@@ -64,6 +64,17 @@ public enum BaseCommand {
      * Issues a deploy order
      */
     DeployOrder("deploy"),
+
+    /**
+     * Issues a deploy order
+     */
+    Commit("commit"),
+
+    /**
+     * Issues a deploy order
+     */
+    Quit("quit"),
+
     /**
      * An invalid command string by user will correspond to this.
      */
