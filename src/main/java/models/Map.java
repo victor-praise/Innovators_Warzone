@@ -194,7 +194,7 @@ public class Map {
     // }
     public Boolean hasAdjacentContinent() throws MapInvalidException {
         for (Continent l_continent : d_continents) {
-            checkIfContinentHasCountry(l_continent);
+            continentHasCountry(l_continent);
             if (!hasAdjacentContinentConnection(l_continent)) {
                 return false;
             }
@@ -202,13 +202,19 @@ public class Map {
         return true;
     }
     
-    private void checkIfContinentHasCountry(Continent continent) throws MapInvalidException {
+    private void continentHasCountry(Continent continent) throws MapInvalidException {
         if (continent.getD_countries().isEmpty()) {
             throw new MapInvalidException("Each continent must have at least one country. No country found under: " + continent.getD_continentName());
         }
     }
     
-
+    /**
+     * Checks if all countries in a given continent are connected and reachable from each other
+     * 
+     * @param p_continent
+     * @return
+     * @throws MapInvalidException
+     */
     public Boolean hasAdjacentContinentConnection(Continent p_continent) throws MapInvalidException {
         HashMap<Integer, Boolean> l_countryReachabilityStatus = new HashMap<Integer, Boolean>();
 

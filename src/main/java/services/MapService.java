@@ -66,13 +66,24 @@ public class MapService {
      * @throws IOException triggered in case the file does not exist or the file name is invalid
      */
     public void editMap(String p_filePath) throws IOException {
-        if (!p_filePath.contains(".map")) {
+
+        if (!p_filePath.endsWith(".map")) {
             p_filePath = p_filePath.concat(".map");
         }
+    
         String l_filePath = getFilePath(p_filePath);
         File l_fileToBeEdited = new File(l_filePath);
+    
+        if (l_fileToBeEdited.exists()) {
+            loadMap(p_filePath);
+        }
+        // if (!p_filePath.contains(".map")) {
+        //     p_filePath = p_filePath.concat(".map");
+        // }
+        // String l_filePath = getFilePath(p_filePath);
+        // File l_fileToBeEdited = new File(l_filePath);
 
-        loadMap(l_fileToBeEdited.exists() ? p_filePath : null);
+        // loadMap(l_fileToBeEdited.exists() ? p_filePath : null);
     }
 
     /**
