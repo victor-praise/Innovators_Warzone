@@ -5,6 +5,7 @@ import main.java.models.Player;
 import main.java.utils.logger.LogEntryBuffer;
 
 /**
+ * In this phase, the player is requested to issue orders for game play
  * @author kevin on 2023-11-02
  */
 public class Attack extends MainPlay {
@@ -13,15 +14,18 @@ public class Attack extends MainPlay {
         attack();
     }
 
+
     /**
-     *
+     * Requests each player to issue commands in a round-robin fashion
      */
     @Override
     public void attack() {
         System.out.println("--- Attack / Issuing Orders phase ---");
+
         LogEntryBuffer.getInstance().log("==== Attack / Issuing Orders phase ====" + "\n\n\n");
+        boolean didQuitGame = false;
         boolean hasMoreOrders = true;
-        while (hasMoreOrders) {
+        while (hasMoreOrders && !didQuitGame) {
             hasMoreOrders = false;
             for (Player l_player: Game.sharedInstance().getD_players()) {
                 if (l_player.canIssueOrder()) {
@@ -29,15 +33,20 @@ public class Attack extends MainPlay {
                     System.out.println("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedArmyUnits() + " army units left to deploy");
                     l_player.issue_order();
                 }
+
+                if (!Game.Is_Gameplay_On) {
+                    System.out.println("Player ordered to end game");
+                    didQuitGame = true;
+                    break;
+                }
             }
         }
 
-        // change state before leaving
         next();
     }
 
     /**
-     *
+     * From Attack phase, move to Fortification phase
      */
     @Override
     public void next() {
@@ -47,7 +56,7 @@ public class Attack extends MainPlay {
     }
 
     /**
-     *
+     * Displays invalid command message and prints the allowed commands
      */
     @Override
     public void printInvalidCommandMessage() {
@@ -60,5 +69,13 @@ public class Attack extends MainPlay {
         System.out.println("5. airlift sourcecountryID targetcountryID numarmies");
         System.out.println("6. negotiate playerID");
         System.out.println(" --- ");
+    }
+
+    /**
+     * Moves the game to 'End' phase which terminates the game
+     */
+    @Override
+    public void endGame() {
+        Game.sharedInstance().setD_gamePhase(new End());
     }
 }

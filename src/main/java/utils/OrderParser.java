@@ -1,10 +1,6 @@
 package main.java.utils;
 
-import main.java.arena.Game;
-import main.java.commands.BaseCommand;
-import main.java.commands.Command;
-import main.java.commands.DeployOrderCommand;
-import main.java.commands.Functionality;
+import main.java.commands.*;
 import main.java.models.Player;
 
 /**
@@ -38,8 +34,7 @@ public class OrderParser {
                     break;
 
                 case Quit:
-                    Game.endGamePlay();
-                    l_command = new Command(BaseCommand.Quit, null, null);
+                    l_command = new QuitCommand();
                     break;
 
                 default:

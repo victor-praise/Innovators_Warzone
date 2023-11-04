@@ -16,7 +16,7 @@ public class Reinforcement extends MainPlay {
     }
 
     /**
-     *
+     * At the beginning of every turn a Player is given a number of reinforcement armies, calculated according to the Warzone rules.
      */
     @Override
     public void reinforce() {
@@ -30,7 +30,7 @@ public class Reinforcement extends MainPlay {
     }
 
     /**
-     *
+     * Moves to next state based on state diagram
      */
     @Override
     public void next() {

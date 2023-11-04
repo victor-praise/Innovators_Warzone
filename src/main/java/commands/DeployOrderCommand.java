@@ -6,6 +6,7 @@ import main.java.orders.DeployOrder;
 import main.java.utils.logger.LogEntryBuffer;
 
 /**
+ * Deploys a unit of army to a given country, reduces the available army units
  * @author kevin on 2023-10-03
  */
 public class DeployOrderCommand extends PlayerOrderCommand {

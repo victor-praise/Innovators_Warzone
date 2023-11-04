@@ -1,12 +1,15 @@
 package main.java.phases;
 
-import main.java.arena.Game;
 import main.java.commands.Functionality;
 
 /**
- * @author kevin on 2023-11-02
+ * @author kevin on 2023-11-04
  */
-public class PlaySetup extends Play {
+public class End extends Phase {
+
+    public End() {
+        endGame();
+    }
 
     /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
@@ -95,7 +98,6 @@ public class PlaySetup extends Play {
     public void saveMap(String[] p_baseParams, Functionality[] p_functionalities) {
         printInvalidCommandMessage();
     }
-
     /**
      * Allows user to 'Add' or 'Remove' players
      *
@@ -104,37 +106,7 @@ public class PlaySetup extends Play {
      */
     @Override
     public void gamePlayers(String[] p_baseParams, Functionality[] p_functionalities) {
-        if (p_functionalities == null || p_functionalities.length == 0) {
-            System.out.println("[GamePlayer]: No functionality provided. Expectation: '-add' or '-remove'");
-            return;
-        }
-        Functionality l_function = p_functionalities[0];
-        String l_playerName = null;
-        switch (l_function.functionality) {
-            case Add:
-                if (l_function.functionalityParams == null || l_function.functionalityParams.length < 1) {
-                    System.out.println("[GamePlayer]: Adding a player requires Player Name");
-                    System.out.println("[GamePlayer]: Adding a player failed");
-                    return;
-                }
-                l_playerName = l_function.functionalityParams[0];
-                if(Game.sharedInstance().addPlayer(l_playerName)) {
-                    System.out.println("[GamePlayer]: Adding a player successfull");
-                } else {
-                    System.out.println("[GamePlayer]: Adding a player failed");
-                }
-                break;
-            case Remove:
-                l_playerName = l_function.functionalityParams[0];
-                if(Game.sharedInstance().removePlayer(l_playerName)) {
-                    System.out.println("[GamePlayer]: Removing a player successfull");
-                } else {
-                    System.out.println("[GamePlayer]: Removing a player failed");
-                }
-                break;
-            default:
-                System.out.println("[EditContinent]: Functionality undefined. Expectation:  '-add' or '-remove'");
-        }
+        printInvalidCommandMessage();
     }
 
     /**
@@ -144,14 +116,7 @@ public class PlaySetup extends Play {
      */
     @Override
     public void assignCountries(String[] p_baseParams, Functionality[] p_functionalities) {
-        Game.sharedInstance().assignCountriesToPlayers();
-        if (!Game.sharedInstance().getD_players().isEmpty()) {
-            Game.sharedInstance().setD_gamePhase(new Reinforcement());
-            System.out.println("--- Moving to Reinforcement phase --- ");
-
-            // change state when all countries assigned
-            next();
-        }
+        printInvalidCommandMessage();
     }
 
     /**
@@ -178,23 +143,25 @@ public class PlaySetup extends Play {
         printInvalidCommandMessage();
     }
 
+    @Override
+    public void endGame() {
+        System.out.println("Game terminated");
+        System.exit(0);
+    }
+
     /**
      * Move to the next phase based on the State Pattern designed for this game
      */
     @Override
     public void next() {
-        Game.sharedInstance().setD_gamePhase(new Reinforcement());
+        endGame();
     }
 
     /**
-     * Displays invalid command message and prints the allowed commands in this Phase
+     * quit the game
      */
     @Override
-    public void printInvalidCommandMessage() {
-        super.printInvalidCommandMessage();
-        System.out.println("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
-        System.out.println("1. gameplayer [-add playername] [-remove playername]");
-        System.out.println("2. assigncountries");
-        System.out.println(" --- ");
+    public void quit() {
+        endGame();
     }
 }

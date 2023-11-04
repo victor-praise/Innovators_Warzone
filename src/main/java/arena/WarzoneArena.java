@@ -22,6 +22,7 @@ public class WarzoneArena {
      */
     private static LogEntryBuffer d_Logger;
     /**
+
      * Main entry point of the game.
      *
      * @param args Any command line arguments separated by a space
@@ -35,9 +36,11 @@ public class WarzoneArena {
      * All the game setup parameters will go here
      */
     private static void startGame() {
+
         d_Game = Game.sharedInstance();
         d_Logger = LogEntryBuffer.getInstance();
         d_Logger.addObserver(new LogWriter());
+
         d_Game.start();
     }
 }
