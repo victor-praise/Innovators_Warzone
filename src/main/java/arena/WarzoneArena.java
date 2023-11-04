@@ -2,6 +2,8 @@ package main.java.arena;
 
 import main.java.models.Player;
 import main.java.orders.Order;
+import main.java.utils.logger.LogEntryBuffer;
+import main.java.utils.logger.LogWriter;
 
 /**
  * A tactical game-play where the player objective is to capture as much territory as possible.
@@ -22,6 +24,11 @@ public class WarzoneArena {
      * Global level game object
      */
     private static Game d_Game;
+
+    /**
+     * Global level Logger (Observable)
+     */
+    private static LogEntryBuffer d_Logger;
 
     /**
      * Global value for defining default reinforcement for each turn in the game
@@ -105,6 +112,8 @@ public class WarzoneArena {
      */
     private static void setupGame() {
         d_Game = Game.sharedInstance();
+        d_Logger = LogEntryBuffer.getInstance();
+        d_Logger.addObserver(new LogWriter());
         d_Game.setup();
     }
 }
