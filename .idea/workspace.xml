@@ -8,8 +8,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de8cebc6-ebf1-495e-a616-20e9d2b1e9a6" name="Changes" comment="Country class and functions added">
-      <change beforePath="$PROJECT_DIR$/src/main/java/phases/Attack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/phases/Attack.java" afterDir="false" />
+    <list default="true" id="de8cebc6-ebf1-495e-a616-20e9d2b1e9a6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +151,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="938d9b87-7aa9-4e2c-b5c5-93cb82f47297" name="Changes" comment="" />
+      <changelist id="de8cebc6-ebf1-495e-a616-20e9d2b1e9a6" name="Changes" comment="" />
       <created>1695627567777</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
