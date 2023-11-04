@@ -410,16 +410,16 @@ public class Map {
 //        }
 //        return null;
 //    }
-     public Country getCountry(String p_countryName) {
-         if (d_countries != null) {
-             for (Country country : d_countries) {
-                 if (country.getD_countryName().equalsIgnoreCase(p_countryName)) {
-                     return country;
-                 }
-             }
-         }
-         return null;
-     }
+    public Country getCountry(String p_countryName) {
+        if (d_countries != null) {
+            for (Country country : d_countries) {
+                if (country.getD_countryName().equalsIgnoreCase(p_countryName)) {
+                    return country;
+                }
+            }
+        }
+        return null;
+    }
 
     /**
      * returns the country for a given country id.
