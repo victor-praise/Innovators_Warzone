@@ -79,24 +79,40 @@ public class MapService {
      * Method is responsible for saving a map
      * @param p_fileName file name for map to be saved as
      * @throws IOException when file could not be written
+     * @throws MapInvalidException If the map is invalid.
      */
     public void saveMap(String p_fileName) throws IOException, MapInvalidException {
+
         if(Game.sharedInstance().getD_map() != null ){
             Map l_currentMap = Game.sharedInstance().getD_map();
-
-            if(l_currentMap.validate()){
-                Files.deleteIfExists(Paths.get(getFilePath(p_fileName)));
-                FileWriter l_fileWriter = new FileWriter(getFilePath(p_fileName));
+        
+            if (l_currentMap != null && l_currentMap.validate()) {
+                String filePath = getFilePath(p_fileName);
+                Files.deleteIfExists(Paths.get(filePath));
+                FileWriter l_fileWriter = new FileWriter(filePath);
                 l_fileWriter.write("; map: " + p_fileName + System.lineSeparator());
                 new MapSaver().saveMapToFile(l_fileWriter);
                 l_fileWriter.close();
+            } else {
+                System.out.println("Map cannot be saved");
             }
+        } 
+        // if(Game.sharedInstance().getD_map() != null ){
+        //     Map l_currentMap = Game.sharedInstance().getD_map();
+
+        //     if(l_currentMap.validate()){
+        //         Files.deleteIfExists(Paths.get(getFilePath(p_fileName)));
+        //         FileWriter l_fileWriter = new FileWriter(getFilePath(p_fileName));
+        //         l_fileWriter.write("; map: " + p_fileName + System.lineSeparator());
+        //         new MapSaver().saveMapToFile(l_fileWriter);
+        //         l_fileWriter.close();
+        //     }
 
 
-        }
-        else{
-            System.out.println("Map cannot be saved");
-        }
+        // }
+        // else{
+        //     System.out.println("Map cannot be saved");
+        // }
     }
     /**
      * Generates absolute file path from the given map file.
