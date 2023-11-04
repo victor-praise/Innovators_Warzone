@@ -4,6 +4,7 @@ import main.java.arena.Game;
 import main.java.commands.Functionality;
 import main.java.exceptions.MapInvalidException;
 import main.java.services.MapService;
+import main.java.utils.logger.LogEntryBuffer;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 /**
  * @author kevin on 2023-10-31
+ * @author victor
  */
 public class PostLoad extends Edit {
 
@@ -76,8 +78,11 @@ public class PostLoad extends Edit {
      */
     @Override
     public void editContinent(String[] p_baseParams, Functionality[] p_functionalities) {
+        String l_message;
         if (p_functionalities == null || p_functionalities.length == 0) {
-            System.out.println("[EditContinent]: No functionality provided. Expectation: '-add' or '-remove'");
+            l_message = "[EditContinent]: No functionality provided. Expectation: '-add' or '-remove'";
+            System.out.println(l_message);
+            LogEntryBuffer.getInstance().log(l_message);
             return;
         }
         Functionality l_function = p_functionalities[0];
@@ -85,29 +90,40 @@ public class PostLoad extends Edit {
         switch (l_function.functionality) {
             case Add:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 2) {
+
                     System.out.println("[EditContinent]: Adding a continent requires 2 parameters\n[1] Continent Name\n[2] Bonus Points");
                     System.out.println("[EditContinent]: Adding a continent failed");
+                    LogEntryBuffer.getInstance().log("[EditContinent]: Adding a continent failed");
                     return;
                 }
                 try {
                     String l_continentName = l_function.functionalityParams[0];
                     int l_bonusValue = Integer.parseInt(l_function.functionalityParams[1]);
                     Game.sharedInstance().getD_map().addContinent(l_continentName, l_bonusValue);
+                    l_message = "Continent " + l_continentName + " with bonus value " +l_bonusValue + " has been successfully added";
+                    LogEntryBuffer.getInstance().log(l_message);
                 } catch (NumberFormatException nfe) {
-                    System.out.println("[EditContinent]: Invalid format: bonus points must be an integer, found: [ " + l_function.functionalityParams[1] +" ]");
+                    l_message = "[EditContinent]: Invalid format: bonus points must be an integer, found: [ " + l_function.functionalityParams[1] +" ]";
+                    System.out.println(l_message);
+                    LogEntryBuffer.getInstance().log(l_message);
                 }
                 break;
             case Remove:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 1) {
                     System.out.println("[EditContinent]: Removing a continent requires 1 parameters\n[1] Continent Name");
                     System.out.println("[EditContinent]: Removing a continent failed");
+                    LogEntryBuffer.getInstance().log("[EditContinent]: Removing a continent failed");
                     return;
                 }
                 String l_continentName = l_function.functionalityParams[0];
                 if (Game.sharedInstance().getD_map().removeContinent(l_continentName)) {
-                    System.out.println("[EditContinent]: Removed continent with name: " + l_continentName);
+                    l_message = "[EditContinent]: Removed continent with name: " + l_continentName;
+                    System.out.println(l_message);
+                    LogEntryBuffer.getInstance().log(l_message);
                 } else {
-                    System.out.println("[EditContinent]: Removing a continent failed");
+                    l_message = "[EditContinent]: Removing a continent failed";
+                    System.out.println(l_message);
+                    LogEntryBuffer.getInstance().log(l_message);
                 }
                 break;
 

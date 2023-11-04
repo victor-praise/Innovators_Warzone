@@ -2,6 +2,7 @@ package main.java.phases;
 
 import main.java.arena.Game;
 import main.java.models.Player;
+import main.java.utils.logger.LogEntryBuffer;
 
 /**
  * In this phase, the player is requested to issue orders for game play
@@ -20,6 +21,8 @@ public class Attack extends MainPlay {
     @Override
     public void attack() {
         System.out.println("--- Attack / Issuing Orders phase ---");
+
+        LogEntryBuffer.getInstance().log("==== Attack / Issuing Orders phase ====" + "\n\n\n");
         boolean didQuitGame = false;
         boolean hasMoreOrders = true;
         while (hasMoreOrders && !didQuitGame) {
@@ -49,6 +52,7 @@ public class Attack extends MainPlay {
     public void next() {
         Game.sharedInstance().setD_gamePhase(new Fortification());
         System.out.println("--- Moving to Fortification phase --- ");
+        LogEntryBuffer.getInstance().log("--- Moving to Fortification phase ---" + "\n");
     }
 
     /**
