@@ -10,6 +10,10 @@ import main.java.utils.logger.LogEntryBuffer;
  */
 public class Fortification extends MainPlay {
 
+    Fortification() {
+        fortify();
+    }
+
     /**
      *
      */

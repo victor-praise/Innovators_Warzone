@@ -23,6 +23,11 @@ public class Reinforcement extends MainPlay {
         for (Player player: Game.sharedInstance().getD_players()) {
             // TODO: Check for ownership of continents, which should be added to DEFAULT_REINFORCEMENT
             player.setD_assignedArmyUnits(Constants.DEFAULT_REINFORCEMENT);
+
+            // Add a random card if the player has conquered any country in previous turn
+            if (player.isConqueror()) {
+                player.assignRandomCard();
+            }
         }
 
         // change state before leaving

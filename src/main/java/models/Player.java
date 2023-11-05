@@ -4,9 +4,7 @@ import main.java.commands.Command;
 import main.java.orders.Order;
 import main.java.utils.OrderParser;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * This class is responsible for the addition and removal of players.
@@ -25,6 +23,10 @@ public class Player {
     private int d_assignedArmyUnits = 0;
 
     private List<Order> d_ordersList = new ArrayList<>();
+
+    private List<SpecialCard> specialCards = new ArrayList<SpecialCard>(0);
+
+    private boolean isConqueror = false;
 
     public Player() {
         d_ownedCountries = new ArrayList<>();
@@ -86,6 +88,70 @@ public class Player {
     public void setD_assignedArmyUnits(int d_assignedArmyUnits) {
         System.out.println(getD_name() + " has been assigned " + d_assignedArmyUnits + " reinforcements");
         this.d_assignedArmyUnits = d_assignedArmyUnits;
+    }
+
+    /**
+     * identifies whether this player is Conqueror for this turn
+     * @return true if the player conquered at least one Country in their turn
+     */
+    public boolean isConqueror() {
+        return isConqueror;
+    }
+
+    /**
+     * set 'Conqueror' flag for this player in this turn
+     * @param p_conqueror conqueror flag value
+     */
+    public void setConqueror(boolean p_conqueror) {
+        isConqueror = p_conqueror;
+    }
+
+    /**
+     * Fetch all the owned Special cards
+     * @return list of cards owned by this player
+     */
+    public List<SpecialCard> getSpecialCards() {
+        return specialCards;
+    }
+
+    /**
+     * Adds a special card to this player's list
+     * @param p_specialCard Card to be added to player's cards list
+     */
+    public void addSpecialCards(SpecialCard p_specialCard) {
+        System.out.println(this.getD_name() + " : has been assigned a card: " + p_specialCard);
+        this.specialCards.add(p_specialCard);
+    }
+
+    /**
+     * Identifies if this player has a special card of a given type
+     * @param p_cardType type of special card to check
+     * @return true if the player has this special card, false otherwise
+     */
+    public boolean hasSpecialCardOfType(String p_cardType) {
+        SpecialCard specialCard = SpecialCard.from(p_cardType);
+        if (specialCard != null) {
+            return this.hasSpecialCard(specialCard);
+        }
+        return false;
+    }
+
+    /**
+     * Identifies whether the player has special card of this type
+     * @param p_card special card to check
+     * @return true if the player has the special card, false otherwise
+     */
+    public boolean hasSpecialCard(SpecialCard p_card) {
+        return this.specialCards.contains(p_card);
+    }
+
+    /**
+     * Removes first occurrence of
+     * @param p_specialCard card to remove
+     * @return true if a special card is removed successfully, false otherwise
+     */
+    public boolean removeSpecialCard(SpecialCard p_specialCard) {
+        return this.specialCards.remove(p_specialCard);
     }
 
     /**
@@ -203,4 +269,19 @@ public class Player {
     public boolean canIssueOrder() {
         return getD_assignedArmyUnits() > 0;
     }
+
+
+    /**
+     * Randomly assigns a special card to the player
+     */
+    public void assignRandomCard() {
+        Object[] cards = SpecialCard.validValues();
+        Random randomNum = new Random();
+        int randomCardIndex = randomNum.nextInt(cards.length);
+        addSpecialCards((SpecialCard) cards[randomCardIndex]);
+
+        // Once a card has been assigned, mark conqueror as false to avoid adding multiple cards by mistake
+        setConqueror(false);
+    }
+
 }
