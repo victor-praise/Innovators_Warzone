@@ -2,9 +2,9 @@ name: Warzone-game Maven Build & Publish Artifact
 
 on:
   push:
-    branches: [ "feature/test-cases-added-to-jenkins" ]
+    branches: [ "develop" ]
   pull_request:
-    branches: [ "feature/test-cases-added-to-jenkins" ]
+    branches: [ "develop" ]
 
 jobs:
   build_test:
