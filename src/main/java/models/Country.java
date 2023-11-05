@@ -159,6 +159,14 @@ public class Country {
     }
 
     /**
+     * Check if country B is a neighbour to Country A (Current Country object)
+     * @param p_destCountry country to be checked as neighbour
+     */
+    public boolean hasAdjacentCountry(Country p_destCountry) {
+        return getD_neighbors().contains(p_destCountry.getD_countryID());
+    }
+
+    /**
      * Describes the Country - name and id of neighbours
      * @return String description of country
      */
