@@ -6,6 +6,7 @@ import main.java.utils.logger.LogEntryBuffer;
 
 /**
  * In this phase, the player is requested to issue orders for game play
+ *
  * @author kevin on 2023-11-02
  */
 public class Attack extends MainPlay {
@@ -27,7 +28,7 @@ public class Attack extends MainPlay {
         boolean hasMoreOrders = true;
         while (hasMoreOrders && !didQuitGame) {
             hasMoreOrders = false;
-            for (Player l_player: Game.sharedInstance().getD_players()) {
+            for (Player l_player : Game.sharedInstance().getD_players()) {
                 if (l_player.canIssueOrder()) {
                     hasMoreOrders = true;
                     System.out.println("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedArmyUnits() + " army units left to deploy");

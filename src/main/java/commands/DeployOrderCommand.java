@@ -7,6 +7,7 @@ import main.java.utils.logger.LogEntryBuffer;
 
 /**
  * Deploys a unit of army to a given country, reduces the available army units
+ *
  * @author kevin on 2023-10-03
  */
 public class DeployOrderCommand extends PlayerOrderCommand {
@@ -14,7 +15,7 @@ public class DeployOrderCommand extends PlayerOrderCommand {
     /**
      * Creates a command to deploy order issued by a player
      *
-     * @param p_player player who issued the order
+     * @param p_player   player who issued the order
      * @param baseParams parameters supplied when issuing deploy order
      */
     public DeployOrderCommand(Player p_player, String[] baseParams) {

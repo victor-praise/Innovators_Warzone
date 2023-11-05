@@ -11,7 +11,7 @@ public abstract class Play extends Phase {
     /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -22,7 +22,7 @@ public abstract class Play extends Phase {
     /**
      * Display the current list of continents countries and neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -33,7 +33,7 @@ public abstract class Play extends Phase {
     /**
      * Validates the current map
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -44,7 +44,7 @@ public abstract class Play extends Phase {
     /**
      * Allows user to 'Add' or 'Remove' continents
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -55,7 +55,7 @@ public abstract class Play extends Phase {
     /**
      * Allows user to 'Add' or 'Remove' countries
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -66,7 +66,7 @@ public abstract class Play extends Phase {
     /**
      * Allows user to 'Add' or 'Remove' neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -77,7 +77,7 @@ public abstract class Play extends Phase {
     /**
      * Load a map from an existing “domination” map file, or create a new map from scratch if the file does not exist
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -88,7 +88,7 @@ public abstract class Play extends Phase {
     /**
      * Save a map to a text file exactly as edited (using the “domination” game map format)
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -99,7 +99,7 @@ public abstract class Play extends Phase {
     /**
      * Allows user to 'Add' or 'Remove' players
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -109,7 +109,8 @@ public abstract class Play extends Phase {
 
     /**
      * Randomly assigns all the countries to different players
-     * @param p_baseParams parameters for this command
+     *
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override

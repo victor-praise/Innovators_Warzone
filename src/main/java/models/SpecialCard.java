@@ -64,6 +64,6 @@ public enum SpecialCard {
     public static Object[] validValues() {
         List<SpecialCard> allValues = new ArrayList<SpecialCard>(Arrays.asList(values()));
         allValues.remove(SpecialCard.None);
-        return  allValues.toArray();
+        return allValues.toArray();
     }
 }

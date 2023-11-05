@@ -11,7 +11,7 @@ public class PlaySetup extends Play {
     /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -22,7 +22,7 @@ public class PlaySetup extends Play {
     /**
      * Display the current list of continents countries and neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -33,7 +33,7 @@ public class PlaySetup extends Play {
     /**
      * Validates the current map
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -44,7 +44,7 @@ public class PlaySetup extends Play {
     /**
      * Allows user to 'Add' or 'Remove' continents
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -55,7 +55,7 @@ public class PlaySetup extends Play {
     /**
      * Allows user to 'Add' or 'Remove' countries
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -66,7 +66,7 @@ public class PlaySetup extends Play {
     /**
      * Allows user to 'Add' or 'Remove' neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -77,7 +77,7 @@ public class PlaySetup extends Play {
     /**
      * Load a map from an existing “domination” map file, or create a new map from scratch if the file does not exist
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -88,7 +88,7 @@ public class PlaySetup extends Play {
     /**
      * Save a map to a text file exactly as edited (using the “domination” game map format)
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -99,7 +99,7 @@ public class PlaySetup extends Play {
     /**
      * Allows user to 'Add' or 'Remove' players
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -118,7 +118,7 @@ public class PlaySetup extends Play {
                     return;
                 }
                 l_playerName = l_function.functionalityParams[0];
-                if(Game.sharedInstance().addPlayer(l_playerName)) {
+                if (Game.sharedInstance().addPlayer(l_playerName)) {
                     System.out.println("[GamePlayer]: Adding a player successfull");
                 } else {
                     System.out.println("[GamePlayer]: Adding a player failed");
@@ -126,7 +126,7 @@ public class PlaySetup extends Play {
                 break;
             case Remove:
                 l_playerName = l_function.functionalityParams[0];
-                if(Game.sharedInstance().removePlayer(l_playerName)) {
+                if (Game.sharedInstance().removePlayer(l_playerName)) {
                     System.out.println("[GamePlayer]: Removing a player successfull");
                 } else {
                     System.out.println("[GamePlayer]: Removing a player failed");
@@ -139,7 +139,8 @@ public class PlaySetup extends Play {
 
     /**
      * Randomly assigns all the countries to different players
-     * @param p_baseParams parameters for this command
+     *
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override

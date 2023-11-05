@@ -19,7 +19,7 @@ public class PostLoad extends Edit {
     /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -30,7 +30,7 @@ public class PostLoad extends Edit {
     /**
      * Allows user to 'Add' or 'Remove' countries
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     public void editCountry(String[] p_baseParams, Functionality[] p_functionalities) {
@@ -73,7 +73,7 @@ public class PostLoad extends Edit {
     /**
      * Allows user to 'Add' or 'Remove' continents
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -100,10 +100,10 @@ public class PostLoad extends Edit {
                     String l_continentName = l_function.functionalityParams[0];
                     int l_bonusValue = Integer.parseInt(l_function.functionalityParams[1]);
                     Game.sharedInstance().getD_map().addContinent(l_continentName, l_bonusValue);
-                    l_message = "Continent " + l_continentName + " with bonus value " +l_bonusValue + " has been successfully added";
+                    l_message = "Continent " + l_continentName + " with bonus value " + l_bonusValue + " has been successfully added";
                     LogEntryBuffer.getInstance().log(l_message);
                 } catch (NumberFormatException nfe) {
-                    l_message = "[EditContinent]: Invalid format: bonus points must be an integer, found: [ " + l_function.functionalityParams[1] +" ]";
+                    l_message = "[EditContinent]: Invalid format: bonus points must be an integer, found: [ " + l_function.functionalityParams[1] + " ]";
                     System.out.println(l_message);
                     LogEntryBuffer.getInstance().log(l_message);
                 }
@@ -135,7 +135,7 @@ public class PostLoad extends Edit {
     /**
      * Allows user to 'Add' or 'Remove' neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -185,7 +185,7 @@ public class PostLoad extends Edit {
     /**
      * Save a map to a text file exactly as edited (using the “domination” game map format)
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     public void saveMap(String[] p_baseParams, Functionality[] p_functionalities) {

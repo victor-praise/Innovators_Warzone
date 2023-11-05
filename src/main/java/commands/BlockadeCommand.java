@@ -13,8 +13,8 @@ public class BlockadeCommand extends PlayerOrderCommand {
     /**
      * Creates a new Command object to blockade current player's one territory and mark it as NEUTRAL
      *
-     * @param p_player        player who issued the order
-     * @param baseParams      represents any parameter to the baseCommand
+     * @param p_player   player who issued the order
+     * @param baseParams represents any parameter to the baseCommand
      */
     public BlockadeCommand(Player p_player, String[] baseParams) {
         super(p_player, BaseCommand.Blockade, baseParams, null);

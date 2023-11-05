@@ -2,18 +2,19 @@ package main.java.commands;
 
 import main.java.arena.Game;
 import main.java.models.Country;
+import main.java.models.Map;
 import main.java.models.Player;
 import main.java.orders.AdvanceOrder;
 import main.java.utils.logger.LogEntryBuffer;
-import main.java.models.Map;
 
 /**
  * Advances certain number of army units from source owned country to a target country which may or may not be owned by another player.
+ *
  * @author sadiqali
  */
-public class AdvanceCommand extends PlayerOrderCommand{
+public class AdvanceCommand extends PlayerOrderCommand {
     /**
-     * @param p_Player player who issued the order
+     * @param p_Player   player who issued the order
      * @param baseParams parameters given when issuing the order
      */
 
@@ -32,23 +33,23 @@ public class AdvanceCommand extends PlayerOrderCommand{
         }
 
         try {
-            String l_countryName = d_baseParams[0];
+            String l_sourceCountry = d_baseParams[0];
             String l_destinationCountry = d_baseParams[1];
             int l_armyUnits = Integer.parseInt(d_baseParams[2]);
             Map map = Game.sharedInstance().getD_map();
-            Country l_ownedSourceCountry = this.d_issuingPlayer.getOwnedCountryWithName((l_countryName));
+            Country l_ownedSourceCountry = this.d_issuingPlayer.getOwnedCountryWithName((l_sourceCountry));
             Country l_targetDestinationCountry = map.getCountry(l_destinationCountry);
 
             // check ownership of country
-            if(l_ownedSourceCountry == null) {
-                l_message = "[AdvanceOrder]: " +d_issuingPlayer.getD_name() + " does not have ownership over country " +l_ownedSourceCountry;
+            if (l_ownedSourceCountry == null) {
+                l_message = "[AdvanceOrder]: " + d_issuingPlayer.getD_name() + " does not have ownership over country " + l_ownedSourceCountry;
                 LogEntryBuffer.getInstance().log(l_message);
                 System.out.println(l_message);
                 return;
             }
 
             // check number of units to advance
-            if (l_armyUnits < l_ownedSourceCountry.getD_noOfArmies() ) {
+            if (l_armyUnits < l_ownedSourceCountry.getD_noOfArmies()) {
                 l_message = "[AdvanceOrder]: " + l_ownedSourceCountry.getD_countryName() + " has only " + l_ownedSourceCountry.getD_noOfArmies() + " units of army left. Cannot advance more than " + l_ownedSourceCountry.getD_noOfArmies() + " army units.";
                 System.out.println(l_message);
                 LogEntryBuffer.getInstance().log(l_message);
@@ -57,9 +58,7 @@ public class AdvanceCommand extends PlayerOrderCommand{
 
             // check if source and destination countries are adjacent
             if(!l_ownedSourceCountry.hasAdjacentCountry(l_targetDestinationCountry)) {
-
                 l_message = "[AdvanceCommand]: Countries " + l_ownedSourceCountry + " and " + l_destinationCountry + " are not neighbours.";
-
                 System.out.println(l_message);
                 LogEntryBuffer.getInstance().log(l_message);
             }

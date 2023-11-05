@@ -22,7 +22,6 @@ public class AdvanceOrder implements Order {
      */
     @Override
     public void execute() {
-    
-        // Advance army units based on ownership rules (60-70)
+
     }
 }

@@ -13,7 +13,7 @@ public class Preload extends Edit {
     /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -27,7 +27,7 @@ public class Preload extends Edit {
     /**
      * Save a map to a text file exactly as edited (using the “domination” game map format)
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override

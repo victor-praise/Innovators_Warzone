@@ -20,7 +20,7 @@ public class Reinforcement extends MainPlay {
      */
     @Override
     public void reinforce() {
-        for (Player player: Game.sharedInstance().getD_players()) {
+        for (Player player : Game.sharedInstance().getD_players()) {
             // TODO: Check for ownership of continents, which should be added to DEFAULT_REINFORCEMENT
             player.setD_assignedArmyUnits(Constants.DEFAULT_REINFORCEMENT);
 

@@ -5,6 +5,7 @@ import main.java.utils.logger.LogEntryBuffer;
 
 /**
  * Triple the number of armies on one of the current player’s territories and make it a neutral territory
+ *
  * @author kevin on 2023-11-04
  */
 public class BlockadeOrder implements Order {

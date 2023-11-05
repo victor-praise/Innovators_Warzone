@@ -23,6 +23,8 @@ public class Country {
 
     private boolean d_isNeutralTerritory = false;
 
+    private Player d_ownedBy;
+
     /**
      * constructor of this class.
      *
@@ -138,10 +140,32 @@ public class Country {
 
     /**
      * Set the isNeutral flag for a country
-     * @param d_isNeutralTerritory value to set
+     * @param p_isNeutralTerritory value to set
      */
-    public void setD_isNeutralTerritory(boolean d_isNeutralTerritory) {
-        this.d_isNeutralTerritory = d_isNeutralTerritory;
+    public void setD_isNeutralTerritory(boolean p_isNeutralTerritory) {
+        if (p_isNeutralTerritory) {
+            this.d_ownedBy = null;
+        }
+        this.d_isNeutralTerritory = p_isNeutralTerritory;
+    }
+
+    /**
+     * get the player who owns this country
+     * @return player who owns this country, null if it's neutral territory
+     */
+    public Player getD_ownedBy() {
+        if (this.d_isNeutralTerritory) {
+            return null;
+        }
+        return d_ownedBy;
+    }
+
+    /**
+     * sets the owner of this country
+     * @param d_ownedBy player who should own this country
+     */
+    public void setD_ownedBy(Player d_ownedBy) {
+        this.d_ownedBy = d_ownedBy;
     }
 
     /**

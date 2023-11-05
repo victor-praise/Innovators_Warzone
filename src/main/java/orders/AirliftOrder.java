@@ -5,6 +5,7 @@ import main.java.utils.logger.LogEntryBuffer;
 
 /**
  * Advance some armies from one of the current player’s territories to any another territory
+ *
  * @author kevin on 2023-11-04
  */
 public class AirliftOrder implements Order {
@@ -14,9 +15,9 @@ public class AirliftOrder implements Order {
     int d_numberOfArmies;
 
     public AirliftOrder(Country p_sourceCountry, Country p_targetCountry, int p_numOfArmies) {
-          this.d_sourceCountry = p_sourceCountry;
-          this.d_targetCountry = p_targetCountry;
-          this.d_numberOfArmies = p_numOfArmies;
+        this.d_sourceCountry = p_sourceCountry;
+        this.d_targetCountry = p_targetCountry;
+        this.d_numberOfArmies = p_numOfArmies;
     }
 
     /**
