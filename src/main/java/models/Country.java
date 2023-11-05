@@ -21,6 +21,8 @@ public class Country {
 
     private List<Integer> d_neighbors;
 
+    private boolean d_isNeutralTerritory = false;
+
     /**
      * constructor of this class.
      *
@@ -127,6 +129,22 @@ public class Country {
     }
 
     /**
+     * Determines if a country is neutral
+     * @return true if the country is neutral, false otherwise
+     */
+    public boolean isD_isNeutralTerritory() {
+        return d_isNeutralTerritory;
+    }
+
+    /**
+     * Set the isNeutral flag for a country
+     * @param d_isNeutralTerritory value to set
+     */
+    public void setD_isNeutralTerritory(boolean d_isNeutralTerritory) {
+        this.d_isNeutralTerritory = d_isNeutralTerritory;
+    }
+
+    /**
      * Adds a neighbour to the list
      * @param p_countryID country ID
      */
@@ -156,6 +174,18 @@ public class Country {
      */
     public void addArmyUnits(int p_units) {
         this.d_noOfArmies += p_units;
+    }
+
+    /**
+     * Reduces a given number of army units to this country
+     *
+     * @param p_units units of army to reduce
+     */
+    public void reduceArmyUnits(int p_units) {
+        this.d_noOfArmies -= p_units;
+        if (this.d_noOfArmies < 0) {
+            this.d_noOfArmies = 0;
+        }
     }
 
     /**

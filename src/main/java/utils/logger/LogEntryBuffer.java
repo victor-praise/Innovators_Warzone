@@ -36,6 +36,7 @@ public class LogEntryBuffer implements Observable{
      * @param p_message The message to be notified
      */
     public void log(String p_message) {
+        System.out.println(p_message);
         notifyObservers(p_message);
     }
 
