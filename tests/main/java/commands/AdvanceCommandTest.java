@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
 
@@ -34,9 +35,11 @@ public class AdvanceCommandTest{
         Continent l_asia = new Continent("Asia", 5);
         Country l_country1 = new Country(1, "India", 1);
         l_country1.setD_noOfArmies(5);
+        l_country1.resetD_availableArmyUnits();
         l_asia.addCountry(l_country1);
         Country l_country2 = new Country(2, "China", 1);
         l_country2.addArmyUnits(3);
+        l_country2.resetD_availableArmyUnits();
         l_asia.addCountry(l_country2);
         l_country1.addNeighbour(l_country2.getD_countryID());
         l_country2.addNeighbour(l_country1.getD_countryID());
@@ -49,7 +52,6 @@ public class AdvanceCommandTest{
      *
      * When Trying to advance more units than available in country, order should fail
      */
-
     @Test
     void test_currentArmies_ifAttemptToAdvanceMoreThanCurrentCount_thenFails() {
         Player l_testPlayer1 = new Player("Player 1");
@@ -61,6 +63,26 @@ public class AdvanceCommandTest{
 
         d_systemUnderTest.execute();
         Order nextOrder = l_testPlayer1.nextorder();
-        assertNotNull(nextOrder, "Order should have been received");
+        assertNull(nextOrder, "Order should not have been accepted");
     }
+
+    /**
+     * Checks if the advance order was issued when the command is correct
+     *
+     * When Trying to advance some units less than available in country, order should pass
+     */
+    @Test
+    void test_givenAValidCommand_whenExecuted_thenAddedToPlayersOrderList() {
+        Player l_testPlayer1 = new Player("Player 1");
+
+        Game.sharedInstance().setD_players(List.of(l_testPlayer1));
+        l_testPlayer1.setD_ownedCountries(Game.sharedInstance().getD_map().getD_countries());
+
+        d_systemUnderTest = new AdvanceCommand(l_testPlayer1, new String[]{"India", "China", "3"});
+
+        d_systemUnderTest.execute();
+        Order nextOrder = l_testPlayer1.nextorder();
+        assertNotNull(nextOrder, "Order should not have been accepted");
+    }
+
 }

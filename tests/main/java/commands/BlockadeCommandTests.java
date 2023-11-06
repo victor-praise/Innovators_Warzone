@@ -4,6 +4,7 @@ import main.java.arena.Game;
 import main.java.models.Continent;
 import main.java.models.Country;
 import main.java.models.Player;
+import main.java.models.SpecialCard;
 import main.java.orders.Order;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -85,6 +86,7 @@ public class BlockadeCommandTests {
         //Given
         List<Country> l_allCountries = Game.sharedInstance().getD_map().getD_countries();
         d_orderIssuingPlayer.setD_ownedCountries(l_allCountries);
+        d_orderIssuingPlayer.addSpecialCards(SpecialCard.Blockade);
         String[] l_baseParams = new String[]{"India"};
         d_systemUnderTest = new BlockadeCommand(d_orderIssuingPlayer, l_baseParams);
 
