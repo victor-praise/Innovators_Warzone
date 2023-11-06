@@ -66,6 +66,11 @@ public enum BaseCommand {
     DeployOrder("deploy"),
 
     /**
+     * Issues a Diplomacy Order
+     */
+    Diplomacy("diplomacy"),
+
+    /**
      * Issues a deploy order
      */
     Commit("commit"),
