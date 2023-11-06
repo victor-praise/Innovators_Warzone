@@ -81,6 +81,16 @@ public enum BaseCommand {
     Quit("quit"),
 
     /**
+     * Airlift XX army units from one territory to another.
+     */
+    Airlift("airlift"),
+
+    /**
+     * Marks a given territory as NEUTRAL and tripling its army units.
+     */
+    Blockade("blockade"),
+
+    /**
      * An invalid command string by user will correspond to this.
      */
     None("");

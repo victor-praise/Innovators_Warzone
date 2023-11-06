@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
+ * Test class for DeployOrderCommand
  * @author kevin on 2023-10-04
  */
 class DeployOrderCommandTest {

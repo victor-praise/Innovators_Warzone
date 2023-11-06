@@ -14,6 +14,8 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
+
+ * Create a new AdvanceCommand
  * @author sadiq
  * */
 
@@ -25,7 +27,7 @@ public class AdvanceCommandTest{
     AdvanceCommand d_systemUnderTest;
 
     /**
-     * Create a new EditContinentCommand
+     * Create a new AdvanceCommand
      */
     @BeforeEach
     void setUp() {
@@ -44,6 +46,8 @@ public class AdvanceCommandTest{
 
     /**
      * Checks if the advance order was issued or not
+     *
+     * When Trying to advance more units than available in country, order should fail
      */
 
     @Test

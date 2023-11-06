@@ -16,6 +16,7 @@ public class AdvanceCommand extends PlayerOrderCommand{
      * @param p_Player player who issued the order
      * @param baseParams parameters given when issuing the order
      */
+
     public AdvanceCommand(Player p_Player, String[] baseParams) {
         super(p_Player, BaseCommand.AdvanceCommand, baseParams, null);
     }
@@ -56,7 +57,9 @@ public class AdvanceCommand extends PlayerOrderCommand{
 
             // check if source and destination countries are adjacent
             if(!l_ownedSourceCountry.hasAdjacentCountry(l_targetDestinationCountry)) {
+
                 l_message = "[AdvanceCommand]: Countries " + l_ownedSourceCountry + " and " + l_destinationCountry + " are not neighbours.";
+
                 System.out.println(l_message);
                 LogEntryBuffer.getInstance().log(l_message);
             }
