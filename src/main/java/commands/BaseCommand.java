@@ -63,7 +63,7 @@ public enum BaseCommand {
     /**
      * Issues a deploy order
      */
-    DeployOrder("deploy"),
+    Deploy("deploy"),
 
     /**
      * Issues a Diplomacy Order
@@ -78,7 +78,7 @@ public enum BaseCommand {
     /**
      * Issues an advance order
      */
-    AdvanceCommand("advance"),
+    Advance("advance"),
 
     /**
      * Issues a deploy order

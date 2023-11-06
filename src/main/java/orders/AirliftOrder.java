@@ -12,12 +12,12 @@ public class AirliftOrder implements Order {
 
     Country d_sourceCountry;
     Country d_targetCountry;
-    int d_numberOfArmies;
+    int d_armyUnitsToAirlift;
 
     public AirliftOrder(Country p_sourceCountry, Country p_targetCountry, int p_numOfArmies) {
         this.d_sourceCountry = p_sourceCountry;
         this.d_targetCountry = p_targetCountry;
-        this.d_numberOfArmies = p_numOfArmies;
+        this.d_armyUnitsToAirlift = p_numOfArmies;
     }
 
     /**
@@ -25,10 +25,14 @@ public class AirliftOrder implements Order {
      */
     @Override
     public void execute() {
-        d_sourceCountry.reduceArmyUnits(this.d_numberOfArmies);
-        d_targetCountry.addArmyUnits(this.d_numberOfArmies);
 
-        String l_message = "[Airlift Order] Airlifted  " + d_numberOfArmies + " army units from " + d_sourceCountry.getD_countryName() + " to " + d_targetCountry.getD_countryName();
+        // If there were some deaths based on previous attacks, only consider current army count
+        d_armyUnitsToAirlift = Math.min(d_armyUnitsToAirlift, d_sourceCountry.getD_noOfArmies());
+
+        d_sourceCountry.reduceArmyUnits(this.d_armyUnitsToAirlift);
+        d_targetCountry.addArmyUnits(this.d_armyUnitsToAirlift);
+
+        String l_message = "[Airlift Order] Airlifted  " + d_armyUnitsToAirlift + " army units from " + d_sourceCountry.getD_countryName() + " to " + d_targetCountry.getD_countryName();
         LogEntryBuffer.getInstance().log(l_message);
     }
 }

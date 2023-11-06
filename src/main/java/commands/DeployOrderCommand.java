@@ -20,7 +20,7 @@ public class DeployOrderCommand extends PlayerOrderCommand {
      * @param baseParams parameters supplied when issuing deploy order
      */
     public DeployOrderCommand(Player p_player, String[] baseParams) {
-        super(p_player, BaseCommand.DeployOrder, baseParams, null);
+        super(p_player, BaseCommand.Deploy, baseParams, null);
     }
 
     /**
@@ -64,8 +64,8 @@ public class DeployOrderCommand extends PlayerOrderCommand {
             // Deploy orders will be executed immediately
             Order deployOrder = new DeployOrder(l_country, l_armyUnits);
             deployOrder.execute();
-            // Reduce army units for this player
-            this.d_issuingPlayer.reduceArmyUnits(l_armyUnits);
+                // Reduce army units for this player
+                this.d_issuingPlayer.reduceArmyUnits(l_armyUnits);
             // Inform about remaining army units
             l_message = "[DeployOrder]: Remaining Units of army to deploy: " + this.d_issuingPlayer.getD_assignedArmyUnits();
             LogEntryBuffer.getInstance().log(l_message);

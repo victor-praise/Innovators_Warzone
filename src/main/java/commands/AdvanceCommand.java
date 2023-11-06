@@ -19,7 +19,7 @@ public class AdvanceCommand extends PlayerOrderCommand {
      */
 
     public AdvanceCommand(Player p_Player, String[] baseParams) {
-        super(p_Player, BaseCommand.AdvanceCommand, baseParams, null);
+        super(p_Player, BaseCommand.Advance, baseParams, null);
     }
 
     @Override

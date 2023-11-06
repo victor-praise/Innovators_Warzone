@@ -33,6 +33,12 @@ public class BlockadeCommand extends PlayerOrderCommand {
             return;
         }
 
+        if (!this.d_issuingPlayer.hasSpecialCard(SpecialCard.Blockade)) {
+            l_message = "[Blockade]: Player " + this.d_issuingPlayer.getD_name() + " does not have an Blockade card";
+            LogEntryBuffer.getInstance().log(l_message);
+            return;
+        }
+
         if (d_baseParams == null || d_baseParams.length < 1) {
             l_message = "[Blockade]: Blockade order requires one parameters. [1] Name of Country to convert to Neutral.";
             LogEntryBuffer.getInstance().log(l_message);
