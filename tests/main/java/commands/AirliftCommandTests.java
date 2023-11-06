@@ -4,6 +4,7 @@ import main.java.arena.Game;
 import main.java.models.Continent;
 import main.java.models.Country;
 import main.java.models.Player;
+import main.java.models.SpecialCard;
 import main.java.orders.Order;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,6 +76,25 @@ public class AirliftCommandTests {
         assertNull(d_orderIssuingPlayer.nextorder(), "Airlift order should have failed");
     }
 
+    @Test
+    void test_givenAirliftCommand_whenNoSpecialCard_thenOrderNotAccepted() {
+        //Given
+        List<Country> l_allCountries = Game.sharedInstance().getD_map().getD_countries();
+        l_allCountries.forEach(country -> {
+            country.setD_noOfArmies(10);
+            country.setD_availableArmyUnits(10);
+        });
+        d_orderIssuingPlayer.setD_ownedCountries(l_allCountries);
+        String[] l_baseParams = new String[]{"India", "Japan", "5"};
+        d_systemUnderTest = new AirliftCommand(d_orderIssuingPlayer, l_baseParams);
+
+        //When
+        d_systemUnderTest.execute();
+
+        //Then
+        assertNull(d_orderIssuingPlayer.nextorder(), "Airlift order should have failed");
+    }
+
     /**
      * When an airlift order is valid, then order is accepted
      */
@@ -82,8 +102,12 @@ public class AirliftCommandTests {
     void test_givenValidAirliftCommand_whenExecuted_thenOrderAccepted() {
         //Given
         List<Country> l_allCountries = Game.sharedInstance().getD_map().getD_countries();
-        l_allCountries.forEach(country -> country.setD_noOfArmies(10));
+        l_allCountries.forEach(country -> {
+            country.setD_noOfArmies(10);
+            country.setD_availableArmyUnits(10);
+        });
         d_orderIssuingPlayer.setD_ownedCountries(l_allCountries);
+        d_orderIssuingPlayer.addSpecialCards(SpecialCard.Airlift);
         String[] l_baseParams = new String[]{"India", "Japan", "5"};
         d_systemUnderTest = new AirliftCommand(d_orderIssuingPlayer, l_baseParams);
 
