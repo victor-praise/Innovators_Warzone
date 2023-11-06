@@ -12,18 +12,16 @@ import main.java.utils.logger.LogEntryBuffer;
 public class Attack extends MainPlay {
 
     Attack() {
+        LogEntryBuffer.getInstance().log("==== Attack / Issuing Orders phase ====" + "\n\n\n");
+        displayValidCommands();
         attack();
     }
-
 
     /**
      * Requests each player to issue commands in a round-robin fashion
      */
     @Override
     public void attack() {
-        System.out.println("--- Attack / Issuing Orders phase ---");
-
-        LogEntryBuffer.getInstance().log("==== Attack / Issuing Orders phase ====" + "\n\n\n");
         boolean didQuitGame = false;
         boolean hasMoreOrders = true;
         while (hasMoreOrders && !didQuitGame) {
@@ -31,12 +29,14 @@ public class Attack extends MainPlay {
             for (Player l_player : Game.sharedInstance().getD_players()) {
                 if (l_player.canIssueOrder()) {
                     hasMoreOrders = true;
-                    System.out.println("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedArmyUnits() + " army units left to deploy");
+                    if (l_player.canDeployTroops()) {
+                        LogEntryBuffer.getInstance().log("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedArmyUnits() + " army units left to deploy");
+                    }
                     l_player.issue_order();
                 }
 
                 if (!Game.Is_Gameplay_On) {
-                    System.out.println("Player ordered to end game");
+                    LogEntryBuffer.getInstance().log("Player" + l_player.getD_name() + "requested to terminate game");
                     didQuitGame = true;
                     break;
                 }
@@ -51,9 +51,8 @@ public class Attack extends MainPlay {
      */
     @Override
     public void next() {
-        Game.sharedInstance().setD_gamePhase(new Fortification());
-        System.out.println("--- Moving to Fortification phase --- ");
         LogEntryBuffer.getInstance().log("--- Moving to Fortification phase ---" + "\n");
+        Game.sharedInstance().setD_gamePhase(new Fortification());
     }
 
     /**
@@ -62,21 +61,21 @@ public class Attack extends MainPlay {
     @Override
     public void printInvalidCommandMessage() {
         super.printInvalidCommandMessage();
-        System.out.println("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
-        System.out.println("1. deploy countryID numarmies");
-        System.out.println("2. advance countrynamefrom countynameto numarmies");
-        System.out.println("3. bomb countryID");
-        System.out.println("4. blockade countryID");
-        System.out.println("5. airlift sourcecountryID targetcountryID numarmies");
-        System.out.println("6. negotiate playerID");
-        System.out.println(" --- ");
+        displayValidCommands();
     }
 
     /**
-     * Moves the game to 'End' phase which terminates the game
+     * Display All Valid Commands in this State
      */
-    @Override
-    public void endGame() {
-        Game.sharedInstance().setD_gamePhase(new End());
+    private void displayValidCommands() {
+        LogEntryBuffer.getInstance().log("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
+        LogEntryBuffer.getInstance().log("1. deploy countryID numarmies");
+        LogEntryBuffer.getInstance().log("2. advance countrynamefrom countynameto numarmies");
+        LogEntryBuffer.getInstance().log("3. bomb countryID");
+        LogEntryBuffer.getInstance().log("4. blockade countryID");
+        LogEntryBuffer.getInstance().log("5. airlift sourcecountryID targetcountryID numarmies");
+        LogEntryBuffer.getInstance().log("6. negotiate playerID");
+        LogEntryBuffer.getInstance().log("quit/commit");
+        LogEntryBuffer.getInstance().log(" --- ");
     }
 }

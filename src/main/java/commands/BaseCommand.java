@@ -71,7 +71,7 @@ public enum BaseCommand {
     Diplomacy("diplomacy"),
 
     /**
-     * Issues a deploy order
+     * Issues a commit order when there are no more orders
      */
     Commit("commit"),
 

@@ -12,11 +12,11 @@ public class BombCommand extends PlayerOrderCommand {
     /**
      * Creates a new Order command for a given player
      *
-     * @param p_player player who issued the order
-     * @param baseParams  represents any parameter to the basecommand
+     * @param p_player   player who issued the order
+     * @param baseParams represents any parameter to the basecommand
      */
     public BombCommand(Player p_player, String[] baseParams) {
-        super(p_player, BaseCommand.Bomb, baseParams,null );
+        super(p_player, BaseCommand.Bomb, baseParams, null);
     }
 
     /**
@@ -35,31 +35,32 @@ public class BombCommand extends PlayerOrderCommand {
         String l_countryName = d_baseParams[0];
         Country l_targetCountry = Game.sharedInstance().getD_map().getCountry(l_countryName);
         List<Country> l_ownedCountries = this.d_issuingPlayer.getD_ownedCountries();
-        if(l_targetCountry==null){
+        if (l_targetCountry == null) {
             l_message = "[Bomb]: Target Country does not exist";
             LogEntryBuffer.getInstance().log(l_message);
-            System.out.println(l_message);
             return;
         }
-        if(!this.d_issuingPlayer.hasSpecialCardOfType("bomb")){
-            l_message = "[Bomb]: Player " +this.d_issuingPlayer.getD_name() +" does not have a bomb card";
+
+        if (!this.d_issuingPlayer.hasSpecialCardOfType("bomb")) {
+            l_message = "[Bomb]: Player " + this.d_issuingPlayer.getD_name() + " does not have a bomb card";
             LogEntryBuffer.getInstance().log(l_message);
-            System.out.println(l_message);
             return;
         }
+
         boolean l_isNeighbour = false;
         for (Country country : l_ownedCountries) {
-           if(country.hasAdjacentCountry(l_targetCountry)){
+            if (country.hasAdjacentCountry(l_targetCountry)) {
                 l_isNeighbour = true;
                 break;
-           }
+            }
         }
-        if(!l_isNeighbour){
+
+        if (!l_isNeighbour) {
             l_message = "[Bomb]: Country " + l_countryName + " is not adjacent to any country owned by " + this.d_issuingPlayer.getD_name();
             LogEntryBuffer.getInstance().log(l_message);
-            System.out.println(l_message);
             return;
         }
+
         d_issuingPlayer.appendOrderToList(new BombOrder(l_targetCountry));
     }
 }

@@ -25,9 +25,14 @@ public class AdvanceCommand extends PlayerOrderCommand {
     @Override
     public void execute() {
         String l_message;
+        if (isDeploymentPending()) {
+            l_message = "[AdvanceOrder]: Advancing order requires all deployment to be completed";
+            LogEntryBuffer.getInstance().log(l_message);
+            return;
+        }
+
         if (d_baseParams == null || d_baseParams.length < 3) {
             l_message = "[AdvanceOrder]: Advance order requires four parameters. [1] Source country from which armies are to be advanced. [2] Destination country to which armies are to be advanced. [3] Number of units of army to be advanced.";
-            System.out.println(l_message);
             LogEntryBuffer.getInstance().log(l_message);
             return;
         }
@@ -49,9 +54,9 @@ public class AdvanceCommand extends PlayerOrderCommand {
             }
 
             // check number of units to advance
-            if (l_armyUnits < l_ownedSourceCountry.getD_noOfArmies()) {
-                l_message = "[AdvanceOrder]: " + l_ownedSourceCountry.getD_countryName() + " has only " + l_ownedSourceCountry.getD_noOfArmies() + " units of army left. Cannot advance more than " + l_ownedSourceCountry.getD_noOfArmies() + " army units.";
-                System.out.println(l_message);
+            int l_availableUnits = l_ownedSourceCountry.getD_availableArmyUnits();
+            if (l_armyUnits > l_availableUnits) {
+                l_message = "[AdvanceOrder]: " + l_ownedSourceCountry.getD_countryName() + " has only " + l_availableUnits + " units of army left. Cannot advance " + l_armyUnits + " army units.";
                 LogEntryBuffer.getInstance().log(l_message);
                 return;
             }
@@ -64,7 +69,10 @@ public class AdvanceCommand extends PlayerOrderCommand {
             }
 
             // Insert Advance Order to players order list
-            this.d_issuingPlayer.appendOrderToList(new AdvanceOrder(l_ownedSourceCountry, l_targetDestinationCountry, l_armyUnits));
+            this.d_issuingPlayer.appendOrderToList(new AdvanceOrder(d_issuingPlayer, l_ownedSourceCountry, l_targetDestinationCountry, l_armyUnits));
+            // Reduce available army units for source country, to prevent Player from advancing more than available units
+            l_availableUnits -= l_armyUnits;
+            l_ownedSourceCountry.setD_availableArmyUnits(l_availableUnits);
         } catch (NumberFormatException error) {
             l_message = "[AdvanceOrder]: Advance order requires the third parameter to be an integer, i.e. Units of army to Advance";
             System.out.println(l_message);

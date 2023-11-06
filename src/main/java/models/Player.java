@@ -4,7 +4,10 @@ import main.java.commands.Command;
 import main.java.orders.Order;
 import main.java.utils.OrderParser;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * This class is responsible for the addition and removal of players.
@@ -28,6 +31,8 @@ public class Player {
 
     private boolean isConqueror = false;
 
+    private boolean didCommitForThisTurn = false;
+
     public Player() {
         d_ownedCountries = new ArrayList<>();
     }
@@ -35,6 +40,14 @@ public class Player {
     public Player(String p_inputName) {
         this();
         d_name = p_inputName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Player player)) {
+            return false;
+        }
+        return getD_name().equalsIgnoreCase(player.getD_name());
     }
 
     /**
@@ -107,6 +120,23 @@ public class Player {
     }
 
     /**
+     * Determines if the player has committed for this turn
+     * @return true if player committed after issuing all orders
+     */
+    public boolean didCommitForThisTurn() {
+        return didCommitForThisTurn;
+    }
+
+    /**
+     * Set the didCommitForThisTurn flag
+     *
+     * @param didCommitForThisTurn true when player commits after deciding all issuing his command
+     */
+    public void setCommitForThisTurn(boolean didCommitForThisTurn) {
+        this.didCommitForThisTurn = didCommitForThisTurn;
+    }
+
+    /**
      * Fetch all the owned Special cards
      * @return list of cards owned by this player
      */
@@ -170,6 +200,7 @@ public class Player {
      * @return success or failure
      */
     public boolean receiveOwnershipForCountry(Country p_country) {
+        p_country.setD_ownedBy(this);
         return this.d_ownedCountries.add(p_country);
     }
 
@@ -233,7 +264,6 @@ public class Player {
         try {
             return this.d_ordersList.remove(0);
         } catch (IndexOutOfBoundsException exception) {
-            System.out.println("[Player]: No more orders available for: " + getD_name());
             return null;
         }
     }
@@ -257,7 +287,6 @@ public class Player {
             System.out.println("6. negotiate playerID");
             System.out.println("7. quit");
             System.out.println(" --- ");
-
         }
     }
 
@@ -267,10 +296,17 @@ public class Player {
      * @return true if player can issue orders
      */
     public boolean canIssueOrder() {
-        return getD_assignedArmyUnits() > 0;
+        return !didCommitForThisTurn;
     }
 
-
+    /**
+     * Determines if the user can deploy any more troops
+     *
+     * @return true if player has troops to deploy, false otherwise
+     */
+    public boolean canDeployTroops() {
+        return getD_assignedArmyUnits() > 0;
+    }
     /**
      * Randomly assigns a special card to the player
      */
@@ -283,5 +319,4 @@ public class Player {
         // Once a card has been assigned, mark conqueror as false to avoid adding multiple cards by mistake
         setConqueror(false);
     }
-
 }

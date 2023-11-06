@@ -25,6 +25,8 @@ public class Country {
 
     private Player d_ownedBy;
 
+    private int d_availableArmyUnits = 0;
+
     /**
      * constructor of this class.
      *
@@ -139,6 +141,31 @@ public class Country {
     }
 
     /**
+     * Gives count of troops available to Advance/Airlift
+     *
+     * @return  count of troops available to Advance/Airlift
+     */
+    public int getD_availableArmyUnits() {
+        return d_availableArmyUnits;
+    }
+
+    /**
+     * Sets the count of troops available to Advance/Airlift
+     *
+     * @param d_availableArmyUnits kill count
+     */
+    public void setD_availableArmyUnits(int d_availableArmyUnits) {
+        this.d_availableArmyUnits = d_availableArmyUnits;
+    }
+
+    /**
+     * Reset Available Army Units back to total army units. This should be reset after every turn
+     */
+    public void resetD_availableArmyUnits() {
+        this.d_availableArmyUnits = this.d_noOfArmies;
+    }
+
+    /**
      * Set the isNeutral flag for a country
      * @param p_isNeutralTerritory value to set
      */
@@ -198,6 +225,8 @@ public class Country {
      */
     public void addArmyUnits(int p_units) {
         this.d_noOfArmies += p_units;
+        // Also update the available units for deployment
+        this.d_availableArmyUnits += p_units;
     }
 
     /**

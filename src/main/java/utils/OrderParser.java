@@ -29,6 +29,18 @@ public class OrderParser {
 
         if (l_orderCommand != BaseCommand.None) {
             switch (l_orderCommand) {
+                case AdvanceCommand:
+                    l_command = new AdvanceCommand(p_player, l_orderParams);
+                    break;
+
+                case Airlift:
+                    l_command = new AirliftCommand(p_player, l_orderParams);
+                    break;
+
+                case Blockade:
+                    l_command = new BlockadeCommand(p_player, l_orderParams);
+                    break;
+
                 case DeployOrder:
                     l_command = new DeployOrderCommand(p_player, l_orderParams);
                     break;
@@ -36,6 +48,9 @@ public class OrderParser {
                 case Quit:
                     l_command = new QuitCommand();
                     break;
+
+                case Commit:
+                    l_command = new CommitCommand(p_player);
 
                 default:
                     break;
@@ -58,7 +73,14 @@ public class OrderParser {
 
     private static boolean isOrderCommand(BaseCommand p_command) {
         //TODO: Create an array of possible orders and verify that the command passed is in this array.
-        BaseCommand[] possibleOrders = {BaseCommand.DeployOrder, BaseCommand.Quit};
+        BaseCommand[] possibleOrders = {
+                BaseCommand.AdvanceCommand,
+                BaseCommand.Airlift,
+                BaseCommand.Blockade,
+                BaseCommand.Commit,
+                BaseCommand.DeployOrder,
+                BaseCommand.Quit
+        };
         for (BaseCommand order: possibleOrders) {
             if (p_command == order) {
                 return true;
