@@ -64,6 +64,14 @@ public class Game {
     }
 
     /**
+     * Return the current phase
+     * @return current phase of game
+     */
+    public Phase getD_gamePhase() {
+        return d_gamePhase;
+    }
+
+    /**
      * @param d_gamePhase phase to shift the game to
      */
     public void setD_gamePhase(Phase d_gamePhase) {
@@ -198,7 +206,6 @@ public class Game {
             case 1:
                 getD_map().getD_countries().forEach(country -> d_players.get(0).receiveOwnershipForCountry(country));
                 l_message = "[AssignCountries]: Single player defined. Assigning all the countries to: " + d_players.get(0).getD_name();
-                System.out.println(l_message);
                 LogEntryBuffer.getInstance().log(l_message);
                 System.out.println("[AssignCountries]: Winner: " + d_players.get(0).getD_name());
                 Game.endGamePlay();
@@ -210,7 +217,6 @@ public class Game {
                     int randomPlayerIndex = randomNum.nextInt(l_playersCount);
                     Player randomPlayer = d_players.get(randomPlayerIndex);
                     if (randomPlayer.receiveOwnershipForCountry(country)) {
-                        System.out.println("[Game]: Assigning country: " + country.getD_countryName() + " to: -- " + randomPlayer.getD_name());
                         LogEntryBuffer.getInstance().log("[Game]: Assigning country: " + country.getD_countryName() + " to: -- " + randomPlayer.getD_name());
                     }
                 });
@@ -242,8 +248,7 @@ public class Game {
      * We set up the game play over here with proper description being given to user
      */
     public void start() {
-        System.out.println("--- Game Starts ---");
-        LogEntryBuffer.getInstance().log("===== Game Startup Phase =====" + "\n\n\n");
+        LogEntryBuffer.getInstance().log("===== Game Startup Phase =====" + "\n");
         System.out.println("--- At any point, you can give a command  'quit' to exit the game ---");
         String l_nextCommand = "";
         CommandParser l_parser = new CommandParser();

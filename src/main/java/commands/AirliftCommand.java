@@ -2,6 +2,7 @@ package main.java.commands;
 
 import main.java.models.Country;
 import main.java.models.Player;
+import main.java.models.SpecialCard;
 import main.java.orders.AirliftOrder;
 import main.java.utils.logger.LogEntryBuffer;
 
@@ -26,8 +27,20 @@ public class AirliftCommand extends PlayerOrderCommand {
     @Override
     public void execute() {
         String l_message;
+        if (isDeploymentPending()) {
+            l_message = "[AirliftOrder]: Airlift order requires all deployment to be completed";
+            LogEntryBuffer.getInstance().log(l_message);
+            return;
+        }
+
         if (d_baseParams == null || d_baseParams.length < 3) {
             l_message = "[Airlift]: Airlift order required three parameters. [1] Name of Country to lift from. [2] Name of Country to drop to [3] Units of army to airlift";
+            LogEntryBuffer.getInstance().log(l_message);
+            return;
+        }
+
+        if (!this.d_issuingPlayer.hasSpecialCard(SpecialCard.Airlift)) {
+            l_message = "[Airlift]: Player " + this.d_issuingPlayer.getD_name() + " does not have an Airlift card";
             LogEntryBuffer.getInstance().log(l_message);
             return;
         }
@@ -50,11 +63,13 @@ public class AirliftCommand extends PlayerOrderCommand {
         }
 
         int l_armyUnitsToAirlift = 0;
+        int l_availableUnits = l_sourceCountry.getD_availableArmyUnits();
         try {
             l_armyUnitsToAirlift = Integer.parseInt(d_baseParams[2]);
 
-            if (l_armyUnitsToAirlift > l_sourceCountry.getD_noOfArmies()) {
-                l_message = "[Airlift]: " + d_issuingPlayer.getD_name() + " can not airlift more than available units of: " + l_sourceCountry.getD_noOfArmies();
+            // check number of units to advance
+            if (l_armyUnitsToAirlift > l_availableUnits) {
+                l_message = "[Airlift]: " + d_issuingPlayer.getD_name() + " can not airlift more than available units of: " + l_availableUnits;
                 LogEntryBuffer.getInstance().log(l_message);
                 return;
             }
@@ -66,5 +81,10 @@ public class AirliftCommand extends PlayerOrderCommand {
 
         // Insert the airlift-order to players order list
         this.d_issuingPlayer.appendOrderToList(new AirliftOrder(l_sourceCountry, l_targetCountry, l_armyUnitsToAirlift));
+        this.d_issuingPlayer.removeSpecialCard(SpecialCard.Airlift);
+
+        // Reduce army units for source country, to prevent Player from airlifting more than available units
+        l_availableUnits -= l_armyUnitsToAirlift;
+        l_sourceCountry.setD_availableArmyUnits(l_availableUnits);
     }
 }

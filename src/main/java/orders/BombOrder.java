@@ -22,6 +22,5 @@ public class BombOrder implements Order{
         d_targetCountry.reduceArmyUnits(l_newNoArmies);
         String l_message = "[ BombOrder ] successfully bombed " + d_targetCountry.getD_countryName();
         LogEntryBuffer.getInstance().log(l_message);
-        System.out.println(l_message);
     }
 }

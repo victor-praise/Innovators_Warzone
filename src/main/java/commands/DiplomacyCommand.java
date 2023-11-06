@@ -2,6 +2,7 @@ package main.java.commands;
 
 import main.java.arena.Game;
 import main.java.models.Player;
+import main.java.models.SpecialCard;
 import main.java.orders.DiplomacyOrder;
 import main.java.utils.logger.LogEntryBuffer;
 
@@ -33,6 +34,12 @@ public class DiplomacyCommand extends PlayerOrderCommand {
             return;
         }
 
+        if (!this.d_issuingPlayer.hasSpecialCard(SpecialCard.Diplomacy)) {
+            l_message = "[Blockade]: Player " + this.d_issuingPlayer.getD_name() + " does not have an Diplomacy card";
+            LogEntryBuffer.getInstance().log(l_message);
+            return;
+        }
+
         String l_playerName = d_baseParams[0];
         Player l_player = Game.sharedInstance().getPlayer(l_playerName);
 
@@ -45,6 +52,8 @@ public class DiplomacyCommand extends PlayerOrderCommand {
 
         // Insert the diplomacy order to players order list
         this.d_issuingPlayer.appendOrderToList(new DiplomacyOrder(this.d_issuingPlayer, l_player));
+        this.d_issuingPlayer.removeSpecialCard(SpecialCard.Diplomacy);
+
         // Inform about remaining army units
         l_message = "[DiplomacyOrder]:" + this.d_issuingPlayer.getD_name() + " and" + l_playerName + "have negotiated each other.";
         LogEntryBuffer.getInstance().log(l_message);

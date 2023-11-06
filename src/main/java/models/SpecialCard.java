@@ -26,7 +26,7 @@ public enum SpecialCard {
      * A card that gives you ability to negotiate with opponents
      * i.e. advance some armies from one of the current player’s territories to any another territory
      */
-    Negotiate("negotiate"),
+    Diplomacy("negotiate"),
     /**
      * A card that gives you ability to bomb opponents territory
      */
@@ -64,6 +64,6 @@ public enum SpecialCard {
     public static Object[] validValues() {
         List<SpecialCard> allValues = new ArrayList<SpecialCard>(Arrays.asList(values()));
         allValues.remove(SpecialCard.None);
-        return  allValues.toArray();
+        return allValues.toArray();
     }
 }

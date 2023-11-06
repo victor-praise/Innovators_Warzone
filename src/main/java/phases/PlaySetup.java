@@ -2,16 +2,21 @@ package main.java.phases;
 
 import main.java.arena.Game;
 import main.java.commands.Functionality;
+import main.java.utils.logger.LogEntryBuffer;
 
 /**
  * @author kevin on 2023-11-02
  */
 public class PlaySetup extends Play {
 
+    public PlaySetup() {
+        displayValidCommands();
+    }
+
     /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -22,7 +27,7 @@ public class PlaySetup extends Play {
     /**
      * Display the current list of continents countries and neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -33,7 +38,7 @@ public class PlaySetup extends Play {
     /**
      * Validates the current map
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -44,7 +49,7 @@ public class PlaySetup extends Play {
     /**
      * Allows user to 'Add' or 'Remove' continents
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -55,7 +60,7 @@ public class PlaySetup extends Play {
     /**
      * Allows user to 'Add' or 'Remove' countries
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -66,7 +71,7 @@ public class PlaySetup extends Play {
     /**
      * Allows user to 'Add' or 'Remove' neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -77,7 +82,7 @@ public class PlaySetup extends Play {
     /**
      * Load a map from an existing “domination” map file, or create a new map from scratch if the file does not exist
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -88,7 +93,7 @@ public class PlaySetup extends Play {
     /**
      * Save a map to a text file exactly as edited (using the “domination” game map format)
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -99,7 +104,7 @@ public class PlaySetup extends Play {
     /**
      * Allows user to 'Add' or 'Remove' players
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -118,7 +123,7 @@ public class PlaySetup extends Play {
                     return;
                 }
                 l_playerName = l_function.functionalityParams[0];
-                if(Game.sharedInstance().addPlayer(l_playerName)) {
+                if (Game.sharedInstance().addPlayer(l_playerName)) {
                     System.out.println("[GamePlayer]: Adding a player successfull");
                 } else {
                     System.out.println("[GamePlayer]: Adding a player failed");
@@ -126,7 +131,7 @@ public class PlaySetup extends Play {
                 break;
             case Remove:
                 l_playerName = l_function.functionalityParams[0];
-                if(Game.sharedInstance().removePlayer(l_playerName)) {
+                if (Game.sharedInstance().removePlayer(l_playerName)) {
                     System.out.println("[GamePlayer]: Removing a player successfull");
                 } else {
                     System.out.println("[GamePlayer]: Removing a player failed");
@@ -139,18 +144,18 @@ public class PlaySetup extends Play {
 
     /**
      * Randomly assigns all the countries to different players
-     * @param p_baseParams parameters for this command
+     *
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
     public void assignCountries(String[] p_baseParams, Functionality[] p_functionalities) {
         Game.sharedInstance().assignCountriesToPlayers();
-        if (!Game.sharedInstance().getD_players().isEmpty()) {
-            Game.sharedInstance().setD_gamePhase(new Reinforcement());
-            System.out.println("--- Moving to Reinforcement phase --- ");
-
+        if (Game.sharedInstance().getD_players().size() > 1) {
             // change state when all countries assigned
             next();
+        } else {
+            endGame();
         }
     }
 
@@ -183,7 +188,16 @@ public class PlaySetup extends Play {
      */
     @Override
     public void next() {
+        LogEntryBuffer.getInstance().log("==== Reinforcement phase ====" + "\n\n");
         Game.sharedInstance().setD_gamePhase(new Reinforcement());
+    }
+
+    /**
+     * End game execution
+     */
+    @Override
+    public void endGame() {
+        Game.sharedInstance().setD_gamePhase(new End());
     }
 
     /**
@@ -192,9 +206,16 @@ public class PlaySetup extends Play {
     @Override
     public void printInvalidCommandMessage() {
         super.printInvalidCommandMessage();
-        System.out.println("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
-        System.out.println("1. gameplayer [-add playername] [-remove playername]");
-        System.out.println("2. assigncountries");
-        System.out.println(" --- ");
+        displayValidCommands();
+    }
+
+    /**
+     * Display All Valid Commands in this State
+     */
+    private void displayValidCommands() {
+        LogEntryBuffer.getInstance().log("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
+        LogEntryBuffer.getInstance().log("1. gameplayer [-add playername] [-remove playername]");
+        LogEntryBuffer.getInstance().log("2. assigncountries");
+        LogEntryBuffer.getInstance().log(" --- ");
     }
 }

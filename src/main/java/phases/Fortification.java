@@ -11,20 +11,19 @@ import main.java.utils.logger.LogEntryBuffer;
 public class Fortification extends MainPlay {
 
     Fortification() {
+        LogEntryBuffer.getInstance().log("==== Fortification/Executing Orders Phase ====" + "\n\n\n");
         fortify();
     }
 
     /**
-     *
+     * Execute orders in round-robin fashion
      */
     @Override
     public void fortify() {
-        System.out.println("--- Fortification/Executing Orders Phase ---");
-        LogEntryBuffer.getInstance().log("==== Fortification/Executing Orders Phase ====" + "\n\n\n");
         boolean hasMoreOrders = true;
         while (hasMoreOrders) {
             hasMoreOrders = false;
-            for (Player l_player: Game.sharedInstance().getD_players()) {
+            for (Player l_player : Game.sharedInstance().getD_players()) {
                 Order l_order = l_player.nextorder();
                 if (l_order != null) {
                     l_order.execute();
@@ -33,17 +32,19 @@ public class Fortification extends MainPlay {
             }
         }
 
+        // Remove commit flags from all players
+        Game.sharedInstance().getD_players().forEach(player -> player.setCommitForThisTurn(false));
+
         // change state before leaving
         next();
     }
 
     /**
-     *
+     * Move to the next state
      */
     @Override
     public void next() {
+        LogEntryBuffer.getInstance().log("--- Moving back to Reinforcement phase ---" + "\n");
         Game.sharedInstance().setD_gamePhase(new Reinforcement());
-        System.out.println("--- Moving back to Reinforcement phase --- ");
-        LogEntryBuffer.getInstance().log("--- Moving back to Reinforcement phase ---" +"\n");
     }
 }

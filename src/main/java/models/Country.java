@@ -23,6 +23,10 @@ public class Country {
 
     private boolean d_isNeutralTerritory = false;
 
+    private Player d_ownedBy;
+
+    private int d_availableArmyUnits = 0;
+
     /**
      * constructor of this class.
      *
@@ -137,11 +141,58 @@ public class Country {
     }
 
     /**
-     * Set the isNeutral flag for a country
-     * @param d_isNeutralTerritory value to set
+     * Gives count of troops available to Advance/Airlift
+     *
+     * @return  count of troops available to Advance/Airlift
      */
-    public void setD_isNeutralTerritory(boolean d_isNeutralTerritory) {
-        this.d_isNeutralTerritory = d_isNeutralTerritory;
+    public int getD_availableArmyUnits() {
+        return d_availableArmyUnits;
+    }
+
+    /**
+     * Sets the count of troops available to Advance/Airlift
+     *
+     * @param d_availableArmyUnits kill count
+     */
+    public void setD_availableArmyUnits(int d_availableArmyUnits) {
+        this.d_availableArmyUnits = d_availableArmyUnits;
+    }
+
+    /**
+     * Reset Available Army Units back to total army units. This should be reset after every turn
+     */
+    public void resetD_availableArmyUnits() {
+        this.d_availableArmyUnits = this.d_noOfArmies;
+    }
+
+    /**
+     * Set the isNeutral flag for a country
+     * @param p_isNeutralTerritory value to set
+     */
+    public void setD_isNeutralTerritory(boolean p_isNeutralTerritory) {
+        if (p_isNeutralTerritory) {
+            this.d_ownedBy = null;
+        }
+        this.d_isNeutralTerritory = p_isNeutralTerritory;
+    }
+
+    /**
+     * get the player who owns this country
+     * @return player who owns this country, null if it's neutral territory
+     */
+    public Player getD_ownedBy() {
+        if (this.d_isNeutralTerritory) {
+            return null;
+        }
+        return d_ownedBy;
+    }
+
+    /**
+     * sets the owner of this country
+     * @param d_ownedBy player who should own this country
+     */
+    public void setD_ownedBy(Player d_ownedBy) {
+        this.d_ownedBy = d_ownedBy;
     }
 
     /**
@@ -174,6 +225,8 @@ public class Country {
      */
     public void addArmyUnits(int p_units) {
         this.d_noOfArmies += p_units;
+        // Also update the available units for deployment
+        this.d_availableArmyUnits += p_units;
     }
 
     /**

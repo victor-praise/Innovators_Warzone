@@ -16,10 +16,14 @@ import java.util.Optional;
  */
 public class PostLoad extends Edit {
 
+    public PostLoad() {
+        displayValidCommands();
+    }
+
     /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -30,12 +34,12 @@ public class PostLoad extends Edit {
     /**
      * Allows user to 'Add' or 'Remove' countries
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     public void editCountry(String[] p_baseParams, Functionality[] p_functionalities) {
         if (p_functionalities == null || p_functionalities.length == 0) {
-            System.out.println("[EditCountry]: No functionality provided. Expectation: '-add' or '-remove'");
+            LogEntryBuffer.getInstance().log("[EditCountry]: No functionality provided. Expectation: '-add' or '-remove'");
             return;
         }
         Functionality l_function = p_functionalities[0];
@@ -43,8 +47,8 @@ public class PostLoad extends Edit {
         switch (l_function.functionality) {
             case Add:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 2) {
-                    System.out.println("[EditCountry]: Adding a country requires 2 parameters\n[1] Country Name\n[2] Continent Name");
-                    System.out.println("[EditCountry]: Adding a country failed");
+                    LogEntryBuffer.getInstance().log("[EditCountry]: Adding a country requires 2 parameters\n[1] Country Name\n[2] Continent Name");
+                    LogEntryBuffer.getInstance().log("[EditCountry]: Adding a country failed");
                     return;
                 }
                 l_countryName = l_function.functionalityParams[0];
@@ -53,27 +57,27 @@ public class PostLoad extends Edit {
                 break;
             case Remove:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 1) {
-                    System.out.println("[EditCountry]: Removing a country requires 1 parameters\n[1] Country Name");
-                    System.out.println("[EditCountry]: Removing a country failed");
+                    LogEntryBuffer.getInstance().log("[EditCountry]: Removing a country requires 1 parameters\n[1] Country Name");
+                    LogEntryBuffer.getInstance().log("[EditCountry]: Removing a country failed");
                     return;
                 }
                 l_countryName = l_function.functionalityParams[0];
                 if (Game.sharedInstance().getD_map().removeCountry(l_countryName)) {
-                    System.out.println("[EditCountry]: Removed country with name: " + l_countryName);
+                    LogEntryBuffer.getInstance().log("[EditCountry]: Removed country with name: " + l_countryName);
                 } else {
-                    System.out.println("[EditCountry]: Removing a country failed");
+                    LogEntryBuffer.getInstance().log("[EditCountry]: Removing a country failed");
                 }
                 break;
 
             default:
-                System.out.println("[EditCountry]: Functionality undefined. Expectation:  '-add' or '-remove'");
+                LogEntryBuffer.getInstance().log("[EditCountry]: Functionality undefined. Expectation:  '-add' or '-remove'");
         }
     }
 
     /**
      * Allows user to 'Add' or 'Remove' continents
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
@@ -81,7 +85,7 @@ public class PostLoad extends Edit {
         String l_message;
         if (p_functionalities == null || p_functionalities.length == 0) {
             l_message = "[EditContinent]: No functionality provided. Expectation: '-add' or '-remove'";
-            System.out.println(l_message);
+            LogEntryBuffer.getInstance().log(l_message);
             LogEntryBuffer.getInstance().log(l_message);
             return;
         }
@@ -91,8 +95,8 @@ public class PostLoad extends Edit {
             case Add:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 2) {
 
-                    System.out.println("[EditContinent]: Adding a continent requires 2 parameters\n[1] Continent Name\n[2] Bonus Points");
-                    System.out.println("[EditContinent]: Adding a continent failed");
+                    LogEntryBuffer.getInstance().log("[EditContinent]: Adding a continent requires 2 parameters\n[1] Continent Name\n[2] Bonus Points");
+                    LogEntryBuffer.getInstance().log("[EditContinent]: Adding a continent failed");
                     LogEntryBuffer.getInstance().log("[EditContinent]: Adding a continent failed");
                     return;
                 }
@@ -100,48 +104,48 @@ public class PostLoad extends Edit {
                     String l_continentName = l_function.functionalityParams[0];
                     int l_bonusValue = Integer.parseInt(l_function.functionalityParams[1]);
                     Game.sharedInstance().getD_map().addContinent(l_continentName, l_bonusValue);
-                    l_message = "Continent " + l_continentName + " with bonus value " +l_bonusValue + " has been successfully added";
+                    l_message = "Continent " + l_continentName + " with bonus value " + l_bonusValue + " has been successfully added";
                     LogEntryBuffer.getInstance().log(l_message);
                 } catch (NumberFormatException nfe) {
-                    l_message = "[EditContinent]: Invalid format: bonus points must be an integer, found: [ " + l_function.functionalityParams[1] +" ]";
-                    System.out.println(l_message);
+                    l_message = "[EditContinent]: Invalid format: bonus points must be an integer, found: [ " + l_function.functionalityParams[1] + " ]";
+                    LogEntryBuffer.getInstance().log(l_message);
                     LogEntryBuffer.getInstance().log(l_message);
                 }
                 break;
             case Remove:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 1) {
-                    System.out.println("[EditContinent]: Removing a continent requires 1 parameters\n[1] Continent Name");
-                    System.out.println("[EditContinent]: Removing a continent failed");
+                    LogEntryBuffer.getInstance().log("[EditContinent]: Removing a continent requires 1 parameters\n[1] Continent Name");
+                    LogEntryBuffer.getInstance().log("[EditContinent]: Removing a continent failed");
                     LogEntryBuffer.getInstance().log("[EditContinent]: Removing a continent failed");
                     return;
                 }
                 String l_continentName = l_function.functionalityParams[0];
                 if (Game.sharedInstance().getD_map().removeContinent(l_continentName)) {
                     l_message = "[EditContinent]: Removed continent with name: " + l_continentName;
-                    System.out.println(l_message);
+                    LogEntryBuffer.getInstance().log(l_message);
                     LogEntryBuffer.getInstance().log(l_message);
                 } else {
                     l_message = "[EditContinent]: Removing a continent failed";
-                    System.out.println(l_message);
+                    LogEntryBuffer.getInstance().log(l_message);
                     LogEntryBuffer.getInstance().log(l_message);
                 }
                 break;
 
             default:
-                System.out.println("[EditContinent]: Functionality undefined. Expectation:  '-add' or '-remove'");
+                LogEntryBuffer.getInstance().log("[EditContinent]: Functionality undefined. Expectation:  '-add' or '-remove'");
         }
     }
 
     /**
      * Allows user to 'Add' or 'Remove' neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     @Override
     public void editNeighbour(String[] p_baseParams, Functionality[] p_functionalities) {
         if (p_functionalities == null || p_functionalities.length == 0) {
-            System.out.println("[EditContinent]: No functionality provided. Expectation: '-add' or '-remove'");
+            LogEntryBuffer.getInstance().log("[EditContinent]: No functionality provided. Expectation: '-add' or '-remove'");
             return;
         }
         Functionality l_function = p_functionalities[0];
@@ -150,47 +154,47 @@ public class PostLoad extends Edit {
         switch (l_function.functionality) {
             case Add:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 2) {
-                    System.out.println("[EditNeighbour]: Adding a neighbour requires 2 parameters\n[1] Country Name\n[2] Neighbour Name");
-                    System.out.println("[EditNeighbour]: Adding a neighbour failed");
+                    LogEntryBuffer.getInstance().log("[EditNeighbour]: Adding a neighbour requires 2 parameters\n[1] Country Name\n[2] Neighbour Name");
+                    LogEntryBuffer.getInstance().log("[EditNeighbour]: Adding a neighbour failed");
                     return;
                 }
                 l_countryName = l_function.functionalityParams[0];
                 l_neighbourName = l_function.functionalityParams[1];
                 if (Game.sharedInstance().getD_map().addNeighbour(l_countryName, l_neighbourName)) {
-                    System.out.println("[EditNeighbour]: Added " + l_countryName + " as a neighbour to: " + l_neighbourName);
+                    LogEntryBuffer.getInstance().log("[EditNeighbour]: Added " + l_countryName + " as a neighbour to: " + l_neighbourName);
                 } else {
-                    System.out.println("[EditNeighbour]: Adding a neighbour failed");
+                    LogEntryBuffer.getInstance().log("[EditNeighbour]: Adding a neighbour failed");
                 }
                 break;
             case Remove:
                 if (l_function.functionalityParams == null || l_function.functionalityParams.length < 2) {
-                    System.out.println("[EditNeighbour]: Removing a neighbour requires 2 parameters\n[1] Country Name\n[2] Neighbour Name");
-                    System.out.println("[EditNeighbour]: Removing a neighbour failed");
+                    LogEntryBuffer.getInstance().log("[EditNeighbour]: Removing a neighbour requires 2 parameters\n[1] Country Name\n[2] Neighbour Name");
+                    LogEntryBuffer.getInstance().log("[EditNeighbour]: Removing a neighbour failed");
                     return;
                 }
                 l_countryName = l_function.functionalityParams[0];
                 l_neighbourName = l_function.functionalityParams[1];
                 if (Game.sharedInstance().getD_map().removeNeighbour(l_countryName, l_neighbourName)) {
-                    System.out.println("[EditNeighbour]: Removed " + l_countryName + " and : " + l_neighbourName + "as neighbours");
+                    LogEntryBuffer.getInstance().log("[EditNeighbour]: Removed " + l_countryName + " and : " + l_neighbourName + "as neighbours");
                 } else {
-                    System.out.println("[EditNeighbour]: Removing a neighbour failed");
+                    LogEntryBuffer.getInstance().log("[EditNeighbour]: Removing a neighbour failed");
                 }
                 break;
 
             default:
-                System.out.println("[EditNeighbour]: Functionality undefined. Expectation:  '-add' or '-remove'");
+                LogEntryBuffer.getInstance().log("[EditNeighbour]: Functionality undefined. Expectation:  '-add' or '-remove'");
         }
     }
 
     /**
      * Save a map to a text file exactly as edited (using the “domination” game map format)
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     public void saveMap(String[] p_baseParams, Functionality[] p_functionalities) {
         if (p_functionalities != null && p_functionalities.length != 0) {
-            System.out.println("[SaveMapCommand]: No functionality is supported for SaveMap command");
+            LogEntryBuffer.getInstance().log("[SaveMapCommand]: No functionality is supported for SaveMap command");
             return;
         }
 
@@ -198,7 +202,7 @@ public class PostLoad extends Edit {
         String l_filename;
 
         if (p_baseParams == null) {
-            System.out.println("[SaveMapCommand]: file name is mandatory ");
+            LogEntryBuffer.getInstance().log("[SaveMapCommand]: file name is mandatory ");
             return;
         } else {
             Optional<String> optionalFileName = Arrays.stream(p_baseParams).findFirst();
@@ -207,7 +211,7 @@ public class PostLoad extends Edit {
 
         try {
             if (l_filename == null || l_filename.isBlank()) {
-                System.out.println("[SaveMapCommand]: file name is mandatory ");
+                LogEntryBuffer.getInstance().log("[SaveMapCommand]: file name is mandatory ");
                 return;
             }
 
@@ -215,12 +219,12 @@ public class PostLoad extends Edit {
                 l_filename = l_filename.concat(".map");
             }
             mapService.saveMap(l_filename);
-            System.out.println("[SaveMap]: Map saved successfully.");
+            LogEntryBuffer.getInstance().log("[SaveMap]: Map saved successfully.");
 
             Game.sharedInstance().setD_gamePhase(new PlaySetup());
-            System.out.println("[PostLoad]: --- Moving to PlaySetup ---");
+            LogEntryBuffer.getInstance().log("[PostLoad]: --- Moving to PlaySetup ---");
         } catch (IOException error) {
-            System.out.println("[SaveMapCommand]: Error while saving map to: " + l_filename + " " + error.getLocalizedMessage());
+            LogEntryBuffer.getInstance().log("[SaveMapCommand]: Error while saving map to: " + l_filename + " " + error.getLocalizedMessage());
             throw new RuntimeException(error);
         } catch (MapInvalidException e) {
             e.printStackTrace();
@@ -231,7 +235,7 @@ public class PostLoad extends Edit {
      * Moves to next state based on state diagram
      */
     public void next() {
-        System.out.println("must load map");
+        LogEntryBuffer.getInstance().log("must load map");
     }
 
     /**
@@ -240,13 +244,19 @@ public class PostLoad extends Edit {
     @Override
     public void printInvalidCommandMessage() {
         super.printInvalidCommandMessage();
-        System.out.println("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
-        System.out.println("1. editcontinent [-add continentID continentvalue] [-remove continentID]");
-        System.out.println("2. editcountry [-add countryID continentID] [-remove countryID]");
-        System.out.println("3. editneighbor [-add countryID neighborcountryID] [-remove countryID]");
-        System.out.println("4. showmap");
-        System.out.println("5. savemap [filename]");
-        System.out.println("6. validatemap");
-        System.out.println(" --- ");
+    }
+
+    /**
+     * Display All Valid Commands in this State
+     */
+    private void displayValidCommands() {
+        LogEntryBuffer.getInstance().log("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
+        LogEntryBuffer.getInstance().log("1. editcontinent [-add continentID continentvalue] [-remove continentID]");
+        LogEntryBuffer.getInstance().log("2. editcountry [-add countryID continentID] [-remove countryID]");
+        LogEntryBuffer.getInstance().log("3. editneighbor [-add countryID neighborcountryID] [-remove countryID]");
+        LogEntryBuffer.getInstance().log("4. showmap");
+        LogEntryBuffer.getInstance().log("5. savemap [filename]");
+        LogEntryBuffer.getInstance().log("6. validatemap");
+        LogEntryBuffer.getInstance().log(" --- ");
     }
 }
