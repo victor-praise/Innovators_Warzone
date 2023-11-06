@@ -10,8 +10,9 @@
   <component name="ChangeListManager">
     <list default="true" id="de8cebc6-ebf1-495e-a616-20e9d2b1e9a6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/logger/LogWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/logger/LogWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/BaseCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/BaseCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/Country.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/orders/AirliftOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/orders/AirliftOrder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,23 +209,6 @@
     <MESSAGE value="Country class and functions added" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/models/Map.java</url>
-          <line>241</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/services/MapService.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Innovators_Warzone$MapTest_test_givenAnUnconnectedContinent_whenValidated_thenValidationFails.ic" NAME="MapTest.test_givenAnUnconnectedContinent_whenValidated_thenValidationFails Coverage Results" MODIFIED="1696458892810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>main.java.models.*</FILTER>
     </SUITE>
