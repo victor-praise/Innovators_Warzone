@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
+
  * Create a new AdvanceCommand
  * @author sadiq
  * */
@@ -44,8 +45,11 @@ public class AdvanceCommandTest{
     }
 
     /**
+     * Checks if the advance order was issued or not
+     *
      * When Trying to advance more units than available in country, order should fail
      */
+
     @Test
     void test_currentArmies_ifAttemptToAdvanceMoreThanCurrentCount_thenFails() {
         Player l_testPlayer1 = new Player("Player 1");

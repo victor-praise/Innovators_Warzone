@@ -176,7 +176,7 @@ public class Country {
         this.d_noOfArmies += p_units;
     }
 
-    /**
+
      * Reduces a given number of army units to this country
      *
      * @param p_units units of army to reduce
