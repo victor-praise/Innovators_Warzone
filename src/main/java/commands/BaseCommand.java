@@ -90,6 +90,11 @@ public enum BaseCommand {
      */
     Blockade("blockade"),
 
+
+    /**
+     * destroy half of the armies located on an opponent’s territory.
+     */
+    Bomb("bomb"),
     /**
      * An invalid command string by user will correspond to this.
      */

@@ -29,5 +29,6 @@ public class AirliftOrder implements Order {
 
         String l_message = "[Airlift Order] Airlifted  " + d_numberOfArmies + " army units from " + d_sourceCountry.getD_countryName() + " to " + d_targetCountry.getD_countryName();
         LogEntryBuffer.getInstance().log(l_message);
+        System.out.println(l_message);
     }
 }
