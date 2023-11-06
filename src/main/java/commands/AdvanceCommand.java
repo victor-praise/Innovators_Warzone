@@ -16,7 +16,6 @@ public class AdvanceCommand extends PlayerOrderCommand{
      * @param p_Player player who issued the order
      * @param baseParams parameters given when issuing the order
      */
-
     public AdvanceCommand(Player p_Player, String[] baseParams) {
         super(p_Player, BaseCommand.AdvanceCommand, baseParams, null);
     }
