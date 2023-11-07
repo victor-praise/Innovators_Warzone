@@ -1,6 +1,8 @@
 package main.java.phases;
 
 import main.java.arena.Game;
+import main.java.commands.BaseFunctionality;
+import main.java.commands.Functionality;
 import main.java.models.Continent;
 import main.java.models.Country;
 import org.junit.jupiter.api.AfterEach;
@@ -12,6 +14,7 @@ import java.util.List;
 
 import static main.java.arena.Game.sharedInstance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @author kevin on 2023-11-04
@@ -53,4 +56,88 @@ public class PostLoadTests {
         assertEquals(6, l_continents.size(), "Expected 6 continents but found: " + l_continents.size());
         assertEquals(31, l_countries.size(), "Expected 31 countries but found: " + l_countries.size());
     }
+
+//    @Test
+//    public void testAddCountry() {
+//        // First, add the continent
+//        String[] continentParams = {"-add", "Continent1", "4"};
+//        Functionality continentFunctionality = new Functionality(BaseFunctionality.Add, continentParams);
+//        d_systemUnderTest.editContinent(new String[0], new Functionality[]{continentFunctionality});
+//
+//        // Now, add the country to the added continent
+//        String[] countryParams = {"-add", "Country1", "Continent1"};
+//        Functionality countryFunctionality = new Functionality(BaseFunctionality.Add, countryParams);
+//        d_systemUnderTest.editCountry(new String[0], new Functionality[]{countryFunctionality});
+//
+//        assertNotNull(Game.sharedInstance().getD_map().getCountry("Country1"));
+//    }
+
+    @Test
+    public void test_AddCountryInvalidParams() {
+        String[] params = {"-add", "Country1"};
+        Functionality functionality = new Functionality(BaseFunctionality.Add, params);
+        d_systemUnderTest.editCountry(new String[0], new Functionality[]{functionality});
+
+        assertNull(Game.sharedInstance().getD_map().getCountry("Country1"));
+    }
+
+    @Test
+    public void test_RemoveCountry() {
+        Game.sharedInstance().getD_map().addCountry("Country1", "Continent1");
+
+        String[] params = {"-remove", "Country1"};
+        Functionality functionality = new Functionality(BaseFunctionality.Remove, params);
+        d_systemUnderTest.editCountry(new String[0], new Functionality[]{functionality});
+
+        assertNull(Game.sharedInstance().getD_map().getCountry("Country1"));
+    }
+
+    @Test
+    public void test_RemoveCountryNotFound() {
+        String[] params = {"-remove", "Country1"};
+        Functionality functionality = new Functionality(BaseFunctionality.Remove, params);
+        d_systemUnderTest.editCountry(new String[0], new Functionality[]{functionality});
+    }
+
+//    @Test
+//    public void testEditContinentAdd() {
+//        String[] continentParams = {"-add", "Continent1", "4"};
+//        Functionality functionality = new Functionality(BaseFunctionality.Add, continentParams);
+//        d_systemUnderTest.editContinent(new String[0], new Functionality[]{functionality});
+//
+//        Continent continent = Game.sharedInstance().getD_map().getContinent("Continent1");
+//        assertNotNull(continent);
+//    }
+
+
+    @Test
+    public void test_EditContinentAddInvalidParams() {
+        String[] params = {"-add", "Continent1"}; // Invalid format, missing bonus
+        Functionality functionality = new Functionality(BaseFunctionality.Add, params);
+        d_systemUnderTest.editContinent(new String[0], new Functionality[]{functionality});
+
+        assertNull(Game.sharedInstance().getD_map().getContinent("Continent1"));
+    }
+
+
+    @Test
+    public void test_RemoveContinentNotFound() {
+        PostLoad postLoad = new PostLoad();
+
+        String[] params = {"-remove", "Continent1"};
+        Functionality functionality = new Functionality(BaseFunctionality.Remove, params);
+        postLoad.editContinent(new String[0], new Functionality[]{functionality});
+
+        // You can assert that the method completes without errors, e.g., no exceptions are thrown
+    }
+
+
+    @Test
+    public void test_EditContinentRemoveNotFound() {
+        String[] params = {"-remove", "NonExistentContinent"};
+        Functionality functionality = new Functionality(BaseFunctionality.Remove, params);
+        d_systemUnderTest.editContinent(new String[0], new Functionality[]{functionality});
+    }
+
 }
+
