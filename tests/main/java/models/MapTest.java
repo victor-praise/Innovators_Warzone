@@ -220,7 +220,7 @@ class MapTest {
         Country country2 = new Country(2, "Country2", 1);
         Country country3 = new Country(3, "Country3", 1);
 
-        // Add neighbors for all countries
+        // Adding neighbors for all countries
         country1.addNeighbour(2);
         country1.addNeighbour(3);
 
@@ -254,6 +254,4 @@ class MapTest {
         // Assert
         assertFalse(result);
     }
-
-
 }
