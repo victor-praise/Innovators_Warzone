@@ -21,6 +21,12 @@ public class Country {
 
     private List<Integer> d_neighbors;
 
+    private boolean d_isNeutralTerritory = false;
+
+    private Player d_ownedBy;
+
+    private int d_availableArmyUnits = 0;
+
     /**
      * constructor of this class.
      *
@@ -127,6 +133,69 @@ public class Country {
     }
 
     /**
+     * Determines if a country is neutral
+     * @return true if the country is neutral, false otherwise
+     */
+    public boolean isD_isNeutralTerritory() {
+        return d_isNeutralTerritory;
+    }
+
+    /**
+     * Gives count of troops available to Advance/Airlift
+     *
+     * @return  count of troops available to Advance/Airlift
+     */
+    public int getD_availableArmyUnits() {
+        return d_availableArmyUnits;
+    }
+
+    /**
+     * Sets the count of troops available to Advance/Airlift
+     *
+     * @param d_availableArmyUnits kill count
+     */
+    public void setD_availableArmyUnits(int d_availableArmyUnits) {
+        this.d_availableArmyUnits = d_availableArmyUnits;
+    }
+
+    /**
+     * Reset Available Army Units back to total army units. This should be reset after every turn
+     */
+    public void resetD_availableArmyUnits() {
+        this.d_availableArmyUnits = this.d_noOfArmies;
+    }
+
+    /**
+     * Set the isNeutral flag for a country
+     * @param p_isNeutralTerritory value to set
+     */
+    public void setD_isNeutralTerritory(boolean p_isNeutralTerritory) {
+        if (p_isNeutralTerritory) {
+            this.d_ownedBy = null;
+        }
+        this.d_isNeutralTerritory = p_isNeutralTerritory;
+    }
+
+    /**
+     * get the player who owns this country
+     * @return player who owns this country, null if it's neutral territory
+     */
+    public Player getD_ownedBy() {
+        if (this.d_isNeutralTerritory) {
+            return null;
+        }
+        return d_ownedBy;
+    }
+
+    /**
+     * sets the owner of this country
+     * @param d_ownedBy player who should own this country
+     */
+    public void setD_ownedBy(Player d_ownedBy) {
+        this.d_ownedBy = d_ownedBy;
+    }
+
+    /**
      * Adds a neighbour to the list
      * @param p_countryID country ID
      */
@@ -156,6 +225,28 @@ public class Country {
      */
     public void addArmyUnits(int p_units) {
         this.d_noOfArmies += p_units;
+        // Also update the available units for deployment
+        this.d_availableArmyUnits += p_units;
+    }
+
+    /**
+     * Reduces a given number of army units to this country
+     *
+     * @param p_units units of army to reduce
+     */
+    public void reduceArmyUnits(int p_units) {
+        this.d_noOfArmies -= p_units;
+        if (this.d_noOfArmies < 0) {
+            this.d_noOfArmies = 0;
+        }
+    }
+
+    /**
+     * Check if country is a neighbour to Country A (Current Country object)
+     * @param p_destCountry country to be checked as neighbour
+     */
+    public boolean hasAdjacentCountry(Country p_destCountry) {
+        return getD_neighbors().contains(p_destCountry.getD_countryID());
     }
 
     /**

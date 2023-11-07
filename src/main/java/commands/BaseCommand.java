@@ -63,18 +63,43 @@ public enum BaseCommand {
     /**
      * Issues a deploy order
      */
-    DeployOrder("deploy"),
+    Deploy("deploy"),
 
     /**
-     * Issues a deploy order
+     * Issues a Diplomacy Order
+     */
+    Diplomacy("diplomacy"),
+
+    /**
+     * Issues a commit order when there are no more orders
      */
     Commit("commit"),
+
+    /**
+     * Issues an advance order
+     */
+    Advance("advance"),
 
     /**
      * Issues a deploy order
      */
     Quit("quit"),
 
+    /**
+     * Airlift XX army units from one territory to another.
+     */
+    Airlift("airlift"),
+
+    /**
+     * Marks a given territory as NEUTRAL and tripling its army units.
+     */
+    Blockade("blockade"),
+
+
+    /**
+     * destroy half of the armies located on an opponent’s territory.
+     */
+    Bomb("bomb"),
     /**
      * An invalid command string by user will correspond to this.
      */

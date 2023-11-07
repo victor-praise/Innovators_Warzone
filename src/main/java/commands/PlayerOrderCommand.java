@@ -18,4 +18,12 @@ public class PlayerOrderCommand extends Command {
         super(command, baseParams, functionalities);
         this.d_issuingPlayer = p_player;
     }
+
+    /**
+     * Checks if there are still some troops to be deployed
+     * @return true if there are troop deployment pending, false otherwise
+     */
+    public boolean isDeploymentPending() {
+        return (d_issuingPlayer.getD_assignedArmyUnits() > 0);
+    }
 }

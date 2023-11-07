@@ -301,7 +301,6 @@ public class Map {
 //         return !d_countryReachability.containsValue(false);
     }
 
-
     /**
      * DFS applies iteratively to all entered node
      *

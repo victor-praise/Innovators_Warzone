@@ -9,6 +9,7 @@ import main.java.models.Player;
 import main.java.phases.Phase;
 import main.java.phases.Preload;
 import main.java.utils.CommandParser;
+import main.java.utils.logger.LogEntryBuffer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,14 @@ public class Game {
         }
 
         return d_sharedInstance;
+    }
+
+    /**
+     * Return the current phase
+     * @return current phase of game
+     */
+    public Phase getD_gamePhase() {
+        return d_gamePhase;
     }
 
     /**
@@ -185,15 +194,19 @@ public class Game {
      * randomly assign each country in countries list to a single player
      */
     public void assignCountriesToPlayers() {
-        int playersCount = getD_players().size();
-        switch (playersCount) {
+        int l_playersCount = getD_players().size();
+        String l_message;
+        switch (l_playersCount) {
             case 0:
-                System.out.println("[AssignCountries]: No players defined. Cannot assign countries.");
+                l_message = "[AssignCountries]: No players defined. Cannot assign countries.";
+                LogEntryBuffer.getInstance().log(l_message);
+                System.out.println(l_message);
                 break;
 
             case 1:
                 getD_map().getD_countries().forEach(country -> d_players.get(0).receiveOwnershipForCountry(country));
-                System.out.println("[AssignCountries]: Single player defined. Assigning all the countries to: " + d_players.get(0).getD_name());
+                l_message = "[AssignCountries]: Single player defined. Assigning all the countries to: " + d_players.get(0).getD_name();
+                LogEntryBuffer.getInstance().log(l_message);
                 System.out.println("[AssignCountries]: Winner: " + d_players.get(0).getD_name());
                 Game.endGamePlay();
                 break;
@@ -201,10 +214,10 @@ public class Game {
             default:
                 Random randomNum = new Random();
                 getD_map().getD_countries().forEach(country -> {
-                    int randomPlayerIndex = randomNum.nextInt(playersCount);
+                    int randomPlayerIndex = randomNum.nextInt(l_playersCount);
                     Player randomPlayer = d_players.get(randomPlayerIndex);
                     if (randomPlayer.receiveOwnershipForCountry(country)) {
-                        System.out.println("[Game]: Assigning country: " + country.getD_countryName() + " to: -- " + randomPlayer.getD_name());
+                        LogEntryBuffer.getInstance().log("[Game]: Assigning country: " + country.getD_countryName() + " to: -- " + randomPlayer.getD_name());
                     }
                 });
         }
@@ -235,7 +248,7 @@ public class Game {
      * We set up the game play over here with proper description being given to user
      */
     public void start() {
-        System.out.println("--- Game Starts ---");
+        LogEntryBuffer.getInstance().log("===== Game Startup Phase =====" + "\n");
         System.out.println("--- At any point, you can give a command  'quit' to exit the game ---");
         String l_nextCommand = "";
         CommandParser l_parser = new CommandParser();
@@ -256,5 +269,6 @@ public class Game {
     // To be called when a single player controls entire board
     public static void endGamePlay() {
         Is_Gameplay_On = false;
+        LogEntryBuffer.getInstance().log("==== Game Ended ====");
     }
 }

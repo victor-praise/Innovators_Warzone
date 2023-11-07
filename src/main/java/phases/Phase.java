@@ -7,6 +7,7 @@ import main.java.commands.Functionality;
 /**
  * This is an abstract class that defines all the functionalities of the game.
  * Each functionality is applicable with only a specific concrete Phase class implementation
+ *
  * @author kevin on 2023-10-30
  */
 public abstract class Phase {
@@ -14,7 +15,7 @@ public abstract class Phase {
     /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void loadMap(String[] p_baseParams, Functionality[] p_functionalities);
@@ -22,7 +23,7 @@ public abstract class Phase {
     /**
      * Display the current list of continents countries and neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void showMap(String[] p_baseParams, Functionality[] p_functionalities);
@@ -30,7 +31,7 @@ public abstract class Phase {
     /**
      * Validates the current map
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void validateMap(String[] p_baseParams, Functionality[] p_functionalities);
@@ -40,7 +41,7 @@ public abstract class Phase {
     /**
      * Allows user to 'Add' or 'Remove' continents
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void editContinent(String[] p_baseParams, Functionality[] p_functionalities);
@@ -48,7 +49,7 @@ public abstract class Phase {
     /**
      * Allows user to 'Add' or 'Remove' countries
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void editCountry(String[] p_baseParams, Functionality[] p_functionalities);
@@ -56,7 +57,7 @@ public abstract class Phase {
     /**
      * Allows user to 'Add' or 'Remove' neighbours
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void editNeighbour(String[] p_baseParams, Functionality[] p_functionalities);
@@ -64,7 +65,7 @@ public abstract class Phase {
     /**
      * Load a map from an existing “domination” map file, or create a new map from scratch if the file does not exist
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void editMap(String[] p_baseParams, Functionality[] p_functionalities);
@@ -72,7 +73,7 @@ public abstract class Phase {
     /**
      * Save a map to a text file exactly as edited (using the “domination” game map format)
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void saveMap(String[] p_baseParams, Functionality[] p_functionalities);
@@ -82,14 +83,15 @@ public abstract class Phase {
     /**
      * Allows user to 'Add' or 'Remove' players
      *
-     * @param p_baseParams parameters for this command
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void gamePlayers(String[] p_baseParams, Functionality[] p_functionalities);
 
     /**
      * Randomly assigns all the countries to different players
-     * @param p_baseParams parameters for this command
+     *
+     * @param p_baseParams      parameters for this command
      * @param p_functionalities functionalities of this command
      */
     abstract public void assignCountries(String[] p_baseParams, Functionality[] p_functionalities);
@@ -138,7 +140,7 @@ public abstract class Phase {
      * Displays invalid command message and prints the allowed commands
      */
     public void printInvalidCommandMessage() {
-        System.out.println("Invalid command in state " + this.getClass().getSimpleName() );
+        System.out.println("Invalid command in state " + this.getClass().getSimpleName());
     }
 
     /**
@@ -147,9 +149,7 @@ public abstract class Phase {
      * @param p_command the command to execute
      */
     public void executeCommand(Command p_command) {
-        if (p_command.d_command == BaseCommand.None) {
-            return;
-        } else {
+        if (p_command.d_command != BaseCommand.None) {
             switch (p_command.d_command) {
                 case EditContinent:
                     editContinent(p_command.d_baseParams, p_command.d_functionalities);

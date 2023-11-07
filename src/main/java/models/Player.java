@@ -6,6 +6,7 @@ import main.java.utils.OrderParser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -26,6 +27,12 @@ public class Player {
 
     private List<Order> d_ordersList = new ArrayList<>();
 
+    private List<SpecialCard> specialCards = new ArrayList<SpecialCard>(0);
+
+    private boolean isConqueror = false;
+
+    private boolean didCommitForThisTurn = false;
+
     public Player() {
         d_ownedCountries = new ArrayList<>();
     }
@@ -33,6 +40,14 @@ public class Player {
     public Player(String p_inputName) {
         this();
         d_name = p_inputName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Player player)) {
+            return false;
+        }
+        return getD_name().equalsIgnoreCase(player.getD_name());
     }
 
     /**
@@ -89,6 +104,87 @@ public class Player {
     }
 
     /**
+     * identifies whether this player is Conqueror for this turn
+     * @return true if the player conquered at least one Country in their turn
+     */
+    public boolean isConqueror() {
+        return isConqueror;
+    }
+
+    /**
+     * set 'Conqueror' flag for this player in this turn
+     * @param p_conqueror conqueror flag value
+     */
+    public void setConqueror(boolean p_conqueror) {
+        isConqueror = p_conqueror;
+    }
+
+    /**
+     * Determines if the player has committed for this turn
+     * @return true if player committed after issuing all orders
+     */
+    public boolean didCommitForThisTurn() {
+        return didCommitForThisTurn;
+    }
+
+    /**
+     * Set the didCommitForThisTurn flag
+     *
+     * @param didCommitForThisTurn true when player commits after deciding all issuing his command
+     */
+    public void setCommitForThisTurn(boolean didCommitForThisTurn) {
+        this.didCommitForThisTurn = didCommitForThisTurn;
+    }
+
+    /**
+     * Fetch all the owned Special cards
+     * @return list of cards owned by this player
+     */
+    public List<SpecialCard> getSpecialCards() {
+        return specialCards;
+    }
+
+    /**
+     * Adds a special card to this player's list
+     * @param p_specialCard Card to be added to player's cards list
+     */
+    public void addSpecialCards(SpecialCard p_specialCard) {
+        System.out.println(this.getD_name() + " : has been assigned a card: " + p_specialCard);
+        this.specialCards.add(p_specialCard);
+    }
+
+    /**
+     * Identifies if this player has a special card of a given type
+     * @param p_cardType type of special card to check
+     * @return true if the player has this special card, false otherwise
+     */
+    public boolean hasSpecialCardOfType(String p_cardType) {
+        SpecialCard specialCard = SpecialCard.from(p_cardType);
+        if (specialCard != null) {
+            return this.hasSpecialCard(specialCard);
+        }
+        return false;
+    }
+
+    /**
+     * Identifies whether the player has special card of this type
+     * @param p_card special card to check
+     * @return true if the player has the special card, false otherwise
+     */
+    public boolean hasSpecialCard(SpecialCard p_card) {
+        return this.specialCards.contains(p_card);
+    }
+
+    /**
+     * Removes first occurrence of
+     * @param p_specialCard card to remove
+     * @return true if a special card is removed successfully, false otherwise
+     */
+    public boolean removeSpecialCard(SpecialCard p_specialCard) {
+        return this.specialCards.remove(p_specialCard);
+    }
+
+    /**
      * Reduces given number of army units from player's available units
      *
      * @param p_units units to reduce
@@ -104,6 +200,7 @@ public class Player {
      * @return success or failure
      */
     public boolean receiveOwnershipForCountry(Country p_country) {
+        p_country.setD_ownedBy(this);
         return this.d_ownedCountries.add(p_country);
     }
 
@@ -178,7 +275,6 @@ public class Player {
         try {
             return this.d_ordersList.remove(0);
         } catch (IndexOutOfBoundsException exception) {
-            System.out.println("[Player]: No more orders available for: " + getD_name());
             return null;
         }
     }
@@ -202,7 +298,6 @@ public class Player {
             System.out.println("6. negotiate playerID");
             System.out.println("7. quit");
             System.out.println(" --- ");
-
         }
     }
 
@@ -212,6 +307,27 @@ public class Player {
      * @return true if player can issue orders
      */
     public boolean canIssueOrder() {
+        return !didCommitForThisTurn;
+    }
+
+    /**
+     * Determines if the user can deploy any more troops
+     *
+     * @return true if player has troops to deploy, false otherwise
+     */
+    public boolean canDeployTroops() {
         return getD_assignedArmyUnits() > 0;
+    }
+    /**
+     * Randomly assigns a special card to the player
+     */
+    public void assignRandomCard() {
+        Object[] cards = SpecialCard.validValues();
+        Random randomNum = new Random();
+        int randomCardIndex = randomNum.nextInt(cards.length);
+        addSpecialCards((SpecialCard) cards[randomCardIndex]);
+
+        // Once a card has been assigned, mark conqueror as false to avoid adding multiple cards by mistake
+        setConqueror(false);
     }
 }
