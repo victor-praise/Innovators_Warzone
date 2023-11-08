@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author kevin on 2023-11-04
+ * @author Karansinh on 2023-11-07
  */
 public class PostLoadTests {
 
@@ -56,6 +57,10 @@ public class PostLoadTests {
         assertEquals(31, l_countries.size(), "Expected 31 countries but found: " + l_countries.size());
     }
 
+    /**
+     * Test case to verify the addition of a country to the map.
+     * It loads a map, adds a country, and checks if the country was added successfully.
+     */
     @Test
     public void test_AddCountry() {
         String[] l_params = new String[] {"canada"};
@@ -69,6 +74,10 @@ public class PostLoadTests {
         assertNotNull(Game.sharedInstance().getD_map().getCountry("CountryToBeAdded"));
     }
 
+    /**
+     * Test case to verify the handling of invalid parameters when adding a country to the map.
+     * It attempts to add a country with invalid parameters and checks that the country is not added.
+     */
     @Test
     public void test_AddCountryInvalidParams() {
         String[] params = {"-add", "Country1"};
@@ -78,6 +87,10 @@ public class PostLoadTests {
         assertNull(Game.sharedInstance().getD_map().getCountry("Country1"));
     }
 
+    /**
+     * Test case to verify the removal of a country from the map.
+     * It adds a country, removes it, and checks if the country was successfully removed.
+     */
     @Test
     public void test_RemoveCountry() {
         Game.sharedInstance().getD_map().addCountry("Country1", "Continent1");
@@ -89,6 +102,10 @@ public class PostLoadTests {
         assertNull(Game.sharedInstance().getD_map().getCountry("Country1"));
     }
 
+    /**
+     * Test case to verify the removal of a non-existent country from the map.
+     * It attempts to remove a country that does not exist and checks that the operation has no effect.
+     */
     @Test
     public void test_RemoveCountryNotFound() {
         Functionality functionality = new Functionality(BaseFunctionality.Remove, new String[]{"Country1"});
@@ -97,6 +114,10 @@ public class PostLoadTests {
         assertNull(Game.sharedInstance().getD_map().getCountry("Country1"));
     }
 
+    /**
+     * Test case to verify the addition of a continent to the map.
+     * It loads a map, adds a continent, and checks if the continent was added successfully.
+     */
     @Test
     public void test_AddContinent() {
         String[] l_params = new String[] {"canada"};
@@ -110,6 +131,10 @@ public class PostLoadTests {
         assertNotNull(Game.sharedInstance().getD_map().getContinent("ContinentToBeAdded"));
     }
 
+    /**
+     * Test case to verify the handling of invalid parameters when adding a continent to the map.
+     * It attempts to add a continent with invalid parameters and checks that the continent is not added.
+     */
     @Test
     public void test_AddContinentAddInvalidParams() {
         String[] params = {"-add", "Continent1"}; // Invalid format, missing bonus
@@ -119,6 +144,10 @@ public class PostLoadTests {
         assertNull(Game.sharedInstance().getD_map().getContinent("Continent1"));
     }
 
+    /**
+     * Test case to verify the removal of a continent from the map.
+     * It adds a continent, removes it, and checks if the continent was successfully removed.
+     */
     @Test
     public void test_RemoveContinent() {
         PostLoad postLoad = new PostLoad();
@@ -130,7 +159,10 @@ public class PostLoadTests {
         assertNull(Game.sharedInstance().getD_map().getContinent("Continent1"));
     }
 
-
+    /**
+     * Test case to verify the removal of a non-existent continent from the map.
+     * It attempts to remove a continent that does not exist and checks that the operation has no effect.
+     */
     @Test
     public void test_RemoveContinentNotFound() {
         Functionality functionality = new Functionality(BaseFunctionality.Remove, new String[]{"continent1"});
@@ -139,6 +171,10 @@ public class PostLoadTests {
         assertNull(Game.sharedInstance().getD_map().getContinent("continent1"));
     }
 
+    /**
+     * Test case to verify the handling of invalid parameters when adding a neighbor to a country.
+     * It attempts to add a neighbor with invalid parameters and checks that the operation is unsuccessful.
+     */
     @Test
     public void test_AddNeighbourInvalidParams() {
         String[] l_param = {"-add", "country1"}; //invalid format, missing neighbour name
@@ -147,6 +183,11 @@ public class PostLoadTests {
 
         assertNull(Game.sharedInstance().getD_map().getCountry(l_param[1]));
     }
+
+    /**
+     * Test case to verify the removal of a neighbor from a country.
+     * It adds a neighbor to a country, removes it, and checks if the neighbor was successfully removed.
+     */
     @Test
     public void test_RemoveNeighbour() {
         String[] l_params = {"-remove", "country1", "neighbour1"};
@@ -156,6 +197,10 @@ public class PostLoadTests {
         assertNull(Game.sharedInstance().getD_map().getCountry("neighbour1"));
     }
 
+    /**
+     * Test case to verify the removal of a non-existent neighbor from a country.
+     * It attempts to remove a neighbor that does not exist and checks that the operation has no effect.
+     */
     @Test
     public void test_RemoveNeighbourNotFound() {
         Functionality functionality = new Functionality(BaseFunctionality.Remove, new String[]{"country1", "neighbour1"});
@@ -164,6 +209,10 @@ public class PostLoadTests {
         assertNull(Game.sharedInstance().getD_map().getCountry("neighbour1"));
     }
 
+    /**
+     * Test case to verify the addition of a neighbor to a country.
+     * It loads a map, adds a neighbor to a country, and checks if the neighbor was added successfully.
+     */
     @Test
     public void test_AddNeighbour() {
         String[] l_params = new String[] {"canada"};
