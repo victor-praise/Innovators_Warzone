@@ -38,16 +38,35 @@ public class MapReader {
      * @return List of continents
      */
     public List<Continent> parseContinentMapData(List<String> p_file){
-        List<String> l_continentLines = p_file.subList(
-                p_file.indexOf("[continents]") + 1,
-                p_file.indexOf("[countries]") - 1);
-        List<Continent> l_continents = new ArrayList<Continent>();
-        for(String continents: l_continentLines){
-            String[] l_continentData = continents.split(" ");
-            l_continents.add(new Continent(l_continentData [0], Integer.parseInt(l_continentData [1])));
+
+        int l_continentsStartIndex = p_file.indexOf("[continents]") + 1;
+        int l_continentsEndIndex = p_file.indexOf("[countries]") - 1;
+
+        List<String> l_continentLines = p_file.subList(l_continentsStartIndex, l_continentsEndIndex);
+        List<Continent> l_continents = new ArrayList<>();
+
+        for (String continentData : l_continentLines) {
+            String[] l_parts = continentData.split(" ");
+            if (l_parts.length >= 2) {
+                String l_continentName = l_parts[0];
+                int l_controlValue = Integer.parseInt(l_parts[1]);
+                l_continents.add(new Continent(l_continentName, l_controlValue));
+            }
         }
+
         return l_continents;
+
+        // List<String> l_continentLines = p_file.subList(
+        //         p_file.indexOf("[continents]") + 1,
+        //         p_file.indexOf("[countries]") - 1);
+        // List<Continent> l_continents = new ArrayList<Continent>();
+        // for(String continents: l_continentLines){
+        //     String[] l_continentData = continents.split(" ");
+        //     l_continents.add(new Continent(l_continentData [0], Integer.parseInt(l_continentData [1])));
+        // }
+        // return l_continents;
     }
+
     /**
      * Reads the corresponding map file lines and extracts country data.
      *

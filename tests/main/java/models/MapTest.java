@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests methods in Map class
  * @author kevin on 2023-09-30
+ * @author Karansinh on 2023-10-04
  */
 class MapTest {
 
@@ -89,5 +89,170 @@ class MapTest {
             assertEquals(l_expectedMessage, e.getMessage());
             assertTrue(true, "Map Invalid Exception should be raised for unconnected continent");
         }
+    }
+
+    /**
+     * All the given counties are neighbour to each other, the result is a success
+     * @throws MapInvalidException
+     */
+    @Test
+    public void test_HasAdjacentContinentConnection_AllConnected() throws MapInvalidException {
+
+        Map l_map = new Map();
+        // Create a continent and add connected countries
+        Continent l_continent = new Continent("Test Continent", 1);
+        Country l_country1 = new Country(1, "Country 1", 1);
+        Country l_country2 = new Country(2, "Country 2", 1);
+        Country l_country3 = new Country(3, "Country 3", 1);
+
+        l_country1.addNeighbour(2);
+        l_country1.addNeighbour(3);
+        l_country2.addNeighbour(1);
+        l_country2.addNeighbour(3);
+        l_country3.addNeighbour(1);
+        l_country3.addNeighbour(2);
+
+        l_continent.addCountry(l_country1);
+        l_continent.addCountry(l_country2);
+        l_continent.addCountry(l_country3);
+
+        assertTrue(l_map.hasAdjacentContinentConnection(l_continent));
+    }
+
+    /**
+     * Given 1 country is always reachable to itself, the result is a success
+     * @throws MapInvalidException
+     */
+    @Test
+    public void test_HasAdjacentContinentConnection_SingleCountry() throws MapInvalidException {
+
+        Map l_map = new Map();
+        // Create a continent with a single country
+        Continent l_continent = new Continent("Test Continent", 1);
+        Country l_country1 = new Country(1, "Country 1", 1);
+        l_continent.addCountry(l_country1);
+
+        assertTrue(l_map.hasAdjacentContinentConnection(l_continent));
+    }
+
+    /**
+     * Adds one continent and checks if added successfully, the result is a success
+     */
+    @Test
+    void test_AddContinent() {
+
+        Map l_map = new Map();
+        // Test adding a new continent to the map
+        String l_continentName = "TestContinent";
+        int l_controlValue = 3;
+
+        l_map.addContinent(l_continentName, l_controlValue);
+
+        // Check if the continent was added successfully
+        assertTrue(l_map.continentExists(l_map.getD_continents(), l_continentName));
+    }
+
+    /**
+     * Given an existing country name, and it should return the corresponding Country object, the result is a success.
+     */
+    @Test
+    public void test_GetCountry_ExistingCountry() {
+        // Arrange
+        Map l_map = new Map();
+        Country l_country1 = new Country(1, "Country1", 1);
+        Country l_country2 = new Country(2, "Country2", 2);
+        l_map.addCountryToMap(l_country1);
+        l_map.addCountryToMap(l_country2);
+
+        // Act
+        Country l_result = l_map.getCountry("Country1");
+
+        // Assert
+        assertEquals(l_country1, l_result);
+    }
+
+    /**
+     * Given a non-existing country name, and it should return null.
+     */
+    @Test
+    public void test_GetCountry_NonExistingCountry() {
+        // Arrange
+        Map l_map = new Map();
+        Country l_country1 = new Country(1, "Country1", 1);
+        Country l_country2 = new Country(2, "Country2", 2);
+        l_map.addCountryToMap(l_country1);
+        l_map.addCountryToMap(l_country2);
+
+        // Act
+        Country l_result = l_map.getCountry("NonExistingCountry");
+
+        // Assert
+        assertNull(l_result);
+    }
+
+    /**
+     * Given a null country name, and it should also return null.
+     */
+    @Test
+    public void test_GetCountry_NullCountryName() {
+        // Arrange
+        Map l_map = new Map();
+        Country l_country1 = new Country(1, "Country1", 1);
+        Country l_country2 = new Country(2, "Country2", 2);
+        l_map.addCountryToMap(l_country1);
+        l_map.addCountryToMap(l_country2);
+
+        // Act
+        Country l_result = l_map.getCountry("");
+
+        // Assert
+        assertNull(l_result);
+    }
+
+    /**
+     * Given a map where all countries are connected to each other, and it returns true.
+     * @throws MapInvalidException
+     */
+    @Test
+    public void test_HasCountryConnectivity_AllConnected() throws MapInvalidException {
+        // Arrange
+        Map l_map = new Map();
+        Country l_country1 = new Country(1, "Country1", 1);
+        Country l_country2 = new Country(2, "Country2", 1);
+        Country l_country3 = new Country(3, "Country3", 1);
+
+        // Adding neighbors for all countries
+        l_country1.addNeighbour(2);
+        l_country1.addNeighbour(3);
+
+        l_country2.addNeighbour(1);
+
+        l_country3.addNeighbour(1);
+
+        l_map.addCountryToMap(l_country1);
+        l_map.addCountryToMap(l_country2);
+        l_map.addCountryToMap(l_country3);
+
+        // Act
+        boolean l_result = l_map.hasCountryConnectivity();
+
+        // Assert
+        assertTrue(l_result);
+    }
+
+    /**
+     * Given the map is empty, it should also return false.
+     * @throws MapInvalidException
+     */
+    @Test
+    public void test_HasCountryConnectivity_EmptyMap() throws MapInvalidException {
+        // Arrange
+        Map l_map = new Map();
+
+        // Act
+        boolean l_result = l_map.hasCountryConnectivity();
+
+        // Assert
+        assertFalse(l_result);
     }
 }

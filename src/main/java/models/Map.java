@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
 /**
  * This class is responsible for the map
  *
@@ -182,20 +181,44 @@ public class Map {
      * @return Boolean Value if all are connected
      * @throws MapInvalidException if any continent is not Connected
      */
+    // public Boolean hasAdjacentContinent() throws MapInvalidException {
+    //     for (Continent l_continent : d_continents) {
+    //         if (l_continent.getD_countries().isEmpty()) {
+    //             throw new MapInvalidException("Each continent must have at least one country. No country found under: " + l_continent.getD_continentName());
+    //         }
+    //         if (!hasAdjacentContinentConnection(l_continent)) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
     public Boolean hasAdjacentContinent() throws MapInvalidException {
         for (Continent l_continent : d_continents) {
-            if (l_continent.getD_countries().isEmpty()) {
-                throw new MapInvalidException("Each continent must have at least one country. No country found under: " + l_continent.getD_continentName());
-            }
+            continentHasCountry(l_continent);
             if (!hasAdjacentContinentConnection(l_continent)) {
                 return false;
             }
         }
         return true;
     }
-
+    
+    private void continentHasCountry(Continent continent) throws MapInvalidException {
+        if (continent.getD_countries().isEmpty()) {
+            throw new MapInvalidException("Each continent must have at least one country. No country found under: " + continent.getD_continentName());
+        }
+    }
+    
+    /**
+     * Checks if all countries in a given continent are connected and reachable from each other
+     * 
+     * @param p_continent
+     * @return
+     * @throws MapInvalidException
+     */
     public Boolean hasAdjacentContinentConnection(Continent p_continent) throws MapInvalidException {
         HashMap<Integer, Boolean> l_countryReachabilityStatus = new HashMap<Integer, Boolean>();
+
+        // Initialize country reachability status for the continent's countries
         for (Country country : p_continent.getD_countries()) {
             l_countryReachabilityStatus.put(country.getD_countryID(), false);
         }
@@ -239,20 +262,43 @@ public class Map {
      * @throws MapInvalidException which Country is not connected
      */
     public boolean hasCountryConnectivity() throws MapInvalidException {
+
         if (d_countries == null) {
             return false;
         }
+
+        // Initialize the country reachability status map
         d_countries.forEach(country -> d_countryReachability.put(country.getD_countryID(), false));
+
+        // Build country reachability status starting from the first country
         buildCountryReachabilityStatus(d_countries.get(0));
 
-        // Iterates over entries to locate the unreachable country
+        // Check for unreachable countries and throw an exception if found
         for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReachability.entrySet()) {
             if (!entry.getValue()) {
                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
                 throw new MapInvalidException(l_exceptionMessage);
             }
         }
+
+        // Check if all countries are reachable
         return !d_countryReachability.containsValue(false);
+        
+        
+//         if (d_countries == null) {
+//             return false;
+//         }
+//         d_countries.forEach(country -> d_countryReachability.put(country.getD_countryID(), false));
+//         buildCountryReachabilityStatus(d_countries.get(0));
+//
+//         // Iterates over entries to locate the unreachable country
+//         for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReachability.entrySet()) {
+//             if (!entry.getValue()) {
+//                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
+//                 throw new MapInvalidException(l_exceptionMessage);
+//             }
+//         }
+//         return !d_countryReachability.containsValue(false);
     }
 
     /**
@@ -352,13 +398,23 @@ public class Map {
      * @param p_countryName name of new continent
      * @return Country with the passed in name, null when no country could not be found
      */
+//    public Country getCountry(String p_countryName) {
+//        if (d_countries == null) {
+//            return null;
+//        }
+//        for (Country obj : d_countries) {
+//            if (obj.getD_countryName().equalsIgnoreCase(p_countryName)) {
+//                return obj;
+//            }
+//        }
+//        return null;
+//    }
     public Country getCountry(String p_countryName) {
-        if (d_countries == null) {
-            return null;
-        }
-        for (Country obj : d_countries) {
-            if (obj.getD_countryName().equalsIgnoreCase(p_countryName)) {
-                return obj;
+        if (d_countries != null) {
+            for (Country country : d_countries) {
+                if (country.getD_countryName().equalsIgnoreCase(p_countryName)) {
+                    return country;
+                }
             }
         }
         return null;
@@ -415,13 +471,25 @@ public class Map {
      * @param p_controlValue  Control value of the continent to be added
      */
     public void addContinent(String p_continentName, Integer p_controlValue) {
-        if (!continentExists(getD_continents(), p_continentName)) {
+
+
+        if (continentExists(getD_continents(), p_continentName)) {
+            System.out.println("Continent already exists on the map");
+        } else {
             Continent l_newContinent = new Continent(p_continentName, p_controlValue);
             d_continents.add(l_newContinent);
             System.out.println("[Map]: Inserted a new continent: " + l_newContinent);
-        } else {
-            System.out.println("Continent already exists on the map");
         }
+        
+
+
+        // if (!continentExists(getD_continents(), p_continentName)) {
+        //     Continent l_newContinent = new Continent(p_continentName, p_controlValue);
+        //     d_continents.add(l_newContinent);
+        //     System.out.println("[Map]: Inserted a new continent: " + l_newContinent);
+        // } else {
+        //     System.out.println("Continent already exists on the map");
+        // }
     }
 
     /**
@@ -549,7 +617,48 @@ public class Map {
 
     public void show() {
 
-        // display list of Continents in the format continentName continentValue
+        List<Continent> continents = getD_continents();
+        List<Country> countries = getD_countries();
+    
+        // Display list of Continents in the format continentName continentValue
+        if (continents.isEmpty()) {
+            return;
+        }
+        System.out.println("\n[Continents]");
+        for (Continent continent : continents) {
+            System.out.println(continent.getD_continentName() + " " + continent.getD_continentValue());
+        }
+    
+        System.out.println();
+    
+        // Display list of countries in the format countryID countryName ownerName (if available)
+        if (countries.isEmpty()) {
+            return;
+        }
+        System.out.println("[Countries]");
+        for (Country country : countries) {
+            System.out.print(country.getD_countryID() + " " + country.getD_countryName());
+            String l_ownerName = Game.sharedInstance().getOwnerNameForCountryName(country.getD_countryName());
+            if (l_ownerName != null) {
+                System.out.print(" " + l_ownerName);
+            }
+            System.out.println();
+        }
+    
+        System.out.println();
+    
+        // Display list of Borders
+        System.out.println("\n[Borders]");
+        for (Country country : countries) {
+            StringBuilder neighbors = new StringBuilder(String.valueOf(country.getD_countryID()));
+            for (int neighbor : country.getD_neighbors()) {
+                neighbors.append(" ").append(neighbor);
+            }
+            System.out.println(neighbors);
+        }
+        
+
+        /** // display list of Continents in the format continentName continentValue
         if (getD_continents().isEmpty()) {
             System.out.println("\n[Map]: This map is empty.");
             return;
@@ -590,5 +699,6 @@ public class Map {
             }
             System.out.println(neighbours);
         }
+    } **/
     }
 }
