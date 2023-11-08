@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests methods in Map class
  * @author kevin on 2023-09-30
+ * @author Karansinh on 2023-10-04
  */
 class MapTest {
 
