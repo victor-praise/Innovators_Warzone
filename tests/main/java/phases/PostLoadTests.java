@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static main.java.arena.Game.sharedInstance;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author kevin on 2023-11-04
@@ -58,6 +57,19 @@ public class PostLoadTests {
     }
 
     @Test
+    public void test_AddCountry() {
+        String[] l_params = new String[] {"canada"};
+
+        d_systemUnderTest.loadMap(l_params, null);
+        String[] l_param = {"CountryToBeAdded", "Ontario_and_Quebec"};
+
+        Functionality functionality = new Functionality(BaseFunctionality.Add, l_param);
+        d_systemUnderTest.editCountry(new String[0], new Functionality[]{functionality});
+
+        assertNotNull(Game.sharedInstance().getD_map().getCountry("CountryToBeAdded"));
+    }
+
+    @Test
     public void test_AddCountryInvalidParams() {
         String[] params = {"-add", "Country1"};
         Functionality functionality = new Functionality(BaseFunctionality.Add, params);
@@ -79,9 +91,23 @@ public class PostLoadTests {
 
     @Test
     public void test_RemoveCountryNotFound() {
-        String[] params = {"-remove", "Country1"};
-        Functionality functionality = new Functionality(BaseFunctionality.Remove, params);
+        Functionality functionality = new Functionality(BaseFunctionality.Remove, new String[]{"Country1"});
         d_systemUnderTest.editCountry(new String[0], new Functionality[]{functionality});
+
+        assertNull(Game.sharedInstance().getD_map().getCountry("Country1"));
+    }
+
+    @Test
+    public void test_AddContinent() {
+        String[] l_params = new String[] {"canada"};
+
+        d_systemUnderTest.loadMap(l_params, null);
+
+        String[] l_param = {"ContinentToBeAdded", "5"};
+        Functionality functionality = new Functionality(BaseFunctionality.Add, l_param);
+        d_systemUnderTest.editContinent(new String[0], new Functionality[]{functionality});
+
+        assertNotNull(Game.sharedInstance().getD_map().getContinent("ContinentToBeAdded"));
     }
 
     @Test
@@ -97,35 +123,57 @@ public class PostLoadTests {
     public void test_RemoveContinent() {
         PostLoad postLoad = new PostLoad();
 
-        String[] params = {"-remove", "Continent1"};
-        Functionality functionality = new Functionality(BaseFunctionality.Remove, params);
-        postLoad.editContinent(new String[0], new Functionality[]{functionality});
+        String[] l_params = {"Continent1"};
+        Functionality functionality = new Functionality(BaseFunctionality.Remove, l_params);
+        d_systemUnderTest.editContinent(new String[0], new Functionality[]{functionality});
+
+        assertNull(Game.sharedInstance().getD_map().getContinent("Continent1"));
     }
 
 
     @Test
     public void test_RemoveContinentNotFound() {
-        String[] params = {"-remove", "NonExistentContinent"};
-        Functionality functionality = new Functionality(BaseFunctionality.Remove, params);
+        Functionality functionality = new Functionality(BaseFunctionality.Remove, new String[]{"continent1"});
         d_systemUnderTest.editContinent(new String[0], new Functionality[]{functionality});
+
+        assertNull(Game.sharedInstance().getD_map().getContinent("continent1"));
     }
 
     @Test
     public void test_AddNeighbourInvalidParams() {
-        String[] param = {"-add", "country1"}; //invalid format, missing neighbour name
-        Functionality functionality = new Functionality(BaseFunctionality.Add, param);
+        String[] l_param = {"-add", "country1"}; //invalid format, missing neighbour name
+        Functionality functionality = new Functionality(BaseFunctionality.Add, l_param);
         d_systemUnderTest.editNeighbour(new String[0], new Functionality[]{functionality});
 
-        assertNull(Game.sharedInstance().getD_map().getCountry(param[1]));
+        assertNull(Game.sharedInstance().getD_map().getCountry(l_param[1]));
     }
     @Test
     public void test_RemoveNeighbour() {
-        String[] params = {"-remove", "country1"};
+        String[] l_params = {"-remove", "country1", "neighbour1"};
+        Functionality functionality = new Functionality(BaseFunctionality.Remove, l_params);
+        d_systemUnderTest.editNeighbour(new String[0], new Functionality[]{functionality});
+
+        assertNull(Game.sharedInstance().getD_map().getCountry("neighbour1"));
     }
 
     @Test
     public void test_RemoveNeighbourNotFound() {
+        Functionality functionality = new Functionality(BaseFunctionality.Remove, new String[]{"country1", "neighbour1"});
+        d_systemUnderTest.editNeighbour(new String[0], new Functionality[]{functionality});
 
+        assertNull(Game.sharedInstance().getD_map().getCountry("neighbour1"));
+    }
+
+    @Test
+    public void test_AddNeighbour() {
+        String[] l_params = new String[] {"canada"};
+
+        d_systemUnderTest.loadMap(l_params, null);
+
+        String[] l_param = {"New_Brunswick", "Quebec-North"};
+        Functionality functionality = new Functionality(BaseFunctionality.Add, l_param);
+        d_systemUnderTest.editNeighbour(new String[0], new Functionality[]{functionality});
+
+        assertNotNull(Game.sharedInstance().getD_map().getCountry("Quebec-North"));
     }
 }
-
