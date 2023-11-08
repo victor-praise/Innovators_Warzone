@@ -110,5 +110,22 @@ public class PostLoadTests {
         d_systemUnderTest.editContinent(new String[0], new Functionality[]{functionality});
     }
 
+    @Test
+    public void test_AddNeighbourInvalidParams() {
+        String[] param = {"-add", "country1"}; //invalid format, missing neighbour name
+        Functionality functionality = new Functionality(BaseFunctionality.Add, param);
+        d_systemUnderTest.editNeighbour(new String[0], new Functionality[]{functionality});
+
+        assertNull(Game.sharedInstance().getD_map().getCountry(param[1]));
+    }
+    @Test
+    public void test_RemoveNeighbour() {
+        String[] params = {"-remove", "country1"};
+    }
+
+    @Test
+    public void test_RemoveNeighbourNotFound() {
+
+    }
 }
 
