@@ -94,7 +94,7 @@ public class PostLoadTests {
     }
 
     @Test
-    public void test_RemoveContinentNotFound() {
+    public void test_RemoveContinent() {
         PostLoad postLoad = new PostLoad();
 
         String[] params = {"-remove", "Continent1"};
@@ -104,7 +104,7 @@ public class PostLoadTests {
 
 
     @Test
-    public void test_EditContinentRemoveNotFound() {
+    public void test_RemoveContinentNotFound() {
         String[] params = {"-remove", "NonExistentContinent"};
         Functionality functionality = new Functionality(BaseFunctionality.Remove, params);
         d_systemUnderTest.editContinent(new String[0], new Functionality[]{functionality});
