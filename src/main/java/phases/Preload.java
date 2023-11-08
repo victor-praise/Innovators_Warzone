@@ -66,6 +66,7 @@ public class Preload extends Edit {
     private void displayValidCommands() {
         LogEntryBuffer.getInstance().log("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
         LogEntryBuffer.getInstance().log("1. loadmap [filename]");
+        LogEntryBuffer.getInstance().log("quit");
         LogEntryBuffer.getInstance().log(" --- ");
     }
 }

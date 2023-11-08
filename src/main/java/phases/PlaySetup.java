@@ -154,8 +154,6 @@ public class PlaySetup extends Play {
         if (Game.sharedInstance().getD_players().size() > 1) {
             // change state when all countries assigned
             next();
-        } else {
-            endGame();
         }
     }
 
@@ -216,6 +214,7 @@ public class PlaySetup extends Play {
         LogEntryBuffer.getInstance().log("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
         LogEntryBuffer.getInstance().log("1. gameplayer [-add playername] [-remove playername]");
         LogEntryBuffer.getInstance().log("2. assigncountries");
+        LogEntryBuffer.getInstance().log("quit");
         LogEntryBuffer.getInstance().log(" --- ");
     }
 }

@@ -257,6 +257,7 @@ public class PostLoad extends Edit {
         LogEntryBuffer.getInstance().log("4. showmap");
         LogEntryBuffer.getInstance().log("5. savemap [filename]");
         LogEntryBuffer.getInstance().log("6. validatemap");
+        LogEntryBuffer.getInstance().log("quit");
         LogEntryBuffer.getInstance().log(" --- ");
     }
 }
