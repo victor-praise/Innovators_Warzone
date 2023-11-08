@@ -1,6 +1,7 @@
 package main.java.orders;
 
 import main.java.models.Country;
+import main.java.models.Player;
 import main.java.utils.logger.LogEntryBuffer;
 
 /**
@@ -9,10 +10,19 @@ import main.java.utils.logger.LogEntryBuffer;
  * @author kevin on 2023-10-03
  */
 public class DeployOrder implements Order {
+    Player d_issuingPlayer;
     Country d_countryForArmyDeployment;
     int d_armyUnitsToDeploy;
 
-    public DeployOrder(Country p_country, int p_armyUnits) {
+    /**
+     * Place some armies on one of the current player’s territories
+     *
+     * @param d_issuingPlayer Player issuing the command
+     * @param p_country Country to place the troops
+     * @param p_armyUnits Number of troops to deploy
+     */
+    public DeployOrder(Player d_issuingPlayer, Country p_country, int p_armyUnits) {
+        this.d_issuingPlayer = d_issuingPlayer;
         this.d_countryForArmyDeployment = p_country;
         this.d_armyUnitsToDeploy = p_armyUnits;
     }

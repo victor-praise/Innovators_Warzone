@@ -54,7 +54,7 @@ public class BlockadeCommand extends PlayerOrderCommand {
         }
 
         // Insert the blockade-order to players order list
-        this.d_issuingPlayer.appendOrderToList(new BlockadeOrder(l_sourceCountry));
+        this.d_issuingPlayer.appendOrderToList(new BlockadeOrder(d_issuingPlayer, l_sourceCountry));
         this.d_issuingPlayer.removeSpecialCard(SpecialCard.Blockade);
     }
 }

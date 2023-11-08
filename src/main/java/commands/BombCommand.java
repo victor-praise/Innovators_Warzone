@@ -61,6 +61,6 @@ public class BombCommand extends PlayerOrderCommand {
             return;
         }
 
-        d_issuingPlayer.appendOrderToList(new BombOrder(l_targetCountry));
+        d_issuingPlayer.appendOrderToList(new BombOrder(d_issuingPlayer, l_targetCountry));
     }
 }
