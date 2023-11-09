@@ -39,12 +39,21 @@ public class Fortification extends MainPlay {
         next();
     }
 
+    public void checkIfWeHaveWinner() {
+        Player winner = Game.sharedInstance().getD_map().playerOwningAllCountries();
+        if (winner != null) {
+            // We have found our winner
+            LogEntryBuffer.getInstance().log(winner.getD_name() + " has won the game. !!!");
+            Game.sharedInstance().setD_gamePhase(new End());
+        }
+    }
+
     /**
      * Move to the next state
      */
     @Override
     public void next() {
-        LogEntryBuffer.getInstance().log("--- Moving back to Reinforcement phase ---" + "\n");
+        checkIfWeHaveWinner();
         Game.sharedInstance().setD_gamePhase(new Reinforcement());
     }
 }

@@ -17,6 +17,7 @@ import java.util.Optional;
 public class PostLoad extends Edit {
 
     public PostLoad() {
+        LogEntryBuffer.getInstance().log("==== PostLoad phase ====" + "\n");
         displayValidCommands();
     }
 
@@ -222,7 +223,6 @@ public class PostLoad extends Edit {
             LogEntryBuffer.getInstance().log("[SaveMap]: Map saved successfully.");
 
             Game.sharedInstance().setD_gamePhase(new PlaySetup());
-            LogEntryBuffer.getInstance().log("[PostLoad]: --- Moving to PlaySetup ---");
         } catch (IOException error) {
             LogEntryBuffer.getInstance().log("[SaveMapCommand]: Error while saving map to: " + l_filename + " " + error.getLocalizedMessage());
             throw new RuntimeException(error);
@@ -257,6 +257,7 @@ public class PostLoad extends Edit {
         LogEntryBuffer.getInstance().log("4. showmap");
         LogEntryBuffer.getInstance().log("5. savemap [filename]");
         LogEntryBuffer.getInstance().log("6. validatemap");
+        LogEntryBuffer.getInstance().log("quit");
         LogEntryBuffer.getInstance().log(" --- ");
     }
 }

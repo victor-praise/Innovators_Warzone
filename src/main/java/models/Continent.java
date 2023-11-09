@@ -2,7 +2,6 @@ package main.java.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This class is responsible for the continents on the map
@@ -152,7 +151,7 @@ public class Continent {
      */
     public void removeCountryAsNeighbourFromAll(Integer p_countryId) {
         if (d_countries != null && !d_countries.isEmpty()) {
-            for (Country c: d_countries){
+            for (Country c: d_countries) {
                 if (c.getD_neighbors() != null) {
                     if (c.getD_neighbors().contains(p_countryId)){
                         c.removeNeighbour(p_countryId);
@@ -160,6 +159,29 @@ public class Continent {
                 }
             }
         }
+    }
+
+    /**
+     * Find Owner of the continent
+     * @return Player owning all the countries in the continent, null otherwise
+     */
+    public Player getContinentOwner() {
+        Player owner0 = null;
+
+        for (int index = 0; index < getD_countries().size(); index++) {
+            Country l_country = getD_countries().get(index);
+            Player l_countryOwner = l_country.getD_ownedBy();
+            if (l_countryOwner != null && owner0 == null) {
+                owner0 = l_countryOwner;
+            } else {
+                if (l_countryOwner != null && l_countryOwner != owner0) {
+                    // We have different owner, stop and return null;
+                    return null;
+                }
+            }
+        }
+
+        return owner0;
     }
 
     /**

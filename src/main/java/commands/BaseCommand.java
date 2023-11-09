@@ -68,7 +68,7 @@ public enum BaseCommand {
     /**
      * Issues a Diplomacy Order
      */
-    Diplomacy("diplomacy"),
+    Diplomacy("negotiate"),
 
     /**
      * Issues a commit order when there are no more orders

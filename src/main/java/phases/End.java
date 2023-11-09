@@ -1,6 +1,7 @@
 package main.java.phases;
 
 import main.java.commands.Functionality;
+import main.java.utils.logger.LogEntryBuffer;
 
 /**
  * @author kevin on 2023-11-04
@@ -8,6 +9,7 @@ import main.java.commands.Functionality;
 public class End extends Phase {
 
     public End() {
+        LogEntryBuffer.getInstance().log("==== End phase ====" + "\n");
         endGame();
     }
 

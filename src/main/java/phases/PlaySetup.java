@@ -10,6 +10,7 @@ import main.java.utils.logger.LogEntryBuffer;
 public class PlaySetup extends Play {
 
     public PlaySetup() {
+        LogEntryBuffer.getInstance().log("==== PlaySetup phase ====" + "\n");
         displayValidCommands();
     }
 
@@ -154,8 +155,6 @@ public class PlaySetup extends Play {
         if (Game.sharedInstance().getD_players().size() > 1) {
             // change state when all countries assigned
             next();
-        } else {
-            endGame();
         }
     }
 
@@ -188,7 +187,6 @@ public class PlaySetup extends Play {
      */
     @Override
     public void next() {
-        LogEntryBuffer.getInstance().log("==== Reinforcement phase ====" + "\n\n");
         Game.sharedInstance().setD_gamePhase(new Reinforcement());
     }
 
@@ -216,6 +214,7 @@ public class PlaySetup extends Play {
         LogEntryBuffer.getInstance().log("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
         LogEntryBuffer.getInstance().log("1. gameplayer [-add playername] [-remove playername]");
         LogEntryBuffer.getInstance().log("2. assigncountries");
+        LogEntryBuffer.getInstance().log("quit");
         LogEntryBuffer.getInstance().log(" --- ");
     }
 }

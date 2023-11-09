@@ -11,6 +11,7 @@ import main.java.utils.logger.LogEntryBuffer;
 public class Preload extends Edit {
 
     public Preload() {
+        LogEntryBuffer.getInstance().log("==== Preload phase ====" + "\n");
         displayValidCommands();
     }
     /**
@@ -22,7 +23,6 @@ public class Preload extends Edit {
     @Override
     public void loadMap(String[] p_baseParams, Functionality[] p_functionalities) {
         super.loadMap(p_baseParams, p_functionalities);
-        LogEntryBuffer.getInstance().log("\n" + "[PreLoad]: Changing state to post load");
         Game.sharedInstance().setD_gamePhase(new PostLoad());
     }
 
@@ -66,6 +66,7 @@ public class Preload extends Edit {
     private void displayValidCommands() {
         LogEntryBuffer.getInstance().log("Valid commands in state " + this.getClass().getSimpleName() + " are: ");
         LogEntryBuffer.getInstance().log("1. loadmap [filename]");
+        LogEntryBuffer.getInstance().log("quit");
         LogEntryBuffer.getInstance().log(" --- ");
     }
 }

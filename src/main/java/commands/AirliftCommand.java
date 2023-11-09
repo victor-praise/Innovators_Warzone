@@ -80,7 +80,7 @@ public class AirliftCommand extends PlayerOrderCommand {
         }
 
         // Insert the airlift-order to players order list
-        this.d_issuingPlayer.appendOrderToList(new AirliftOrder(l_sourceCountry, l_targetCountry, l_armyUnitsToAirlift));
+        this.d_issuingPlayer.appendOrderToList(new AirliftOrder(d_issuingPlayer, l_sourceCountry, l_targetCountry, l_armyUnitsToAirlift));
         this.d_issuingPlayer.removeSpecialCard(SpecialCard.Airlift);
 
         // Reduce army units for source country, to prevent Player from airlifting more than available units

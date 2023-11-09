@@ -1,6 +1,7 @@
 package main.java.orders;
 
 import main.java.models.Country;
+import main.java.models.Player;
 import main.java.utils.logger.LogEntryBuffer;
 
 /**
@@ -10,11 +11,21 @@ import main.java.utils.logger.LogEntryBuffer;
  */
 public class AirliftOrder implements Order {
 
+    Player d_issuingPlayer;
     Country d_sourceCountry;
     Country d_targetCountry;
     int d_armyUnitsToAirlift;
 
-    public AirliftOrder(Country p_sourceCountry, Country p_targetCountry, int p_numOfArmies) {
+    /**
+     * Transfer some armies from one of the current player’s territories to any another territory
+     *
+     * @param d_issuingPlayer Player issuing the command
+     * @param p_sourceCountry Country to move the troops from
+     * @param p_targetCountry Country to move the troops to
+     * @param p_numOfArmies   Units of Troops to Airlift
+     */
+    public AirliftOrder(Player d_issuingPlayer, Country p_sourceCountry, Country p_targetCountry, int p_numOfArmies) {
+        this.d_issuingPlayer = d_issuingPlayer;
         this.d_sourceCountry = p_sourceCountry;
         this.d_targetCountry = p_targetCountry;
         this.d_armyUnitsToAirlift = p_numOfArmies;

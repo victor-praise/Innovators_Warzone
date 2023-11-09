@@ -33,5 +33,7 @@ public class DiplomacyOrder implements Order {
 
     @Override
     public void execute() {
+        d_issuingPlayer.negotiateWith(d_targetedPlayer);
+        d_targetedPlayer.negotiateWith(d_issuingPlayer);
     }
 }

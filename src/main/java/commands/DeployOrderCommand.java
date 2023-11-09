@@ -62,7 +62,7 @@ public class DeployOrderCommand extends PlayerOrderCommand {
             }
 
             // Deploy orders will be executed immediately
-            Order deployOrder = new DeployOrder(l_country, l_armyUnits);
+            Order deployOrder = new DeployOrder(d_issuingPlayer, l_country, l_armyUnits);
             deployOrder.execute();
                 // Reduce army units for this player
                 this.d_issuingPlayer.reduceArmyUnits(l_armyUnits);

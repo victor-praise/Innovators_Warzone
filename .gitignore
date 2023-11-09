@@ -29,6 +29,7 @@ bin/
 .DS_Store
 
 ### IntelliJ - Sensitive or high-churn files ###
+.idea/workspace.xml
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml

@@ -28,7 +28,7 @@ public class BlockadeCommand extends PlayerOrderCommand {
     public void execute() {
         String l_message;
         if (isDeploymentPending()) {
-            l_message = "[Blockade]: Airlift order requires all deployment to be completed";
+            l_message = "[Blockade]: Blockade order requires all deployment to be completed";
             LogEntryBuffer.getInstance().log(l_message);
             return;
         }
@@ -54,7 +54,7 @@ public class BlockadeCommand extends PlayerOrderCommand {
         }
 
         // Insert the blockade-order to players order list
-        this.d_issuingPlayer.appendOrderToList(new BlockadeOrder(l_sourceCountry));
+        this.d_issuingPlayer.appendOrderToList(new BlockadeOrder(d_issuingPlayer, l_sourceCountry));
         this.d_issuingPlayer.removeSpecialCard(SpecialCard.Blockade);
     }
 }
