@@ -1,6 +1,7 @@
 package main.java.phases;
 
 import main.java.arena.Game;
+import main.java.models.Continent;
 import main.java.models.Country;
 import main.java.models.Player;
 import main.java.utils.Constants;
@@ -13,6 +14,7 @@ import main.java.utils.logger.LogEntryBuffer;
 public class Reinforcement extends MainPlay {
 
     Reinforcement() {
+        LogEntryBuffer.getInstance().log("==== Reinforcement phase ====" + "\n");
         reinforce();
     }
 
@@ -25,8 +27,12 @@ public class Reinforcement extends MainPlay {
         Game.sharedInstance().getD_map().getD_countries().forEach(Country::resetD_availableArmyUnits);
 
         for (Player player : Game.sharedInstance().getD_players()) {
-            // TODO: Check for ownership of continents, which should be added to DEFAULT_REINFORCEMENT
             int l_reinforcementValue = (int) Math.floor((double) player.getD_ownedCountries().size() / 3.0);
+            // Check for ownership of continents, which should be added to DEFAULT_REINFORCEMENT
+            for (Continent continent : player.getContinentsOwnedByPlayer()) {
+                l_reinforcementValue += continent.getD_continentValue();
+            }
+
             player.setD_assignedArmyUnits(Math.max(Constants.DEFAULT_REINFORCEMENT, l_reinforcementValue));
 
             // Add a random card if the player has conquered any country in previous turn
@@ -44,7 +50,6 @@ public class Reinforcement extends MainPlay {
      */
     @Override
     public void next() {
-        LogEntryBuffer.getInstance().log("---- Moving to Attack phase -----" + "\n");
         Game.sharedInstance().setD_gamePhase(new Attack());
     }
 }

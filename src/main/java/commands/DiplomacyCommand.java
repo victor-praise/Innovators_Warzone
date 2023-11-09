@@ -28,6 +28,12 @@ public class DiplomacyCommand extends PlayerOrderCommand {
     @Override
     public void execute() {
         String l_message;
+        if (isDeploymentPending()) {
+            l_message = "[Diplomacy]: Diplomacy order requires all deployment to be completed";
+            LogEntryBuffer.getInstance().log(l_message);
+            return;
+        }
+
         if (d_baseParams == null || d_baseParams.length < 1) {
             l_message = "[DiplomacyOrder]: Diplomacy order requires one parameters. [1] Name of Player.";
             LogEntryBuffer.getInstance().log(l_message);

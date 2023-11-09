@@ -1,8 +1,10 @@
 package main.java.models;
 
+import main.java.arena.Game;
 import main.java.commands.Command;
 import main.java.orders.Order;
 import main.java.utils.OrderParser;
+import main.java.utils.logger.LogEntryBuffer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,8 @@ public class Player {
     private boolean isConqueror = false;
 
     private boolean didCommitForThisTurn = false;
+
+    private final List<Player> d_negotiatedWith = new ArrayList<Player>();
 
     public Player() {
         d_ownedCountries = new ArrayList<>();
@@ -167,6 +171,32 @@ public class Player {
     }
 
     /**
+     * Adds another player to current players negotiations list
+     *
+     * @param p_player player to negotiate with
+     */
+    public void negotiateWith(Player p_player) {
+        d_negotiatedWith.add(p_player);
+    }
+
+    /**
+     * Checks if this player has negotiated with current player
+     *
+     * @param p_player player to check negotiations with
+     * @return true if the current player has negotiated with passed in player, false otherwise
+     */
+    public boolean hasNegotiatedWith(Player p_player) {
+        return d_negotiatedWith.contains(p_player);
+    }
+
+    /**
+     * removes all the negotiations of current player
+     */
+    public void clearNegotiations() {
+        d_negotiatedWith.clear();
+    }
+
+    /**
      * Identifies whether the player has special card of this type
      * @param p_card special card to check
      * @return true if the player has the special card, false otherwise
@@ -273,21 +303,22 @@ public class Player {
      */
     public void issue_order() {
         System.out.println("Player [" + getD_name() + "] needs to issue order: ");
+        displayOwnedCountriesWithTroopCount();
         Scanner inputReader = new Scanner(System.in);
         String l_nextOrder = inputReader.nextLine();
         Command l_command = OrderParser.parseOrderStatement(this, l_nextOrder);
         if (l_command != null) {
             l_command.execute();
         } else {
-            System.out.println("Valid commands in state [Attack] are: ");
-            System.out.println("1. deploy countryID numarmies");
-            System.out.println("2. advance countrynamefrom countynameto numarmies");
-            System.out.println("3. bomb countryID");
-            System.out.println("4. blockade countryID");
-            System.out.println("5. airlift sourcecountryID targetcountryID numarmies");
-            System.out.println("6. negotiate playerID");
-            System.out.println("7. quit");
-            System.out.println(" --- ");
+            LogEntryBuffer.getInstance().log("Valid commands in state [Attack] are: ");
+            LogEntryBuffer.getInstance().log("1. deploy countryID numarmies");
+            LogEntryBuffer.getInstance().log("2. advance countrynamefrom countynameto numarmies");
+            LogEntryBuffer.getInstance().log("3. bomb countryID");
+            LogEntryBuffer.getInstance().log("4. blockade countryID");
+            LogEntryBuffer.getInstance().log("5. airlift sourcecountryID targetcountryID numarmies");
+            LogEntryBuffer.getInstance().log("6. negotiate playerID");
+            LogEntryBuffer.getInstance().log("commit/quit");
+            LogEntryBuffer.getInstance().log(" --- ");
         }
     }
 
@@ -319,5 +350,29 @@ public class Player {
 
         // Once a card has been assigned, mark conqueror as false to avoid adding multiple cards by mistake
         setConqueror(false);
+    }
+
+    /**
+     * Finds all the continent owned by a given player
+     *
+     * @return all the continents owned by this player
+     */
+    public List<Continent> getContinentsOwnedByPlayer() {
+        List<Continent> ownedContinents = new ArrayList<Continent>();
+        for (Continent continent: Game.sharedInstance().getD_map().getD_continents()) {
+            if (continent.getContinentOwner().equals(this)) {
+                ownedContinents.add(continent);
+            }
+        }
+        return ownedContinents;
+    }
+
+    /**
+     *  Display All countries owned by this player with troop count
+     */
+    private void displayOwnedCountriesWithTroopCount() {
+        for (Country country : getD_ownedCountries()) {
+            System.out.println(country.getD_countryName() + " :: " + country.getD_availableArmyUnits());
+        }
     }
 }

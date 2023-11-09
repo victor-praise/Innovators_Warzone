@@ -28,7 +28,7 @@ public class BlockadeCommand extends PlayerOrderCommand {
     public void execute() {
         String l_message;
         if (isDeploymentPending()) {
-            l_message = "[Blockade]: Airlift order requires all deployment to be completed";
+            l_message = "[Blockade]: Blockade order requires all deployment to be completed";
             LogEntryBuffer.getInstance().log(l_message);
             return;
         }

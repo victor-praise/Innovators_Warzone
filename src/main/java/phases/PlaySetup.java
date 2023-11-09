@@ -10,6 +10,7 @@ import main.java.utils.logger.LogEntryBuffer;
 public class PlaySetup extends Play {
 
     public PlaySetup() {
+        LogEntryBuffer.getInstance().log("==== PlaySetup phase ====" + "\n");
         displayValidCommands();
     }
 
@@ -186,7 +187,6 @@ public class PlaySetup extends Play {
      */
     @Override
     public void next() {
-        LogEntryBuffer.getInstance().log("==== Reinforcement phase ====" + "\n\n");
         Game.sharedInstance().setD_gamePhase(new Reinforcement());
     }
 

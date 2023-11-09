@@ -25,6 +25,12 @@ public class BombCommand extends PlayerOrderCommand {
     @Override
     public void execute() {
         String l_message;
+        if (isDeploymentPending()) {
+            l_message = "[Bomb]: Bomb order requires all deployment to be completed";
+            LogEntryBuffer.getInstance().log(l_message);
+            return;
+        }
+
         if (d_baseParams == null || d_baseParams.length < 1) {
             l_message = "[Bomb]: Bomb order requires one parameter. [1] Target Country's name";
             LogEntryBuffer.getInstance().log(l_message);

@@ -609,4 +609,28 @@ public class Map {
             System.out.println(neighbors);
         }
     }
+
+    /**
+     * Finds the player owning all the countries in this game
+     *
+     * @return Winning player of the game
+     */
+    public Player playerOwningAllCountries() {
+        Player owner0 = null;
+
+        for (int index = 0; index < getD_countries().size(); index++) {
+            Country l_country = getD_countries().get(index);
+            Player l_countryOwner = l_country.getD_ownedBy();
+            if (l_countryOwner != null && owner0 == null) {
+                owner0 = l_countryOwner;
+            } else {
+                if (l_countryOwner != null && l_countryOwner != owner0) {
+                    // We have different owner, stop and return null;
+                    return null;
+                }
+            }
+        }
+
+        return owner0;
+    }
 }

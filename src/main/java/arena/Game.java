@@ -2,10 +2,7 @@ package main.java.arena;
 
 import main.java.commands.BaseCommand;
 import main.java.commands.Command;
-import main.java.models.Continent;
-import main.java.models.Country;
-import main.java.models.Map;
-import main.java.models.Player;
+import main.java.models.*;
 import main.java.phases.Phase;
 import main.java.phases.Preload;
 import main.java.utils.CommandParser;
@@ -248,7 +245,7 @@ public class Game {
      * We set up the game play over here with proper description being given to user
      */
     public void start() {
-        LogEntryBuffer.getInstance().log("===== Game Startup Phase =====" + "\n");
+        LogEntryBuffer.getInstance().log("===== Game Startup =====" + "\n");
         System.out.println("--- At any point, you can give a command  'quit' to exit the game ---");
         String l_nextCommand = "";
         CommandParser l_parser = new CommandParser();
