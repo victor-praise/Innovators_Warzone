@@ -181,17 +181,6 @@ public class Map {
      * @return Boolean Value if all are connected
      * @throws MapInvalidException if any continent is not Connected
      */
-    // public Boolean hasAdjacentContinent() throws MapInvalidException {
-    //     for (Continent l_continent : d_continents) {
-    //         if (l_continent.getD_countries().isEmpty()) {
-    //             throw new MapInvalidException("Each continent must have at least one country. No country found under: " + l_continent.getD_continentName());
-    //         }
-    //         if (!hasAdjacentContinentConnection(l_continent)) {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
     public Boolean hasAdjacentContinent() throws MapInvalidException {
         for (Continent l_continent : d_continents) {
             continentHasCountry(l_continent);
@@ -283,22 +272,6 @@ public class Map {
 
         // Check if all countries are reachable
         return !d_countryReachability.containsValue(false);
-        
-        
-//         if (d_countries == null) {
-//             return false;
-//         }
-//         d_countries.forEach(country -> d_countryReachability.put(country.getD_countryID(), false));
-//         buildCountryReachabilityStatus(d_countries.get(0));
-//
-//         // Iterates over entries to locate the unreachable country
-//         for (java.util.Map.Entry<Integer, Boolean> entry : d_countryReachability.entrySet()) {
-//             if (!entry.getValue()) {
-//                 String l_exceptionMessage = getCountry(entry.getKey()).getD_countryName() + " country is not reachable";
-//                 throw new MapInvalidException(l_exceptionMessage);
-//             }
-//         }
-//         return !d_countryReachability.containsValue(false);
     }
 
     /**
@@ -398,17 +371,6 @@ public class Map {
      * @param p_countryName name of new continent
      * @return Country with the passed in name, null when no country could not be found
      */
-//    public Country getCountry(String p_countryName) {
-//        if (d_countries == null) {
-//            return null;
-//        }
-//        for (Country obj : d_countries) {
-//            if (obj.getD_countryName().equalsIgnoreCase(p_countryName)) {
-//                return obj;
-//            }
-//        }
-//        return null;
-//    }
     public Country getCountry(String p_countryName) {
         if (d_countries != null) {
             for (Country country : d_countries) {
@@ -480,16 +442,6 @@ public class Map {
             d_continents.add(l_newContinent);
             System.out.println("[Map]: Inserted a new continent: " + l_newContinent);
         }
-        
-
-
-        // if (!continentExists(getD_continents(), p_continentName)) {
-        //     Continent l_newContinent = new Continent(p_continentName, p_controlValue);
-        //     d_continents.add(l_newContinent);
-        //     System.out.println("[Map]: Inserted a new continent: " + l_newContinent);
-        // } else {
-        //     System.out.println("Continent already exists on the map");
-        // }
     }
 
     /**
@@ -656,49 +608,5 @@ public class Map {
             }
             System.out.println(neighbors);
         }
-        
-
-        /** // display list of Continents in the format continentName continentValue
-        if (getD_continents().isEmpty()) {
-            System.out.println("\n[Map]: This map is empty.");
-            return;
-        }
-        System.out.println("\n[Continents]");
-        for (Continent continent : getD_continents()) {
-            System.out.print(continent.getD_continentName());
-            System.out.print(" " + continent.getD_continentValue() + "\n");
-        }
-
-        System.out.println();
-
-        // displays list of countries in the format countryID countryName
-        if (getD_countries().isEmpty()) {
-            return;
-        }
-        System.out.println("[Countries]");
-        for (Country country : getD_countries()) {
-            System.out.print("" + country.getD_countryID());
-            System.out.print(" " + country.getD_countryName());
-            String l_ownerName = Game.sharedInstance().getOwnerNameForCountryName(country.getD_countryName());
-            if (l_ownerName == null) {
-                l_ownerName = "";
-            }
-            System.out.print(" " + l_ownerName + "\n");
-        }
-
-        System.out.print("\n");
-
-        if (getD_countries().isEmpty()) {
-            return;
-        }
-        System.out.println("\n[Borders]");
-        for (Country country : getD_countries()) {
-            StringBuilder neighbours = new StringBuilder(String.valueOf(country.getD_countryID()));
-            for (int neighbor : country.getD_neighbors()) {
-                neighbours.append(" ").append(neighbor);
-            }
-            System.out.println(neighbours);
-        }
-    } **/
     }
 }

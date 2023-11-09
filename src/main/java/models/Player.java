@@ -235,16 +235,6 @@ public class Player {
      * @param p_countryName name of country to fetch
      * @return Country with passed in name, null otherwise
      */
-    // public Country getOwnedCountryWithName(String p_countryName) {
-    //     Country l_ownedCountry = null;
-    //     for (Country l_country: getD_ownedCountries()) {
-    //         if (l_country.getD_countryName().equalsIgnoreCase(p_countryName)) {
-    //             l_ownedCountry = l_country;
-    //             break;
-    //         }
-    //     }
-    //     return  l_ownedCountry;
-    // }
 
     public Country getOwnedCountryWithName(String p_countryName) {
         Country l_ownedCountry = null;

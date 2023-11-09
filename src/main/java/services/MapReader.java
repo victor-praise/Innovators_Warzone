@@ -1,6 +1,5 @@
 package main.java.services;
 
-import main.java.arena.Game;
 import main.java.models.Continent;
 import main.java.models.Country;
 import main.java.models.Map;
@@ -55,16 +54,6 @@ public class MapReader {
         }
 
         return l_continents;
-
-        // List<String> l_continentLines = p_file.subList(
-        //         p_file.indexOf("[continents]") + 1,
-        //         p_file.indexOf("[countries]") - 1);
-        // List<Continent> l_continents = new ArrayList<Continent>();
-        // for(String continents: l_continentLines){
-        //     String[] l_continentData = continents.split(" ");
-        //     l_continents.add(new Continent(l_continentData [0], Integer.parseInt(l_continentData [1])));
-        // }
-        // return l_continents;
     }
 
     /**
