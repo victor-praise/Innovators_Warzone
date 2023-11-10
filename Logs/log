@@ -1,4 +1,34 @@
-===== Game Startup Phase =====
+===== Game Startup =====
 
+==== Preload phase ====
 
+Valid commands in state Preload are: 
+1. loadmap [filename]
+quit
+ --- 
+==== PostLoad phase ====
+
+Valid commands in state PostLoad are: 
+1. editcontinent [-add continentID continentvalue] [-remove continentID]
+2. editcountry [-add countryID continentID] [-remove countryID]
+3. editneighbor [-add countryID neighborcountryID] [-remove countryID]
+4. showmap
+5. savemap [filename]
+6. validatemap
+quit
+ --- 
+[SaveMap]: Map saved successfully.
+==== PlaySetup phase ====
+
+Valid commands in state PlaySetup are: 
+1. gameplayer [-add playername] [-remove playername]
+2. assigncountries
+quit
+ --- 
+[Game]: Assigning country: India to: -- player1
+[Game]: Assigning country: Pakistan to: -- player1
+[Game]: Assigning country: China to: -- player1
+[Game]: Assigning country: Japan to: -- player2
+[Game]: Assigning country: Korea to: -- player1
+==== Reinforcement phase ====
 
