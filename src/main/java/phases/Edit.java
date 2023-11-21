@@ -38,7 +38,7 @@ public class Edit extends Phase {
             l_filename = optionalFileName.orElse(null);
         }
 
-
+        try {
             if (l_filename == null || l_filename.isBlank()) {
                 System.out.println("[EditPhase]: file name is mandatory ");
                 return;
@@ -56,7 +56,9 @@ public class Edit extends Phase {
             } else {
                 System.out.println("[LoadMapCommand]: file does not exist, please provide the name of a file that exists ");
             }
-
+        } catch (Exception e) {
+            System.out.println("[LoadMapCommand]: Error reading from file : " + e.getMessage());
+        }
     }
 
     /**

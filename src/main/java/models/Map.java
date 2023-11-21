@@ -400,6 +400,17 @@ public class Map {
         return null;
     }
 
+    public Continent getContinent(int p_continentId){
+        if (d_continents == null) {
+            return null;
+        }
+        for (Continent obj: d_continents){
+            if(p_continentId == obj.getD_continentID()){
+                return obj;
+            }
+        }
+        return null;
+    }
     /**
      * Remove Specified Country as a Neighbor from all countries on the map
      *

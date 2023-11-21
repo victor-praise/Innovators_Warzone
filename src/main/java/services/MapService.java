@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -102,7 +103,21 @@ public class MapService {
                 Files.deleteIfExists(Paths.get(filePath));
                 FileWriter l_fileWriter = new FileWriter(filePath);
                 l_fileWriter.write("; map: " + p_fileName + System.lineSeparator());
-                new MapSaver().saveMapToFile(l_fileWriter);
+                System.out.println("How would you like to save the map: 1 for conquest and 2 for regular map");
+                Scanner input = new Scanner(System.in);
+                int mapFormat = input.nextInt();
+
+                if(mapFormat==1){
+                    MapSaverAdapter l_mapSaver = new MapSaverAdapter(new ConquestMapSaver());
+                    l_mapSaver.saveMapToFile(l_fileWriter);
+                }
+                else if(mapFormat==2){
+                    new MapSaver().saveMapToFile(l_fileWriter);
+                }
+                else{
+                    System.out.println("Invalid Format");
+                    saveMap(p_fileName);
+                }
                 l_fileWriter.close();
             } else {
                 System.out.println("Map cannot be saved");
