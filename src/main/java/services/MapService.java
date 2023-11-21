@@ -28,7 +28,14 @@ public class MapService {
         if (p_fileName != null) {
             List<String> l_file = loadFile(p_fileName);
             if (l_file != null && !l_file.isEmpty()) {
-                new MapReader().readMapFile( l_map, l_file);
+                if(l_file.contains("[Territories]")){
+                    MapReaderAdapter l_mapReaderAdapter = new MapReaderAdapter(new ConquestMapReader());
+                    l_mapReaderAdapter.parseMapFile(l_map,l_file);
+                }
+                else if(l_file.contains("[countries]")){
+                    new MapReader().readMapFile( l_map, l_file);
+                }
+
             }
         } else {
             System.out.println("[Map Service]: Unknown file name, Creating new map from scratch");
