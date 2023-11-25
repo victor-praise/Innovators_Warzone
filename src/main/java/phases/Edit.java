@@ -17,6 +17,17 @@ public class Edit extends Phase {
     private static final int DEFAULT_REINFORCEMENT = 3;
 
     /**
+     * Loads a Tournament
+     *
+     * @param p_baseParams      parameters for this command
+     * @param p_functionalities functionalities of this command
+     */
+    @Override
+    public void loadTournament(String[] p_baseParams, Functionality[] p_functionalities) {
+        printInvalidCommandMessage();
+    }
+
+    /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
      * @param p_baseParams      parameters for this command
@@ -198,7 +209,7 @@ public class Edit extends Phase {
             System.out.println("[SaveMapCommand]: Error while saving map to: " + l_filename + " " + error.getLocalizedMessage());
             throw new RuntimeException(error);
         } catch (MapInvalidException e) {
-            e.printStackTrace();
+            System.out.println("Save map failed with error: " + e.getLocalizedMessage());
         }
     }
 

@@ -1,6 +1,8 @@
 package main.java.models;
 
 import main.java.arena.Game;
+import main.java.strategy.HumanPlayerStrategy;
+import main.java.strategy.PlayerStrategy;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +27,8 @@ public class PlayerTest {
      */
     @BeforeEach
     void setUp() {
-        d_systemUnderTest = new Player("Player1");
+        PlayerStrategy defaultStrategy = new HumanPlayerStrategy();
+        d_systemUnderTest = new Player("Player1", defaultStrategy);
     }
 
     /**

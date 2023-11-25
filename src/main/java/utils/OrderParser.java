@@ -59,6 +59,7 @@ public class OrderParser {
 
                 case Commit:
                     l_command = new CommitCommand(p_player);
+                    break;
 
                 default:
                     break;

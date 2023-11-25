@@ -95,11 +95,16 @@ public enum BaseCommand {
      */
     Blockade("blockade"),
 
-
     /**
      * destroy half of the armies located on an opponent’s territory.
      */
     Bomb("bomb"),
+
+    /**
+     * A command that tells that game will execute in tournament mode.
+     */
+    Tournament("tournament"),
+
     /**
      * An invalid command string by user will correspond to this.
      */

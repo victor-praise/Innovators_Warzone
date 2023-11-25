@@ -51,6 +51,7 @@ public class Attack extends MainPlay {
      */
     @Override
     public void next() {
+        setValidCommand(true);
         LogEntryBuffer.getInstance().log("--- Moving to Fortification phase ---" + "\n");
         Game.sharedInstance().setD_gamePhase(new Fortification());
     }

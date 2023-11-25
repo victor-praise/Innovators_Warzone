@@ -24,4 +24,9 @@ public class Functionality {
         this.functionality = p_functionality;
         this.functionalityParams = p_functionalityParams;
     }
+
+    @Override
+    public String toString() {
+        return ("Base Functionality: " + functionality.toString());
+    }
 }

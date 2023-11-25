@@ -9,6 +9,17 @@ import main.java.commands.Functionality;
 public abstract class Play extends Phase {
 
     /**
+     * Loads a Tournament
+     *
+     * @param p_baseParams      parameters for this command
+     * @param p_functionalities functionalities of this command
+     */
+    @Override
+    public void loadTournament(String[] p_baseParams, Functionality[] p_functionalities) {
+        printInvalidCommandMessage();
+    }
+
+    /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
      * @param p_baseParams      parameters for this command

@@ -3,8 +3,11 @@ package main.java.arena;
 import main.java.commands.BaseCommand;
 import main.java.commands.Command;
 import main.java.models.*;
+import main.java.phases.End;
 import main.java.phases.Phase;
 import main.java.phases.Preload;
+import main.java.strategy.HumanPlayerStrategy;
+import main.java.strategy.PlayerStrategy;
 import main.java.utils.CommandParser;
 import main.java.utils.logger.LogEntryBuffer;
 
@@ -41,6 +44,10 @@ public class Game {
      */
     public static Boolean Is_Gameplay_On = true;
 
+    private GameMode gameMode = GameMode.Single;
+
+    private Tournament tournament = null;
+
     /**
      * constructor being made private to prevent random instance creation, always use sharedInstance()
      */
@@ -76,6 +83,42 @@ public class Game {
     }
 
     /**
+     * Return the current mode of the game
+     * @return current gameMode
+     */
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    /**
+     * Sets the mode of the game
+     * @param gameMode mode to set
+     */
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    /**
+     * Returns the tournament object of our game
+     * @return tournament object
+     */
+    public Tournament getTournament() {
+        return tournament;
+    }
+
+    /**
+     * Sets the tournament mode on for this game
+     * @param tournament tournament object to set
+     */
+    public void setTournament(Tournament tournament) {
+        if (tournament != null) {
+            setGameMode(GameMode.Tournament);
+            this.tournament = tournament;
+            startTournament();
+        }
+    }
+
+    /**
      * Returns current map being edited or a new map when there are no current map
      *
      * @return current map object
@@ -86,6 +129,10 @@ public class Game {
         }
         d_map = new Map();
         return d_map;
+    }
+
+    public boolean isMapEmpty() {
+        return (d_map == null);
     }
 
     /**
@@ -142,14 +189,20 @@ public class Game {
         return l_player;
     }
 
-    public void addPlayer(Player player) {
-        d_players.add(player);
+    public boolean addPlayer(Player p_player) {
+        if (p_player == null) {
+            return false;
+        } else {
+            getD_players().add(p_player);
+            return true;
+        }
     }
 
     public boolean addPlayer(String p_name) {
         Player l_player = getPlayer(p_name);
         if (l_player == null) {
-            getD_players().add(new Player(p_name));
+            PlayerStrategy defaultStrategy = new HumanPlayerStrategy();
+            getD_players().add(new Player(p_name, defaultStrategy));
             return true;
         } else {
             return false;
@@ -261,11 +314,30 @@ public class Game {
     }
 
     /**
+     * Begin tournament mode.
+     */
+    public void startTournament() {
+        System.out.println(" --- TOURNAMENT-MODE BEGINS ---");
+        tournament.createPlayers();
+        endTournament();
+    }
+
+    /**
+     * End tournament mode.
+     */
+    public void endTournament() {
+        // Intentionally ending game.
+        System.out.println(" --- TOURNAMENT-MODE ENDS ---");
+        d_gamePhase.endGame();
+    }
+
+    /**
      * Call to this method should be made when the game needs to be terminated
      */
     // To be called when a single player controls entire board
     public static void endGamePlay() {
         Is_Gameplay_On = false;
         LogEntryBuffer.getInstance().log("==== Game Ended ====");
+        Game.sharedInstance().setD_gamePhase(new End());
     }
 }
