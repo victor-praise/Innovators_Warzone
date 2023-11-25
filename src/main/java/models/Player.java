@@ -379,7 +379,8 @@ public class Player {
     public List<Continent> getContinentsOwnedByPlayer() {
         List<Continent> ownedContinents = new ArrayList<Continent>();
         for (Continent continent: Game.sharedInstance().getD_map().getD_continents()) {
-            if (continent.getContinentOwner().equals(this)) {
+            Player owner = continent.getContinentOwner();
+            if (owner != null && owner.equals(this)) {
                 ownedContinents.add(continent);
             }
         }
