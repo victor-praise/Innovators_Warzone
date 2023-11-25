@@ -8,6 +8,17 @@ import main.java.utils.logger.LogEntryBuffer;
  */
 public class End extends Phase {
 
+    /**
+     * Loads a Tournament
+     *
+     * @param p_baseParams      parameters for this command
+     * @param p_functionalities functionalities of this command
+     */
+    @Override
+    public void loadTournament(String[] p_baseParams, Functionality[] p_functionalities) {
+        printInvalidCommandMessage();
+    }
+
     public End() {
         LogEntryBuffer.getInstance().log("==== End phase ====" + "\n");
         endGame();

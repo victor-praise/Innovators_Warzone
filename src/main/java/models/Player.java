@@ -3,6 +3,8 @@ package main.java.models;
 import main.java.arena.Game;
 import main.java.commands.Command;
 import main.java.orders.Order;
+import main.java.strategy.HumanPlayerStrategy;
+import main.java.strategy.PlayerStrategy;
 import main.java.utils.OrderParser;
 import main.java.utils.logger.LogEntryBuffer;
 
@@ -37,12 +39,29 @@ public class Player {
 
     private final List<Player> d_negotiatedWith = new ArrayList<Player>();
 
-    public Player() {
+    private PlayerStrategy d_strategy;
+
+    private Player(PlayerStrategy p_playerStrategy) {
+        d_strategy = p_playerStrategy;
         d_ownedCountries = new ArrayList<>();
     }
 
+    /**
+     * Add a player with given name.
+     * When no strategy is defined, it is assumed to be human
+     * @param p_inputName player name
+     */
     public Player(String p_inputName) {
-        this();
+        this(p_inputName, new HumanPlayerStrategy());
+    }
+
+    /**
+     * Add a player with given name and given strategy.
+     * @param p_inputName name of player
+     * @param p_playerStrategy strategy for the player
+     */
+    public Player(String p_inputName, PlayerStrategy p_playerStrategy) {
+        this(p_playerStrategy);
         d_name = p_inputName;
     }
 

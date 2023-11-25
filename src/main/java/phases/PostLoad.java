@@ -227,7 +227,7 @@ public class PostLoad extends Edit {
             LogEntryBuffer.getInstance().log("[SaveMapCommand]: Error while saving map to: " + l_filename + " " + error.getLocalizedMessage());
             throw new RuntimeException(error);
         } catch (MapInvalidException e) {
-            e.printStackTrace();
+            System.out.println("Save map failed with error: " + e.getLocalizedMessage());
         }
     }
 
@@ -244,6 +244,7 @@ public class PostLoad extends Edit {
     @Override
     public void printInvalidCommandMessage() {
         super.printInvalidCommandMessage();
+        displayValidCommands();
     }
 
     /**

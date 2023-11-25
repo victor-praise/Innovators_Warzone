@@ -19,6 +19,22 @@ public enum BaseFunctionality {
      */
     Remove("remove"),
     /**
+     * Functionality for tournament to read a list of maps
+     */
+    MapFiles("m"),
+    /**
+     * Functionality for tournament to read a list of player strategies
+     */
+    PlayerStrategies("p"),
+    /**
+     * Functionality for tournament to read the number of games
+     */
+    NumberOfGame("g"),
+    /**
+     * Functionality for tournament to read maximum number of turns
+     */
+    MaxTurns("d"),
+    /**
      * An invalid/unknown functionality corresponds to this
      */
     None("");
@@ -49,5 +65,10 @@ public enum BaseFunctionality {
     public static BaseFunctionality from(String p_label) {
         BaseFunctionality d_determinate = From_String.get(p_label.toLowerCase());
         return d_determinate == null ? BaseFunctionality.None : d_determinate;
+    }
+
+    @Override
+    public String toString() {
+        return this.d_label;
     }
 }

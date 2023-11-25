@@ -13,6 +13,35 @@ import main.java.commands.Functionality;
 public abstract class Phase {
 
     /**
+     * Determines if the lastCommand was valid
+     */
+    private boolean isValidCommand = false;
+
+    /**
+     * Fetches the validity of last executed command
+     * @return validity of last executed command
+     */
+    public boolean isValidCommand() {
+        return isValidCommand;
+    }
+
+    /**
+     * sets the validity of last executed command
+     * @param validCommand true if command is valid, false otherwise
+     */
+    public void setValidCommand(boolean validCommand) {
+        isValidCommand = validCommand;
+    }
+
+    /**
+     * Loads a Tournament
+     *
+     * @param p_baseParams      parameters for this command
+     * @param p_functionalities functionalities of this command
+     */
+    abstract public void loadTournament(String[] p_baseParams, Functionality[] p_functionalities);
+
+    /**
      * Loads a valid map if present in correct phase, otherwise displays invalid command message
      *
      * @param p_baseParams      parameters for this command
@@ -140,6 +169,7 @@ public abstract class Phase {
      * Displays invalid command message and prints the allowed commands
      */
     public void printInvalidCommandMessage() {
+        setValidCommand(false);
         System.out.println("Invalid command in state " + this.getClass().getSimpleName());
     }
 
@@ -191,13 +221,20 @@ public abstract class Phase {
                     assignCountries(p_command.d_baseParams, p_command.d_functionalities);
                     break;
 
+                case Tournament:
+                    loadTournament(p_command.d_baseParams, p_command.d_functionalities);
+                    break;
+
                 case Quit:
                     quit();
                     break;
 
                 default:
+                    printInvalidCommandMessage();
                     break;
             }
+        } else {
+            printInvalidCommandMessage();
         }
     }
 }

@@ -2,6 +2,10 @@ package main.java.utils;
 
 import main.java.commands.*;
 
+import java.util.ArrayList;
+
+import static java.lang.Math.max;
+
 /**
  * A parser for the user provided command string.
  * @author kevin wadera
@@ -29,15 +33,30 @@ public class CommandParser {
             l_baseCommand = inferBaseCommand(l_baseCommandString);
 
             if (l_remainingToParse.startsWith("-")) {
-                Functionality l_function = parseFunctionalities(l_remainingToParse.substring(1));
-                l_functionalities = new Functionality[1];
-                l_functionalities[0] = l_function;
+                String[] allSubstrings = parseRemainingString(l_remainingToParse);
+                l_functionalities = new Functionality[allSubstrings.length];
+                for (int index = 0; index < allSubstrings.length; index++) {
+                    l_functionalities[index] = parseFunctionalities(allSubstrings[index]);
+                }
             } else {
                 l_baseParams = l_remainingToParse.split(" ");
             }
         }
 
         return new Command(l_baseCommand, l_baseParams, l_functionalities);
+    }
+
+    private String[] parseRemainingString(String p_remainingString) {
+        ArrayList<String> functionalityStrings = new ArrayList<>();
+        int splitStartIndex = 0;
+        String l_remaining = p_remainingString;
+        while (!l_remaining.isEmpty()) {
+            int lastIndex = l_remaining.lastIndexOf("-");
+            String lastFunctionalityString = l_remaining.substring(lastIndex + 1);
+            functionalityStrings.add(lastFunctionalityString);
+            l_remaining = l_remaining.substring(0, max(0, lastIndex - 1));
+        }
+        return functionalityStrings.toArray(new String[0]);
     }
 
     /**
