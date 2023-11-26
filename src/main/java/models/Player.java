@@ -319,25 +319,7 @@ public class Player {
      */
     public void issue_order() {
         this.d_strategy.createOrder();
-//        System.out.println("Player [" + getD_name() + "] needs to issue order: ");
-//        displayOwnedCountriesWithTroopCount();
-//        Scanner inputReader = new Scanner(System.in);
-//        String l_nextOrder = inputReader.nextLine();
-//        Command l_command = OrderParser.parseOrderStatement(this, l_nextOrder);
-//        if (l_command != null) {
-//            l_command.execute();
-//        } else {
-//            LogEntryBuffer.getInstance().log("Valid commands in state [Attack] are: ");
-//            LogEntryBuffer.getInstance().log("1. deploy countryID numarmies");
-//            LogEntryBuffer.getInstance().log("2. advance countrynamefrom countynameto numarmies");
-//            LogEntryBuffer.getInstance().log("3. bomb countryID");
-//            LogEntryBuffer.getInstance().log("4. blockade countryID");
-//            LogEntryBuffer.getInstance().log("5. airlift sourcecountryID targetcountryID numarmies");
-//            LogEntryBuffer.getInstance().log("6. negotiate playerID");
-//            LogEntryBuffer.getInstance().log("commit/quit");
-//            LogEntryBuffer.getInstance().log(" --- ");
-//        }
-    }
+   }
 
     /**
      * Determines if the user can assign any more orders
