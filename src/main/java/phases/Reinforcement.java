@@ -13,8 +13,13 @@ import main.java.utils.logger.LogEntryBuffer;
  */
 public class Reinforcement extends MainPlay {
 
+    /**
+     * Determines the number of turn in this game
+     */
+    private static long TURN_NUMBER = 1;
+
     Reinforcement() {
-        LogEntryBuffer.getInstance().log("==== Reinforcement phase ====" + "\n");
+        LogEntryBuffer.getInstance().log("==== Reinforcement phase {Turn Number :: " + TURN_NUMBER++ + "} ====" + "\n");
         reinforce();
     }
 

@@ -1,7 +1,6 @@
 package main.java.strategy;
 
 import main.java.models.Country;
-import main.java.orders.Order;
 
 /**
  * @author kevin on 2023-11-24
@@ -10,11 +9,10 @@ public class RandomPlayerStrategy extends PlayerStrategy {
     /**
      * Create a new order based on Strategy
      *
-     * @return new order according to the strategy
      */
     @Override
-    public Order createOrder() {
-        return null;
+    public void createOrder() {
+
     }
 
     /**

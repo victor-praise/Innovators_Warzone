@@ -1,17 +1,13 @@
 package main.java.models;
 
 import main.java.arena.Game;
-import main.java.commands.Command;
 import main.java.orders.Order;
 import main.java.strategy.HumanPlayerStrategy;
 import main.java.strategy.PlayerStrategy;
-import main.java.utils.OrderParser;
-import main.java.utils.logger.LogEntryBuffer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * This class is responsible for the addition and removal of players.
@@ -39,9 +35,10 @@ public class Player {
 
     private final List<Player> d_negotiatedWith = new ArrayList<Player>();
 
-    private PlayerStrategy d_strategy;
+    private final PlayerStrategy d_strategy;
 
     private Player(PlayerStrategy p_playerStrategy) {
+        p_playerStrategy.setPlayer(this);
         d_strategy = p_playerStrategy;
         d_ownedCountries = new ArrayList<>();
     }
@@ -321,24 +318,25 @@ public class Player {
      * Ask the player to issue orders, will add an order object to its 'order' list
      */
     public void issue_order() {
-        System.out.println("Player [" + getD_name() + "] needs to issue order: ");
-        displayOwnedCountriesWithTroopCount();
-        Scanner inputReader = new Scanner(System.in);
-        String l_nextOrder = inputReader.nextLine();
-        Command l_command = OrderParser.parseOrderStatement(this, l_nextOrder);
-        if (l_command != null) {
-            l_command.execute();
-        } else {
-            LogEntryBuffer.getInstance().log("Valid commands in state [Attack] are: ");
-            LogEntryBuffer.getInstance().log("1. deploy countryID numarmies");
-            LogEntryBuffer.getInstance().log("2. advance countrynamefrom countynameto numarmies");
-            LogEntryBuffer.getInstance().log("3. bomb countryID");
-            LogEntryBuffer.getInstance().log("4. blockade countryID");
-            LogEntryBuffer.getInstance().log("5. airlift sourcecountryID targetcountryID numarmies");
-            LogEntryBuffer.getInstance().log("6. negotiate playerID");
-            LogEntryBuffer.getInstance().log("commit/quit");
-            LogEntryBuffer.getInstance().log(" --- ");
-        }
+        this.d_strategy.createOrder();
+//        System.out.println("Player [" + getD_name() + "] needs to issue order: ");
+//        displayOwnedCountriesWithTroopCount();
+//        Scanner inputReader = new Scanner(System.in);
+//        String l_nextOrder = inputReader.nextLine();
+//        Command l_command = OrderParser.parseOrderStatement(this, l_nextOrder);
+//        if (l_command != null) {
+//            l_command.execute();
+//        } else {
+//            LogEntryBuffer.getInstance().log("Valid commands in state [Attack] are: ");
+//            LogEntryBuffer.getInstance().log("1. deploy countryID numarmies");
+//            LogEntryBuffer.getInstance().log("2. advance countrynamefrom countynameto numarmies");
+//            LogEntryBuffer.getInstance().log("3. bomb countryID");
+//            LogEntryBuffer.getInstance().log("4. blockade countryID");
+//            LogEntryBuffer.getInstance().log("5. airlift sourcecountryID targetcountryID numarmies");
+//            LogEntryBuffer.getInstance().log("6. negotiate playerID");
+//            LogEntryBuffer.getInstance().log("commit/quit");
+//            LogEntryBuffer.getInstance().log(" --- ");
+//        }
     }
 
     /**
@@ -390,7 +388,7 @@ public class Player {
     /**
      *  Display All countries owned by this player with troop count
      */
-    private void displayOwnedCountriesWithTroopCount() {
+    public void displayOwnedCountriesWithTroopCount() {
         for (Country country : getD_ownedCountries()) {
             System.out.println(country.getD_countryName() + " :: " + country.getD_availableArmyUnits());
         }

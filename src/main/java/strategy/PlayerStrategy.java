@@ -2,7 +2,6 @@ package main.java.strategy;
 
 import main.java.models.Country;
 import main.java.models.Player;
-import main.java.orders.Order;
 
 /**
  * @author kevin on 2023-11-24
@@ -16,10 +15,25 @@ public abstract class PlayerStrategy {
     private Player player;
 
     /**
-     * Create a new order based on Strategy
-     * @return new order according to the strategy
+     * Create a new order based on Strategy and adds it to Player's order list.
      */
-    public abstract Order createOrder();
+    public abstract void createOrder();
+
+    /**
+     * Returns the player associated with this strategy object
+     * @return player associated with this
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Set the player to which this strategy applies
+     * @param player player to which this strategy applies
+     */
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
     /**
      * Identifies the country to attack
