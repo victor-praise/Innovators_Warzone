@@ -327,7 +327,7 @@ public class Player {
      * @return true if player can issue orders
      */
     public boolean canIssueOrder() {
-        return !didCommitForThisTurn;
+        return !didCommitForThisTurn && !getD_ownedCountries().isEmpty();
     }
 
     /**

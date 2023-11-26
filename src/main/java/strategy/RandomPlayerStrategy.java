@@ -54,4 +54,13 @@ public class RandomPlayerStrategy extends PlayerStrategy {
     public Country toDefend() {
         return null;
     }
+
+    /**
+     * Identifies the country to deploy to
+     * @return country to which deployment should take place
+     */
+    @Override
+    public Country toDeploy() {
+        return null;
+    }
 }

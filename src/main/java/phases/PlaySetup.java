@@ -166,8 +166,9 @@ public class PlaySetup extends Play {
     public void assignCountries(String[] p_baseParams, Functionality[] p_functionalities) {
         Game.sharedInstance().assignCountriesToPlayers();
         if (Game.sharedInstance().getD_players().size() > 1) {
-            // change state when all countries assigned
-            next();
+            Game.sharedInstance().playerAssignmentComplete();
+//            // change state when all countries assigned
+//            next();
         }
     }
 
