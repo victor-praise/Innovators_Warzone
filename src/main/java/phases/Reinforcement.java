@@ -16,7 +16,7 @@ public class Reinforcement extends MainPlay {
     /**
      * Determines the number of turn in this game
      */
-    private static long TURN_NUMBER = 1;
+    public static long TURN_NUMBER = 1;
 
     Reinforcement() {
         LogEntryBuffer.getInstance().log("==== Reinforcement phase {Turn Number :: " + TURN_NUMBER++ + "} ====" + "\n");
@@ -28,10 +28,23 @@ public class Reinforcement extends MainPlay {
      */
     @Override
     public void reinforce() {
+        if (TURN_NUMBER > Constants.MAX_TURNS_ALLOWED) {
+            System.out.println("No winners in more than " + Constants.MAX_TURNS_ALLOWED + " rounds. This Game is a DRAW");
+            for (Player player: Game.sharedInstance().getD_players()) {
+                if (player.getD_ownedCountries().isEmpty()) {
+                    continue;
+                }
+                System.out.println(player.getD_name() + " currently owns " + player.getD_ownedCountries().size() + " countries out of " + Game.sharedInstance().getD_map().getD_countries().size() + " countries");
+            }
+            Game.sharedInstance().setD_gamePhase(new End());
+        }
         // Reset available Army units back to total number of armies
         Game.sharedInstance().getD_map().getD_countries().forEach(Country::resetD_availableArmyUnits);
 
         for (Player player : Game.sharedInstance().getD_players()) {
+            if (player.getD_ownedCountries().isEmpty()) {
+                continue;
+            }
             int l_reinforcementValue = (int) Math.floor((double) player.getD_ownedCountries().size() / 3.0);
             // Check for ownership of continents, which should be added to DEFAULT_REINFORCEMENT
             for (Continent continent : player.getContinentsOwnedByPlayer()) {
@@ -45,9 +58,6 @@ public class Reinforcement extends MainPlay {
                 player.assignRandomCard();
             }
         }
-
-        // change state before leaving
-        next();
     }
 
     /**

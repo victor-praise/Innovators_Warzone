@@ -48,6 +48,12 @@ public abstract class PlayerStrategy {
     public abstract Country toAttackFrom();
 
     /**
+     * Identifies the country to deploy to
+     * @return country to which deployment should take place
+     */
+    public abstract Country toDeploy();
+
+    /**
      * Identifies country to move to
      * @return country to move to
      */

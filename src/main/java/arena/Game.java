@@ -3,9 +3,7 @@ package main.java.arena;
 import main.java.commands.BaseCommand;
 import main.java.commands.Command;
 import main.java.models.*;
-import main.java.phases.End;
-import main.java.phases.Phase;
-import main.java.phases.Preload;
+import main.java.phases.*;
 import main.java.strategy.HumanPlayerStrategy;
 import main.java.strategy.PlayerStrategy;
 import main.java.utils.CommandParser;
@@ -43,6 +41,11 @@ public class Game {
      * Global level boolean to terminate game
      */
     public static Boolean Is_Gameplay_On = true;
+
+    /**
+     * Informs the game that countries have been assigned to players
+     */
+    private static Boolean Player_Assignment_Complete = false;
 
     private GameMode gameMode = GameMode.Single;
 
@@ -309,7 +312,16 @@ public class Game {
         Command l_command = l_parser.parseCommandStatement(l_nextCommand);
         while (l_command.d_command != BaseCommand.Quit && Is_Gameplay_On) {
             d_gamePhase.executeCommand(l_command);
+            if (Player_Assignment_Complete) {
+                // We don't need anymore inputs
+                break;
+            }
             l_command = l_parser.parseCommandStatement(commandReader.nextLine());
+        }
+
+
+        while (true) {
+            d_gamePhase.next();
         }
     }
 
@@ -329,6 +341,10 @@ public class Game {
         // Intentionally ending game.
         System.out.println(" --- TOURNAMENT-MODE ENDS ---");
         d_gamePhase.endGame();
+    }
+
+    public void playerAssignmentComplete() {
+        Player_Assignment_Complete = true;
     }
 
     /**

@@ -30,7 +30,7 @@ public class Attack extends MainPlay {
                 if (l_player.canIssueOrder()) {
                     hasMoreOrders = true;
                     if (l_player.canDeployTroops()) {
-                        LogEntryBuffer.getInstance().log("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedArmyUnits() + " army units left to deploy");
+                        LogEntryBuffer.getInstance().log("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedArmyUnits() + " army units left to deploy on " + l_player.getD_ownedCountries().size() + " owned countries");
                     }
                     l_player.issue_order();
                 }
@@ -42,8 +42,6 @@ public class Attack extends MainPlay {
                 }
             }
         }
-
-        next();
     }
 
     /**

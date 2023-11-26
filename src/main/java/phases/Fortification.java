@@ -34,17 +34,13 @@ public class Fortification extends MainPlay {
 
         // Remove commit flags from all players
         Game.sharedInstance().getD_players().forEach(player -> player.setCommitForThisTurn(false));
-
-        // change state before leaving
-        next();
     }
 
     public void checkIfWeHaveWinner() {
         Player winner = Game.sharedInstance().getD_map().playerOwningAllCountries();
         if (winner != null) {
             // We have found our winner
-            LogEntryBuffer.getInstance().log("\n****** " + winner.getD_name() + " has won the game. ****** !!!\n\n");
-
+            LogEntryBuffer.getInstance().log("\n****** " + winner.getD_name() + " has won the game in "  + Reinforcement.TURN_NUMBER + " turns. ****** !!!\n\n");
             Game.sharedInstance().setD_gamePhase(new End());
         }
     }

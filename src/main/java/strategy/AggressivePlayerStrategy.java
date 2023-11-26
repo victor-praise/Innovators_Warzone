@@ -5,6 +5,8 @@ import main.java.orders.AdvanceOrder;
 import main.java.orders.DeployOrder;
 import main.java.utils.logger.LogEntryBuffer;
 
+import java.util.Random;
+
 /**
  * @author kevin on 2023-11-24
  */
@@ -68,19 +70,16 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
     public Country toAttack() {
         Country[] enemyCountries = d_lastDeployedCountry.getEnemyNeighbours();
         // Find first enemy with chance to win
-        Country toAttack = null;
         Country attackFrom = toAttackFrom();
-        for (Country enemy: enemyCountries) {
-            if (toAttack == null) {
-                toAttack = enemy;
-            } else {
-                if (enemy.getD_noOfArmies() < toAttack.getD_noOfArmies()) {
-                    toAttack = enemy;
-                }
-            }
+        if (enemyCountries.length > 1) {
+            Random random = new Random(0);
+            int randomIndex = random.nextInt(enemyCountries.length - 1);
+            return enemyCountries[randomIndex];
+        } else if (enemyCountries.length == 1) {
+            return enemyCountries[0];
+        } else {
+            return null;
         }
-
-        return (toAttack == null) ? ((enemyCountries.length > 0) ? enemyCountries[0] : null) : toAttack;
     }
 
     /**
@@ -113,6 +112,12 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
         return null;
     }
 
+
+    /**
+     * Identifies the country to deploy to
+     * @return country to which deployment should take place
+     */
+    @Override
     public Country toDeploy() {
         Country countryWithHighestDeployment = getCountryWithHighestDeployment();
         if (countryWithHighestDeployment == null) {

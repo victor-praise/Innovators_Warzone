@@ -76,7 +76,7 @@ public class AdvanceOrder implements Order {
             long defendingArmyLeft = Math.max(0, defendingArmyUnits - attackerCanKill);
             String l_message;
 
-            System.out.print("Attacker can kill: " + attackerCanKill);
+            System.out.print("[AdvanceOrder]: Attacker can kill: " + attackerCanKill);
             System.out.print(" :: Defender can kill: " + defenderCanKill);
             System.out.print(" :: Attacker left: " + attackingArmyLeft);
             System.out.print(" :: Defender left: " + defendingArmyLeft + "\n");
