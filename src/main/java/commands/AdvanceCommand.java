@@ -64,7 +64,6 @@ public class AdvanceCommand extends PlayerOrderCommand {
             // check if source and destination countries are adjacent
             if(!l_ownedSourceCountry.hasAdjacentCountry(l_targetDestinationCountry)) {
                 l_message = "[AdvanceCommand]: Countries " + l_ownedSourceCountry + " and " + l_destinationCountry + " are not neighbours.";
-                System.out.println(l_message);
                 LogEntryBuffer.getInstance().log(l_message);
             }
 

@@ -1,5 +1,7 @@
 package main.java.models;
 
+import main.java.arena.Game;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -249,6 +251,38 @@ public class Country {
         return getD_neighbors().contains(p_destCountry.getD_countryID());
     }
 
+    /**
+     * Finds all the neighbours which are not NEUTRAL and owned by some other player
+     * @return all enemy countries
+     */
+    public Country[] getEnemyNeighbours() {
+        Player owner = getD_ownedBy();
+        if (owner == null) {
+            // if this is NEUTRAL or free-city, there are no enemies
+            return new Country[0];
+        }
+        List<Country> enemies = new ArrayList<Country>();
+        for (int neighbourId: d_neighbors) {
+            Country neighbour = Game.sharedInstance().getD_map().getCountry(neighbourId);
+            if (!neighbour.isD_isNeutralTerritory()) {
+                Player neighbourOwnedBy = neighbour.getD_ownedBy();
+                if (neighbourOwnedBy == null) {
+                    enemies.add(neighbour);
+                } else {
+                    // If this owner and neighbour owner are different, its enemy territory
+                    if (!owner.equals(neighbourOwnedBy)) {
+                        enemies.add(neighbour);
+                    }
+                }
+            }
+        }
+        if (enemies.isEmpty()) {
+            // This is an edge case where none of the neighbouring countries are enemy
+            // Just pick up the first neighbour
+            enemies.add(Game.sharedInstance().getD_map().getCountry(d_neighbors.get(d_neighbors.size() - 1)));
+        }
+        return enemies.toArray(new Country[0]);
+    }
     /**
      * Describes the Country - name and id of neighbours
      * @return String description of country

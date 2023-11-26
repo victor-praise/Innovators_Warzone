@@ -1,20 +1,17 @@
 package main.java.strategy;
 
 import main.java.models.Country;
-import main.java.orders.Order;
 
 /**
  * @author kevin on 2023-11-24
  */
 public class CheaterPlayerStrategy extends PlayerStrategy {
     /**
-     * Create a new order based on Strategy
+     * Create a new order based on Strategy and adds it to Player's order list
      *
-     * @return new order according to the strategy
      */
     @Override
-    public Order createOrder() {
-        return null;
+    public void createOrder() {
     }
 
     /**

@@ -83,7 +83,7 @@ public class AdvanceOrder implements Order {
 
             if (defendingArmyLeft == 0) {
                 // Attacker won
-                l_message = d_issuingPlayer.getD_name() + " Attacked with " + d_armyUnitsToAdvance + " and eliminated all " + defendingArmyUnits + " army units in " + d_destinationCountry.getD_countryName();
+                l_message = d_issuingPlayer.getD_name() + " Attacked"  + d_destinationCountry.getD_countryName() + " with " + d_armyUnitsToAdvance + " and eliminated all " + defendingArmyUnits + " army units in ";
                 LogEntryBuffer.getInstance().log(l_message);
 
                 LogEntryBuffer.getInstance().log(d_issuingPlayer.getD_name() + " is the New owner of " + d_destinationCountry.getD_countryName() + " with " + ((int)attackingArmyLeft) + " left");

@@ -9,4 +9,5 @@ public final class Constants {
      * Global value for defining default reinforcement for each turn in the game
      */
     public static final int DEFAULT_REINFORCEMENT = 3;
+    public static final int MAX_PLAYERS_ALLOWED = 10;
 }
