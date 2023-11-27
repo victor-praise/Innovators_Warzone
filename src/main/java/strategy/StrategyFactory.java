@@ -10,8 +10,8 @@ public class StrategyFactory {
             case Human -> playerStrategy = new HumanPlayerStrategy();
             case Aggressive -> playerStrategy = new AggressivePlayerStrategy();
             case Benevolent -> playerStrategy = new BenevolantPlayerStrategy();
-            case cheater -> playerStrategy = new CheaterPlayerStrategy();
-            case random -> playerStrategy = new RandomPlayerStrategy();
+            case Cheater -> playerStrategy = new CheaterPlayerStrategy();
+            case Random -> playerStrategy = new RandomPlayerStrategy();
         }
 
         return playerStrategy;

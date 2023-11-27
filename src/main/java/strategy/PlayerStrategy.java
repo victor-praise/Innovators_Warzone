@@ -2,6 +2,10 @@ package main.java.strategy;
 
 import main.java.models.Country;
 import main.java.models.Player;
+import main.java.orders.DeployOrder;
+import main.java.utils.logger.LogEntryBuffer;
+
+import java.util.Random;
 
 /**
  * @author kevin on 2023-11-24
@@ -13,6 +17,16 @@ public abstract class PlayerStrategy {
      * Player to whom the strategy belongs
      */
     private Player player;
+
+    /**
+     * Country where last deployment order took place
+     */
+    protected Country d_lastDeployedCountry = null;
+
+    /**
+     * Army units used during last deployment order
+     */
+    protected int d_lastDeploymentUnits = 0;
 
     /**
      * Create a new order based on Strategy and adds it to Player's order list.
@@ -64,4 +78,26 @@ public abstract class PlayerStrategy {
      * @return country to defend
      */
     public abstract Country toDefend();
+
+    public void deployArmyUnits(int l_unitsToDeploy) {
+        // we need to deploy
+        Country toDeploy = toDeploy();
+        DeployOrder deployOrder = new DeployOrder(getPlayer(), toDeploy, l_unitsToDeploy);
+        getPlayer().appendOrderToList(deployOrder);
+
+        // Reduce army units for this player
+        getPlayer().reduceArmyUnits(l_unitsToDeploy);
+        // Inform about remaining army units
+        String l_message = "[PlayerStrategy]: Remaining Units of army to deploy: " + getPlayer().getD_assignedArmyUnits();
+        LogEntryBuffer.getInstance().log(l_message);
+
+        // save values
+        d_lastDeployedCountry = toDeploy;
+        d_lastDeploymentUnits = l_unitsToDeploy;
+    }
+
+    protected int getRandomNumberBetween(int low, int high) {
+        Random random = new Random(high - low);
+        return random.nextInt(low, high);
+    }
 }
