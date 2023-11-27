@@ -1,8 +1,6 @@
 package main.java.strategy;
 
 import main.java.models.Country;
-import main.java.orders.DeployOrder;
-import main.java.utils.logger.LogEntryBuffer;
 
 import java.util.Comparator;
 import java.util.List;
@@ -19,15 +17,8 @@ public class BenevolantPlayerStrategy extends PlayerStrategy {
     public void createOrder() {
         int availableToDeploy = getPlayer().getD_assignedArmyUnits();
         if (availableToDeploy > 0) {
-            // We need to deploy the armies first
-            Country toDeploy =  toDeploy();
-            DeployOrder deployOrder = new DeployOrder(getPlayer(), toDeploy, 1);
-            getPlayer().appendOrderToList(deployOrder);
-
-            // Reduce army units for this player
-            getPlayer().reduceArmyUnits(1);
-            String l_message = getPlayer().getD_name() + " asked to deploy 1 unit to " + toDeploy.getD_countryName();
-            LogEntryBuffer.getInstance().log(l_message);
+            // We need to deploy the armies one unit at a time to weakest country
+            deployArmyUnits(1);
         } else {
             // Already deployed, we can commit
             getPlayer().setCommitForThisTurn(true);

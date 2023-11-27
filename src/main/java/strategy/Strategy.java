@@ -26,12 +26,12 @@ public enum Strategy {
      * Deploys on a random country, attacks random neighboring countries,
      * and moves armies randomly between its countries.
      */
-    random("random"),
+    Random("random"),
     /**
      * Conquers all the immediate neighboring enemy countries,
      * and then doubles the number of armies on its countries that have enemy neighbors.
      */
-    cheater("cheater");
+    Cheater("cheater");
 
     private Strategy(String strategy) {
         this.d_label = strategy;

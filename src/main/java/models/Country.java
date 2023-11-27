@@ -295,4 +295,8 @@ public class Country {
         }
         return l_description;
     }
+
+    public boolean hasMoreThanOneArmyUnit() {
+        return (d_noOfArmies + d_availableArmyUnits) > 0;
+    }
 }

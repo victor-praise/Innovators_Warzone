@@ -2,7 +2,6 @@ package main.java.strategy;
 
 import main.java.models.Country;
 import main.java.orders.AdvanceOrder;
-import main.java.orders.DeployOrder;
 import main.java.utils.logger.LogEntryBuffer;
 
 import java.util.Random;
@@ -11,9 +10,6 @@ import java.util.Random;
  * @author kevin on 2023-11-24
  */
 public class AggressivePlayerStrategy extends PlayerStrategy {
-
-    private Country d_lastDeployedCountry = null;
-    private int d_lastDeploymentUnits = 0;
 
     /**
      * Create a new order based on Strategy and adds it to Player's order list
@@ -24,36 +20,12 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 
         if (getPlayer().getD_assignedArmyUnits() > 0) {
             // we need to deploy
-            Country toDeploy = toDeploy();
             int deploymentUnits = getPlayer().getD_assignedArmyUnits();
-            DeployOrder deployOrder = new DeployOrder(getPlayer(), toDeploy, deploymentUnits);
-            getPlayer().appendOrderToList(deployOrder);
-
-            // Reduce army units for this player
-            getPlayer().reduceArmyUnits(deploymentUnits);
-            // Inform about remaining army units
-            String l_message = "[DeployOrder]: Remaining Units of army to deploy: " + getPlayer().getD_assignedArmyUnits();
-            LogEntryBuffer.getInstance().log(l_message);
-
-            // save values
-            d_lastDeployedCountry = toDeploy;
-            d_lastDeploymentUnits = deploymentUnits;
+            deployArmyUnits(deploymentUnits);
         } else {
             // Can commit or attack
             if (d_lastDeployedCountry != null) {
-                // attack now!
-                Country attackFrom = toAttackFrom();
-                int availableArmyUnits = d_lastDeploymentUnits + ((attackFrom == null) ? 0 : attackFrom.getD_noOfArmies());
-                int tenPercent = (int) Math.floor((0.1 * availableArmyUnits));
-                int ninetyPercent = availableArmyUnits - tenPercent;
-                System.out.println("Leaving behind 10% = " + tenPercent);
-                AdvanceOrder advanceOrder = new AdvanceOrder(getPlayer(), attackFrom, toAttack(), ninetyPercent);
-                String l_message = "[AdvanceCommand]: " + getPlayer().getD_name() + " requested Country " + attackFrom.getD_countryName() + " to attack " + toAttack().getD_countryName() + " with " + ninetyPercent + " army units.";
-                LogEntryBuffer.getInstance().log(l_message);
-
-                getPlayer().appendOrderToList(advanceOrder);
-                d_lastDeployedCountry = null;
-                d_lastDeploymentUnits = 0;
+                attack();
             } else {
                 // Already deployed and attacked
                 getPlayer().setCommitForThisTurn(true);
@@ -127,6 +99,24 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
             // We have deployment, add forces to this country
             return countryWithHighestDeployment;
         }
+    }
+
+    /**
+     * Attack with all the might into an enemy neighbouring country
+     */
+    private void attack() {
+        // attack now!
+        Country attackFrom = toAttackFrom();
+        int availableArmyUnits = d_lastDeploymentUnits + ((attackFrom == null) ? 0 : attackFrom.getD_noOfArmies());
+        int tenPercent = (int) Math.floor((0.1 * availableArmyUnits));
+        int ninetyPercent = availableArmyUnits - tenPercent;
+        AdvanceOrder advanceOrder = new AdvanceOrder(getPlayer(), attackFrom, toAttack(), ninetyPercent);
+        String l_message = "[AdvanceCommand]: " + getPlayer().getD_name() + " requested Country " + attackFrom.getD_countryName() + " to attack " + toAttack().getD_countryName() + " with " + ninetyPercent + " army units.";
+        LogEntryBuffer.getInstance().log(l_message);
+
+        getPlayer().appendOrderToList(advanceOrder);
+        d_lastDeployedCountry = null;
+        d_lastDeploymentUnits = 0;
     }
 
     public Country getCountryWithHighestDeployment() {

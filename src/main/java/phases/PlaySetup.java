@@ -240,7 +240,7 @@ public class PlaySetup extends Play {
             String l_name = playerNamePrefix + (playerIndex + 1);
             Strategy strategy = playerStrategies[playerIndex];
             Player nextPlayer = new Player(l_name, StrategyFactory.generateStrategyObject(strategy));
-            System.out.println("Created new player with name: " + l_name + " and strategy: " + strategy.toString());
+            LogEntryBuffer.getInstance().log("Created new player with name: " + l_name + " and strategy: " + strategy.toString());
             Game.sharedInstance().addPlayer(nextPlayer);
         }
     }
