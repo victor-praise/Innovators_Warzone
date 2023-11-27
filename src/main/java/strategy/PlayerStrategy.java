@@ -79,23 +79,35 @@ public abstract class PlayerStrategy {
      */
     public abstract Country toDefend();
 
-    public void deployArmyUnits(int l_unitsToDeploy) {
+    /**
+     * deploy a given number of troops to country determied from 'toDeploy()'
+     * @param l_unitsToDeploy
+     */
+    protected void deployArmyUnits(int l_unitsToDeploy) {
         // we need to deploy
         Country toDeploy = toDeploy();
-        DeployOrder deployOrder = new DeployOrder(getPlayer(), toDeploy, l_unitsToDeploy);
-        getPlayer().appendOrderToList(deployOrder);
+        if (toDeploy != null) {
+            DeployOrder deployOrder = new DeployOrder(getPlayer(), toDeploy, l_unitsToDeploy);
+            getPlayer().appendOrderToList(deployOrder);
 
-        // Reduce army units for this player
-        getPlayer().reduceArmyUnits(l_unitsToDeploy);
-        // Inform about remaining army units
-        String l_message = "[PlayerStrategy]: Remaining Units of army to deploy: " + getPlayer().getD_assignedArmyUnits();
-        LogEntryBuffer.getInstance().log(l_message);
+            // Reduce army units for this player
+            getPlayer().reduceArmyUnits(l_unitsToDeploy);
+            // Inform about remaining army units
+            String l_message = "[PlayerStrategy]: Remaining Units of army to deploy: " + getPlayer().getD_assignedArmyUnits();
+            LogEntryBuffer.getInstance().log(l_message);
+        }
 
         // save values
         d_lastDeployedCountry = toDeploy;
         d_lastDeploymentUnits = l_unitsToDeploy;
     }
 
+    /**
+     * Generates a random number between low and high
+     * @param low lowest value
+     * @param high highest value
+     * @return random number
+     */
     protected int getRandomNumberBetween(int low, int high) {
         Random random = new Random(high - low);
         return random.nextInt(low, high);

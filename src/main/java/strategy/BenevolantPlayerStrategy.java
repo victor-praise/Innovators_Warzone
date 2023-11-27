@@ -17,7 +17,7 @@ public class BenevolantPlayerStrategy extends PlayerStrategy {
     public void createOrder() {
         int availableToDeploy = getPlayer().getD_assignedArmyUnits();
         if (availableToDeploy > 0) {
-            // We need to deploy the armies one unit at a time to weakest country
+            // We need to deploy the armies one unit at a time to the weakest country
             deployArmyUnits(1);
         } else {
             // Already deployed, we can commit
@@ -74,6 +74,10 @@ public class BenevolantPlayerStrategy extends PlayerStrategy {
         return sortBasedOnNumberOfArmies()[0];
     }
 
+    /**
+     * Sorted list of owned countries based on number of armies
+     * @return countries sorted based on number of armies
+     */
     private Country[] sortBasedOnNumberOfArmies() {
         List<Country> playerOwnedCountries = getPlayer().getD_ownedCountries();
         playerOwnedCountries.sort(new Comparator<Country>() {

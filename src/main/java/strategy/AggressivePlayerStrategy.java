@@ -119,6 +119,10 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
         d_lastDeploymentUnits = 0;
     }
 
+    /**
+     * Get the country having maximum number of armies for this player
+     * @return country having maximum number of armies
+     */
     public Country getCountryWithHighestDeployment() {
         int currentMaxDeploymentCount = 0;
         Country countryWithMaxDeployment = null;

@@ -143,8 +143,14 @@ public class RandomPlayerStrategy extends PlayerStrategy {
     @Override
     public Country toDeploy() {
         List<Country> ownedCountries = getPlayer().getD_ownedCountries();
-        int randomCountryIndex = getRandomNumberBetween(0, ownedCountries.size() - 1);
-        return ownedCountries.get(randomCountryIndex);
+        if (ownedCountries.isEmpty()) {
+            return null;
+        } else if (ownedCountries.size() == 1) {
+            return ownedCountries.get(0);
+        } else {
+            int randomCountryIndex = getRandomNumberBetween(0, ownedCountries.size() - 1);
+            return ownedCountries.get(randomCountryIndex);
+        }
     }
 
     /**
@@ -169,6 +175,9 @@ public class RandomPlayerStrategy extends PlayerStrategy {
         d_toAttackFrom = null;
     }
 
+    /**
+     * Performs movement of troops from 'toMoveFrom()' to a random country
+     */
     private void move() {
         Country toMoveFrom = toMoveFrom();
         if (toMoveFrom != null) {
@@ -188,6 +197,5 @@ public class RandomPlayerStrategy extends PlayerStrategy {
         }
         d_lastDeployedCountry = null;
         d_lastDeploymentUnits = 0;
-
     }
 }

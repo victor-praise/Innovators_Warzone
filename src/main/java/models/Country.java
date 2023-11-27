@@ -283,6 +283,7 @@ public class Country {
         }
         return enemies.toArray(new Country[0]);
     }
+
     /**
      * Describes the Country - name and id of neighbours
      * @return String description of country
@@ -296,7 +297,54 @@ public class Country {
         return l_description;
     }
 
+    /**
+     * For a given country, determines if the owner is different
+     * @param country country to test
+     * @return true if it's owned by someone else, false if NEUTRAL or owned by same owner
+     */
+    public boolean isHostileForMe(Country country) {
+        if (country.d_isNeutralTerritory) {
+            return  false;
+        }
+        String ownerName = getD_ownedBy().getD_name();
+        String testCountryOwnerName = country.getD_ownedBy().getD_name();
+        return !ownerName.equals(testCountryOwnerName);
+    }
+
+    /**
+     * Returns all the neighbours which do not have border with any enemy
+     * @return neighbours which are safe
+     */
+    public Country[] safeNeighbours() {
+        List<Country> neighbours = getD_neighbors().stream()
+                .map(d_countryID -> Game.sharedInstance().getD_map().getCountry(d_countryID))
+                .toList();
+
+        return neighbours.stream().filter(country -> {
+            return !country.hasAdjacentEnemyTerritory();
+        }).toList().toArray(new Country[0]);
+    }
+
+    /**
+     * Determines if it has at least one standing army or incoming army from deploy
+     * @return true if this country has or will be getting at least one unit of army, false otherwise
+     */
     public boolean hasMoreThanOneArmyUnit() {
         return (d_noOfArmies + d_availableArmyUnits) > 0;
+    }
+
+    /**
+     * Determines if this country has at least one neighbour which is hostile
+     * @return true if it has one hostile neighbour, false otherwise
+     */
+    public boolean hasAdjacentEnemyTerritory() {
+        boolean hasEnemyAtBorder = false;
+        for (int neighbourId: d_neighbors) {
+            Player neighbourOwner = Game.sharedInstance().getD_map().getCountry(neighbourId).getD_ownedBy();
+            if (neighbourOwner != null && !neighbourOwner.getD_name().equals(d_ownedBy.getD_name())) {
+                hasEnemyAtBorder = true;
+            }
+        }
+        return hasEnemyAtBorder;
     }
 }
