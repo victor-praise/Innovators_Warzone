@@ -80,7 +80,8 @@ public class Tournament {
         System.out.print("\t\t\t\t M:  \t");
         boolean isFirst = true;
         for (String mapName: mapNames) {
-            System.out.print((isFirst ? "" : ", ") + "mapName");
+            String label = mapName.substring(0,1).toUpperCase() + mapName.substring(1).toLowerCase();
+            System.out.print((isFirst ? "" : ", ") + label);
             if (isFirst) {
                 isFirst = false;
             }
@@ -90,7 +91,8 @@ public class Tournament {
         System.out.print("\t\t\t\t P:  \t");
         isFirst = true;
         for (Strategy strategy: playerStrategies) {
-            System.out.print((isFirst ? "" : ", ") + strategy.d_label);
+            String label = strategy.d_label.substring(0,1).toUpperCase() + strategy.d_label.substring(1);
+            System.out.print((isFirst ? "" : ", ") + label);
             if (isFirst) {
                 isFirst = false;
             }
@@ -115,13 +117,16 @@ public class Tournament {
                 String[] mapWinners = results[index - 1];
                 System.out.print("*\t" + mapName + "\t\t | ");
                 for (int gameIndex = 0; gameIndex < numberOfGames; gameIndex++) {
+                    String label = mapWinners[gameIndex];
                     String tabsAfter = "\t\t | ";
                     String tabsBefore = "\t\t ";
-                    if (mapWinners[gameIndex].equals("DRAW")) {
+                    if (label.equals("DRAW")) {
                         tabsAfter = "\t\t\t\t |  ";
                         tabsBefore = "\t\t\t ";
+                    } else {
+                        label = label.substring(0,1).toUpperCase() + label.substring(1);
                     }
-                    System.out.print(tabsBefore + mapWinners[gameIndex] + tabsAfter);
+                    System.out.print(tabsBefore + label + tabsAfter);
                 }
                 System.out.println("*");
             }
