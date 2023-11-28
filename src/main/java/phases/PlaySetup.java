@@ -245,30 +245,35 @@ public class PlaySetup extends Play {
         }
     }
 
-    /**
-     * Asks user to input number of players in console
-     * @return number of players
-     */
     private int readNumberOfPlayers() {
-        int numberOfPlayers = 0;
-        boolean isInvalid = true;
-        int maxPlayers = Constants.MAX_PLAYERS_ALLOWED;
+        int l_numberOfPlayers = 0;
+        final int l_MAXPLAYERS = Constants.MAX_PLAYERS_ALLOWED;
+
         do {
-            System.out.println("Please enter the number of players between 1 and " + maxPlayers + ": ");
+            System.out.println("Please enter the number of players between 1 and " + l_MAXPLAYERS + ": ");
             String input = reader.nextLine();
-            try {
-                int received = Integer.parseInt(input);
-                if (received > 0 && received < 10) {
-                    numberOfPlayers = received;
-                    isInvalid = false;
-                } else {
-                    System.out.println("Invalid. Please enter a number between 1 and 10" + maxPlayers);
-                }
-            } catch (NumberFormatException exception) {
-                System.out.println("Invalid. Please enter a number between 1 and " + maxPlayers);
+            if (isValidInput(input, l_MAXPLAYERS)) {
+                l_numberOfPlayers = Integer.parseInt(input);
+            } else {
+                System.out.println("Invalid input. Please enter a number between 1 and " + l_MAXPLAYERS);
             }
-        } while (isInvalid);
-        return numberOfPlayers;
+        } while (l_numberOfPlayers == 0);
+        return l_numberOfPlayers;
+    }
+    /**
+     * Checks if the provided input is a valid integer within the specified range.
+     *
+     * @param p_input      The user input to be validated.
+     * @param p_maxPlayers The maximum number of players allowed.
+     * @return {@code true} if the input is a valid integer within the range, {@code false} otherwise.
+     */
+    private boolean isValidInput(String p_input, int p_maxPlayers) {
+        try {
+            int received = Integer.parseInt(p_input);
+            return received > 0 && received <= p_maxPlayers;
+        } catch (NumberFormatException exception) {
+            return false;
+        }
     }
 
     private Strategy[] readStrategiesForEachPlayer(int size) {
