@@ -3,6 +3,7 @@ package main.java.models;
 import main.java.arena.Game;
 import main.java.strategy.Strategy;
 import main.java.strategy.StrategyFactory;
+import main.java.utils.Constants;
 
 /**
  * Contains the information about the tournament if the game is running in tournament mode
@@ -15,6 +16,8 @@ public class Tournament {
     Strategy[] playerStrategies;
     int numberOfGames;
     int maxNumberOfTurns;
+
+    public String[][] results;
 
     public Tournament() {
         this(null, null, 0, 0);
@@ -57,9 +60,11 @@ public class Tournament {
 
     public void setMaxNumberOfTurns(int maxNumberOfTurns) {
         this.maxNumberOfTurns = maxNumberOfTurns;
+        Constants.MAX_TURNS_ALLOWED = maxNumberOfTurns;
     }
 
     public void createPlayers() {
+        this.results = new String[mapNames.length][numberOfGames];
         String playerNamePrefix = "Player";
         int playerIndex = 1;
         for (Strategy strategy: playerStrategies) {
@@ -68,5 +73,61 @@ public class Tournament {
             System.out.println("Created new player with name: " + l_name + " and strategy: " + strategy.toString());
             Game.sharedInstance().addPlayer(nextPlayer);
         }
+    }
+
+    public void displayResults() {
+        System.out.println("\n\n **************  Final Results  **************\n\n");
+        System.out.print("\t\t\t\t M:  \t");
+        boolean isFirst = true;
+        for (String mapName: mapNames) {
+            System.out.print((isFirst ? "" : ", ") + "mapName");
+            if (isFirst) {
+                isFirst = false;
+            }
+        }
+        System.out.println();
+
+        System.out.print("\t\t\t\t P:  \t");
+        isFirst = true;
+        for (Strategy strategy: playerStrategies) {
+            System.out.print((isFirst ? "" : ", ") + strategy.d_label);
+            if (isFirst) {
+                isFirst = false;
+            }
+        }
+        System.out.println();
+
+        System.out.println("\t\t\t\t G:  \t" + numberOfGames);
+        System.out.println("\t\t\t\t D:  \t" + maxNumberOfTurns);
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        for (int index = 0; index <= mapNames.length; index++) {
+            if (index == 0) {
+                System.out.print("*\t\t\t\t | \t");
+                for (int gameIndex = 0; gameIndex < numberOfGames; gameIndex++) {
+                    System.out.print("\t\t Game " + (gameIndex + 1) + "\t\t\t\t |  " );
+                }
+                System.out.println("*");
+            } else {
+                String mapName = mapNames[index - 1];
+                String[] mapWinners = results[index - 1];
+                System.out.print("*\t" + mapName + "\t\t | ");
+                for (int gameIndex = 0; gameIndex < numberOfGames; gameIndex++) {
+                    String tabsAfter = "\t\t | ";
+                    String tabsBefore = "\t\t ";
+                    if (mapWinners[gameIndex].equals("DRAW")) {
+                        tabsAfter = "\t\t\t\t |  ";
+                        tabsBefore = "\t\t\t ";
+                    }
+                    System.out.print(tabsBefore + mapWinners[gameIndex] + tabsAfter);
+                }
+                System.out.println("*");
+            }
+        }
+
+        System.out.println("\n\n **************  Final Results  **************\n\n");
+
     }
 }

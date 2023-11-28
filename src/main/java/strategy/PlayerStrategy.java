@@ -18,6 +18,8 @@ public abstract class PlayerStrategy {
      */
     private Player player;
 
+    protected String strategyName;
+
     /**
      * Country where last deployment order took place
      */
@@ -79,9 +81,13 @@ public abstract class PlayerStrategy {
      */
     public abstract Country toDefend();
 
+    PlayerStrategy(Strategy strategy) {
+        this.strategyName = strategy.d_label;
+    }
+
     /**
-     * deploy a given number of troops to country determied from 'toDeploy()'
-     * @param l_unitsToDeploy
+     * deploy a given number of troops to country determined from 'toDeploy()'
+     * @param l_unitsToDeploy number of units to deploy
      */
     protected void deployArmyUnits(int l_unitsToDeploy) {
         // we need to deploy
@@ -100,6 +106,14 @@ public abstract class PlayerStrategy {
         // save values
         d_lastDeployedCountry = toDeploy;
         d_lastDeploymentUnits = l_unitsToDeploy;
+    }
+
+    /**
+     * Get the name of the strategy
+     * @return strategy name
+     */
+    public String getName() {
+        return strategyName;
     }
 
     /**

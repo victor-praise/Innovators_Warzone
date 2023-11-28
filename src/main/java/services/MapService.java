@@ -36,12 +36,33 @@ public class MapService {
                 else if(l_file.contains("[countries]")){
                     new MapReader().readMapFile( l_map, l_file);
                 }
-
             }
         } else {
             System.out.println("[Map Service]: Unknown file name, Creating new map from scratch");
         }
         Game.sharedInstance().setD_map(l_map);
+    }
+
+    /**
+     * Attempts loading a map with a given file name
+     * @param l_fileName file name to load
+     * @return Returns true if load map was successfully, false otherwise
+     */
+    public boolean attemptLoadMapWithFileName(String l_fileName) {
+        String l_filename = l_fileName;
+        if (!l_filename.endsWith(".map")) {
+            l_filename = l_filename.concat(".map");
+        }
+
+        String l_filePath = new File("").getAbsolutePath();
+        String l_file = l_filePath + File.separator + "res" + File.separator + l_filename;
+        File l_fileToBeLoaded = new File(l_file);
+        if (l_fileToBeLoaded.exists()) {
+            this.loadMap(l_filename);
+            return true;
+        } else {
+            return  false;
+        }
     }
 
     /**

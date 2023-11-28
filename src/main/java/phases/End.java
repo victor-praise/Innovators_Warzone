@@ -1,5 +1,6 @@
 package main.java.phases;
 
+import main.java.arena.Game;
 import main.java.commands.Functionality;
 import main.java.utils.logger.LogEntryBuffer;
 
@@ -161,7 +162,7 @@ public class End extends Phase {
     @Override
     public void endGame() {
         System.out.println("Game terminated");
-        System.exit(0);
+        Game.endGamePlay();
     }
 
     /**

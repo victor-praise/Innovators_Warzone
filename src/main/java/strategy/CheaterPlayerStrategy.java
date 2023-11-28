@@ -14,6 +14,11 @@ import java.util.Optional;
  * @author kevin on 2023-11-24
  */
 public class CheaterPlayerStrategy extends PlayerStrategy {
+
+    public CheaterPlayerStrategy(Strategy p_strategy) {
+        super(p_strategy);
+    }
+
     /**
      * Create a new order based on Strategy and adds it to Player's order list
      *

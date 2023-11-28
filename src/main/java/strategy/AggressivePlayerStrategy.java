@@ -11,6 +11,10 @@ import java.util.Random;
  */
 public class AggressivePlayerStrategy extends PlayerStrategy {
 
+    public AggressivePlayerStrategy(Strategy p_strategy) {
+        super(p_strategy);
+    }
+
     /**
      * Create a new order based on Strategy and adds it to Player's order list
      *

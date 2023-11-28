@@ -5,7 +5,6 @@ import main.java.commands.Functionality;
 import main.java.exceptions.MapInvalidException;
 import main.java.services.MapService;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
@@ -55,18 +54,22 @@ public class Edit extends Phase {
                 return;
             }
 
-            if (!l_filename.endsWith(".map")) {
-                l_filename = l_filename.concat(".map");
-            }
-
-            String l_filePath = new File("").getAbsolutePath();
-            String l_file = l_filePath + File.separator + "res" + File.separator + l_filename;
-            File l_fileToBeLoaded = new File(l_file);
-            if (l_fileToBeLoaded.exists()) {
-                mapService.loadMap(l_filename);
-            } else {
+            if (!mapService.attemptLoadMapWithFileName(l_filename)) {
                 System.out.println("[LoadMapCommand]: file does not exist, please provide the name of a file that exists ");
             }
+
+//            if (!l_filename.endsWith(".map")) {
+//                l_filename = l_filename.concat(".map");
+//            }
+//
+//            String l_filePath = new File("").getAbsolutePath();
+//            String l_file = l_filePath + File.separator + "res" + File.separator + l_filename;
+//            File l_fileToBeLoaded = new File(l_file);
+//            if (l_fileToBeLoaded.exists()) {
+//                mapService.loadMap(l_filename);
+//            } else {
+//                System.out.println("[LoadMapCommand]: file does not exist, please provide the name of a file that exists ");
+//            }
         } catch (Exception e) {
             System.out.println("[LoadMapCommand]: Error reading from file : " + e.getMessage());
         }
