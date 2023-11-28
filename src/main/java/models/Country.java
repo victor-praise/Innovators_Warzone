@@ -251,37 +251,93 @@ public class Country {
         return getD_neighbors().contains(p_destCountry.getD_countryID());
     }
 
+//    /**
+//     * Finds all the neighbours which are not NEUTRAL and owned by some other player
+//     * @return all enemy countries
+//     */
+//    public Country[] getEnemyNeighbours() {
+//        Player owner = getD_ownedBy();
+//        if (owner == null) {
+//            // if this is NEUTRAL or free-city, there are no enemies
+//            return new Country[0];
+//        }
+//        List<Country> enemies = new ArrayList<Country>();
+//        for (int neighbourId: d_neighbors) {
+//            Country neighbour = Game.sharedInstance().getD_map().getCountry(neighbourId);
+//            if (!neighbour.isD_isNeutralTerritory()) {
+//                Player neighbourOwnedBy = neighbour.getD_ownedBy();
+//                if (neighbourOwnedBy == null) {
+//                    enemies.add(neighbour);
+//                } else {
+//                    // If this owner and neighbour owner are different, its enemy territory
+//                    if (!owner.equals(neighbourOwnedBy)) {
+//                        enemies.add(neighbour);
+//                    }
+//                }
+//            }
+//        }
+//        if (enemies.isEmpty()) {
+//            // This is an edge case where none of the neighbouring countries are enemy
+//            // Just pick up the first neighbour
+//            enemies.add(Game.sharedInstance().getD_map().getCountry(d_neighbors.get(d_neighbors.size() - 1)));
+//        }
+//        return enemies.toArray(new Country[0]);
+//    }
+
     /**
-     * Finds all the neighbours which are not NEUTRAL and owned by some other player
-     * @return all enemy countries
+     * Gets the array of neighboring countries that are considered enemies.
+     * A country is considered an enemy if it is not neutral and is owned by a different player.
+     *
+     * @return An array of enemy neighboring countries.
      */
     public Country[] getEnemyNeighbours() {
-        Player owner = getD_ownedBy();
-        if (owner == null) {
-            // if this is NEUTRAL or free-city, there are no enemies
+        Player l_owner = getD_ownedBy();
+
+        if (l_owner == null || isNeutralOrFreeCity()) {
             return new Country[0];
         }
-        List<Country> enemies = new ArrayList<Country>();
-        for (int neighbourId: d_neighbors) {
-            Country neighbour = Game.sharedInstance().getD_map().getCountry(neighbourId);
-            if (!neighbour.isD_isNeutralTerritory()) {
-                Player neighbourOwnedBy = neighbour.getD_ownedBy();
-                if (neighbourOwnedBy == null) {
-                    enemies.add(neighbour);
-                } else {
-                    // If this owner and neighbour owner are different, its enemy territory
-                    if (!owner.equals(neighbourOwnedBy)) {
-                        enemies.add(neighbour);
-                    }
-                }
+
+        List<Country> l_enemies = new ArrayList<>();
+
+        for (int neighbourId : d_neighbors) {
+            Country l_neighbour = Game.sharedInstance().getD_map().getCountry(neighbourId);
+            if (isEnemyTerritory(l_owner, l_neighbour)) {
+                l_enemies.add(l_neighbour);
             }
         }
-        if (enemies.isEmpty()) {
-            // This is an edge case where none of the neighbouring countries are enemy
-            // Just pick up the first neighbour
-            enemies.add(Game.sharedInstance().getD_map().getCountry(d_neighbors.get(d_neighbors.size() - 1)));
-        }
-        return enemies.toArray(new Country[0]);
+
+        return l_enemies.isEmpty() ? new Country[]{getDefaultEnemy()} : l_enemies.toArray(new Country[0]);
+    }
+
+    /**
+     * Checks if the country is neutral or a free city (not owned by any player).
+     *
+     * @return {@code true} if the country is neutral or a free city, {@code false} otherwise.
+     */
+    private boolean isNeutralOrFreeCity() {
+        return getD_ownedBy() == null;
+    }
+
+    /**
+     * Checks if the given country is an enemy territory.
+     * A country is considered an enemy territory if it is not neutral and is owned by a different player.
+     *
+     * @param owner    The player who owns the current country.
+     * @param neighbour The neighboring country to check.
+     * @return {@code true} if the country is an enemy territory, {@code false} otherwise.
+     */
+    private boolean isEnemyTerritory(Player owner, Country neighbour) {
+        return !neighbour.isD_isNeutralTerritory() && (neighbour.getD_ownedBy() == null || !owner.equals(neighbour.getD_ownedBy()));
+    }
+
+    /**
+     * Gets the default enemy country, which is the last neighbor in the list.
+     *
+     * @return The default enemy country.
+     */
+    private Country getDefaultEnemy() {
+        int lastNeighbourId = d_neighbors.get(d_neighbors.size() - 1);
+        return Game.sharedInstance().getD_map().getCountry(lastNeighbourId);
     }
 
     /**
