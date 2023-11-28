@@ -16,23 +16,41 @@ public class Fortification extends MainPlay {
     }
 
     /**
-     * Execute orders in round-robin fashion
+     * Executes fortification orders for all players until no more orders are available.
+     * Resets commit flags for all players and changes the game state before leaving.
      */
-    @Override
     public void fortify() {
-        boolean hasMoreOrders = true;
-        while (hasMoreOrders) {
-            hasMoreOrders = false;
-            for (Player l_player : Game.sharedInstance().getD_players()) {
-                Order l_order = l_player.nextorder();
-                if (l_order != null) {
-                    l_order.execute();
-                    hasMoreOrders = true;
-                }
-            }
+        while (executeNextOrder()) {
+            // Continue processing orders until there are no more
         }
 
-        // Remove commit flags from all players
+        // Reset commit flags for all players
+        resetCommitFlags();
+
+        // Change state before leaving
+        next();
+    }
+
+    /**
+     * Executes the next order for each player, if available.
+     *
+     * @return {@code true} if there are more orders to execute, {@code false} otherwise.
+     */
+    private boolean executeNextOrder() {
+        for (Player player : Game.sharedInstance().getD_players()) {
+            Order order = player.nextorder();
+            if (order != null) {
+                order.execute();
+                return true; // There is at least one more order to execute
+            }
+        }
+        return false; // No more orders to execute
+    }
+
+    /**
+     * Resets commit flags for all players.
+     */
+    private void resetCommitFlags() {
         Game.sharedInstance().getD_players().forEach(player -> player.setCommitForThisTurn(false));
     }
 
