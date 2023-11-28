@@ -162,26 +162,26 @@ public class Continent {
     }
 
     /**
-     * Find Owner of the continent
-     * @return Player owning all the countries in the continent, null otherwise
+     * Finds the owner of the continent by checking if all countries in the continent have the same owner.
+     *
+     * @return The player owning all the countries in the continent, or {@code null} if there are multiple owners or no owner.
      */
     public Player getContinentOwner() {
-        Player owner0 = null;
+        Player l_owner = null;
 
-        for (int index = 0; index < getD_countries().size(); index++) {
-            Country l_country = getD_countries().get(index);
-            Player l_countryOwner = l_country.getD_ownedBy();
-            if (l_countryOwner != null && owner0 == null) {
-                owner0 = l_countryOwner;
-            } else {
-                if (l_countryOwner != null && l_countryOwner != owner0) {
-                    // We have different owner, stop and return null;
+        for (Country country : getD_countries()) {
+            Player countryOwner = country.getD_ownedBy();
+            if (countryOwner != null) {
+                if (l_owner == null) {
+                    l_owner = countryOwner;
+                } else if (!countryOwner.equals(l_owner)) {
+                    // Different owners found, return null
                     return null;
                 }
             }
         }
 
-        return owner0;
+        return l_owner;
     }
 
     /**

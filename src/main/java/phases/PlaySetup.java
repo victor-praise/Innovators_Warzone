@@ -281,32 +281,38 @@ public class PlaySetup extends Play {
         int nextIndex = 0;
         while (nextIndex < size) {
             System.out.println("Select Strategy for player " + (nextIndex + 1));
-            strategies[nextIndex++] = readUntillValidStrategy();
+            strategies[nextIndex++] = readUntilValidStrategy();
         }
         return strategies;
     }
 
-    private Strategy readUntillValidStrategy() {
-        boolean isInvalid = true;
-        Strategy strategySelected = null;
+    private Strategy readUntilValidStrategy() {
+        Strategy l_strategySelected = null;
         Strategy[] allValues = Strategy.values();
+
         do {
             displayAvailableStrategies();
-            String input = reader.nextLine();
+            String l_input = reader.nextLine();
+
             try {
-                int received = Integer.parseInt(input);
-                if (received >= 1 && received <= allValues.length) {
-                    strategySelected = allValues[received - 1];
-                    isInvalid = false;
+                int l_received = Integer.parseInt(l_input);
+                if (isValidStrategyChoice(l_received, allValues)) {
+                    l_strategySelected = allValues[l_received - 1];
                 } else {
                     System.out.println("Invalid choice.");
                 }
             } catch (NumberFormatException exception) {
                 System.out.println("Invalid choice.");
             }
-        } while (isInvalid);
-        return strategySelected;
+        } while (l_strategySelected == null);
+
+        return l_strategySelected;
     }
+
+    private boolean isValidStrategyChoice(int choice, Strategy[] allValues) {
+        return choice >= 1 && choice <= allValues.length;
+    }
+
 
     private void displayAvailableStrategies() {
         System.out.println("Available Strategies are: ");
