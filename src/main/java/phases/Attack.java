@@ -13,7 +13,6 @@ public class Attack extends MainPlay {
 
     Attack() {
         LogEntryBuffer.getInstance().log("==== Attack / Issuing Orders phase ====" + "\n\n\n");
-        displayValidCommands();
         attack();
     }
 

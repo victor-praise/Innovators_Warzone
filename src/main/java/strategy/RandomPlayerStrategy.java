@@ -13,6 +13,10 @@ import java.util.List;
  */
 public class RandomPlayerStrategy extends PlayerStrategy {
 
+    public RandomPlayerStrategy(Strategy p_strategy) {
+        super(p_strategy);
+    }
+
     /**
      * Determines if we have ordered random tropp movement or not
      */

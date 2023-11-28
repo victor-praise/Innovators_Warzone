@@ -18,7 +18,7 @@ public class Reinforcement extends MainPlay {
      */
     public static long TURN_NUMBER = 1;
 
-    Reinforcement() {
+    public Reinforcement() {
         LogEntryBuffer.getInstance().log("==== Reinforcement phase {Turn Number :: " + TURN_NUMBER++ + "} ====" + "\n");
         reinforce();
     }
@@ -37,6 +37,8 @@ public class Reinforcement extends MainPlay {
                 System.out.println(player.getD_name() + " currently owns " + player.getD_ownedCountries().size() + " countries out of " + Game.sharedInstance().getD_map().getD_countries().size() + " countries");
             }
             Game.sharedInstance().setD_gamePhase(new End());
+            Game.sharedInstance().setD_gameWinner("DRAW");
+            return;
         }
         // Reset available Army units back to total number of armies
         Game.sharedInstance().getD_map().getD_countries().forEach(Country::resetD_availableArmyUnits);

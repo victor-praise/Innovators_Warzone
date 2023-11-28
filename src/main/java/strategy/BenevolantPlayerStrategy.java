@@ -9,6 +9,11 @@ import java.util.List;
  * @author kevin on 2023-11-24
  */
 public class BenevolantPlayerStrategy extends PlayerStrategy {
+
+    public BenevolantPlayerStrategy(Strategy p_strategy) {
+        super(p_strategy);
+    }
+
     /**
      * Create a new order based on Strategy and adds it to Player's order list
      *
