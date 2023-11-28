@@ -21,27 +21,58 @@ public class Attack extends MainPlay {
      * Requests each player to issue commands in a round-robin fashion
      */
     @Override
-    public void attack() {
-        boolean didQuitGame = false;
-        boolean hasMoreOrders = true;
-        while (hasMoreOrders && !didQuitGame) {
-            hasMoreOrders = false;
-            for (Player l_player : Game.sharedInstance().getD_players()) {
-                if (l_player.canIssueOrder()) {
-                    hasMoreOrders = true;
-                    if (l_player.canDeployTroops()) {
-                        LogEntryBuffer.getInstance().log("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedArmyUnits() + " army units left to deploy on " + l_player.getD_ownedCountries().size() + " owned countries");
-                    }
-                    l_player.issue_order();
-                }
+//    public void attack() {
+//        boolean didQuitGame = false;
+//        boolean hasMoreOrders = true;
+//        while (hasMoreOrders && !didQuitGame) {
+//            hasMoreOrders = false;
+//            for (Player l_player : Game.sharedInstance().getD_players()) {
+//                if (l_player.canIssueOrder()) {
+//                    hasMoreOrders = true;
+//                    if (l_player.canDeployTroops()) {
+//                        LogEntryBuffer.getInstance().log("[GameEngine]: " + l_player.getD_name() + " has currently " + l_player.getD_assignedArmyUnits() + " army units left to deploy on " + l_player.getD_ownedCountries().size() + " owned countries");
+//                    }
+//                    l_player.issue_order();
+//                }
+//
+//                if (!Game.Is_Gameplay_On) {
+//                    LogEntryBuffer.getInstance().log("Player" + l_player.getD_name() + "requested to terminate game");
+//                    didQuitGame = true;
+//                    break;
+//                }
+//            }
+//        }
+//    }
 
-                if (!Game.Is_Gameplay_On) {
-                    LogEntryBuffer.getInstance().log("Player" + l_player.getD_name() + "requested to terminate game");
-                    didQuitGame = true;
-                    break;
-                }
+    public void attack() {
+        boolean l_gameInProgress = true;
+        while (l_gameInProgress) {
+            l_gameInProgress = executePlayerTurns();
+        }
+    }
+    private boolean executePlayerTurns() {
+        boolean l_anyPlayerHasMoreOrders = false;
+
+        for (Player player : Game.sharedInstance().getD_players()) {
+            if (player.canIssueOrder()) {
+                l_anyPlayerHasMoreOrders = true;
+                processPlayerTurn(player);
+            }
+            if (!Game.Is_Gameplay_On) {
+                LogEntryBuffer.getInstance().log("Player " + player.getD_name() + " requested to terminate the game.");
+                return false;
             }
         }
+        return l_anyPlayerHasMoreOrders;
+    }
+    private void processPlayerTurn(Player player) {
+        if (player.canDeployTroops()) {
+            LogEntryBuffer.getInstance().log("[GameEngine]: " + player.getD_name() + " has currently " +
+                    player.getD_assignedArmyUnits() + " army units left to deploy on " +
+                    player.getD_ownedCountries().size() + " owned countries");
+        }
+
+        player.issue_order();
     }
 
     /**
