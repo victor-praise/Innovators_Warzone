@@ -46,6 +46,14 @@ public class Country {
     }
 
     /**
+     * Reset the properties for next tournament round
+     */
+    public void reset() {
+        this.d_noOfArmies = 0;
+        this.d_ownedBy = null;
+    }
+
+    /**
      * getter method to get the armies.
      * @return armies
      */

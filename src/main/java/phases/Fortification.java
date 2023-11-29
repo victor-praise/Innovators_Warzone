@@ -54,13 +54,16 @@ public class Fortification extends MainPlay {
         Game.sharedInstance().getD_players().forEach(player -> player.setCommitForThisTurn(false));
     }
 
-    public void checkIfWeHaveWinner() {
+    public boolean checkIfWeHaveWinner() {
         Player winner = Game.sharedInstance().getD_map().playerOwningAllCountries();
         if (winner != null) {
             // We have found our winner
             LogEntryBuffer.getInstance().log("\n****** " + winner.getD_name() + " has won the game in "  + Reinforcement.TURN_NUMBER + " turns. ****** !!!\n\n");
+            Game.sharedInstance().setD_gameWinner(winner.getStrategyName() + "(" + winner.getD_name() + ")");
             Game.sharedInstance().setD_gamePhase(new End());
+            return true;
         }
+        return false;
     }
 
     /**
@@ -68,7 +71,8 @@ public class Fortification extends MainPlay {
      */
     @Override
     public void next() {
-        checkIfWeHaveWinner();
-        Game.sharedInstance().setD_gamePhase(new Reinforcement());
+        if (!checkIfWeHaveWinner()) {
+            Game.sharedInstance().setD_gamePhase(new Reinforcement());
+        }
     }
 }

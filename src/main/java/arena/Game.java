@@ -4,8 +4,10 @@ import main.java.commands.BaseCommand;
 import main.java.commands.Command;
 import main.java.models.*;
 import main.java.phases.*;
+import main.java.services.MapService;
 import main.java.strategy.HumanPlayerStrategy;
 import main.java.strategy.PlayerStrategy;
+import main.java.strategy.Strategy;
 import main.java.utils.CommandParser;
 import main.java.utils.logger.LogEntryBuffer;
 
@@ -50,6 +52,8 @@ public class Game {
     private GameMode gameMode = GameMode.Single;
 
     private Tournament tournament = null;
+
+    private String d_gameWinner = "";
 
     /**
      * constructor being made private to prevent random instance creation, always use sharedInstance()
@@ -107,6 +111,14 @@ public class Game {
      */
     public Tournament getTournament() {
         return tournament;
+    }
+
+    /**
+     * Set the winner for last game;
+     * @param d_gameWinner name of winner in last game
+     */
+    public void setD_gameWinner(String d_gameWinner) {
+        this.d_gameWinner = d_gameWinner;
     }
 
     /**
@@ -204,7 +216,7 @@ public class Game {
     public boolean addPlayer(String p_name) {
         Player l_player = getPlayer(p_name);
         if (l_player == null) {
-            PlayerStrategy defaultStrategy = new HumanPlayerStrategy();
+            PlayerStrategy defaultStrategy = new HumanPlayerStrategy(Strategy.Human);
             getD_players().add(new Player(p_name, defaultStrategy));
             return true;
         } else {
@@ -320,7 +332,7 @@ public class Game {
         }
 
 
-        while (true) {
+        while (Is_Gameplay_On) {
             d_gamePhase.next();
         }
     }
@@ -331,6 +343,28 @@ public class Game {
     public void startTournament() {
         System.out.println(" --- TOURNAMENT-MODE BEGINS ---");
         tournament.createPlayers();
+        int mapIndex = 0;
+
+        for (String map: tournament.getMapNames()) {
+            for (int gameIndex = 0; gameIndex < tournament.getNumberOfGames(); gameIndex++) {
+                Is_Gameplay_On = true;
+                System.out.println("\n\n\n ***** Round " + (gameIndex + 1) + " for map: " + map + " begins \n\n");
+                loadMap(map);
+                assignCountriesToPlayers();
+
+                setD_gamePhase(new Reinforcement());
+                while (Is_Gameplay_On) {
+                    d_gamePhase.next();
+                }
+
+                tournament.results[mapIndex][gameIndex] = d_gameWinner;
+
+                System.out.println("\n\n\n  ***** Round " + (gameIndex + 1) + " for map: " + map + " ends.\n\n");
+                resetGame();
+            }
+            mapIndex++;
+        }
+
         endTournament();
     }
 
@@ -339,8 +373,9 @@ public class Game {
      */
     public void endTournament() {
         // Intentionally ending game.
+        Player_Assignment_Complete = true;
         System.out.println(" --- TOURNAMENT-MODE ENDS ---");
-        d_gamePhase.endGame();
+        tournament.displayResults();
     }
 
     public void playerAssignmentComplete() {
@@ -354,6 +389,26 @@ public class Game {
     public static void endGamePlay() {
         Is_Gameplay_On = false;
         LogEntryBuffer.getInstance().log("==== Game Ended ====");
-        Game.sharedInstance().setD_gamePhase(new End());
+    }
+
+    /**
+     * loads map with a given file name
+     * @param l_filename name of the file to load
+     */
+    private void loadMap(String l_filename) {
+        MapService mapService = new MapService();
+        if (!mapService.attemptLoadMapWithFileName(l_filename)) {
+            System.out.println("[LoadMapCommand]: file does not exist, please provide the name of a file that exists ");
+        }
+    }
+
+    private void resetGame() {
+        d_map = null;
+        setD_map(null);
+        setD_gamePhase(null);
+        for (Player player: getD_players()) {
+            player.reset();
+        }
+        Reinforcement.TURN_NUMBER = 0;
     }
 }

@@ -572,53 +572,115 @@ public class Map {
         }
     }
 
+//    /**
+//     * Displays map according to .map file format
+//     *
+//     * @author Sadiqali
+//     */
+//
+//    public void show() {
+//
+//        List<Continent> continents = getD_continents();
+//        List<Country> countries = getD_countries();
+//
+//        // Display list of Continents in the format continentName continentValue
+//        if (continents.isEmpty()) {
+//            return;
+//        }
+//        System.out.println("\n[Continents]");
+//        for (Continent continent : continents) {
+//            System.out.println(continent.getD_continentName() + " " + continent.getD_continentValue());
+//        }
+//
+//        System.out.println();
+//
+//        // Display list of countries in the format countryID countryName ownerName (if available)
+//        if (countries.isEmpty()) {
+//            return;
+//        }
+//        System.out.println("[Countries]");
+//        for (Country country : countries) {
+//            System.out.print(country.getD_countryID() + " " + country.getD_countryName());
+//            String l_ownerName = Game.sharedInstance().getOwnerNameForCountryName(country.getD_countryName());
+//            if (l_ownerName != null) {
+//                System.out.print(" " + l_ownerName);
+//            }
+//            System.out.println();
+//        }
+//
+//        System.out.println();
+//
+//        // Display list of Borders
+//        System.out.println("\n[Borders]");
+//        for (Country country : countries) {
+//            StringBuilder neighbors = new StringBuilder(String.valueOf(country.getD_countryID()));
+//            for (int neighbor : country.getD_neighbors()) {
+//                neighbors.append(" ").append(neighbor);
+//            }
+//            System.out.println(neighbors);
+//        }
+//    }
+
     /**
-     * Displays map according to .map file format
+     * Displays map information in the format of .map file.
+     *
+     * This method combines the display of continents, countries, and borders.
+     * The information is printed to the console.
      *
      * @author Sadiqali
      */
-
     public void show() {
+        displayContinents();
+        displayCountries();
+        displayBorders();
+    }
 
-        List<Continent> continents = getD_continents();
-        List<Country> countries = getD_countries();
-    
-        // Display list of Continents in the format continentName continentValue
-        if (continents.isEmpty()) {
+    /**
+     * Displays the list of continents in the format: continentName continentValue.
+     */
+    private void displayContinents() {
+        List<Continent> l_continents = getD_continents();
+        if (l_continents.isEmpty()) {
             return;
         }
         System.out.println("\n[Continents]");
-        for (Continent continent : continents) {
-            System.out.println(continent.getD_continentName() + " " + continent.getD_continentValue());
-        }
-    
+        l_continents.forEach(continent -> System.out.println(continent.getD_continentName() + " " + continent.getD_continentValue()));
         System.out.println();
-    
-        // Display list of countries in the format countryID countryName ownerName (if available)
-        if (countries.isEmpty()) {
+    }
+
+    /**
+     * Displays the list of countries in the format: countryID countryName ownerName (if available).
+     */
+    private void displayCountries() {
+        List<Country> l_countries = getD_countries();
+        if (l_countries.isEmpty()) {
             return;
         }
         System.out.println("[Countries]");
-        for (Country country : countries) {
+        l_countries.forEach(country -> {
             System.out.print(country.getD_countryID() + " " + country.getD_countryName());
-            String l_ownerName = Game.sharedInstance().getOwnerNameForCountryName(country.getD_countryName());
-            if (l_ownerName != null) {
-                System.out.print(" " + l_ownerName);
+            String ownerName = Game.sharedInstance().getOwnerNameForCountryName(country.getD_countryName());
+            if (ownerName != null) {
+                System.out.print(" " + ownerName);
             }
             System.out.println();
-        }
-    
+        });
         System.out.println();
-    
-        // Display list of Borders
+    }
+
+    /**
+     * Displays the list of borders for each country.
+     * Each line shows the countryID followed by its neighboring country IDs.
+     */
+    private void displayBorders() {
+        List<Country> l_countries = getD_countries();
         System.out.println("\n[Borders]");
-        for (Country country : countries) {
-            StringBuilder neighbors = new StringBuilder(String.valueOf(country.getD_countryID()));
-            for (int neighbor : country.getD_neighbors()) {
-                neighbors.append(" ").append(neighbor);
-            }
+        l_countries.forEach(country -> {
+            String neighbors = country.getD_countryID() + " " + country.getD_neighbors().stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(" "));
             System.out.println(neighbors);
-        }
+        });
     }
 
     /**

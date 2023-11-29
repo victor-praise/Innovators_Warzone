@@ -1,10 +1,14 @@
 package main.java.phases;
 
 import main.java.arena.Game;
-import main.java.models.Tournament;
 import main.java.commands.Functionality;
+import main.java.models.Tournament;
 import main.java.strategy.Strategy;
 import main.java.utils.logger.LogEntryBuffer;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author kevin on 2023-10-31
@@ -15,11 +19,21 @@ public class Preload extends Edit {
     @Override
     public void loadTournament(String[] p_baseParams, Functionality[] p_functionalities) {
         Tournament tournament = new Tournament();
+        boolean validTournament = true;
         for (Functionality functionality: p_functionalities) {
-            setupTournament(functionality, tournament);
+           if(!setupTournament(functionality, tournament)){
+               validTournament = false;
+           }
         }
-        setValidCommand(true);
-        Game.sharedInstance().setTournament(tournament);
+
+
+        if(validTournament){
+            setValidCommand(true);
+            Game.sharedInstance().setTournament(tournament);
+        }
+        else{
+           printInvalidCommandMessage();
+        }
     }
 
     public Preload() {
@@ -87,12 +101,23 @@ public class Preload extends Edit {
         LogEntryBuffer.getInstance().log("quit");
         LogEntryBuffer.getInstance().log(" --- ");
     }
-    private void setupTournament(Functionality functionality, Tournament tournament) {
+    private boolean setupTournament(Functionality functionality, Tournament tournament) {
+        boolean isValid = false;
         switch (functionality.functionality) {
+
             case MaxTurns:
                 try {
+
                     int turns = Integer.parseInt(functionality.functionalityParams[0]);
-                    tournament.setMaxNumberOfTurns(turns);
+                    if(turns >= 10 && turns <= 50){
+                        isValid = true;
+                        tournament.setMaxNumberOfTurns(turns);
+                    }
+                    else{
+                        LogEntryBuffer.getInstance().log("[Tournament: ] Invalid number of turns must be between 10 and 50");
+                        isValid = false;
+                    }
+
                 } catch (NumberFormatException exception) {
                     tournament.setMaxNumberOfTurns(0);
                 }
@@ -100,8 +125,17 @@ public class Preload extends Edit {
 
             case NumberOfGame:
                 try {
+
                     int numberOfGames = Integer.parseInt(functionality.functionalityParams[0]);
-                    tournament.setNumberOfGames(numberOfGames);
+                    if(numberOfGames >= 1 && numberOfGames <= 5){
+                        tournament.setNumberOfGames(numberOfGames);
+                        isValid = true;
+                    }
+                    else{
+                        LogEntryBuffer.getInstance().log("[Tournament: ] Invalid number of games must be between 1 and 5");
+                        isValid = false;
+                    }
+
                 } catch (NumberFormatException exception) {
                     tournament.setNumberOfGames(0);
                 }
@@ -109,18 +143,57 @@ public class Preload extends Edit {
 
             case PlayerStrategies:
                 Strategy[] playerStrategies = new Strategy[functionality.functionalityParams.length];
+                List<String> l_validStrategies = Arrays.asList("Aggressive", "Random", "Benevolent", "Cheater");
                 int index = 0;
+                if(functionality.functionalityParams.length < 2 || functionality.functionalityParams.length > 4){
+                    isValid = false;
+                    LogEntryBuffer.getInstance().log("{Tournament: Number of strategies must be between 2 and 4");
+                    break;
+                }
                 for (String strategyString: functionality.functionalityParams) {
+                    if(!l_validStrategies.contains(strategyString)){
+                        isValid = false;
+                    }
+                    else{
+                        isValid = true;
+                    }
                     playerStrategies[index++] = Strategy.from(strategyString);
                 }
-                tournament.setPlayerStrategies(playerStrategies);
+
+                if(isValid){
+                    tournament.setPlayerStrategies(playerStrategies);
+                }
+                else{
+                    LogEntryBuffer.getInstance().log("[Tournament: ] Invalid Strategy Only Aggressive, Benevolent, Random, Cheater strategies are valid");
+                }
+
+                break;
 
             case MapFiles:
-                tournament.setMapNames(functionality.functionalityParams);
+
+                String resFolderPath = System.getProperty("user.dir") + File.separator + "res";
+                for(String mapName: functionality.functionalityParams){
+                    String filePath = resFolderPath + File.separator + mapName;
+                    File file = new File(filePath);
+                    if (file.exists() && file.isFile()) {
+                        isValid = true;
+                    }
+                    else{
+                        isValid = false;
+                    }
+                }
+                if(isValid){
+                    tournament.setMapNames(functionality.functionalityParams);
+                }
+                else{
+                    LogEntryBuffer.getInstance().log("[Tournament: ] Invalid map. Please ensure map names are valid");
+                }
+
                 break;
 
             default:
                 System.out.println("Functionality " + functionality.toString() + " undetermined for Tournament command");
                 break;
         }
+        return isValid;
     }}

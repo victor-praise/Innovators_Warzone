@@ -18,14 +18,30 @@ public class Reinforcement extends MainPlay {
      */
     public static long TURN_NUMBER = 1;
 
-    Reinforcement() {
+    public Reinforcement() {
         LogEntryBuffer.getInstance().log("==== Reinforcement phase {Turn Number :: " + TURN_NUMBER++ + "} ====" + "\n");
         reinforce();
     }
 
     @Override
     public void reinforce() {
+
         resetAvailableArmyUnits();
+
+        if (TURN_NUMBER > Constants.MAX_TURNS_ALLOWED) {
+            System.out.println("No winners in more than " + Constants.MAX_TURNS_ALLOWED + " rounds. This Game is a DRAW");
+            for (Player player: Game.sharedInstance().getD_players()) {
+                if (player.getD_ownedCountries().isEmpty()) {
+                    continue;
+                }
+                System.out.println(player.getD_name() + " currently owns " + player.getD_ownedCountries().size() + " countries out of " + Game.sharedInstance().getD_map().getD_countries().size() + " countries");
+            }
+            Game.sharedInstance().setD_gamePhase(new End());
+            Game.sharedInstance().setD_gameWinner("DRAW");
+            return;
+        }
+        // Reset available Army units back to total number of armies
+        Game.sharedInstance().getD_map().getD_countries().forEach(Country::resetD_availableArmyUnits);
 
         for (Player player : Game.sharedInstance().getD_players()) {
             int reinforcementValue = calculateReinforcementValue(player);

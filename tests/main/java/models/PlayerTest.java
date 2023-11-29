@@ -3,6 +3,7 @@ package main.java.models;
 import main.java.arena.Game;
 import main.java.strategy.HumanPlayerStrategy;
 import main.java.strategy.PlayerStrategy;
+import main.java.strategy.Strategy;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class PlayerTest {
      */
     @BeforeEach
     void setUp() {
-        PlayerStrategy defaultStrategy = new HumanPlayerStrategy();
+        PlayerStrategy defaultStrategy = new HumanPlayerStrategy(Strategy.Human);
         d_systemUnderTest = new Player("Player1", defaultStrategy);
     }
 

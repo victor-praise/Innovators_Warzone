@@ -31,19 +31,64 @@ public class AirliftOrder implements Order {
         this.d_armyUnitsToAirlift = p_numOfArmies;
     }
 
+//    /**
+//     * Each order will have an execute method where the execution logic will be inserted
+//     */
+//    @Override
+//    public void execute() {
+//
+//        // If there were some deaths based on previous attacks, only consider current army count
+//        d_armyUnitsToAirlift = Math.min(d_armyUnitsToAirlift, d_sourceCountry.getD_noOfArmies());
+//
+//        d_sourceCountry.reduceArmyUnits(this.d_armyUnitsToAirlift);
+//        d_targetCountry.addArmyUnits(this.d_armyUnitsToAirlift);
+//
+//        String l_message = "[Airlift Order] Airlifted  " + d_armyUnitsToAirlift + " army units from " + d_sourceCountry.getD_countryName() + " to " + d_targetCountry.getD_countryName();
+//        LogEntryBuffer.getInstance().log(l_message);
+//    }
+//}
+
     /**
-     * Each order will have an execute method where the execution logic will be inserted
+     * Executes an airlift order by moving army units from the source country to the target country.
+     * If there were casualties in previous attacks, only the remaining army units are considered.
      */
     @Override
     public void execute() {
+        int l_actualAirliftedUnits = Math.min(d_armyUnitsToAirlift, d_sourceCountry.getD_noOfArmies());
 
-        // If there were some deaths based on previous attacks, only consider current army count
-        d_armyUnitsToAirlift = Math.min(d_armyUnitsToAirlift, d_sourceCountry.getD_noOfArmies());
+        reduceArmiesInSourceCountry(l_actualAirliftedUnits);
+        addArmiesToTargetCountry(l_actualAirliftedUnits);
 
-        d_sourceCountry.reduceArmyUnits(this.d_armyUnitsToAirlift);
-        d_targetCountry.addArmyUnits(this.d_armyUnitsToAirlift);
+        logAirliftMessage(l_actualAirliftedUnits);
+    }
 
-        String l_message = "[Airlift Order] Airlifted  " + d_armyUnitsToAirlift + " army units from " + d_sourceCountry.getD_countryName() + " to " + d_targetCountry.getD_countryName();
-        LogEntryBuffer.getInstance().log(l_message);
+    /**
+     * Reduces the number of army units in the source country by the specified amount.
+     *
+     * @param p_airliftedUnits The number of army units to be airlifted.
+     */
+    private void reduceArmiesInSourceCountry(int p_airliftedUnits) {
+        d_sourceCountry.reduceArmyUnits(p_airliftedUnits);
+    }
+
+    /**
+     * Adds the specified number of army units to the target country.
+     *
+     * @param p_airliftedUnits The number of army units to be airlifted.
+     */
+    private void addArmiesToTargetCountry(int p_airliftedUnits) {
+        d_targetCountry.addArmyUnits(p_airliftedUnits);
+    }
+
+    /**
+     * Logs a message indicating the execution of the airlift order.
+     *
+     * @param p_airliftedUnits The actual number of army units airlifted.
+     */
+    private void logAirliftMessage(int p_airliftedUnits) {
+        String message = "[Airlift Order] Airlifted " + p_airliftedUnits +
+                " army units from " + d_sourceCountry.getD_countryName() +
+                " to " + d_targetCountry.getD_countryName();
+        LogEntryBuffer.getInstance().log(message);
     }
 }

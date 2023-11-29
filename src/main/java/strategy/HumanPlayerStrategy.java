@@ -11,6 +11,11 @@ import java.util.Scanner;
  * @author kevin on 2023-11-24
  */
 public class HumanPlayerStrategy extends PlayerStrategy {
+
+    public HumanPlayerStrategy(Strategy p_strategy) {
+        super(p_strategy);
+    }
+
     /**
      * Create a new order for human, i.e. ask user for a valid order
      *

@@ -4,6 +4,7 @@ import main.java.arena.Game;
 import main.java.orders.Order;
 import main.java.strategy.HumanPlayerStrategy;
 import main.java.strategy.PlayerStrategy;
+import main.java.strategy.Strategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,9 @@ public class Player {
 
     private int d_assignedArmyUnits = 0;
 
-    private List<Order> d_ordersList = new ArrayList<>();
+    private final List<Order> d_ordersList = new ArrayList<>();
 
-    private List<SpecialCard> specialCards = new ArrayList<SpecialCard>(0);
+    private final List<SpecialCard> specialCards = new ArrayList<SpecialCard>(0);
 
     private boolean isConqueror = false;
 
@@ -49,7 +50,7 @@ public class Player {
      * @param p_inputName player name
      */
     public Player(String p_inputName) {
-        this(p_inputName, new HumanPlayerStrategy());
+        this(p_inputName, new HumanPlayerStrategy(Strategy.Human));
     }
 
     /**
@@ -68,6 +69,19 @@ public class Player {
             return false;
         }
         return getD_name().equalsIgnoreCase(player.getD_name());
+    }
+
+    /**
+     * Reset the properties for next tournament round
+     */
+    public void reset() {
+        d_assignedArmyUnits = 0;
+        isConqueror = false;
+        didCommitForThisTurn = false;
+        d_ownedCountries.clear();
+        d_ordersList.clear();
+        d_negotiatedWith.clear();
+        specialCards.clear();
     }
 
     /**
@@ -121,6 +135,14 @@ public class Player {
     public void setD_assignedArmyUnits(int d_assignedArmyUnits) {
         System.out.println(getD_name() + " has been assigned " + d_assignedArmyUnits + " reinforcements");
         this.d_assignedArmyUnits = d_assignedArmyUnits;
+    }
+
+    /**
+     * Get the name of the strategy
+     * @return strategy name
+     */
+    public String getStrategyName() {
+        return d_strategy.getName();
     }
 
     /**
