@@ -2,10 +2,15 @@ package main.java.services;
 
 import main.java.models.Continent;
 import main.java.models.Country;
+import main.java.models.Map;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Validates methods in MapReader class
  * @author kevin on 2023-09-30
@@ -43,4 +48,32 @@ class MapReaderTest {
         assertTrue(l_asia.getD_countries().isEmpty());
     }
 
+    @Test
+    void testReadMapFileWithInvalidData() {
+        // Given
+        MapReader mapReader = new MapReader();
+        Map map = new Map();
+        List<String> invalidData = Arrays.asList(
+                "[continents]",
+                "Asia", // Invalid continent data
+                "[countries]",
+                "1 India 1",
+                "2 China 1",
+                "[borders]",
+                "1 2"
+        );
+
+        // When
+        mapReader.readMapFile(map, invalidData);
+
+        // Then
+        List<Continent> continents = map.getD_continents();
+        List<Country> countries = map.getD_countries();
+
+        assertNotNull(continents);
+        assertNotNull(countries);
+
+        assertEquals(0, continents.size(), "Should have 0 continents due to invalid data");
+        assertEquals(1, countries.size(), "Should have 0 countries due to invalid data");
+    }
 }

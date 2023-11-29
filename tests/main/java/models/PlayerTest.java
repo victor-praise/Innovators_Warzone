@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author kevin on 2023-11-04
@@ -65,5 +66,15 @@ public class PlayerTest {
         assertTrue(d_systemUnderTest.hasSpecialCard(SpecialCard.Bomb));
         assertTrue(d_systemUnderTest.hasSpecialCardOfType("bomb"));
 
+    }
+
+    @Test
+    public void testGetContinentsOwnedByPlayerWithNoContinents() {
+        // Given
+        List<Continent> ownedContinents = d_systemUnderTest.getContinentsOwnedByPlayer();
+
+        // Then
+        assertNotNull(ownedContinents);
+        assertTrue(ownedContinents.isEmpty(), "Owned continents should be empty when no continents exist.");
     }
 }
