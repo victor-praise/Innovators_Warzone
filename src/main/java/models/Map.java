@@ -572,55 +572,6 @@ public class Map {
         }
     }
 
-//    /**
-//     * Displays map according to .map file format
-//     *
-//     * @author Sadiqali
-//     */
-//
-//    public void show() {
-//
-//        List<Continent> continents = getD_continents();
-//        List<Country> countries = getD_countries();
-//
-//        // Display list of Continents in the format continentName continentValue
-//        if (continents.isEmpty()) {
-//            return;
-//        }
-//        System.out.println("\n[Continents]");
-//        for (Continent continent : continents) {
-//            System.out.println(continent.getD_continentName() + " " + continent.getD_continentValue());
-//        }
-//
-//        System.out.println();
-//
-//        // Display list of countries in the format countryID countryName ownerName (if available)
-//        if (countries.isEmpty()) {
-//            return;
-//        }
-//        System.out.println("[Countries]");
-//        for (Country country : countries) {
-//            System.out.print(country.getD_countryID() + " " + country.getD_countryName());
-//            String l_ownerName = Game.sharedInstance().getOwnerNameForCountryName(country.getD_countryName());
-//            if (l_ownerName != null) {
-//                System.out.print(" " + l_ownerName);
-//            }
-//            System.out.println();
-//        }
-//
-//        System.out.println();
-//
-//        // Display list of Borders
-//        System.out.println("\n[Borders]");
-//        for (Country country : countries) {
-//            StringBuilder neighbors = new StringBuilder(String.valueOf(country.getD_countryID()));
-//            for (int neighbor : country.getD_neighbors()) {
-//                neighbors.append(" ").append(neighbor);
-//            }
-//            System.out.println(neighbors);
-//        }
-//    }
-
     /**
      * Displays map information in the format of .map file.
      *
